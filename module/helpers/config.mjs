@@ -1,23 +1,24 @@
-export const BOILERPLATE = {};
+export const FOE = {};
 
 /**
  * The set of Ability Scores used within the sytem.
  * @type {Object}
  */
- BOILERPLATE.abilities = {
-  "str": "BOILERPLATE.AbilityStr",
-  "dex": "BOILERPLATE.AbilityDex",
-  "con": "BOILERPLATE.AbilityCon",
-  "int": "BOILERPLATE.AbilityInt",
-  "wis": "BOILERPLATE.AbilityWis",
-  "cha": "BOILERPLATE.AbilityCha"
+ FOE.abilities = {
+  "str": "FOE.AbilityStr",
+  "per": "FOE.AbilityPer",
+  "end": "FOE.AbilityEnd",
+  "cha": "FOE.AbilityCha",
+  "int": "FOE.AbilityInt",
+  "agi": "FOE.AbilityAgi",
+  "luck": "FOE.AbilityLuck",
 };
 
-BOILERPLATE.abilityAbbreviations = {
-  "str": "BOILERPLATE.AbilityStrAbbr",
-  "dex": "BOILERPLATE.AbilityDexAbbr",
-  "con": "BOILERPLATE.AbilityConAbbr",
-  "int": "BOILERPLATE.AbilityIntAbbr",
-  "wis": "BOILERPLATE.AbilityWisAbbr",
-  "cha": "BOILERPLATE.AbilityChaAbbr"
-};
+FOE.abilityAbbreviations = {
+  "str": "FOE.AbilityStrAbbr",
+  "per": "FOE.AbilityPerAbbr",
+  "end": "FOE.AbilityEndAbbr",
+  "cha": "FOE.AbilityChaAbbr",
+  "int": "FOE.AbilityIntAbbr",
+  "agi": "FOE.AbilityAgiAbbr",
+  "luck": "FOE.AbilityLuckAbbr",};

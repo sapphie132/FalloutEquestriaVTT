@@ -1,22 +1,24 @@
 {
-  "BOILERPLATE.AbilityStr": "Strength",
-  "BOILERPLATE.AbilityCon": "Constitution",
-  "BOILERPLATE.AbilityDex": "Dexterity",
-  "BOILERPLATE.AbilityInt": "Intelligence",
-  "BOILERPLATE.AbilityWis": "Wisdom",
-  "BOILERPLATE.AbilityCha": "Charisma",
+  "FOE.AbilityStr": "Strength",
+  "FOE.AbilityPer": "Perception",
+  "FOE.AbilityEnd": "Endurance",
+  "FOE.AbilityCha": "Charisma",
+  "FOE.AbilityInt": "Intelligence",
+  "FOE.AbilityAgi": "Agility",
+  "FOE.AbilityLuck": "Luck",
 
-  "BOILERPLATE.AbilityStrAbbr": "str",
-  "BOILERPLATE.AbilityConAbbr": "con",
-  "BOILERPLATE.AbilityDexAbbr": "dex",
-  "BOILERPLATE.AbilityIntAbbr": "int",
-  "BOILERPLATE.AbilityWisAbbr": "wis",
-  "BOILERPLATE.AbilityChaAbbr": "cha",
+  "FOE.AbilityStrAbbr": "str",
+  "FOE.AbilityPerAbbr": "per",
+  "FOE.AbilityEndAbbr": "end",
+  "FOE.AbilityChaAbbr": "cha",
+  "FOE.AbilityIntAbbr": "int",
+  "FOE.AbilityAgiAbbr": "agi",
+  "FOE.AbilityLuckAbbr": "luck",
 
-  "BOILERPLATE.EffectCreate": "Create Effect",
-  "BOILERPLATE.EffectToggle": "Toggle Effect",
-  "BOILERPLATE.EffectEdit": "Edit Effect",
-  "BOILERPLATE.EffectDelete": "Delete Effect",
+  "FOE.EffectCreate": "Create Effect",
+  "FOE.EffectToggle": "Toggle Effect",
+  "FOE.EffectEdit": "Edit Effect",
+  "FOE.EffectDelete": "Delete Effect",
 
-  "BOILERPLATE.Add": "Add"
+  "FOE.Add": "Add"
 }
