@@ -53,6 +53,8 @@ export class FalloutEquestriaActor extends Actor {
       // Calculate the modifier using d20 rules.
       // ability.mod = Math.floor((ability.value - 10) / 2);
     // }
+    data.strain.base = data.abilities.end.value + data.abilities.int.value;
+    data.strain.max = data.strain.base + data.strain.bonus;
   }
 
   /**

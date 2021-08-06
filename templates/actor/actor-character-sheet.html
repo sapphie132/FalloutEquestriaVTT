@@ -23,11 +23,11 @@
         </div>
 
         <div class="resource flex-group-center">
-          <label for="data.power.value" class="resource-label">Power</label>
+          <label for="data.strain.value" class="resource-label">Strain</label>
           <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="data.power.value" value="{{data.power.value}}" data-dtype="Number"/>
+          <input type="text" name="data.strain.value" value="{{data.strain.value}}" data-dtype="Number"/>
           <span> / </span>
-          <input type="text" name="data.power.max" value="{{data.power.max}}" data-dtype="Number"/>
+          <input type="text" name="data.strain.max" value="{{data.strain.max}}" data-dtype="Number"/>
           </div>
         </div>
 
@@ -45,18 +45,21 @@
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
     {{!-- Default tab is specified in actor-sheet.mjs --}}
-    <a class="item" data-tab="features">Features</a>
-    <a class="item" data-tab="description">Description</a>
-    <a class="item" data-tab="items">Items</a>
-    <a class="item" data-tab="spells">Spells</a>
-    <a class="item" data-tab="effects">Effects</a>
+    <a class="item" data-tab="vital">Vital</a>
+    <a class="item" data-tab="skills">Skills</a>
+    <a class="item" data-tab="perks-traits">Perks & Traits</a>
+    <a class="item" data-tab="inventory">Inventory</a>
+    <a class="item" data-tab="magic">Magic</a>
+    <!--& effects-->
+    <a class="item" data-tab="misc">Miscellaneous</a>
+    <a class="item" data-tab="biography">Biography</a>
   </nav>
 
   {{!-- Sheet Body --}}
   <section class="sheet-body">
 
-    {{!-- Owned Features Tab --}}
-    <div class="tab features" data-group="primary" data-tab="features">
+    {{!-- Vital Information Tab --}}
+    <div class="tab vital" data-group="primary" data-tab="vital">
       <section class="grid grid-3col">
         <aside class="sidebar">
 
@@ -85,25 +88,33 @@
       </section>
     </div>
 
-    {{!-- Biography Tab --}}
-    <div class="tab biography" data-group="primary" data-tab="description">
-      {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to the rollData property. --}}
-      {{editor content=data.biography target="data.biography" rollData=rollData button=true owner=owner editable=editable}}
+    <div class="tab skills" data-group="primary" data-tab="skills">
+      <!--no clue lol-->
     </div>
 
-    {{!-- Owned Items Tab --}}
-    <div class="tab items" data-group="primary" data-tab="items">
+    <div class="tab perks-traits" data-group="primary" data-tab="perks-traits">
+      <!--no clue lol-->
+    </div>
+
+    {{!-- Inventory Tab --}}
+    <div class="tab inventory" data-group="primary" data-tab="inventory">
        {{> "systems/foe/templates/actor/parts/actor-items.html"}}
     </div>
 
-    {{!-- Owned Spells Tab --}}
-    <div class="tab spells" data-group="primary" data-tab="spells">
+    {{!-- Magic Tab --}}
+    <div class="tab magic" data-group="primary" data-tab="magic">
       {{> "systems/foe/templates/actor/parts/actor-spells.html"}}
     </div>
 
     {{!-- Active Effects Tab --}}
-    <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+    <div class="tab misc" data-group="primary" data-tab="misc">
       {{> "systems/foe/templates/actor/parts/actor-effects.html"}}
+    </div>
+
+    {{!-- Biography Tab --}}
+    <div class="tab biography" data-group="primary" data-tab="biography">
+      {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to the rollData property. --}}
+      {{editor content=data.biography target="data.biography" rollData=rollData button=true owner=owner editable=editable}}
     </div>
 
   </section>

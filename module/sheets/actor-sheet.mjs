@@ -11,7 +11,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     return mergeObject(super.defaultOptions, {
       classes: ["foe", "sheet", "actor"],
       template: "systems/foe/templates/actor/actor-sheet.html",
-      width: 600,
+      width: 650,
       height: 600,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "features" }]
     });
