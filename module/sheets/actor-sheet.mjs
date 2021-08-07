@@ -71,6 +71,10 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     for (let [k, v] of Object.entries(context.data.abilities)) {
       v.label = game.i18n.localize(CONFIG.FOE.abilities[k]) ?? k;
     }
+
+    for (let [k, v] of Object.entries(context.data.resources)) {
+      v.label = game.i18n.localize(CONFIG.FOE.resources[k]) ?? k;
+    }
   }
 
   /**
@@ -206,10 +210,15 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
 
     // Handle item rolls.
     if (dataset.rollType) {
-      if (dataset.rollType == 'item') {
-        const itemId = element.closest('.item').dataset.itemId;
-        const item = this.actor.items.get(itemId);
-        if (item) return item.roll();
+      switch (dataset.rollType) {
+        case 'item':
+          const itemId = element.closest('.item').dataset.itemId;
+          const item = this.actor.items.get(itemId);
+          if (item) return item.roll();
+        case 'special':
+          let label = dataset.label ? `[ability] ${dataset.label}` : '';
+
+
       }
     }
 

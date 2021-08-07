@@ -14,6 +14,7 @@ export const FOE = {};
   "luck": "FOE.AbilityLuck",
 };
 
+
 FOE.abilityAbbreviations = {
   "str": "FOE.AbilityStrAbbr",
   "per": "FOE.AbilityPerAbbr",
@@ -22,3 +23,11 @@ FOE.abilityAbbreviations = {
   "int": "FOE.AbilityIntAbbr",
   "agi": "FOE.AbilityAgiAbbr",
   "luck": "FOE.AbilityLuckAbbr",};
+
+FOE.resources = {
+  "hp": "FOE.ResourceHP",
+  "strain": "FOE.ResourceStrain",
+  "stun": "FOE.ResourceStun",
+  "illusion": "FOE.ResourceIllusion",
+  "TP": "FOE.ResourceTP"
+}

@@ -13,29 +13,36 @@
         "resources": {
           "hp": {
             "value": 0,
-            "bonus": {	
-            "temp": 0,
+            "bonus": {
+              "temp": 0,
               "perm": 0
             }
           },
           "strain": {
             "value": 0,
-            "bonus": {	
-            "temp": 0,
+            "bonus": {
+              "temp": 0,
               "perm": 0
             }
           },
           "illusion": {
             "value": 0,
-            "bonus": {	
-            "temp": 0,
+            "bonus": {
+              "temp": 0,
               "perm": 0
             }
           },
           "stun": {
             "value": 0,
-            "bonus": {	
-            "temp": 0,
+            "bonus": {
+              "temp": 0,
+              "perm": 0
+            }
+          },
+          "TP": {
+            "value": 0,
+            "bonus": {
+              "temp": 0,
               "perm": 0
             }
           }

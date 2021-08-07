@@ -20,5 +20,12 @@
   "FOE.EffectEdit": "Edit Effect",
   "FOE.EffectDelete": "Delete Effect",
 
+  "FOE.ResourceHP": "Health Points",
+  "FOE.ResourceIllusion": "Illusion Points",
+  "FOE.ResourceStrain": "Strain",
+  "FOE.ResourceStun": "Stun Points",
+  "FOE.ResourceTP": "Trick Points",
+
+
   "FOE.Add": "Add"
 }

@@ -61,20 +61,36 @@
   <section class="sheet-body">
 
     <div class="tab bonuses" data-group="primary" data-tab="bonuses">
-      <ol class="items-list">
-      <li class="item flexrow items-header">
-        <div class="item-name">Stat</div>
-        <div class="">Permanent Bonus</div>
-        <div class="">Temporary Bonus</div>
-      </li>
-        {{#each data.abilities as |ability key|}}
-          <li class="item flexrow">
-            <label for="data.abilities.{{key}}.value" data-label="{{ability.label}}">{{ability.label}}</label>
-            <input type="text" name="data.abilities.{{key}}.bonus.perm" value="{{ability.bonus.perm}}" data-dtype="Number"/>
-            <input type="text" name="data.abilities.{{key}}.bonus.temp" value="{{ability.bonus.temp}}" data-dtype="Number"/>
-          </li>
-        {{/each}}
-      </ol>
+      <div class="grid grid-3col">
+        <ol class="items-list resource-bonuses">
+        <li class="item flexrow items-header">
+          <div class="item-name">Stat</div>
+          <div class="item-perm">Permanent</div>
+          <div class="item-temp">Temporary</div>
+        </li>
+          {{#each data.abilities as |ability key|}}
+            <li class="item flexrow">
+              <label for="data.abilities.{{key}}.value" class="item-name" data-label="{{ability.label}}">{{ability.label}}</label>
+              <input type="text" name="data.abilities.{{key}}.bonus.perm" class="item-perm" value="{{ability.bonus.perm}}" data-dtype="Number"/>
+              <input type="text" name="data.abilities.{{key}}.bonus.temp" class="item-temp" value="{{ability.bonus.temp}}" data-dtype="Number"/>
+            </li>
+          {{/each}}
+        </ol>
+        <ol class="items-list resource-bonuses">
+        <li class="item flexrow items-header">
+          <div class="item-name">Resource (max)</div>
+          <div class="item-perm">Permanent</div>
+          <div class="item-temp">Temporary</div>
+        </li>
+          {{#each data.resources as |resource key|}}
+            <li class="item flexrow">
+              <label for="data.resources.{{key}}.value" class="item-name" data-label="{{resource.label}}">{{resource.label}}</label>
+              <input type="text" name="data.resources.{{key}}.bonus.perm" class="item-perm" value="{{resource.bonus.perm}}" data-dtype="Number"/>
+              <input type="text" name="data.resources.{{key}}.bonus.temp" class="item-temp" value="{{resource.bonus.temp}}" data-dtype="Number"/>
+            </li>
+          {{/each}}
+        </ol>
+      </div>
     </div>
     {{!-- Vital Information Tab --}}
     <div class="tab vital" data-group="primary" data-tab="vital">
@@ -87,7 +103,7 @@
           <div class="abilities flexcol">
             {{#each data.abilities as |ability key|}}
             <div class="ability flexrow flex-group-center">
-              <label for="data.abilities.{{key}}.value" class="resource-label rollable flexlarge align-left" data-roll="d10+@abilities.{{key}}.mod" data-label="{{ability.label}}">{{ability.label}}</label>
+              <label for="data.abilities.{{key}}.value" class="resource-label rollable flexlarge align-left" data-roll-type="special" data-label="{{ability.label}}">{{ability.label}}</label>
               <input type="text" name="data.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
               +
               <input type="text" name="data.abilities.{{key}}.mod" value="{{ability.mod}}" data-dtype="Number"/>
