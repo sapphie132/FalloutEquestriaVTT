@@ -2,25 +2,43 @@
   "Actor": {
     "types": ["character", "npc"],
     "templates": {
+      "resource": {
+        "value": 0,
+        "bonus": {
+          "temp": 0,
+          "perm": 0
+        }
+      },
       "base": {
-        "health": {
-          "value": 10,
-          "min": 0,
-          "max": 10
-        },
-        "stundmg": {
-          "value": 10,
-          "min": 0,
-          "max": 10 
-        },
-        "illusiondmg": {
-          "value": 10,
-          "min": 0,
-          "max": 10
-        },
-        "strain": {
-          "value": 0,
-          "bonus": 0
+        "resources": {
+          "hp": {
+            "value": 0,
+            "bonus": {	
+            "temp": 0,
+              "perm": 0
+            }
+          },
+          "strain": {
+            "value": 0,
+            "bonus": {	
+            "temp": 0,
+              "perm": 0
+            }
+          },
+          "illusion": {
+            "value": 0,
+            "bonus": {	
+            "temp": 0,
+              "perm": 0
+            }
+          },
+          "stun": {
+            "value": 0,
+            "bonus": {	
+            "temp": 0,
+              "perm": 0
+            }
+          }
         },
         "biography": ""
       }
@@ -35,31 +53,52 @@
       "abilities": {
         "str": {
           "value": 5,
-          "mod": 0
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
         },
         "per": {
           "value": 5,
-          "mod": 0
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
         },
         "end": {
           "value": 5,
-          "mod": 0
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
         },
         "cha":{
           "value": 5,
-          "mod": 0
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
         },
         "int": {
           "value": 5,
-          "mod": 0
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
         },
         "agi": {
           "value": 5,
-          "mod": 0
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
         },
         "luck": {
           "value": 5,
-          "mod": 0
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
         }
       }
     },

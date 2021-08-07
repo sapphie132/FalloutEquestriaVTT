@@ -53,8 +53,21 @@ export class FalloutEquestriaActor extends Actor {
       // Calculate the modifier using d20 rules.
       // ability.mod = Math.floor((ability.value - 10) / 2);
     // }
-    data.strain.base = data.abilities.end.value + data.abilities.int.value;
-    data.strain.max = data.strain.base + data.strain.bonus;
+    const resources = data.resources;
+    for (let [key, resource] of Object.entries(resources)) {
+      resource.bonus.total = resource.bonus.temp + resource.bonus.perm;
+    }
+    const end = data.abilities.end.value;
+    const int = data.abilities.int.value;
+    const lvl = data.attributes.level.value;
+
+    resources.strain.base = end + int;
+    resources.hp.base = 100+(end*2)+(end*lvl);
+
+    for (let [key, resource] of Object.entries(resources)) {
+      resource.max = resource.base + resource.bonus.total;
+      resource.percent = (resource.value / resource.max) * 100;
+    }
   }
 
   /**
@@ -91,6 +104,12 @@ export class FalloutEquestriaActor extends Actor {
     // formulas like `@str.mod + 4`.
     if (data.abilities) {
       for (let [k, v] of Object.entries(data.abilities)) {
+        data[k] = foundry.utils.deepClone(v);
+      }
+    }
+
+    if (data.resources) {
+      for (let [k, v] of Object.entries(data.resources)) {
         data[k] = foundry.utils.deepClone(v);
       }
     }

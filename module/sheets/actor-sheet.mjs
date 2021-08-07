@@ -11,7 +11,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     return mergeObject(super.defaultOptions, {
       classes: ["foe", "sheet", "actor"],
       template: "systems/foe/templates/actor/actor-sheet.html",
-      width: 650,
+      width: 720,
       height: 600,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "features" }]
     });
@@ -157,7 +157,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     html.find('.rollable').click(this._onRoll.bind(this));
 
     // Drag events for macros.
-    if (this.actor.owner) {
+    if (this.actor.isOwner) {
       let handler = ev => this._onDragStart(ev);
       html.find('li.item').each((i, li) => {
         if (li.classList.contains("inventory-header")) return;
