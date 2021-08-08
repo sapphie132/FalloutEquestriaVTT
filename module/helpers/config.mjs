@@ -31,3 +31,23 @@ FOE.resources = {
   "illusion": "FOE.ResourceIllusion",
   "TP": "FOE.ResourceTP"
 }
+
+FOE.specialDifficulties = {
+  "Very easy": 3,
+  "Easy": 2,
+  "Normal": 1,
+  "Default": 0,
+  "Difficult": -1,
+  "Hard": -2,
+  "Very hard": -3
+}
+
+FOE.skillDifficulties = {
+  "Very easy": 30,
+  "Easy": 20,
+  "Normal": 10,
+  "Default": 0,
+  "Difficult": -10,
+  "Hard": -20,
+  "Very hard": -30
+}

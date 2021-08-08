@@ -1,3 +1,4 @@
+import { FOE } from "../helpers/config.mjs";
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
@@ -54,6 +55,7 @@ export class FalloutEquestriaActor extends Actor {
       // ability.mod = Math.floor((ability.value - 10) / 2);
     // }
     const resources = data.resources;
+    const abilities = data.abilities;
     for (let [key, resource] of Object.entries(resources)) {
       resource.bonus.total = resource.bonus.temp + resource.bonus.perm;
     }
@@ -67,6 +69,10 @@ export class FalloutEquestriaActor extends Actor {
     for (let [key, resource] of Object.entries(resources)) {
       resource.max = resource.base + resource.bonus.total;
       resource.percent = (resource.value / resource.max) * 100;
+    }
+
+    for (let [key, ability] of Object.entries(abilities)) {
+      ability.total = ability.value + ability.bonus.total;
     }
   }
 

@@ -1,5 +1,6 @@
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/effects.mjs";
 import { promptRoll } from "../helpers/util.mjs";
+import { FOE } from "../helpers/config.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -222,7 +223,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
           const stat = dataset.rollStat;
           const rollData = this.actor.getRollData();
           const target = rollData[stat].value;
-          promptRoll({});
+          promptRoll(FOE.specialDifficulties);
           console.log(target);
 
 
