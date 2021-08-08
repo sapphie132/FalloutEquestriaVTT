@@ -1,4 +1,5 @@
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/effects.mjs";
+import { promptRoll } from "../helpers/util.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -13,7 +14,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       template: "systems/foe/templates/actor/actor-sheet.html",
       width: 720,
       height: 600,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "features" }]
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "vital" }]
     });
   }
 
@@ -216,7 +217,14 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
           const item = this.actor.items.get(itemId);
           if (item) return item.roll();
         case 'special':
-          let label = dataset.label ? `[ability] ${dataset.label}` : '';
+          const label = dataset.label ? `[ability] ${dataset.label}` : '';
+          const roll = new Roll("d10").roll();
+          const stat = dataset.rollStat;
+          const rollData = this.actor.getRollData();
+          const target = rollData[stat].value;
+          promptRoll({});
+          console.log(target);
+
 
 
       }
@@ -234,5 +242,4 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       return roll;
     }
   }
-
 }

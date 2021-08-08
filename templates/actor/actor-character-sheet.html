@@ -103,7 +103,7 @@
           <div class="abilities flexcol">
             {{#each data.abilities as |ability key|}}
             <div class="ability flexrow flex-group-center">
-              <label for="data.abilities.{{key}}.value" class="resource-label rollable flexlarge align-left" data-roll-type="special" data-label="{{ability.label}}">{{ability.label}}</label>
+              <label for="data.abilities.{{key}}.value" class="resource-label rollable flexlarge align-left" data-roll-type="special" data-roll-stat="{{key}}" data-label="{{ability.label}}">{{ability.label}}</label>
               <input type="text" name="data.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
               +
               <input type="text" name="data.abilities.{{key}}.mod" value="{{ability.mod}}" data-dtype="Number"/>
