@@ -1,6 +1,5 @@
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/effects.mjs";
-import { promptRoll } from "../helpers/util.mjs";
-import { FOE } from "../helpers/config.mjs";
+import {default as specialRoll} from "../dice.mjs"
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -219,15 +218,10 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
           if (item) return item.roll();
         case 'special':
           const label = dataset.label ? `[ability] ${dataset.label}` : '';
-          const roll = new Roll("d10").roll();
-          const stat = dataset.rollStat;
-          const rollData = this.actor.getRollData();
-          const target = rollData[stat].value;
-          promptRoll(FOE.specialDifficulties);
-          console.log(target);
+          const r = specialRoll(this.actor.getRollData());
+          const e = r.toMessage({}, {create: true})
 
-
-
+          return r;
       }
     }
 

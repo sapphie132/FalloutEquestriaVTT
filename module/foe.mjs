@@ -8,6 +8,8 @@ import { FalloutEquestriaItemSheet } from "./sheets/item-sheet.mjs";
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { FOE } from "./helpers/config.mjs";
 
+import * as dice from './dice.mjs'
+
 /* -------------------------------------------- */
 /*  Init Hook                                   */
 /* -------------------------------------------- */
@@ -25,13 +27,17 @@ Hooks.once('init', async function() {
   // Add custom constants for configuration.
   CONFIG.FOE = FOE;
 
+  CONFIG.Dice.FoERoll = dice.FoERoll;
+  CONFIG.Dice.rolls.push(dice.FoERoll);
+  console.log(dice.FoERoll);
+
   /**
    * Set an initiative formula for the system
    * @type {String}
    */
   CONFIG.Combat.initiative = {
     formula: "1d10 + ((@abilities.per+@abilities.agi)/2)",
-    decimals: 2
+    decimals: 1
   };
 
   // Define custom Document classes

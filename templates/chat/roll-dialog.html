@@ -1,0 +1,32 @@
+<form>
+    <div class="form-group">
+        <label>{{ localize "FOE.Formula" }}</label>
+        <input type="text" name="formula" value="{{formula}}" disabled/>
+    </div>
+    {{#if chooseAbility}}
+    <div class="form-group">
+        <label>{{ localize "FOE.Ability" }}</label>
+        <select name="ability">
+            {{selectOptions abilities selected=defaultAbility}}
+        </select>
+    </div>
+    {{/if}}
+    {{#if chooseDifficulty}}
+    <div class="form-group">
+        <label>{{ localize  "FOE.difficulty"}}</label>
+        <select name="difficulty">
+            {{selectOptions difficulties selected=defaultDifficulty}}
+        </select>
+    </div>
+    {{/if}}
+    <div class="form-group">
+        <label>{{ localize "FOE.RollSituationalBonus" }}</label>
+        <input type="text" name="bonus" value="" placeholder="{{ localize 'DND5E.RollExample' }}"/>
+    </div>
+    <div class="form-group">
+        <label>{{ localize "FOE.RollMode" }}</label>
+        <select name="rollMode">
+            {{selectOptions rollModes selected=defaultRollMode localize=true}}
+        </select>
+    </div>
+</form>

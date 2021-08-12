@@ -11,5 +11,7 @@
     "systems/foe/templates/actor/parts/actor-items.html",
     "systems/foe/templates/actor/parts/actor-spells.html",
     "systems/foe/templates/actor/parts/actor-effects.html",
+    // Roll dialog
+    "systems/foe/templates/chat/roll-dialog.html",
   ]);
 };
