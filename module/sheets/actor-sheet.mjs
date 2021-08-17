@@ -217,9 +217,10 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
           const item = this.actor.items.get(itemId);
           if (item) return item.roll();
         case 'special':
-          const label = dataset.label ? `[ability] ${dataset.label}` : '';
-          const r = specialRoll(this.actor.getRollData());
-          const e = r.toMessage({}, {create: true})
+          const label = dataset.label ? `${dataset.label} check` : '';
+          const r = specialRoll(dataset.stat, label, this.actor.getRollData());
+          const speaker = {actor: this.actor}
+          const e = r.toMessage({speaker: speaker}, {create: true})
 
           return r;
       }
@@ -227,7 +228,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
 
     // Handle rolls that supply the formula directly.
     if (dataset.roll) {
-      let label = dataset.label ? `[ability] ${dataset.label}` : '';
+      let label = dataset.label ? `${dataset.label} check` : '';
       let roll = new Roll(dataset.roll, this.actor.getRollData()).roll();
       roll.toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),

@@ -461,3 +461,11 @@
 .foe .effects .item .effect-controls {
   border: none;
 }
+
+.fumble {
+  color: red;
+}
+
+.critical {
+  color: green;
+}

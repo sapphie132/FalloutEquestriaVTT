@@ -57,8 +57,9 @@ export class FalloutEquestriaActor extends Actor {
     const resources = data.resources;
     const abilities = data.abilities;
     for (let [key, resource] of Object.entries(resources)) {
-      resource.bonus.total = resource.bonus.temp + resource.bonus.perm;
+      resource.bonus.tot = resource.bonus.temp + resource.bonus.perm;
     }
+
     const end = data.abilities.end.value;
     const int = data.abilities.int.value;
     const lvl = data.attributes.level.value;
@@ -67,12 +68,15 @@ export class FalloutEquestriaActor extends Actor {
     resources.hp.base = 100+(end*2)+(end*lvl);
 
     for (let [key, resource] of Object.entries(resources)) {
-      resource.max = resource.base + resource.bonus.total;
+      resource.max = resource.base + resource.bonus.tot;
       resource.percent = (resource.value / resource.max) * 100;
     }
 
     for (let [key, ability] of Object.entries(abilities)) {
-      ability.total = ability.value + ability.bonus.total;
+      const bonus = ability.bonus;
+      bonus.tot = bonus.perm + bonus.temp;
+      ability.tot = ability.value + bonus.tot;
+      console.log(ability);
     }
   }
 
