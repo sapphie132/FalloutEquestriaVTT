@@ -98,7 +98,12 @@ export default class FoERoll {
                        <span class="foe-roll-result${await this.isMainCriticalOrFumble()}">
                        ${this.mainRoll.result}</span></span>`
         if (this.targetRoll) {
-            content += `<br/><span>Target (${this.targetRoll._formula}): ${this.targetRoll.result}</span>`
+            if (this.targetRoll.terms.length <= 1) {
+                content += `<br/><span>Target (${this.targetRoll._formula}): ${this.targetRoll.result}</span>`
+            } else {
+                content += `<br/><span>Target (${this.targetRoll._formula}): ${this.targetRoll.result} =
+                 ${this.targetRoll.total}</span>`
+            }
             const deg = this.targetRoll.total - this.mainRoll.total;
             content += `<br/><span>Degree of ${deg >= 0 ? "success" : "failure"}: ${deg}</span>`
         }
