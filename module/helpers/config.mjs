@@ -4,7 +4,7 @@ export const FOE = {};
  * The set of Ability Scores used within the sytem.
  * @type {Object}
  */
- FOE.abilities = {
+FOE.abilities = {
   "str": "FOE.AbilityStr",
   "per": "FOE.AbilityPer",
   "end": "FOE.AbilityEnd",
@@ -22,7 +22,32 @@ FOE.abilityAbbreviations = {
   "cha": "FOE.AbilityChaAbbr",
   "int": "FOE.AbilityIntAbbr",
   "agi": "FOE.AbilityAgiAbbr",
-  "luck": "FOE.AbilityLuckAbbr",};
+  "luck": "FOE.AbilityLuckAbbr",
+};
+
+FOE.skills = {
+  unarmed: "FOE.Unarmed",
+  throwing: "FOE.Throwing",
+  melee: "FOE.Melee",
+  firearms: "FOE.Firearms",
+  mew: "FOE.MEW",
+  explosives: "FOE.Explosives",
+  bSaddles: "FOE.BattleSaddles",
+  survival: "FOE.AlchemySurvivalTraps",
+  barter: "FOE.Barter",
+  intimidation: "FOE.BluffIntimidation",
+  persuasion: "FOE.NegotiationSeduction",
+  sneak: "FOE.Sneak",
+  lockpick: "FOE.Lockpick",
+  sleightHoof: "FOE.SleightOfHoof",
+  tech: "FOE.HackingMatrixTech",
+  chem: "FOE.Chemistry",
+  history: "FOE.AcademicsLore",
+  repair: "FOE.RepairMechanics",
+  gambling: "FOE.Gambling",
+  athletics: "FOE.Athletics",
+  profession: "FOE.Profession"
+}
 
 FOE.resources = {
   "hp": "FOE.ResourceHP",
