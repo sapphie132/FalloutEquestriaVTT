@@ -13,15 +13,15 @@
     {{/if}}
     {{#if chooseDifficulty}}
     <div class="form-group">
-        <label>{{ localize  "FOE.difficulty"}}</label>
+        <label>{{ localize  "FOE.Difficulty"}}</label>
         <select name="difficulty">
             {{selectOptions difficulties selected=defaultDifficulty}}
         </select>
     </div>
     {{/if}}
     <div class="form-group">
-        <label>{{ localize "FOE.RollSituationalBonus" }}</label>
-        <input type="text" name="bonus" value="" placeholder="{{ localize 'DND5E.RollExample' }}"/>
+        <label>{{ localize "FOE.SituationalRollBonus" }}</label>
+        <input type="text" name="bonus" value="" placeholder="{{ localize 'FOE.RollExample' }}"/>
     </div>
     <div class="form-group">
         <label>{{ localize "FOE.RollMode" }}</label>

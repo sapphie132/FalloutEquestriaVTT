@@ -1,3 +1,5 @@
+import { FOE } from "../helpers/config.mjs";
+
 /* 
 Code originally from the dnd 5e module (https://gitlab.com/foundrynet/dnd5e/-/blob/master/module/dice/d20-roll.js)
 Adapted by Sapphie
@@ -5,7 +7,7 @@ Adapted by Sapphie
 export default class FoERoll {
     constructor(mainFormula, targetFormula, data, options) {
         this.mainRoll = new Roll(mainFormula, data);
-        if (!(this.mainRoll.terms[0] instanceof Die)) 
+        if (!(this.mainRoll.terms[0] instanceof Die))
             throw new Error(`Invalid roll formula provided: ${mainFormula}`)
         this.mainFormula = mainFormula;
         this.targetRoll = new Roll(targetFormula, data);
@@ -17,7 +19,8 @@ export default class FoERoll {
     static EVALUATION_TEMPLATE = "systems/foe/templates/chat/roll-dialog.html";
 
 
-    async configureDialog({ title, defaultRollMode, chooseAbility = false, defaultAbility, chooseDifficulty = true, defaultDifficulty, template } = {}, options = {}) {
+    async configureDialog({ title, defaultRollMode, chooseAbility = false, defaultAbility, chooseDifficulty = false, defaultDifficulty = "none", difficulties: difficultyMods, template } = {}, options = {}) {
+        if (chooseDifficulty && !(difficultyMods)) throw new Error("No difficulty modifiers provided");
         const content = await renderTemplate(template ?? this.constructor.EVALUATION_TEMPLATE, {
             target: `${this.targetFormula} + @bonus`,
             formula: this.mainFormula,
@@ -25,47 +28,52 @@ export default class FoERoll {
             rollModes: CONFIG.Dice.rollModes,
             chooseAbility,
             defaultAbility,
+            chooseDifficulty,
+            difficulties: FOE.rollDifficulties,
+            defaultDifficulty: chooseDifficulty ? defaultDifficulty ?? difficultyMods[0] : null,
             abilities: CONFIG.FOE.abilities,
         });
-        return new Promise(resolve => {
-            Dialog.prompt({
-                title,
-                content,
-                label: game.i18n.localize("FOE.Roll"),
-                callback: html => resolve(this._onDialogSubmit(html)),
-                rejectClose: () => resolve(null),
-                options: options
-            }).render(true)
+        return Dialog.prompt({
+            title,
+            content,
+            label: game.i18n.localize("FOE.Roll"),
+            callback: html => this._onDialogSubmit(html, defaultDifficulty, difficultyMods),
+            rejectClose: false,
+            options: options
         })
     }
 
-    _onDialogSubmit(html) {
+    _onDialogSubmit(html, defaultDiff, difficultyMods) {
         const form = html[0].querySelector("form");
-        let bonus = "";
+        // Append a situational bonus term
         if (form.bonus.value) {
-            const bonusRoll = new Roll(form.bonus.value, this.data);
-            bonusRoll.evaluate({ async: false });
-            bonus = bonusRoll.total;
+            const bonusTerms = Roll.parse(form.bonus.value, this.data);
+            const terms = this.targetRoll.terms;
+            if (!(bonusTerms[0] instanceof OperatorTerm)) terms.push(new OperatorTerm({ operator: "+" }));
+            this.targetRoll.terms = terms.concat(bonusTerms);
         }
 
+
         if (form.ability?.value) {
+            // Note: untested lol
             const abl = this.data.abilities[form.ability.value];
             this.options.targetAbility = abl;
             this.targetValue = this.getTargetValue();
         }
 
-        let difficulty = 0;
         if (form.difficulty?.value) {
             const diff = form.difficulty.value;
+            if (diff != defaultDiff) {
+                const mod = difficultyMods[diff];
+                const diffTerms = Roll.parse(`+${mod}`);
+                this.targetRoll.terms = this.targetRoll.terms.concat(diffTerms);
+            }
         }
-
-        this.targetRoll = difficulty + bonus + this.targetValue;
 
         return this
     }
 
     async evaluate(options = {}) {
-        console.log(this.targetRoll.data);
         if (this._evaluated) {
             throw new Error("This roll has already been evaluated and is now immutable");
         } else {
@@ -79,6 +87,7 @@ export default class FoERoll {
         this.mainRoll.evaluate({ async: false });
     }
 
+    // Maybe TODO: prettify this
     async toMessage(messageData, options = {}) {
         if (!this._evaluated) await this.evaluate({ async: true });
         const create = true || options.create;
@@ -95,7 +104,9 @@ export default class FoERoll {
         }
         content += "</p>"
         const msgData = {
-            content
+            content,
+            sound: CONFIG.sounds.dice,
+            roll: JSON.stringify(this)
         };
         if (this.options.label) msgData.flavor = this.options.label;
 

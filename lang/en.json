@@ -27,5 +27,11 @@
   "FOE.ResourceTP": "Trick Points",
 
 
-  "FOE.Add": "Add"
+  "FOE.Add": "Add",
+
+  "FOE.Formula": "Formula",
+  "FOE.SituationalRollBonus": "Situational Roll Bonus",
+  "FOE.RollMode": "Roll Mode",
+  "FOE.RollExample": "d4",
+  "FOE.Difficulty": "Difficulty"
 }

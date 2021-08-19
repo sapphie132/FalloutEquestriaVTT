@@ -204,7 +204,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
    * @param {Event} event   The originating click event
    * @private
    */
-  _onRoll(event) {
+  async _onRoll(event) {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
@@ -218,7 +218,8 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
           if (item) return item.roll();
         case 'special':
           const label = dataset.label ? `${dataset.label} check` : '';
-          const r = specialRoll(dataset.stat, label, this.actor.getRollData());
+          const r = await specialRoll(dataset.stat, label, this.actor.getRollData());
+
           const speaker = {actor: this.actor}
           const e = r.toMessage({speaker: speaker}, {create: true})
 

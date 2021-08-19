@@ -32,22 +32,32 @@ FOE.resources = {
   "TP": "FOE.ResourceTP"
 }
 
+FOE.rollDifficulties = {
+  vEasy: "FOE.VeryEasy",
+  easy: "FOE.Easy",
+  normal: "FOE.Normal",
+  none: "FOE.Default",
+  difficult: "FOE.Difficult",
+  hard: "FOE.Hard",
+  vHard: "FOE.VeryHard",
+}
+
 FOE.specialDifficulties = {
-  "Very easy": 3,
-  "Easy": 2,
-  "Normal": 1,
-  "Default": 0,
-  "Difficult": -1,
-  "Hard": -2,
-  "Very hard": -3
+  vEasy: 3,
+  easy: 2,
+  normal: 1,
+  none: 0,
+  difficult: -1,
+  hard: -2,
+  vHard: -3
 }
 
 FOE.skillDifficulties = {
-  "Very easy": 30,
-  "Easy": 20,
-  "Normal": 10,
-  "Default": 0,
-  "Difficult": -10,
-  "Hard": -20,
-  "Very hard": -30
+  vEasy: 30,
+  easy: 20,
+  normal: 10,
+  none: 0,
+  difficult: -10,
+  hard: -20,
+  vHard: -30
 }
