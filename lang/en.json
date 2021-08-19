@@ -32,6 +32,15 @@
   "FOE.Formula": "Formula",
   "FOE.SituationalRollBonus": "Situational Roll Bonus",
   "FOE.RollMode": "Roll Mode",
+  "FOE.Roll": "Roll",
   "FOE.RollExample": "d4",
-  "FOE.Difficulty": "Difficulty"
+
+  "FOE.Difficulty": "Difficulty",
+  "FOE.VeryEasy": "Very Easy",
+  "FOE.Easy": "Easy",
+  "FOE.Difficult": "Difficult",
+  "FOE.Normal": "Normal",
+  "FOE.Hard": "Hard",
+  "FOE.VeryHard": "Very Hard",
+  "FOE.Default": "Default"
 }

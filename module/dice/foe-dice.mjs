@@ -21,6 +21,12 @@ export default class FoERoll {
 
     async configureDialog({ title, defaultRollMode, chooseAbility = false, defaultAbility, chooseDifficulty = false, defaultDifficulty = "none", difficulties: difficultyMods, template } = {}, options = {}) {
         if (chooseDifficulty && !(difficultyMods)) throw new Error("No difficulty modifiers provided");
+        // No clue if there's a less retarded way to do this lol
+        const localizedDifficulties = foundry.utils.deepClone(FOE.rollDifficulties);
+        Object.keys(localizedDifficulties).map(function(key, index) {
+            localizedDifficulties[key] = game.i18n.localize(localizedDifficulties[key])
+        })
+
         const content = await renderTemplate(template ?? this.constructor.EVALUATION_TEMPLATE, {
             target: `${this.targetFormula} + @bonus`,
             formula: this.mainFormula,
@@ -29,7 +35,7 @@ export default class FoERoll {
             chooseAbility,
             defaultAbility,
             chooseDifficulty,
-            difficulties: FOE.rollDifficulties,
+            difficulties: localizedDifficulties,
             defaultDifficulty: chooseDifficulty ? defaultDifficulty ?? difficultyMods[0] : null,
             abilities: CONFIG.FOE.abilities,
         });
