@@ -64,6 +64,7 @@ export class FalloutEquestriaActor extends Actor {
     const end = data.abilities.end.value;
     const int = data.abilities.int.value;
     const lvl = data.attributes.level.value;
+    const luck = data.abilities.luck.value;
 
     resources.strain.base = end + int;
     resources.hp.base = 100+(end*2)+(end*lvl);
@@ -84,6 +85,9 @@ export class FalloutEquestriaActor extends Actor {
       bonus.tot = bonus.perm + bonus.temp;
       skill.tot = skill.value + bonus.tot;
     }
+
+    data.attributes.crit = luck + data.attributes.critMod;
+    data.attributes.fumble = Math.floor(luck/2) + data.attributes.fumbleMod;
   }
 
   /**
@@ -132,6 +136,12 @@ export class FalloutEquestriaActor extends Actor {
 
     if (data.skills) {
       for (let [k, v] of Object.entries(data.skills)) {
+        data[k] = foundry.utils.deepClone(v);
+      }
+    }
+
+    if (data.attributes) {
+      for (let [k, v] of Object.entries(data.attributes)) {
         data[k] = foundry.utils.deepClone(v);
       }
     }

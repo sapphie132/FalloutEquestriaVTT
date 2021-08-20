@@ -17,7 +17,11 @@ async function specialRoll(ability, label, data = {}) {
 }
 
 async function skillRoll(skill, label, data) {
-    const r = new CONFIG.Dice.FoERoll("1d100", `@${skill}.tot`, data, {label: label})
+    const r = new CONFIG.Dice.FoERoll("1d100", `@${skill}.tot`, data, {
+        label: label,
+        fumble: 94+data.fumble,
+        crit: 1+data.crit
+    });
     const configured = await r.configureDialog({
         chooseDifficulty: true,
         difficulties: FOE.skillDifficulties,

@@ -7,8 +7,6 @@ Adapted by Sapphie
 export default class FoERoll {
     constructor(mainFormula, targetFormula, data, options) {
         this.mainRoll = new Roll(mainFormula, data);
-        console.log(targetFormula)
-        console.log(data)
         if (!(this.mainRoll.terms[0] instanceof Die))
             throw new Error(`Invalid roll formula provided: ${mainFormula}`)
         this.mainFormula = mainFormula;
@@ -137,7 +135,7 @@ export default class FoERoll {
         if (this.mainRoll.total >= minFumble) return " fumble";
 
         let maxCrit = 1;
-        if (this.options.critical) maxCrit = this.options.critical;
+        if (this.options.crit) maxCrit = this.options.crit;
         if (this.mainRoll.total <= maxCrit) return " critical";
 
         return "";

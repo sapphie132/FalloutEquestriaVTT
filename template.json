@@ -60,7 +60,9 @@
       "attributes": {
         "level": {
           "value": 1
-        }
+        },
+        "fumbleMod": 0,
+        "critMod": 0
       },
       "abilities": {
         "str": {

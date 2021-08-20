@@ -229,7 +229,6 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
           return r;
         }
         case 'skill': {
-          console.log(dataset)
           const r = await skillRoll(dataset.rollSkill, label, this.actor.getRollData());
 
           const speaker = { actor: this.actor };
