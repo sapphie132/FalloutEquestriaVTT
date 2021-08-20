@@ -1,5 +1,5 @@
-import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/effects.mjs";
-import {default as specialRoll} from "../dice.mjs"
+import { onManageActiveEffect, prepareActiveEffectCategories } from "../helpers/effects.mjs";
+import { skillRoll, specialRoll } from "../dice.mjs"
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -13,7 +13,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       classes: ["foe", "sheet", "actor"],
       template: "systems/foe/templates/actor/actor-sheet.html",
       width: 720,
-      height: 600,
+      height: 770,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "vital" }]
     });
   }
@@ -76,6 +76,10 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     for (let [k, v] of Object.entries(context.data.resources)) {
       v.label = game.i18n.localize(CONFIG.FOE.resources[k]) ?? k;
     }
+
+    for (let [k, v] of Object.entries(context.data.skills)) {
+      v.label = game.i18n.localize(CONFIG.FOE.skills[k]) ?? k;
+    }
   }
 
   /**
@@ -125,7 +129,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     context.gear = gear;
     context.features = features;
     context.spells = spells;
-   }
+  }
 
   /* -------------------------------------------- */
 
@@ -196,7 +200,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     delete itemData.data["type"];
 
     // Finally, create the item!
-    return await Item.create(itemData, {parent: this.actor});
+    return await Item.create(itemData, { parent: this.actor });
   }
 
   /**
@@ -211,19 +215,27 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
 
     // Handle item rolls.
     if (dataset.rollType) {
+      const label = dataset.label ? `${dataset.label} check` : '';
       switch (dataset.rollType) {
         case 'item':
           const itemId = element.closest('.item').dataset.itemId;
           const item = this.actor.items.get(itemId);
           if (item) return item.roll();
-        case 'special':
-          const label = dataset.label ? `${dataset.label} check` : '';
-          const r = await specialRoll(dataset.stat, label, this.actor.getRollData());
+        case 'special': {
+          const r = await specialRoll(dataset.rollStat, label, this.actor.getRollData());
 
-          const speaker = {actor: this.actor}
-          const e = r.toMessage({speaker: speaker}, {create: true})
-
+          const speaker = { actor: this.actor }
+          const e = r.toMessage({ speaker: speaker }, { create: true })
           return r;
+        }
+        case 'skill': {
+          console.log(dataset)
+          const r = await skillRoll(dataset.rollSkill, label, this.actor.getRollData());
+
+          const speaker = { actor: this.actor };
+          const e = r.toMessage({ speaker }, { create: true })
+          return r;
+        }
       }
     }
 

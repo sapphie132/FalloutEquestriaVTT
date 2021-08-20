@@ -1,8 +1,9 @@
 import { FOE } from "./helpers/config.mjs"
 export {default as FoERoll} from "./dice/foe-dice.mjs"
 
+export {specialRoll, skillRoll}
 
-export default async function specialRoll(ability, label, data = {}) {
+async function specialRoll(ability, label, data = {}) {
     const r = new CONFIG.Dice.FoERoll("1d10", `@${ability}.tot`, data, {label: label})
 
     const configured = await r.configureDialog({
@@ -10,6 +11,17 @@ export default async function specialRoll(ability, label, data = {}) {
         difficulties: FOE.specialDifficulties,
     });
     if (configured == null) return null;
+
+    r.evaluate({})
+    return r;
+}
+
+async function skillRoll(skill, label, data) {
+    const r = new CONFIG.Dice.FoERoll("1d100", `@${skill}.tot`, data, {label: label})
+    const configured = await r.configureDialog({
+        chooseDifficulty: true,
+        difficulties: FOE.skillDifficulties,
+    });
 
     r.evaluate({})
     return r;

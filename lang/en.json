@@ -6,7 +6,6 @@
   "FOE.AbilityInt": "Intelligence",
   "FOE.AbilityAgi": "Agility",
   "FOE.AbilityLuck": "Luck",
-
   "FOE.AbilityStrAbbr": "str",
   "FOE.AbilityPerAbbr": "per",
   "FOE.AbilityEndAbbr": "end",
@@ -14,27 +13,21 @@
   "FOE.AbilityIntAbbr": "int",
   "FOE.AbilityAgiAbbr": "agi",
   "FOE.AbilityLuckAbbr": "luck",
-
   "FOE.EffectCreate": "Create Effect",
   "FOE.EffectToggle": "Toggle Effect",
   "FOE.EffectEdit": "Edit Effect",
   "FOE.EffectDelete": "Delete Effect",
-
   "FOE.ResourceHP": "Health Points",
   "FOE.ResourceIllusion": "Illusion Points",
   "FOE.ResourceStrain": "Strain",
   "FOE.ResourceStun": "Stun Points",
   "FOE.ResourceTP": "Trick Points",
-
-
   "FOE.Add": "Add",
-
   "FOE.Formula": "Formula",
   "FOE.SituationalRollBonus": "Situational Roll Bonus",
   "FOE.RollMode": "Roll Mode",
   "FOE.Roll": "Roll",
   "FOE.RollExample": "d4",
-
   "FOE.Difficulty": "Difficulty",
   "FOE.VeryEasy": "Very Easy",
   "FOE.Easy": "Easy",
@@ -42,5 +35,26 @@
   "FOE.Normal": "Normal",
   "FOE.Hard": "Hard",
   "FOE.VeryHard": "Very Hard",
-  "FOE.Default": "Default"
+  "FOE.Default": "Default",
+  "FOE.Unarmed": "Unarmed",
+  "FOE.Throwing": "Throwing",
+  "FOE.Melee": "Melee",
+  "FOE.Firearms": "Firearms",
+  "FOE.MEW": "M.E.W.",
+  "FOE.Explosives": "Explosives",
+  "FOE.BattleSaddles": "Battle Saddles",
+  "FOE.AlchemySurvivalTraps": "Alchemy, Survival & Traps",
+  "FOE.Barter": "Barter",
+  "FOE.BluffIntimidation": "Bluff & Intimidation",
+  "FOE.NegotiationSeduction": "Negotiation & Seduction",
+  "FOE.Sneak": "Sneak",
+  "FOE.Lockpick": "Lockpick",
+  "FOE.SleightOfHoof": "Sleight of Hoof",
+  "FOE.HackingMatrixTech": "Hacking & Matrix Tech",
+  "FOE.Chemistry": "Chemistry",
+  "FOE.AcademicsLore": "Academics & Lore",
+  "FOE.RepairMechanics": "Repair & Mechanics",
+  "FOE.Gambling": "Gambling",
+  "FOE.Athletics": "Athletics",
+  "FOE.Profession": "Profession"
 }

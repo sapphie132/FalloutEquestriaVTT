@@ -1,6 +1,9 @@
 {
   "Actor": {
-    "types": ["character", "npc"],
+    "types": [
+      "character",
+      "npc"
+    ],
     "templates": {
       "resource": {
         "value": 0,
@@ -51,7 +54,9 @@
       }
     },
     "character": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "attributes": {
         "level": {
           "value": 1
@@ -79,7 +84,7 @@
             "temp": 0
           }
         },
-        "cha":{
+        "cha": {
           "value": 5,
           "bonus": {
             "perm": 0,
@@ -107,31 +112,192 @@
             "temp": 0
           }
         }
+      },
+      "skills": {
+        "unarmed": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "throwing": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "melee": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "firearms": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "mew": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "explosives": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "bSaddles": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "survival": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "barter": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "intimidation": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "persuasion": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "sneak": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "lockpick": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "sleightHoof": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "tech": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "chem": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "history": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "repair": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "gambling": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "athletics": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "profession": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        }
       }
     },
     "npc": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "cr": 0
     }
   },
   "Item": {
-    "types": ["item", "feature", "spell"],
+    "types": [
+      "item",
+      "feature",
+      "spell"
+    ],
     "templates": {
       "base": {
         "description": ""
       }
     },
     "item": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "quantity": 1,
       "weight": 0,
       "formula": "d20 + @str.mod + ceil(@lvl / 2)"
     },
     "feature": {
-      "templates": ["base"]
+      "templates": [
+        "base"
+      ]
     },
     "spell": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "spellLevel": 1
     }
   }

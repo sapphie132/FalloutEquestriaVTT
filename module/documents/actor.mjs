@@ -56,6 +56,7 @@ export class FalloutEquestriaActor extends Actor {
     // }
     const resources = data.resources;
     const abilities = data.abilities;
+    const skills = data.skills;
     for (let [key, resource] of Object.entries(resources)) {
       resource.bonus.tot = resource.bonus.temp + resource.bonus.perm;
     }
@@ -76,7 +77,12 @@ export class FalloutEquestriaActor extends Actor {
       const bonus = ability.bonus;
       bonus.tot = bonus.perm + bonus.temp;
       ability.tot = ability.value + bonus.tot;
-      console.log(ability);
+    }
+
+    for (let [key, skill] of Object.entries(skills)) {
+      const bonus = skill.bonus;
+      bonus.tot = bonus.perm + bonus.temp;
+      skill.tot = skill.value + bonus.tot;
     }
   }
 
@@ -120,6 +126,12 @@ export class FalloutEquestriaActor extends Actor {
 
     if (data.resources) {
       for (let [k, v] of Object.entries(data.resources)) {
+        data[k] = foundry.utils.deepClone(v);
+      }
+    }
+
+    if (data.skills) {
+      for (let [k, v] of Object.entries(data.skills)) {
         data[k] = foundry.utils.deepClone(v);
       }
     }

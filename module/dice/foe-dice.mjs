@@ -7,6 +7,8 @@ Adapted by Sapphie
 export default class FoERoll {
     constructor(mainFormula, targetFormula, data, options) {
         this.mainRoll = new Roll(mainFormula, data);
+        console.log(targetFormula)
+        console.log(data)
         if (!(this.mainRoll.terms[0] instanceof Die))
             throw new Error(`Invalid roll formula provided: ${mainFormula}`)
         this.mainFormula = mainFormula;
