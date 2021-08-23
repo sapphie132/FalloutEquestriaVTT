@@ -274,16 +274,30 @@
   },
   "Item": {
     "types": [
-      "item",
-      "feature",
+      "equipment",
+      "consumable",
+      "crafting",
+      "misc",
+      "perk",
       "spell"
     ],
     "templates": {
       "base": {
+        "name":"",
         "description": ""
+      },
+      "physical": {
+        "weight": 0
+      },
+      "stackable": {
+        "amount": 1,
+        "charges": {
+          "max": 0,
+          "value": 0
+        }
       }
     },
-    "item": {
+    "equipment": {
       "templates": [
         "base"
       ],
@@ -291,7 +305,22 @@
       "weight": 0,
       "formula": "d20 + @str.mod + ceil(@lvl / 2)"
     },
-    "feature": {
+    "perk": {
+      "templates": [
+        "base"
+      ]
+    },
+    "crafting": {
+      "templates": [
+        "base"
+      ]
+    },
+    "misc": {
+      "templates": [
+        "base"
+      ]
+    },
+    "consumable": {
       "templates": [
         "base"
       ]
@@ -299,8 +328,7 @@
     "spell": {
       "templates": [
         "base"
-      ],
-      "spellLevel": 1
+      ]
     }
   }
 }

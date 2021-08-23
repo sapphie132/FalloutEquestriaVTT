@@ -91,44 +91,39 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
    */
   _prepareItems(context) {
     // Initialize containers.
-    const gear = [];
-    const features = [];
-    const spells = {
-      0: [],
-      1: [],
-      2: [],
-      3: [],
-      4: [],
-      5: [],
-      6: [],
-      7: [],
-      8: [],
-      9: []
+    const inventory = {
+      equipment: {
+        label: "FOE.WeaponsArmor",
+        extra: true,
+        content: []
+      },
+      consumable: {
+        label: "FOE.FoodAlcDrugs",
+        content: []
+      },
+      crafting: {
+        label: "FOE.GearCraftingSupplies",
+        content: []
+      },
+      misc: {
+        label: "FOE.Misc",
+        content: []
+      },
     };
 
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       i.img = i.img || DEFAULT_TOKEN;
       // Append to gear.
-      if (i.type === 'item') {
-        gear.push(i);
-      }
-      // Append to features.
-      else if (i.type === 'feature') {
-        features.push(i);
-      }
-      // Append to spells.
-      else if (i.type === 'spell') {
-        if (i.data.spellLevel != undefined) {
-          spells[i.data.spellLevel].push(i);
-        }
-      }
+      if (inventory[i.type]) {
+        inventory[i.type].content.push(i);
+      } 
     }
 
     // Assign and return
-    context.gear = gear;
-    context.features = features;
-    context.spells = spells;
+    context.inventory = inventory;
+    // context.features = features;
+    // context.spells = spells;
   }
 
   /* -------------------------------------------- */

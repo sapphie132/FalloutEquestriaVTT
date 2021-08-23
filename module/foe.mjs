@@ -29,7 +29,6 @@ Hooks.once('init', async function() {
 
   CONFIG.Dice.FoERoll = dice.FoERoll;
   CONFIG.Dice.rolls.push(dice.FoERoll);
-  console.log(dice.FoERoll);
 
   /**
    * Set an initiative formula for the system
