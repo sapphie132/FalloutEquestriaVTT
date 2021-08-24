@@ -64,10 +64,12 @@ export class FalloutEquestriaActor extends Actor {
     const end = data.abilities.end.value;
     const int = data.abilities.int.value;
     const lvl = data.attributes.level.value;
+    const agi = data.abilities.agi.value;
     const luck = data.abilities.luck.value;
 
     resources.strain.base = end + int;
     resources.hp.base = 100+(end*2)+(end*lvl);
+    resources.ap.base = 55+(agi*3);
 
     for (let [key, resource] of Object.entries(resources)) {
       resource.max = resource.base + resource.bonus.tot;

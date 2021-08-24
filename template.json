@@ -5,16 +5,16 @@
       "npc"
     ],
     "templates": {
-      "resource": {
-        "value": 0,
-        "bonus": {
-          "temp": 0,
-          "perm": 0
-        }
-      },
       "base": {
         "resources": {
           "hp": {
+            "value": 0,
+            "bonus": {
+              "temp": 0,
+              "perm": 0
+            }
+          },
+          "ap": {
             "value": 0,
             "bonus": {
               "temp": 0,
@@ -57,6 +57,17 @@
       "templates": [
         "base"
       ],
+      "equipped": {
+        "0": {
+          "item": "none"
+        },
+        "1": {
+          "item": "none"
+        },
+        "2": {
+          "item": "none"
+        }
+      },
       "attributes": {
         "level": {
           "value": 1
@@ -262,6 +273,27 @@
             "perm": 0,
             "temp": 0
           }
+        },
+        "shamanism": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "magic": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
+        },
+        "flightMagic": {
+          "value": 0,
+          "bonus": {
+            "perm": 0,
+            "temp": 0
+          }
         }
       }
     },
@@ -274,7 +306,8 @@
   },
   "Item": {
     "types": [
-      "equipment",
+      "weapon",
+      "armor",
       "consumable",
       "crafting",
       "misc",
@@ -283,7 +316,7 @@
     ],
     "templates": {
       "base": {
-        "name":"",
+        "name": "",
         "description": ""
       },
       "physical": {
@@ -295,37 +328,67 @@
           "max": 0,
           "value": 0
         }
+      },
+      "equipment": {
+        "condition": 100
       }
     },
-    "equipment": {
+    "weapon": {
       "templates": [
-        "base"
+        "base",
+        "physical",
+        "equipment"
       ],
-      "quantity": 1,
-      "weight": 0,
-      "formula": "d20 + @str.mod + ceil(@lvl / 2)"
+      "damage": {
+        "base": 0,
+        "d10": 0
+      },
+      "range": "melee",
+      "cost": "0",
+      "firerate": "",
+      "ammunition": {
+        "type": "",
+        "caliber": "",
+        "capacity": {
+          "current": 0,
+          "total": 0
+        }
+      }
     },
-    "perk": {
+    "armor": {
       "templates": [
-        "base"
+        "base",
+        "physical",
+        "equipment"
       ]
     },
     "crafting": {
       "templates": [
-        "base"
+        "base",
+        "physical",
+        "stackable"
       ]
     },
     "misc": {
       "templates": [
-        "base"
+        "base",
+        "physical",
+        "stackable"
       ]
     },
     "consumable": {
       "templates": [
-        "base"
+        "base",
+        "physical",
+        "stackable"
       ]
     },
     "spell": {
+      "templates": [
+        "base"
+      ]
+    },
+    "perk": {
       "templates": [
         "base"
       ]

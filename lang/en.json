@@ -56,5 +56,14 @@
   "FOE.RepairMechanics": "Repair & Mechanics",
   "FOE.Gambling": "Gambling",
   "FOE.Athletics": "Athletics",
-  "FOE.Profession": "Profession"
+  "FOE.Profession": "Profession",
+  "FOE.RateOfFire": "Rate of Fire",
+  "FOE.Condition": "Condition",
+  "FOE.Damage": "Damage",
+  "FOE.Range": "Range",
+  "FOE.APCost": "AP Cost",
+  "FOE.Primary": "Primary",
+  "FOE.Secondary": "Secondary",
+  "FOE.Tertiary": "Tertiary",
+  "FOE.PickWeapon": "Pick Equipped"
 }

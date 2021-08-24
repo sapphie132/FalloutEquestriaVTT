@@ -25,6 +25,16 @@ export class FalloutEquestriaItem extends Item {
     return rollData;
   }
 
+  get damageString() {
+    const dmg = this.data.damage;
+    if (dmg) {
+      console.log(dmg)
+      return `${dmg.base}${'+'.repeat(dmg.d10)}`
+    } else {
+      return ""
+    }
+  }
+
   /**
    * Handle clickable rolls.
    * @param {Event} event   The originating click event

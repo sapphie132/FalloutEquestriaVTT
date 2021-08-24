@@ -14,6 +14,12 @@ FOE.abilities = {
   "luck": "FOE.AbilityLuck",
 };
 
+FOE.weaponSlots = {
+  0: "FOE.Primary",
+  1: "FOE.Secondary",
+  2: "FOE.Tertiary"
+}
+
 
 FOE.abilityAbbreviations = {
   "str": "FOE.AbilityStrAbbr",
@@ -46,7 +52,10 @@ FOE.skills = {
   repair: "FOE.RepairMechanics",
   gambling: "FOE.Gambling",
   athletics: "FOE.Athletics",
-  profession: "FOE.Profession"
+  profession: "FOE.Profession",
+  shamanism: "FOE.Shamanism",
+  magic: "FOE.Magic",
+  flightMagic: "FOE.FlightMagic"
 }
 
 FOE.resources = {
@@ -86,3 +95,5 @@ FOE.skillDifficulties = {
   hard: -20,
   vHard: -30
 }
+
+Handlebars

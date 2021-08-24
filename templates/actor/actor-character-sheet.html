@@ -16,29 +16,42 @@
         <div class="resource flex-group-center">
           <label for="data.resources.hp.value" class="resource-label">Health</label>
           <div class="resource-content flexrow flex-center flex-between">
-            <input type="text" name="data.resources.hp.value" value="{{data.resources.hp.value}}" data-dtype="Number" />
+            <input type="number" name="data.resources.hp.value" value="{{data.resources.hp.value}}"
+              data-dtype="Number" />
             <span> / </span>
-            <input type="text" name="data.resources.hp.max" value="{{data.resources.hp.max}}" data-dtype="Number" />
+            <input disabled type="text" name="data.resources.hp.max" value="{{data.resources.hp.max}}"
+              data-dtype="Number" />
             <span class="hp-percent">&nbsp;({{numberFormat data.hp.percent decimals=0 sign=false}}%)</span>
           </div>
         </div>
 
-        <div class="resource flex-group-center">
-          <label for="data.strain.value" class="resource-label">Strain</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <input type="text" name="data.strain.value" value="{{data.strain.value}}" data-dtype="Number" />
-            <span> / </span>
-            <input type="text" name="data.strain.max" value="{{data.strain.max}}" data-dtype="Number" />
-          </div>
-        </div>
-
-        <div class="resource flex-group-center">
+        {{!--
+         <div class="resource flex-group-center">
           <label for="data.attributes.level.value" class="resource-label">Level</label>
           <div class="resource-content flexrow flex-center flex-between">
             <input type="text" name="data.attributes.level.value" value="{{data.attributes.level.value}}"
               data-dtype="Number" />
           </div>
         </div>
+        --}}
+        <div class="resource flex-group-center">
+          <label for="data.resources.ap.value" class="resource-label">AP</label>
+          <div class="resource-content flexrow flex-center flex-between">
+            <input type="number" name="data.resources.ap.value" value="{{data.ap.value}}" data-dtype="Number" />
+            <span>&nbsp;/&nbsp;</span>
+            <input disabled type="number" name="data.resources.ap.max" value="{{data.ap.max}}" data-dtype="Number" />
+          </div>
+        </div>
+        <div class="resource flex-group-center">
+          <label for="data.strain.value" class="resource-label">Strain</label>
+          <div class="resource-content flexrow flex-center flex-between">
+            <input type="number" name="data.resources.strain.value" value="{{data.strain.value}}" data-dtype="Number" />
+            <span> / </span>
+            <input disabled type="number" name="data.resources.strain.max" value="{{data.strain.max}}"
+              data-dtype="Number" />
+          </div>
+        </div>
+
 
       </div>
     </div>
@@ -62,48 +75,12 @@
   <section class="sheet-body">
 
     <div class="tab bonuses" data-group="primary" data-tab="bonuses">
-      <div class="grid grid-3col">
-        <ol class="items-list resource-bonuses">
-          <li class="item flexrow items-header">
-            <div class="item-name">Stat</div>
-            <div class="item-perm">Permanent</div>
-            <div class="item-temp">Temporary</div>
-          </li>
-          {{#each data.abilities as |ability key|}}
-          <li class="item flexrow">
-            <label for="data.abilities.{{key}}.value" class="item-name"
-              data-label="{{ability.label}}">{{ability.label}}</label>
-            <input type="text" name="data.abilities.{{key}}.bonus.perm" class="item-perm" value="{{ability.bonus.perm}}"
-              data-dtype="Number" />
-            <input type="text" name="data.abilities.{{key}}.bonus.temp" class="item-temp" value="{{ability.bonus.temp}}"
-              data-dtype="Number" />
-          </li>
-          {{/each}}
-        </ol>
-        <ol class="items-list resource-bonuses">
-          <li class="item flexrow items-header">
-            <div class="item-name">Resource (max)</div>
-            <div class="item-perm">Permanent</div>
-            <div class="item-temp">Temporary</div>
-          </li>
-          {{#each data.resources as |resource key|}}
-          <li class="item flexrow">
-            <label for="data.resources.{{key}}.value" class="item-name"
-              data-label="{{resource.label}}">{{resource.label}}</label>
-            <input type="text" name="data.resources.{{key}}.bonus.perm" class="item-perm"
-              value="{{resource.bonus.perm}}" data-dtype="Number" />
-            <input type="text" name="data.resources.{{key}}.bonus.temp" class="item-temp"
-              value="{{resource.bonus.temp}}" data-dtype="Number" />
-          </li>
-          {{/each}}
-        </ol>
-      </div>
+      {{> "systems/foe/templates/actor/parts/actor-bonuses.html"}}
     </div>
     {{!-- Vital Information Tab --}}
     <div class="tab vital" data-group="primary" data-tab="vital">
       <section class="grid grid-2col">
-        <aside class="sidebar">
-
+        <div class="sidebar">
           {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
           use both the "grid" and "grid-Ncol" class where "N" can be any number
           from 1 to 12 and will create that number of columns. --}}
@@ -121,44 +98,42 @@
             </div>
             {{/each}}
           </div>
-        </aside>
-
-        {{!-- For the main features list, span the right two columns --}}
-        {{!--
-        <section class="main grid-span-2">
-          <ol class="items-list skills">
-            <li class="item flexrow items-header">
-              <div class="skill-label">Name</div>
-              <div class="skill-value">Value</div>
-            </li>
-            {{#each data.skills as |skill key|}}
-            <li class="item skill flexrow">
-              <div class="skill-label rollable">{{skill.label}}</div>
-              <div class="skill-value flex-group-center">{{skill.value}}</div>
-            </li>
-            {{/each}}
-          </ol>
-        </section>--}}
-        <div class="skills flexcol">
-          {{#each data.skills as |skill key|}}
-          <div class="skill flexrow align-left">
-            <label for="data.skills.{{key}}.value" class="resource-label rollable flexlarge" data-roll-type="skill"
-              data-roll-skill="{{key}}" data-label="{{skill.label}}">{{skill.label}}</label>
-            <input type="text" name="data.skills.{{key}}.value" value="{{skill.value}}" data-dtype="Number" />
-            <div>
-              &nbsp;({{skill.tot}})
-            </div>
-            <!-- <span class="ability-mod rollable" data-roll="d20+@abilities.{{key}}.mod" data-label="{{ability.label}}">{{numberFormat ability.mod decimals=0 sign=true}}</span> -->
+          <div class="equipped flexcol align-left">
+            <ol class="items-list">
+              {{#each equippable.weapon as |slot idx|}}
+              {{localize slot.label}}
+              <div class="form-group">
+                <label>{{localize "FOE.PickWeapon"}}</label>
+                <select class="equipped-form" data-index="{{idx}}" value="{{slot.item}}">
+                  {{selectOptions slot.options selected=slot.item}}
+                </select>
+              </div>
+              <li class="item flexrow items-header align-left">
+                <div class="item-damage">{{localize "FOE.Damage"}}</div>
+                <div class="item-range">{{localize "FOE.Range"}}</div>
+                <div class="item-cost">{{localize "FOE.APCost"}}</div>
+                <div class="item-firerate">{{localize "FOE.RateOfFire"}}</div>
+                <div class="item-condition">{{localize "FOE.Condition"}}</div>
+              </li>
+              {{#if slot.equippedItem}}
+              <li class="item flexrow align-left">
+                <div class="item-damage">{{damageString slot.equippedItem}}</div>
+                <div class="item-range">{{slot.equippedItem.data.range}}</div>
+                <div class="item-cost">{{slot.equippedItem.data.cost}}</div>
+                <div class="item-firerate">{{slot.equippedItem.data.firerate}}</div>
+                <div class="item-condition">{{slot.equippedItem.data.condition}}</div>
+              </li>
+              {{/if}}
+                
+              {{/each}}
+            </ol>
           </div>
-          {{/each}}
         </div>
-
-
       </section>
     </div>
 
     <div class="tab skills" data-group="primary" data-tab="skills">
-      <!--no clue lol-->
+      {{> "systems/foe/templates/actor/parts/actor-skills.html"}}
     </div>
 
     <div class="tab perks-traits" data-group="primary" data-tab="perks-traits">

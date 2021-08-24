@@ -1,5 +1,6 @@
 import { onManageActiveEffect, prepareActiveEffectCategories } from "../helpers/effects.mjs";
 import { skillRoll, specialRoll } from "../dice.mjs"
+import { FOE } from "../helpers/config.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -90,10 +91,16 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
    * @return {undefined}
    */
   _prepareItems(context) {
+    const equipped = foundry.utils.deepClone(context.data.equipped);
     // Initialize containers.
     const inventory = {
-      equipment: {
-        label: "FOE.WeaponsArmor",
+      weapon: {
+        label: "FOE.Weapons",
+        extra: true,
+        content: []
+      },
+      armor: {
+        label: "FOE.Armor",
         extra: true,
         content: []
       },
@@ -111,17 +118,43 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       },
     };
 
+    const equippable = {
+      weapon: {}
+    }
+    for (let j = 0; j < 3; j++) {
+      equippable.weapon[j] = {
+        options: {
+          "none": "None"
+        },
+        label: FOE.weaponSlots[j],
+        item: equipped[j].item
+      }
+    }
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       i.img = i.img || DEFAULT_TOKEN;
       // Append to gear.
       if (inventory[i.type]) {
         inventory[i.type].content.push(i);
-      } 
+        if (i.type == "weapon") {
+          for (let j = 0; j < 3; j++) {
+            const currSlot = equippable[i.type][j];
+            currSlot.options[i._id] = i.name;
+            if (currSlot.item == i._id) {
+              currSlot.equippedItem = i;
+            }
+          }
+        }
+      }
     }
+
+
 
     // Assign and return
     context.inventory = inventory;
+    // context.equipped = equipped;
+    // context.equipped = equipped; 
+    context.equippable = equippable;
     // context.features = features;
     // context.spells = spells;
   }
@@ -145,6 +178,9 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
 
     // Add Inventory Item
     html.find('.item-create').click(this._onItemCreate.bind(this));
+
+    // Equipped Item
+    html.find('.equipped-form').change(this._onSelectChange.bind(this));
 
     // Delete Inventory Item
     html.find('.item-delete').click(ev => {
@@ -198,6 +234,17 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     return await Item.create(itemData, { parent: this.actor });
   }
 
+  async _onSelectChange(event) {
+    // event.preventDefault();
+    const header = event.currentTarget;
+    const sel = header.options[header.selectedIndex];
+    const slotIdx = header.dataset.index;
+    const newData = {data: {equipped: {}}};
+    newData.data.equipped = {};
+    newData.data.equipped[slotIdx] = {item: sel.value};
+    this.actor.update(newData);
+  }
+
   /**
    * Handle clickable rolls.
    * @param {Event} event   The originating click event
@@ -246,3 +293,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     }
   }
 }
+
+Handlebars.registerHelper('damageString', function (itemObject) {
+  return `${itemObject.data.damage.base}${'+'.repeat(itemObject.data.damage.d10)}`
+})
