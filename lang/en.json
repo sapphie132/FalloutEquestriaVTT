@@ -65,5 +65,13 @@
   "FOE.Primary": "Primary",
   "FOE.Secondary": "Secondary",
   "FOE.Tertiary": "Tertiary",
-  "FOE.PickWeapon": "Pick Equipped"
+  "FOE.PickWeapon": "Pick Equipped",
+  "FOE.Weapons": "Weapons",
+  "FOE.Armor": "Armour",
+  "FOE.FoodAlcDrugs": "Food, Alcohol and Drugs",
+  "FOE.Misc": "Miscellaneous",
+  "FOE.GearCraftingSupplies": "Gear and Crafting Supplies",
+  "FOE.BaseDamage": "Base Damage",
+  "FOE.BonusDamageDice": "Bonus Damage (dice)",
+  "FOE.CritDamage": "Crit"
 }

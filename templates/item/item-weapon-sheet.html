@@ -38,16 +38,38 @@
       <div class="grid-2col">
         {{!-- As you add new fields, add them in here! --}}
         <div class="resource">
-          <label class="resource-label">Flat Damage</label>
+          <label class="resource-label">{{localize "FOE.BaseDamage"}}</label>
           <input type="number" name="data.damage.base" value="{{data.damage.base}}" data-dtype="Number" />
         </div>
         <div class="resource">
-          <label class="resource-label">Bonus Damage</label>
+          <label class="resource-label">{{localize "FOE.BonusDamageDice"}}</label>
           <input type="number" name="data.damage.d10" value="{{data.damage.d10}}" data-dtype="Number" />
         </div>
         <div class="resource">
-          <label class="resource-label">Range</label>
+          <label class="resource-label">{{localize "FOE.Range"}}</label>
           <input type="text" name="data.range" value="{{data.range}}" data-dtype="String" />
+        </div>
+        <div class="resource">
+          <label class="resource-label">{{localize "FOE.APCost"}}</label>
+          {{!--TODO: Make AP cost one or two integers--}}
+          <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="String" />
+        </div>
+        <div class="resource">
+          {{!--TODO: Make firerate a dropdown --}}
+          <label class="resource-label">{{localize "FOE.RateOfFire"}}</label>
+          <input type="text" name="data.firerate" value="{{data.firerate}}" data-dtype="String" />
+        </div>
+        <div class="resource">
+          <label class="resource-label">{{localize "FOE.WeaponSkill"}}</label>
+          <select value="{{data.rollSkill}}" name="data.rollSkill">
+            {{selectOptions combatSkills selected=data.rollSkill}}
+          </select>
+        </div>
+        <div class="resource">
+          <label class="resource-label">{{localize "FOE.ConditionModifierType"}}</label>
+          <select value="{{data.conditionMod}}" name="data.conditionMod">
+            {{selectOptions conditionModTypes selected=data.conditionMod}}
+          </select>
         </div>
       </div>
     </div>

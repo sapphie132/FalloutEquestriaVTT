@@ -16,8 +16,11 @@ async function specialRoll(ability, label, data = {}) {
     return r;
 }
 
-async function skillRoll(skill, label, data) {
-    const r = new CONFIG.Dice.FoERoll("1d100", `@${skill}.tot`, data, {
+async function skillRoll(skill, label, data, targetMod) {
+    if (!data.fumble) data.fumble = 0;
+    if (!data.crit) data.crit = 0;
+    if (!targetMod) targetMod = "";
+    const r = new CONFIG.Dice.FoERoll("1d100", `@${skill}.tot ${targetMod ? '+' + targetMod: ''}`, data, {
         label: label,
         fumble: 94+data.fumble,
         crit: 1+data.crit

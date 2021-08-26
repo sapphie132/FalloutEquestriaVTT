@@ -26,7 +26,7 @@
         </div>
 
         {{!--
-         <div class="resource flex-group-center">
+        <div class="resource flex-group-center">
           <label for="data.attributes.level.value" class="resource-label">Level</label>
           <div class="resource-content flexrow flex-center flex-between">
             <input type="text" name="data.attributes.level.value" value="{{data.attributes.level.value}}"
@@ -101,14 +101,31 @@
           <div class="equipped flexcol align-left">
             <ol class="items-list">
               {{#each equippable.weapon as |slot idx|}}
-              {{localize slot.label}}
+              <div class="flexlarge flexrow resource-label" data-item-id="{{slot.item}}">
+                <div>
+                  {{localize slot.label}}
+                </div>
+                <div class="flexlarge rollable resource-label" data-roll-type="weapon" data-roll-subtype="attack"
+                  data-item-id="{{slot.item}}">
+                  &nbsp;({{localize "FOE.Attack"}})
+                </div>
+                <div class="flexlarge resource-label flexrow">
+                  <div class="rollable" data-roll-type="weapon" data-roll-subtype="damage" data-item-id="{{slot.item}}">
+                    ({{localize "FOE.Damage"}}
+                  </div>
+                  <div class="rollable" data-roll-type="weapon" data-roll-subtype="damage" data-crit="true"
+                    data-item-id="{{slot.item}}">
+                    {{localize "FOE.CritDamage"}})
+                  </div>
+                </div>
+              </div>
               <div class="form-group">
                 <label>{{localize "FOE.PickWeapon"}}</label>
                 <select class="equipped-form" data-index="{{idx}}" value="{{slot.item}}">
                   {{selectOptions slot.options selected=slot.item}}
                 </select>
               </div>
-              <li class="item flexrow items-header align-left">
+              <li class="item flexrow items-header flex-group-left">
                 <div class="item-damage">{{localize "FOE.Damage"}}</div>
                 <div class="item-range">{{localize "FOE.Range"}}</div>
                 <div class="item-cost">{{localize "FOE.APCost"}}</div>
@@ -124,7 +141,7 @@
                 <div class="item-condition">{{slot.equippedItem.data.condition}}</div>
               </li>
               {{/if}}
-                
+
               {{/each}}
             </ol>
           </div>

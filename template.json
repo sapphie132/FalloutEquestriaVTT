@@ -343,6 +343,9 @@
         "base": 0,
         "d10": 0
       },
+      "conditionMod": "hit",
+      "critMult": 2,
+      "rollSkill": "melee",
       "range": "melee",
       "cost": "0",
       "firerate": "",

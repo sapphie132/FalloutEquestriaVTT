@@ -58,12 +58,21 @@ FOE.skills = {
   flightMagic: "FOE.FlightMagic"
 }
 
+FOE.combatSkills = ["unarmed", "melee", "throwing", "firearms", "mew", "explosives", "bSaddles"];
+
+FOE.localizedCombatSkills = null;
+
 FOE.resources = {
   "hp": "FOE.ResourceHP",
   "strain": "FOE.ResourceStrain",
   "stun": "FOE.ResourceStun",
   "illusion": "FOE.ResourceIllusion",
   "TP": "FOE.ResourceTP"
+}
+
+FOE.conditionModTypes = {
+  damage: "FOE.Damage",
+  hit: "FOE.Hit"
 }
 
 FOE.rollDifficulties = {
@@ -96,4 +105,56 @@ FOE.skillDifficulties = {
   vHard: -30
 }
 
-Handlebars
+// Note: Lower is excluded, upper is included
+FOE.conditionModifiers = {
+  perfect: {
+    lower: 100,
+    upper: 120,
+    extraLuck: 3,
+    DTModAdd: 2,
+    DTModMul: 1,
+    damageMod: 1.1,
+    hitMod: 5,
+    skillToRepair: 100,
+  },
+  good: {
+    lower: 75,
+    upper: 100,
+    extraLuck: 1,
+    DTModAdd: 0,
+    DTModMul: 1,
+    damageMod: 1.0,
+    hitMod: 0,
+    skillToRepair: 75,
+  },
+  used: {
+    lower: 50,
+    upper: 75,
+    extraLuck: 0,
+    DTModAdd: -2,
+    DTModMul: 1,
+    damageMod: 0.9,
+    hitMod: -5,
+    skillToRepair: 50,
+  },
+  heavilyUsed: {
+    lower: 25,
+    upper: 50,
+    extraLuck: -1,
+    DTModAdd: 0,
+    DTModMul: 0.5,
+    damageMod: 0.5,
+    hitMod: -10,
+    skillToRepair: 25,
+  },
+  poor: {
+    lower: -1,
+    upper: 25,
+    extraLuck: 3,
+    DTModAdd: 0,
+    DTModMul: 1 / 3,
+    damageMod: 1 / 3,
+    hitMod: -15,
+    skillToRepair: 0,
+  }
+}

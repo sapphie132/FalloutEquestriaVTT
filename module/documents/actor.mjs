@@ -88,10 +88,31 @@ export class FalloutEquestriaActor extends Actor {
       skill.tot = skill.value + bonus.tot;
     }
 
-    data.attributes.crit = luck + data.attributes.critMod;
-    data.attributes.fumble = Math.floor(luck/2) + data.attributes.fumbleMod;
+    data.attributes.crit = this.critVal(0, data);
+    data.attributes.fumble = this.fumbleVal(0, data);
   }
 
+  critVal(extraLuck, data) {
+    if (!data) {
+      data = this.data.data;
+    }
+    let effLuck = data.abilities.luck.value;
+    if (extraLuck) {
+      effLuck += extraLuck;
+    }
+    return effLuck + data.attributes.critMod;
+  }
+
+  fumbleVal(extraLuck, data) {
+    if (!data) {
+      data = this.data.data;
+    }
+    let effLuck = data.abilities.luck.value;
+    if (extraLuck) {
+      effLuck += extraLuck;
+    }
+    return Math.floor(effLuck/2) + data.attributes.fumbleMod;
+  }
   /**
    * Prepare NPC type specific data.
    */

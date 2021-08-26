@@ -263,6 +263,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
           const itemId = element.closest('.item').dataset.itemId;
           const item = this.actor.items.get(itemId);
           if (item) return item.roll();
+          break;
         case 'special': {
           const r = await specialRoll(dataset.rollStat, label, this.actor.getRollData());
 
@@ -277,6 +278,15 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
           const e = r.toMessage({ speaker }, { create: true })
           return r;
         }
+        case 'weapon': {
+          const itemId = dataset.itemId;
+          const item = this.actor.items.get(itemId);
+          const tpe = dataset.rollSubtype;
+          if(item) return item.roll(tpe, dataset.crit);
+          break;
+        }
+        default:
+          console.log(`Unhandled roll type: ${dataset.rollType}`)
       }
     }
 
@@ -295,5 +305,6 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
 }
 
 Handlebars.registerHelper('damageString', function (itemObject) {
-  return `${itemObject.data.damage.base}${'+'.repeat(itemObject.data.damage.d10)}`
+  let n = itemObject.data.damage.d10;
+  return `${itemObject.data.damage.base}${'+'.repeat(n > 0 ? n : 0)}`
 })

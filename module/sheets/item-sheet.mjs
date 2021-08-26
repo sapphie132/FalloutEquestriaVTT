@@ -1,3 +1,4 @@
+import { FOE } from "../helpers/config.mjs";
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -44,7 +45,9 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
 
     // Add the actor's data to context.data for easier access, as well as flags.
     context.data = itemData.data;
+    context.combatSkills = FOE.localizedCombatSkills;
     context.flags = itemData.flags;
+    context.conditionModTypes = FOE.conditionModTypes;
 
     return context;
   }

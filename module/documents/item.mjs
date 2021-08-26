@@ -1,3 +1,6 @@
+import { skillRoll } from "../dice.mjs";
+import { FOE } from "../helpers/config.mjs";
+
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
@@ -10,25 +13,45 @@ export class FalloutEquestriaItem extends Item {
     // As with the actor class, items are documents that can have their data
     // preparation methods overridden (such as prepareBaseData()).
     super.prepareData();
+    const condition = this.data.data.condition;
+    this.conditionValues = FOE.conditionModifiers.perfect;
+    for (let [k, v] of Object.entries(FOE.conditionModifiers)) {
+      if (condition > v.lower && condition <= v.upper) {
+        this.conditionValues = foundry.utils.deepClone(v)
+      }
+    }
+
   }
 
   /**
    * Prepare a data object which is passed to any Roll formulas which are created related to this Item
    * @private
    */
-   getRollData() {
+  getRollData() {
     // If present, return the actor's roll data.
-    if ( !this.actor ) return null;
+    if (!this.actor) return null;
     const rollData = this.actor.getRollData();
     rollData.item = foundry.utils.deepClone(this.data.data);
 
     return rollData;
   }
 
+  // returns the equivalent extra luck for item condition
+  get extraLuck() {
+    return this.conditionValues.extraLuck;
+  }
+
+  get damageMod() {
+    return this.conditionValues.damageMod;
+  }
+
+  get hitMod() {
+    return this.conditionValues.hitMod;
+  }
+
   get damageString() {
-    const dmg = this.data.damage;
+    const dmg = this.data.data.damage;
     if (dmg) {
-      console.log(dmg)
       return `${dmg.base}${'+'.repeat(dmg.d10)}`
     } else {
       return ""
@@ -40,16 +63,17 @@ export class FalloutEquestriaItem extends Item {
    * @param {Event} event   The originating click event
    * @private
    */
-  async roll() {
+  async roll(damageOrAttack, critical) {
     const item = this.data;
 
     // Initialize chat data.
     const speaker = ChatMessage.getSpeaker({ actor: this.actor });
     const rollMode = game.settings.get('core', 'rollMode');
-    const label = `[${item.type}] ${item.name}`;
+    let label = `[${item.type}] ${item.name}`;
 
+    const isWeapon = this.type == 'weapon';
     // If there's no roll data, send a chat message.
-    if (!this.data.data.formula) {
+    if (!(item.data.formula || isWeapon)) {
       ChatMessage.create({
         speaker: speaker,
         rollMode: rollMode,
@@ -63,7 +87,45 @@ export class FalloutEquestriaItem extends Item {
       const rollData = this.getRollData();
 
       // Invoke the roll and submit it to chat.
-      const roll = new Roll(rollData.item.formula, rollData).roll();
+      let roll;
+      if (isWeapon) {
+        const conditionModifierType = item.data.conditionMod;
+        if (damageOrAttack == "damage") {
+          console.log("hi")
+          label = `[damage] ${item.name} (${this.actor.name})`;
+          const n = item.data.damage.d10;
+          let formula = `${item.data.damage.base}`;
+          if (n > 0) {
+            formula += `+${n}d10`
+          }
+
+          if (conditionModifierType == "damage") {
+            formula = `${this.damageMod}*(${formula})`
+          }
+
+          if (critical) {
+            formula = `${item.data.critMult}*(${formula})`
+          }
+          console.log(formula);
+          roll = new Roll(formula, rollData).roll({async: false});
+        } else if (damageOrAttack == "attack") {
+          label = `[${item.data.rollSkill}] ${item.name} (${this.actor.name})`;
+          if (this.actor) {
+            rollData.fumble = this.actor.fumbleVal(this.extraLuck);
+            rollData.crit = this.actor.critVal(this.extraLuck);
+          }
+
+          let targetMod;
+          if (conditionModifierType == "hit") {
+            targetMod = this.hitMod;
+          }
+          roll = await skillRoll(item.data.rollSkill, label, rollData, targetMod)
+        } else {
+          throw new Error(`Invalid roll mode: ${damageOrAttack}`);
+        }
+      } else {
+        roll = new Roll(rollData.item.formula, rollData).roll();
+      }
       roll.toMessage({
         speaker: speaker,
         rollMode: rollMode,
