@@ -84,7 +84,7 @@
           {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
           use both the "grid" and "grid-Ncol" class where "N" can be any number
           from 1 to 12 and will create that number of columns. --}}
-          <div class="abilities flexcol">
+          <div class="abilities flexcol flex-block">
             {{#each data.abilities as |ability key|}}
             <div class="ability flexrow align-left">
               <label for="data.abilities.{{key}}.value" class="resource-label rollable flexlarge"
@@ -99,8 +99,8 @@
             {{/each}}
           </div>
           <div class="equipped flexcol align-left">
-            <ol class="items-list">
-              {{#each equippable.weapon as |slot idx|}}
+            {{#each equippable.weapon as |slot idx|}}
+            <div class="flex-block">
               <div class="flexlarge flexrow resource-label" data-item-id="{{slot.item}}">
                 <div>
                   {{localize slot.label}}
@@ -125,25 +125,25 @@
                   {{selectOptions slot.options selected=slot.item}}
                 </select>
               </div>
-              <li class="item flexrow items-header flex-group-left">
+              {{#if slot.equippedItem}}
+              <div class="item flexrow items-header flex-group-left">
                 <div class="item-damage">{{localize "FOE.Damage"}}</div>
                 <div class="item-range">{{localize "FOE.Range"}}</div>
                 <div class="item-cost">{{localize "FOE.APCost"}}</div>
                 <div class="item-firerate">{{localize "FOE.RateOfFire"}}</div>
                 <div class="item-condition">{{localize "FOE.Condition"}}</div>
-              </li>
-              {{#if slot.equippedItem}}
-              <li class="item flexrow align-left">
+              </div>
+              <div class="item flexrow align-left">
                 <div class="item-damage">{{damageString slot.equippedItem}}</div>
                 <div class="item-range">{{slot.equippedItem.data.range}}</div>
                 <div class="item-cost">{{slot.equippedItem.data.cost}}</div>
                 <div class="item-firerate">{{slot.equippedItem.data.firerate}}</div>
                 <div class="item-condition">{{slot.equippedItem.data.condition}}</div>
-              </li>
+              </div>
               {{/if}}
+            </div>
 
-              {{/each}}
-            </ol>
+            {{/each}}
           </div>
         </div>
       </section>
