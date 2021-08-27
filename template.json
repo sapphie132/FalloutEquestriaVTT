@@ -312,7 +312,8 @@
       "crafting",
       "misc",
       "perk",
-      "spell"
+      "spell",
+      "ammo"
     ],
     "templates": {
       "base": {
@@ -323,11 +324,7 @@
         "weight": 0
       },
       "stackable": {
-        "amount": 1,
-        "charges": {
-          "max": 0,
-          "value": 0
-        }
+        "amount": 1
       },
       "equipment": {
         "condition": 100
@@ -357,6 +354,15 @@
           "total": 0
         }
       }
+    },
+    "ammo": {
+      "templates": [
+        "base",
+        "physical",
+        "stackable"
+      ],
+      "type": "",
+      "subtype": ""
     },
     "armor": {
       "templates": [

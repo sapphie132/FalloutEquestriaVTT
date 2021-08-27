@@ -116,6 +116,10 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
         label: "FOE.Misc",
         content: []
       },
+      ammo: {
+        label: "FOE.Ammunition",
+        content: []
+      }
     };
 
     const equippable = {

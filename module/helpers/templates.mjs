@@ -13,6 +13,9 @@
     "systems/foe/templates/actor/parts/actor-skills.html",
     "systems/foe/templates/actor/parts/actor-spells.html",
     "systems/foe/templates/actor/parts/actor-effects.html",
+    // Item partials
+    "systems/foe/templates/item/parts/physical-attributes.html",
+    "systems/foe/templates/item/parts/stackable-attributes.html",
     // Roll dialog
     "systems/foe/templates/chat/roll-dialog.html",
   ]);
