@@ -48,6 +48,22 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
     context.combatSkills = FOE.localizedCombatSkills;
     context.flags = itemData.flags;
     context.conditionModTypes = FOE.conditionModTypes;
+    const item = this.object;
+    const compatAmmo = {};
+    if (item.type == 'weapon') {
+      for (let [itemId, thatItem] of this.actor.data.items.entries()) {
+        const tpe = thatItem.type;
+        if (tpe == 'ammo') {
+          const thatAmmoType = thatItem.data.data.type;
+          const thisAmmoType = item.data.data.ammoType;
+          if (thisAmmoType == thatAmmoType) {
+            compatAmmo[itemId] = thatItem.name;
+          }
+        }
+      }
+    }
+
+    context.compatAmmo = compatAmmo;
 
     return context;
   }

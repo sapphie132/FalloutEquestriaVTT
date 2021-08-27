@@ -4,10 +4,15 @@
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
       <div class="grid grid-2col">
-        {{> "systems/foe/templates/item/parts/physical-attributes.html"}}
         <div class="resource">
           <label class="resource-label">{{localize "FOE.Condition"}}</label>
           <input type="number" name="data.condition" value="{{data.condition}}" data-dtype="Number" />
+        </div>
+        <div class="resource">
+          <label class="resource-label">{{localize "FOE.LoadedAmmunition"}}</label>
+          <select class="resource-dropdown" name="data.loadedAmmo" value="{{data.loadedAmmo}}">
+          {{selectOptions compatAmmo selected=data.loadedAmmo}}
+          </select>
         </div>
       </div>
     </div>
@@ -34,6 +39,7 @@
     <div class="tab attributes" data-group="primary" data-tab="attributes">
       <div class="grid-2col">
         {{!-- As you add new fields, add them in here! --}}
+        {{> "systems/foe/templates/item/parts/physical-attributes.html"}}
         <div class="resource">
           <label class="resource-label">{{localize "FOE.BaseDamage"}}</label>
           <input type="number" name="data.damage.base" value="{{data.damage.base}}" data-dtype="Number" />
@@ -58,7 +64,7 @@
         </div>
         <div class="resource">
           <label class="resource-label">{{localize "FOE.WeaponSkill"}}</label>
-          <select value="{{data.rollSkill}}" name="data.rollSkill">
+          <select class="resource-dropdown" value="{{data.rollSkill}}" name="data.rollSkill">
             {{selectOptions combatSkills selected=data.rollSkill}}
           </select>
         </div>
@@ -67,6 +73,10 @@
           <select value="{{data.conditionMod}}" name="data.conditionMod">
             {{selectOptions conditionModTypes selected=data.conditionMod}}
           </select>
+        </div>
+        <div class="resource">
+          <label class="resource-label">{{localize "FOE.AmmunitionType"}}</label>
+          <input type="text" name="data.ammoType" value="{{data.ammoType}}" data-dtype="String" />
         </div>
       </div>
     </div>
