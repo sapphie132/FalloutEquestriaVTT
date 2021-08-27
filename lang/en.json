@@ -73,5 +73,11 @@
   "FOE.GearCraftingSupplies": "Gear and Crafting Supplies",
   "FOE.BaseDamage": "Base Damage",
   "FOE.BonusDamageDice": "Bonus Damage (dice)",
-  "FOE.CritDamage": "Crit"
+  "FOE.CritDamage": "Crit",
+  "FOE.SingleWeight": "Single Weight",
+  "FOE.Amount": "Amount",
+  "FOE.TotalWeight": "Total Weight",
+  "FOE.WeaponSkill": "Combat Skill",
+  "FOE.ConditionModifierType": "Modifer type from condition",
+  "FOE.Attack": "Attack"
 }
