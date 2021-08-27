@@ -63,7 +63,7 @@ export class FalloutEquestriaItem extends Item {
    * @param {Event} event   The originating click event
    * @private
    */
-  async roll(damageOrAttack, critical) {
+  async roll({damageOrAttack = "attack", critical, isWeapon} = {}) {
     const item = this.data;
 
     // Initialize chat data.
@@ -71,7 +71,6 @@ export class FalloutEquestriaItem extends Item {
     const rollMode = game.settings.get('core', 'rollMode');
     let label = `[${item.type}] ${item.name}`;
 
-    const isWeapon = this.type == 'weapon';
     // If there's no roll data, send a chat message.
     if (!(item.data.formula || isWeapon)) {
       ChatMessage.create({
@@ -91,7 +90,6 @@ export class FalloutEquestriaItem extends Item {
       if (isWeapon) {
         const conditionModifierType = item.data.conditionMod;
         if (damageOrAttack == "damage") {
-          console.log("hi")
           label = `[damage] ${item.name} (${this.actor.name})`;
           const n = item.data.damage.d10;
           let formula = `${item.data.damage.base}`;

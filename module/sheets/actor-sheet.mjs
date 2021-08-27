@@ -145,6 +145,9 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
             }
           }
         }
+        if (i.data.amount) {
+          i.data.totalWeight = i.data.weight * i.data.amount;
+        }
       }
     }
 
@@ -190,6 +193,8 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       li.slideUp(200, () => this.render(false));
     });
 
+    html.find('input.item-condition').click(ev => ev.target.select()).change(this._onConditionChange.bind(this));
+
     // Active Effect management
     html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
 
@@ -234,6 +239,15 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     return await Item.create(itemData, { parent: this.actor });
   }
 
+  async _onConditionChange(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    const condition = Math.clamped(0, parseInt(event.target.value), 120);
+    event.target.value = condition;
+    return item.update({'data.condition': condition})
+  }
+
   async _onSelectChange(event) {
     // event.preventDefault();
     const header = event.currentTarget;
@@ -260,6 +274,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       const label = dataset.label ? `${dataset.label} check` : '';
       switch (dataset.rollType) {
         case 'item':
+          // TODO: make weapon rolls smarter (post in chat)
           const itemId = element.closest('.item').dataset.itemId;
           const item = this.actor.items.get(itemId);
           if (item) return item.roll();
@@ -281,8 +296,8 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
         case 'weapon': {
           const itemId = dataset.itemId;
           const item = this.actor.items.get(itemId);
-          const tpe = dataset.rollSubtype;
-          if(item) return item.roll(tpe, dataset.crit);
+          const damageOrAttack = dataset.rollSubtype;
+          if(item) return item.roll({damageOrAttack, critical: dataset.crit, isWeapon: true});
           break;
         }
         default:
