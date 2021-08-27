@@ -19,6 +19,12 @@
         </select>
     </div>
     {{/if}}
+    {{#if chooseConsumeResource}}
+    <div class="form-group">
+        <label>{{localize "FOE.ConsumeResource?"}}</label>
+        <input type="checkbox" name="resourceCheckbox" checked/>
+    </div>
+    {{/if}}
     <div class="form-group">
         <label>{{ localize "FOE.SituationalRollBonus" }}</label>
         <input type="text" name="bonus" value="" placeholder="{{ localize 'FOE.RollExample' }}"/>

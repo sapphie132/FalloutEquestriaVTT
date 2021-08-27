@@ -19,11 +19,14 @@ export default class FoERoll {
     static EVALUATION_TEMPLATE = "systems/foe/templates/chat/roll-dialog.html";
 
 
-    async configureDialog({ title, defaultRollMode, chooseAbility = false, defaultAbility, chooseDifficulty = false, defaultDifficulty = "none", difficulties: difficultyMods, template } = {}, options = {}) {
+    async configureDialog({ title, defaultRollMode, chooseAbility = false,
+        defaultAbility, chooseDifficulty = false, defaultDifficulty = "none",
+        difficulties: difficultyMods, template, chooseConsumeResource = false,
+        consumeResourceCallback } = {}, options = {}) {
         if (chooseDifficulty && !(difficultyMods)) throw new Error("No difficulty modifiers provided");
         // No clue if there's a less retarded way to do this lol
         const localizedDifficulties = foundry.utils.deepClone(FOE.rollDifficulties);
-        Object.keys(localizedDifficulties).map(function(key, index) {
+        Object.keys(localizedDifficulties).map(function (key, index) {
             localizedDifficulties[key] = game.i18n.localize(localizedDifficulties[key])
         })
 
@@ -35,6 +38,7 @@ export default class FoERoll {
             chooseAbility,
             defaultAbility,
             chooseDifficulty,
+            chooseConsumeResource,
             difficulties: localizedDifficulties,
             defaultDifficulty: chooseDifficulty ? defaultDifficulty ?? difficultyMods[0] : null,
             abilities: CONFIG.FOE.abilities,
@@ -43,13 +47,13 @@ export default class FoERoll {
             title,
             content,
             label: game.i18n.localize("FOE.Roll"),
-            callback: html => this._onDialogSubmit(html, defaultDifficulty, difficultyMods),
+            callback: html => this._onDialogSubmit(html, defaultDifficulty, difficultyMods, consumeResourceCallback),
             rejectClose: false,
             options: options
         })
     }
 
-    _onDialogSubmit(html, defaultDiff, difficultyMods) {
+    _onDialogSubmit(html, defaultDiff, difficultyMods, consumeResourceCallback) {
         const form = html[0].querySelector("form");
         // Append a situational bonus term
         if (form.bonus.value) {
@@ -57,6 +61,11 @@ export default class FoERoll {
             const terms = this.targetRoll.terms;
             if (!(bonusTerms[0] instanceof OperatorTerm)) terms.push(new OperatorTerm({ operator: "+" }));
             this.targetRoll.terms = terms.concat(bonusTerms);
+        }
+
+        const resourceCheckbox = form.resourceCheckbox;
+        if (resourceCheckbox) {
+            consumeResourceCallback(resourceCheckbox.checked);
         }
 
 

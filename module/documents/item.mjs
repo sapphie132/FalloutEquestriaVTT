@@ -58,6 +58,13 @@ export class FalloutEquestriaItem extends Item {
     }
   }
 
+  decrementBullets(arg) {
+    if (arg) {
+      const item = this.data;
+      const ammoId = item.data.loadedAmmo;
+    }
+  }
+
   /**
    * Handle clickable rolls.
    * @param {Event} event   The originating click event
