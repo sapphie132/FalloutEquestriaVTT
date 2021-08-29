@@ -346,7 +346,15 @@
       "range": "melee",
       "cost": "0",
       "firerate": "",
-      "ammoType": ""
+      "ammo": {
+        "type": "",
+        "loaded": "", 
+        "capacity": {
+          "value": 0,
+          "max": 0
+        },
+        "perShot": 1
+      }
     },
     "ammo": {
       "templates": [

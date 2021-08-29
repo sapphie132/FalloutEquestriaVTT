@@ -125,6 +125,8 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     const equippable = {
       weapon: {}
     }
+
+    // Set up the slots dropdowns
     for (let j = 0; j < 3; j++) {
       equippable.weapon[j] = {
         options: {
@@ -142,12 +144,22 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
         inventory[i.type].content.push(i);
         if (i.type == "weapon") {
           for (let j = 0; j < 3; j++) {
+            // Add the weapon to each selectable slot
             const currSlot = equippable[i.type][j];
             currSlot.options[i._id] = i.name;
+
+            // If the weapon is already equipped for this slot,
+            // then create a shortcut in the slot
             if (currSlot.item == i._id) {
               currSlot.equippedItem = i;
+              // Additionally, link the currently equipped ammunition for
+              // this gun
+              const loadedAmmoId = i.data.ammo.loaded;
+              const loadedAmmo = this.actor.items.get(loadedAmmoId);
+              currSlot.loadedAmmo = loadedAmmo;
             }
           }
+
         }
         if (i.data.amount) {
           i.data.totalWeight = i.data.weight * i.data.amount;
@@ -198,6 +210,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     });
 
     html.find('input.item-condition').click(ev => ev.target.select()).change(this._onConditionChange.bind(this));
+    html.find('input.item-ammo-current').click(ev => ev.target.select()).change(this._onCurrentAmmoChange.bind(this));
 
     // Active Effect management
     html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
@@ -249,7 +262,25 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     const item = this.actor.items.get(itemId);
     const condition = Math.clamped(0, parseInt(event.target.value), 120);
     event.target.value = condition;
-    return item.update({'data.condition': condition})
+    return item.update({ 'data.condition': condition })
+  }
+
+  async _onCurrentAmmoChange(event) {
+    event.preventDefault();
+    const input = event.currentTarget;
+    const slotIdx = input.dataset.slotId;
+    const itemId = this.actor.data.data.equipped[slotIdx].item;
+    const weapon = this.actor.items.get(itemId);
+    if (weapon) {
+      const ammoCap = foundry.utils.deepClone(weapon.data.data.ammo.capacity);
+      const newVal = Math.clamped(0, ammoCap.max, parseInt(input.value));
+      ammoCap.value = newVal;
+      input.value = newVal;
+      const a = weapon.update({ 'data.ammo.capacity': ammoCap });
+      return a;
+    } else {
+      throw new Error("Invalid weapon id selected");
+    }
   }
 
   async _onSelectChange(event) {
@@ -257,9 +288,9 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     const header = event.currentTarget;
     const sel = header.options[header.selectedIndex];
     const slotIdx = header.dataset.index;
-    const newData = {data: {equipped: {}}};
+    const newData = { data: { equipped: {} } };
     newData.data.equipped = {};
-    newData.data.equipped[slotIdx] = {item: sel.value};
+    newData.data.equipped[slotIdx] = { item: sel.value };
     this.actor.update(newData);
   }
 
@@ -278,7 +309,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       const label = dataset.label ? `${dataset.label} check` : '';
       switch (dataset.rollType) {
         case 'item':
-          // TODO: make weapon rolls smarter (post in chat)
+          // TODO: make weapon rolls smarter (post rollable links in chat)
           const itemId = element.closest('.item').dataset.itemId;
           const item = this.actor.items.get(itemId);
           if (item) return item.roll();
@@ -301,7 +332,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
           const itemId = dataset.itemId;
           const item = this.actor.items.get(itemId);
           const damageOrAttack = dataset.rollSubtype;
-          if(item) return item.roll({damageOrAttack, critical: dataset.crit, isWeapon: true});
+          if (item) return item.roll({ damageOrAttack, critical: dataset.crit, isWeapon: true });
           break;
         }
         default:

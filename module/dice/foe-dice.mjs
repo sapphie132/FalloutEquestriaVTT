@@ -53,7 +53,7 @@ export default class FoERoll {
         })
     }
 
-    _onDialogSubmit(html, defaultDiff, difficultyMods, consumeResourceCallback) {
+    async _onDialogSubmit(html, defaultDiff, difficultyMods, consumeResourceCallback) {
         const form = html[0].querySelector("form");
         // Append a situational bonus term
         if (form.bonus.value) {
@@ -65,9 +65,20 @@ export default class FoERoll {
 
         const resourceCheckbox = form.resourceCheckbox;
         if (resourceCheckbox) {
-            consumeResourceCallback(resourceCheckbox.checked);
+            const success = await consumeResourceCallback(resourceCheckbox.checked);
+            // User lacks the resources to consume
+            if (!success) {
+                // LOCALIZATION
+                await Dialog.prompt({
+                    title: "Insufficient resources",
+                    content: "You lack the resources for this action (forgot to reload?)",
+                    label: "Sorry, master",
+                    callback: () => {},
+                    rejectClose: false
+                });
+                return null;
+            }
         }
-
 
         if (form.ability?.value) {
             // Note: untested lol

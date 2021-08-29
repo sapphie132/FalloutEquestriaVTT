@@ -55,7 +55,7 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
         const tpe = thatItem.type;
         if (tpe == 'ammo') {
           const thatAmmoType = thatItem.data.data.type;
-          const thisAmmoType = item.data.data.ammoType;
+          const thisAmmoType = item.data.data.ammo.type;
           if (thisAmmoType == thatAmmoType) {
             compatAmmo[itemId] = thatItem.name;
           }

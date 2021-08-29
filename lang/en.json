@@ -79,5 +79,16 @@
   "FOE.TotalWeight": "Total Weight",
   "FOE.WeaponSkill": "Combat Skill",
   "FOE.ConditionModifierType": "Modifer type from condition",
-  "FOE.Attack": "Attack"
+  "FOE.Attack": "Attack",
+  "FOE.AmmunitionType": "Calibre",
+  "FOE.Caliber": "Calibre",
+  "FOE.Subtype": "Subtype",
+  "FOE.NumberLoaded": "Rounds in Magazine",
+  "FOE.MagazineCap": "Magazine Capacity",
+  "FOE.LoadedAmmunition": "Loaded Ammunition",
+  "FOE.Current": "Current",
+  "FOE.Total": "Total",
+  "FOE.Reload": "Reload",
+  "FOE.Ammunition": "Ammunition",
+  "FOE.Hit": "Hit"
 }

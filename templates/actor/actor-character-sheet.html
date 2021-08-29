@@ -99,51 +99,7 @@
             {{/each}}
           </div>
           <div class="equipped flexcol align-left">
-            {{#each equippable.weapon as |slot idx|}}
-            <div class="flex-block">
-              <div class="flexlarge flexrow resource-label" data-item-id="{{slot.item}}">
-                <div>
-                  {{localize slot.label}}
-                </div>
-                <div class="flexlarge rollable resource-label" data-roll-type="weapon" data-roll-subtype="attack"
-                  data-item-id="{{slot.item}}">
-                  &nbsp;({{localize "FOE.Attack"}})
-                </div>
-                <div class="flexlarge resource-label flexrow">
-                  <div class="rollable" data-roll-type="weapon" data-roll-subtype="damage" data-item-id="{{slot.item}}">
-                    ({{localize "FOE.Damage"}}
-                  </div>
-                  <div class="rollable" data-roll-type="weapon" data-roll-subtype="damage" data-crit="true"
-                    data-item-id="{{slot.item}}">
-                    {{localize "FOE.CritDamage"}})
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>{{localize "FOE.PickWeapon"}}</label>
-                <select class="equipped-form" data-index="{{idx}}" value="{{slot.item}}">
-                  {{selectOptions slot.options selected=slot.item}}
-                </select>
-              </div>
-              {{#if slot.equippedItem}}
-              <div class="item flexrow items-header flex-group-left">
-                <div class="item-damage">{{localize "FOE.Damage"}}</div>
-                <div class="item-range">{{localize "FOE.Range"}}</div>
-                <div class="item-cost">{{localize "FOE.APCost"}}</div>
-                <div class="item-firerate">{{localize "FOE.RateOfFire"}}</div>
-                <div class="item-condition">{{localize "FOE.Condition"}}</div>
-              </div>
-              <div class="item flexrow align-left">
-                <div class="item-damage">{{damageString slot.equippedItem}}</div>
-                <div class="item-range">{{slot.equippedItem.data.range}}</div>
-                <div class="item-cost">{{slot.equippedItem.data.cost}}</div>
-                <div class="item-firerate">{{slot.equippedItem.data.firerate}}</div>
-                <div class="item-condition">{{slot.equippedItem.data.condition}}</div>
-              </div>
-              {{/if}}
-            </div>
-
-            {{/each}}
+            {{> "systems/foe/templates/actor/parts/actor-equipped.html"}}
           </div>
         </div>
       </section>

@@ -14,10 +14,12 @@ export class FalloutEquestriaItem extends Item {
     // preparation methods overridden (such as prepareBaseData()).
     super.prepareData();
     const condition = this.data.data.condition;
-    this.conditionValues = FOE.conditionModifiers.perfect;
+    if (typeof (condition) == 'number') {
+      this.conditionValues = FOE.conditionModifiers.perfect;
+    }
     for (let [k, v] of Object.entries(FOE.conditionModifiers)) {
       if (condition > v.lower && condition <= v.upper) {
-        this.conditionValues = foundry.utils.deepClone(v)
+        this.data.conditionValues = foundry.utils.deepClone(v)
       }
     }
 
@@ -58,10 +60,18 @@ export class FalloutEquestriaItem extends Item {
     }
   }
 
-  decrementBullets(arg) {
+  async decrementBullets(arg) {
     if (arg) {
       const item = this.data;
-      const ammoId = item.data.loadedAmmo;
+      const ammoCap = item.data.ammo.capacity;
+      const decAmount = item.data.ammo.perShot;
+      if (ammoCap.value >= decAmount) {
+        const newAmount = ammoCap.value - decAmount;
+        ammoCap.value = newAmount;
+        return this.update({ "data.ammo.capacity": ammoCap }).then(() => true);
+      } else {
+        return false;
+      }
     }
   }
 
@@ -70,7 +80,7 @@ export class FalloutEquestriaItem extends Item {
    * @param {Event} event   The originating click event
    * @private
    */
-  async roll({damageOrAttack = "attack", critical, isWeapon} = {}) {
+  async roll({ damageOrAttack = "attack", critical, isWeapon } = {}) {
     const item = this.data;
 
     // Initialize chat data.
@@ -111,8 +121,7 @@ export class FalloutEquestriaItem extends Item {
           if (critical) {
             formula = `${item.data.critMult}*(${formula})`
           }
-          console.log(formula);
-          roll = new Roll(formula, rollData).roll({async: false});
+          roll = new Roll(formula, rollData).roll({ async: false });
         } else if (damageOrAttack == "attack") {
           label = `[${item.data.rollSkill}] ${item.name} (${this.actor.name})`;
           if (this.actor) {
@@ -124,18 +133,20 @@ export class FalloutEquestriaItem extends Item {
           if (conditionModifierType == "hit") {
             targetMod = this.hitMod;
           }
-          roll = await skillRoll(item.data.rollSkill, label, rollData, targetMod)
+          roll = await skillRoll(item.data.rollSkill, label, rollData, targetMod, true, this.decrementBullets.bind(this));
         } else {
           throw new Error(`Invalid roll mode: ${damageOrAttack}`);
         }
       } else {
         roll = new Roll(rollData.item.formula, rollData).roll();
       }
-      roll.toMessage({
-        speaker: speaker,
-        rollMode: rollMode,
-        flavor: label,
-      });
+      if (roll) {
+        roll.toMessage({
+          speaker: speaker,
+          rollMode: rollMode,
+          flavor: label,
+        });
+      }
       return roll;
     }
   }

@@ -16,7 +16,17 @@ async function specialRoll(ability, label, data = {}) {
     return r;
 }
 
-async function skillRoll(skill, label, data, targetMod) {
+/**
+ * 
+ * @param skill The skill to roll
+ * @param label The label to give the roll
+ * @param data The roll data
+ * @param targetMod The target modifier
+ * @param chooseConsumeAmmo Whether to ask if to consume some resource
+ * @param chooseConsumeAmmoCallback What to do with the decision whether to consume ammo or not
+ * @returns the roll
+ */
+async function skillRoll(skill, label, data, targetMod, chooseConsumeResource = false, consumeResourceCallback) {
     if (!data.fumble) data.fumble = 0;
     if (!data.crit) data.crit = 0;
     if (!targetMod) targetMod = "";
@@ -28,8 +38,13 @@ async function skillRoll(skill, label, data, targetMod) {
     const configured = await r.configureDialog({
         chooseDifficulty: true,
         difficulties: FOE.skillDifficulties,
+        chooseConsumeResource,
+        consumeResourceCallback
     });
 
-    r.evaluate({})
-    return r;
+
+    if (configured) {
+        configured.evaluate({})
+    }
+    return configured;
 }
