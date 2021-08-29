@@ -39,9 +39,9 @@
         <div class="item-firerate">{{slot.equippedItem.data.firerate}}</div>
         <div class="item-condition">{{slot.equippedItem.data.condition}}</div>
     </div>
-    {{!-- <div>{{localize "FOE.Ammunition"}}</div> --}}
     <hr />
-    <div class="flexlarge resource-label">{{localize "FOE.Ammunition"}}&nbsp;<span class="clickable">({{localize
+    <div class="flexlarge resource-label">{{localize "FOE.Ammunition"}}&nbsp;<span class="reload-button"
+            data-slot-id="{{idx}}">({{localize
             "FOE.Reload"}})</span></div>
     <div class="item flexrow items-header flex-group-left">
         <div class="item-ammo-caliber">{{localize "FOE.Caliber"}}</div>
@@ -52,7 +52,6 @@
     <div class="item flexrow flex-group-left">
         <div class="item-ammo-caliber">{{slot.equippedItem.data.ammo.type}}</div>
         <div class="item-ammo-type">{{slot.loadedAmmo.data.data.subtype}}</div>
-        {{!-- <div class="item-ammo-current">{{slot.equippedItem.data.ammo.capacity.value}}</div> --}}
         <div class="item-ammo-current">
             <input class="item-ammo-current" type="number" data-dtype="Number" data-slot-id="{{idx}}"
                 value="{{slot.equippedItem.data.ammo.capacity.value}}" />

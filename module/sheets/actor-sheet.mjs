@@ -236,6 +236,8 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this));
 
+    html.find('.reload-button').click(this._reload.bind(this));
+
     // Drag events for macros.
     if (this.actor.isOwner) {
       let handler = ev => this._onDragStart(ev);
@@ -272,7 +274,29 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     console.log(itemData);
 
     // Finally, create the item!
-     await Item.create(itemData, { parent: this.actor });
+    await Item.create(itemData, { parent: this.actor });
+  }
+
+  async _reload(event) {
+    event.preventDefault();
+    const actor = this.actor.data;
+    const header = event.currentTarget;
+    const slotIdx = header.dataset.slotId;
+    const itemId = actor.data.equipped[slotIdx].item;
+    const weapon = actor.items.get(itemId);
+    const ammoId = weapon.data.data.ammo.loaded;
+    const ammo = actor.items.get(ammoId);
+    const ammoCount = ammo.data.data.amount;
+    const ammoCap = weapon.data.data.ammo.capacity;
+    const neededToReload = ammoCap.max - ammoCap.value;
+    const reloadedAmount = Math.min(neededToReload, ammoCount);
+
+    const newAmmoCount = ammoCount - reloadedAmount;
+    const a = ammo.update({ 'data.amount': newAmmoCount });
+    const b = weapon.update({ 'data.ammo.capacity.value': reloadedAmount + ammoCap.value });
+
+    await a;
+    await b;
   }
 
   async _onConditionChange(event) {
