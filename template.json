@@ -401,7 +401,8 @@
     "perk": {
       "templates": [
         "base"
-      ]
+      ],
+      "subtype": "perk"
     }
   }
 }

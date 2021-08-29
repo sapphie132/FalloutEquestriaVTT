@@ -454,6 +454,10 @@
   text-align: left;
 }
 
+.foe input.item {
+  max-width: 50px;
+}
+
 .foe .item-formula {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 200px;

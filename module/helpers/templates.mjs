@@ -14,6 +14,7 @@
     "systems/foe/templates/actor/parts/actor-spells.html",
     "systems/foe/templates/actor/parts/actor-effects.html",
     "systems/foe/templates/actor/parts/actor-equipped.html",
+    "systems/foe/templates/actor/parts/actor-perks.html",
     // Item partials
     "systems/foe/templates/item/parts/physical-attributes.html",
     "systems/foe/templates/item/parts/stackable-attributes.html",

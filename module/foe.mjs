@@ -77,6 +77,7 @@ Handlebars.registerHelper('toLowerCase', function (str) {
 /* -------------------------------------------- */
 
 Hooks.once("ready", async function () {
+  // Localise various global variables
   if (!FOE.localizedCombatSkills) {
     FOE.localizedCombatSkills = {};
     for (let skill of FOE.combatSkills) {
@@ -84,10 +85,20 @@ Hooks.once("ready", async function () {
     }
   }
 
+  FOE.localizedConditionModTypes = localizeObject(FOE.conditionModTypes);
+  FOE.localizedRatesOfFire = localizeObject(FOE.ratesOfFire);
+
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => createItemMacro(data, slot));
 });
 
+function localizeObject(arg0, arg1) {
+  let res = {};
+  for (let [k, v] of Object.entries(arg0)) {
+    res[k] = game.i18n.localize(v);
+  }
+  return res;
+}
 /* -------------------------------------------- */
 /*  Hotbar Macros                               */
 /* -------------------------------------------- */

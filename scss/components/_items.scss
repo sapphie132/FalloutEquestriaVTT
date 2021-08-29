@@ -113,6 +113,10 @@
   }
 }
 
+input.item {
+  max-width: 50px;
+}
+
 /* Example style for FalloutEquestria (can be removed if not needed) */
 .item-formula {
   flex: 0 0 200px;

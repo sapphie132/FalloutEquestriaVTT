@@ -126,6 +126,21 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       weapon: {}
     }
 
+    const perks = {
+      perk: {
+        label: "FOE.Perk",
+        content: {}
+      },
+      questPerk: {
+        label: "FOE.QuestPerk",
+        content: {}
+      },
+      trait: {
+        label: "FOE.Trait",
+        content: {}
+      },
+    }
+
     // Set up the slots dropdowns
     for (let j = 0; j < 3; j++) {
       equippable.weapon[j] = {
@@ -164,6 +179,8 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
         if (i.data.amount) {
           i.data.totalWeight = i.data.weight * i.data.amount;
         }
+      } else if (i.type == 'perk') {
+        perks[i.data.subtype].content[i._id] = i;
       }
     }
 
@@ -174,6 +191,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     // context.equipped = equipped;
     // context.equipped = equipped; 
     context.equippable = equippable;
+    context.perks = perks;
     // context.features = features;
     // context.spells = spells;
   }
@@ -251,9 +269,10 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     };
     // Remove the type from the dataset since it's in the itemData.type prop.
     delete itemData.data["type"];
+    console.log(itemData);
 
     // Finally, create the item!
-    return await Item.create(itemData, { parent: this.actor });
+     await Item.create(itemData, { parent: this.actor });
   }
 
   async _onConditionChange(event) {
@@ -317,9 +336,11 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
         case 'special': {
           const r = await specialRoll(dataset.rollStat, label, this.actor.getRollData());
 
-          const speaker = { actor: this.actor }
-          const e = r.toMessage({ speaker: speaker }, { create: true })
-          return r;
+          if (r) {
+            const speaker = { actor: this.actor }
+            const e = r.toMessage({ speaker: speaker }, { create: true })
+            return r;
+          }
         }
         case 'skill': {
           const r = await skillRoll(dataset.rollSkill, label, this.actor.getRollData());

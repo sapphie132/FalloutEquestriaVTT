@@ -75,6 +75,16 @@ FOE.conditionModTypes = {
   hit: "FOE.Hit"
 }
 
+FOE.ratesOfFire = {
+  fullAuto: "FOE.FullAuto",
+  boltAction: "FOE.BoltAction",
+  leverAction: "FOE.LeverAction",
+  pumpAction: "FOE.PumpAction",
+  semiAuto: "FOE.SemiAuto",
+  singleShot: "FOE.SingleShot",
+  burst: "FOE.Burst",
+}
+
 FOE.rollDifficulties = {
   vEasy: "FOE.VeryEasy",
   easy: "FOE.Easy",
