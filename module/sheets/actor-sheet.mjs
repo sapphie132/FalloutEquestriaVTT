@@ -128,15 +128,18 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
 
     const perks = {
       perk: {
-        label: "FOE.Perk",
+        label: "FOE.Perks",
+        addLabel: "FOE.AddPerk",
         content: {}
       },
       questPerk: {
-        label: "FOE.QuestPerk",
+        label: "FOE.QuestPerks",
+        addLabel: "FOE.AddQuestPerk",
         content: {}
       },
       trait: {
-        label: "FOE.Trait",
+        label: "FOE.Traits",
+        addLabel: "FOE.AddTrait",
         content: {}
       },
     }
@@ -262,7 +265,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     // Grab any data associated with this control.
     const data = duplicate(header.dataset);
     // Initialize a default name.
-    const name = `New ${type.capitalize()}`;
+    const name = `New ${(data.subtype ?? type).capitalize()}`;
     // Prepare the item object.
     const itemData = {
       name: name,
@@ -271,7 +274,6 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     };
     // Remove the type from the dataset since it's in the itemData.type prop.
     delete itemData.data["type"];
-    console.log(itemData);
 
     // Finally, create the item!
     await Item.create(itemData, { parent: this.actor });

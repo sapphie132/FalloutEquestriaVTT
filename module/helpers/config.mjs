@@ -60,14 +60,13 @@ FOE.skills = {
 
 FOE.combatSkills = ["unarmed", "melee", "throwing", "firearms", "mew", "explosives", "bSaddles"];
 
-FOE.localizedCombatSkills = null;
-
 FOE.resources = {
   "hp": "FOE.ResourceHP",
   "strain": "FOE.ResourceStrain",
   "stun": "FOE.ResourceStun",
   "illusion": "FOE.ResourceIllusion",
-  "TP": "FOE.ResourceTP"
+  "TP": "FOE.ResourceTP",
+  "ap": "FOE.ActionPoints",
 }
 
 FOE.conditionModTypes = {

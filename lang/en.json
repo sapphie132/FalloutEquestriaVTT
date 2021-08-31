@@ -90,5 +90,12 @@
   "FOE.Total": "Total",
   "FOE.Reload": "Reload",
   "FOE.Ammunition": "Ammunition",
-  "FOE.Hit": "Hit"
+  "FOE.Hit": "Hit",
+  "FOE.QuestPerks": "Quest Perks",
+  "FOE.Traits": "Traits",
+  "FOE.Perks": "Perks",
+  "FOE.Magic": "Magic",
+  "FOE.FlightMagic": "Flight Magic",
+  "FOE.Shamanism": "Shamanism",
+  "FOE.ActionPoints": "Action Points"
 }
