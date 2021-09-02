@@ -49,7 +49,9 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
     context.flags = itemData.flags;
     context.conditionModTypes = FOE.localizedConditionModTypes;
     const item = this.object;
-    const compatAmmo = {};
+    const compatAmmo = {
+      "none": game.i18n.localize("FOE.None")
+    };
     if (item.type == 'weapon') {
       for (let [itemId, thatItem] of this.actor.data.items.entries()) {
         const tpe = thatItem.type;

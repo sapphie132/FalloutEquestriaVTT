@@ -144,6 +144,15 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       },
     }
 
+    const details = {};
+    for (let [k, v] of Object.entries(context.data.details)) {
+      details[k] = foundry.utils.deepClone(v);
+      if (typeof(details[k]) != "object") {
+        details[k] = {}
+      }
+      details[k].label = FOE.details[k] ?? k;
+      details[k].isCutieMark = k == "cutieMark";
+    }
     // Set up the slots dropdowns
     for (let j = 0; j < 3; j++) {
       equippable.weapon[j] = {
@@ -195,6 +204,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     // context.equipped = equipped; 
     context.equippable = equippable;
     context.perks = perks;
+    context.details = details;
     // context.features = features;
     // context.spells = spells;
   }
@@ -288,17 +298,29 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     const weapon = actor.items.get(itemId);
     const ammoId = weapon.data.data.ammo.loaded;
     const ammo = actor.items.get(ammoId);
-    const ammoCount = ammo.data.data.amount;
-    const ammoCap = weapon.data.data.ammo.capacity;
-    const neededToReload = ammoCap.max - ammoCap.value;
-    const reloadedAmount = Math.min(neededToReload, ammoCount);
+    if (ammoId == "none") {
+      await Dialog.prompt({
+        title: game.i18n.localize("FOE.NoAmmoEquipped"),
+        content: game.i18n.localize("FOE.NoAmmoEquippedLong"),
+        label: game.i18n.localize("FOE.OkError"),
+        callback: () => { },
+        rejectClose: false
+      });
+    } else if (ammo) {
+      const ammoCount = ammo.data.data.amount;
+      const ammoCap = weapon.data.data.ammo.capacity;
+      const neededToReload = ammoCap.max - ammoCap.value;
+      const reloadedAmount = Math.min(neededToReload, ammoCount);
 
-    const newAmmoCount = ammoCount - reloadedAmount;
-    const a = ammo.update({ 'data.amount': newAmmoCount });
-    const b = weapon.update({ 'data.ammo.capacity.value': reloadedAmount + ammoCap.value });
+      const newAmmoCount = ammoCount - reloadedAmount;
+      const a = ammo.update({ 'data.amount': newAmmoCount });
+      const b = weapon.update({ 'data.ammo.capacity.value': reloadedAmount + ammoCap.value });
 
-    await a;
-    await b;
+      await a;
+      await b;
+    } else {
+      throw new Error(`Unknown ammo id: ${ammoId}`)
+    }
   }
 
   async _onConditionChange(event) {
