@@ -14,28 +14,36 @@
         and it will add a small amount of padding, a border, and will
         center all of its child elements content and text. --}}
         <div class="resource flex-group-center">
-          <label for="data.resources.hp.value" class="resource-label">{{localize FOE.hp}}</label>
+          <label for="data.resources.hp.value" class="resource-label">{{localize "FOE.HP"}}</label>
           <div class="resource-content flexrow flex-center flex-between">
             <input type="number" name="data.resources.hp.value" value="{{data.resources.hp.value}}"
               data-dtype="Number" />
             <span> / </span>
             <input disabled type="text" name="data.resources.hp.max" value="{{data.resources.hp.max}}"
               data-dtype="Number" />
-            <span class="hp-percent">&nbsp;({{numberFormat data.hp.percent decimals=0 sign=false}}%)</span>
+            <div class="hp-percent">&nbsp;({{numberFormat data.hp.percent decimals=0 sign=false}}%)</div>
           </div>
         </div>
+        <div class="flexrow">
+          <div class="resource flex-group-center">
+            <label for="data.resources.hp.regen" class="resource-label">{{localize "FOE.HealingRate"}}</label>
+            <div class="resource-content flexrow flex-center flex-between">
+              <input type="number" name="data.resources.hp.regen" value="{{data.resources.hp.regen}}"
+                data-dtype="Number" />
+            </div>
+          </div>
+          &nbsp;
 
-        {{!--
-        <div class="resource flex-group-center">
-          <label for="data.attributes.level.value" class="resource-label">Level</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <input type="text" name="data.attributes.level.value" value="{{data.attributes.level.value}}"
-              data-dtype="Number" />
+          <div class="resource flex-group-center">
+            <label for="data.attributes.level.value" class="resource-label">{{localize "FOE.Level"}}</label>
+            <div class="resource-content flexrow flex-center flex-between">
+              <input type="number" name="data.attributes.level.value" value="{{data.attributes.level.value}}"
+                data-dtype="Number" />
+            </div>
           </div>
         </div>
-        --}}
         <div class="resource flex-group-center">
-          <label for="data.resources.ap.value" class="resource-label">AP</label>
+          <label for="data.resources.ap.value" class="resource-label">{{localize "FOE.AP"}}</label>
           <div class="resource-content flexrow flex-center flex-between">
             <input type="number" name="data.resources.ap.value" value="{{data.ap.value}}" data-dtype="Number" />
             <span>&nbsp;/&nbsp;</span>
@@ -43,13 +51,16 @@
           </div>
         </div>
         <div class="resource flex-group-center">
-          <label for="data.strain.value" class="resource-label">Strain</label>
+          <label for="data.strain.value" class="resource-label">{{localize "FOE.Strain"}}</label>
           <div class="resource-content flexrow flex-center flex-between">
             <input type="number" name="data.resources.strain.value" value="{{data.strain.value}}" data-dtype="Number" />
             <span> / </span>
             <input disabled type="number" name="data.resources.strain.max" value="{{data.strain.max}}"
               data-dtype="Number" />
           </div>
+        </div>
+        <div class="resource flex-group-center">
+
         </div>
 
 
@@ -102,6 +113,27 @@
             {{> "systems/foe/templates/actor/parts/actor-equipped.html"}}
           </div>
         </div>
+        <div>
+          <h3>Limb condition</h3>
+          <ul class="items-list">
+            <li class="items-header flexrow">
+              <div>Location</div>
+              <div>Current</div>
+              <div>Total</div>
+              <div>Percent</div>
+            </li>
+            {{#each limbs as |limb key|}}
+            <li class="item flex-group-center flexrow">
+              <div>{{limb.label}}</div>
+              <input type="number" name="data.resources.hp.limbs.{{key}}.condition.value" value="{{limb.condition.value}}"
+                data-dtype="Number">
+              <input type="number" name="data.resources.hp.limbs.{{key}}.condition.max" value="{{limb.condition.max}}"
+                data-dtype="Number" disabled>
+              <div> {{numberFormat limb.condition.percent decimals=0 sign=false}}% </div>
+            </li>
+            {{/each}}
+          </ul>
+        </div>
       </section>
     </div>
 
@@ -143,8 +175,8 @@
         {{#each details as |detail key|}}
         <label>{{localize detail.label}}</label>
         {{#if detail.isCutieMark}}
-        <img class="profile-img" src="{{detail.img}}" data-edit="data.details.{{key}}.img"
-          title="{{actor.name}}" height="100" width="100" />
+        <img class="profile-img" src="{{detail.img}}" data-edit="data.details.{{key}}.img" title="{{actor.name}}"
+          height="100" width="100" />
         {{/if}}
         <input name="data.details.{{key}}.value" value="{{detail.value}}" />
         {{/each}}

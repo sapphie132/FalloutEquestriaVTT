@@ -13,7 +13,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     return mergeObject(super.defaultOptions, {
       classes: ["foe", "sheet", "actor"],
       template: "systems/foe/templates/actor/actor-sheet.html",
-      width: 800,
+      width: 820,
       height: 770,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "vital" }]
     });
@@ -81,6 +81,12 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     for (let [k, v] of Object.entries(context.data.skills)) {
       v.label = game.i18n.localize(CONFIG.FOE.skills[k]) ?? k;
     }
+
+    for (let [k, v] of Object.entries(context.data.resources.hp.limbs)) {
+      v.label = game.i18n.localize(CONFIG.FOE.limbs[k]) ?? k;
+    }
+
+    context.limbs = context.data.resources.hp.limbs;
   }
 
   /**

@@ -84,6 +84,10 @@ FOE.ratesOfFire = {
   burst: "FOE.Burst",
 }
 
+FOE.limbs = {
+  horn: "FOE.Horn"
+}
+
 FOE.rollDifficulties = {
   vEasy: "FOE.VeryEasy",
   easy: "FOE.Easy",

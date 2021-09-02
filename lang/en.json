@@ -18,6 +18,8 @@
   "FOE.EffectEdit": "Edit Effect",
   "FOE.EffectDelete": "Delete Effect",
   "FOE.ResourceHP": "Health Points",
+  "FOE.Level": "Level",
+  "FOE.HealingRate": "Healing Rate",
   "FOE.ResourceIllusion": "Illusion Points",
   "FOE.ResourceStrain": "Strain",
   "FOE.ResourceStun": "Stun Points",

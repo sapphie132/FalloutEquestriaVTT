@@ -8,10 +8,58 @@
       "base": {
         "resources": {
           "hp": {
+            "regen": null,
             "value": 0,
             "bonus": {
               "temp": 0,
               "perm": 0
+            },
+            "limbs": {
+              "horn": {
+                "condition": {
+                  "value": 0
+                }
+              },
+              "head": {
+                "condition": {
+                  "value": 0
+                }
+              },
+              "torso": {
+                "condition": {
+                  "value": 0
+                }
+              },
+              "lForeleg": {
+                "condition": {
+                  "value": 0
+                }
+              },
+              "lHindleg": {
+                "condition": {
+                  "value": 0
+                }
+              },
+              "lWing": {
+                "condition": {
+                  "value": 0
+                }
+              },
+              "rForeleg": {
+                "condition": {
+                  "value": 0
+                }
+              },
+              "rHindleg": {
+                "condition": {
+                  "value": 0
+                }
+              },
+              "rWing": {
+                "condition": {
+                  "value": 0
+                }
+              }
             }
           },
           "ap": {
@@ -70,7 +118,9 @@
       },
       "attributes": {
         "level": {
-          "value": 1
+          "value": 1,
+          "xp": 0,
+          "nextLevel": 0
         },
         "fumbleMod": 0,
         "critMod": 0
@@ -386,7 +436,7 @@
       "firerate": "",
       "ammo": {
         "type": "",
-        "loaded": "", 
+        "loaded": "",
         "capacity": {
           "value": 0,
           "max": 0
