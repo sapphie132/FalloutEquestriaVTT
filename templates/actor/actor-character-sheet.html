@@ -14,7 +14,7 @@
         and it will add a small amount of padding, a border, and will
         center all of its child elements content and text. --}}
         <div class="resource flex-group-center">
-          <label for="data.resources.hp.value" class="resource-label">Health</label>
+          <label for="data.resources.hp.value" class="resource-label">{{localize FOE.hp}}</label>
           <div class="resource-content flexrow flex-center flex-between">
             <input type="number" name="data.resources.hp.value" value="{{data.resources.hp.value}}"
               data-dtype="Number" />
@@ -110,7 +110,6 @@
     </div>
 
     <div class="tab perks-traits" data-group="primary" data-tab="perks-traits">
-      <!--no clue lol-->
       {{> "systems/foe/templates/actor/parts/actor-perks.html"}}
     </div>
 
@@ -130,11 +129,30 @@
     </div>
 
     {{!-- Biography Tab --}}
-    <div class="tab biography" data-group="primary" data-tab="biography">
+    <div class="tab flexrow" data-group="primary" data-tab="biography">
       {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to
       the rollData property. --}}
-      {{editor content=data.biography target="data.biography" rollData=rollData button=true owner=owner
-      editable=editable}}
+      {{!-- <aside>
+        <p>hi</p>
+      </aside>
+      <div>
+        {{editor content=data.biography target="data.biography" rollData=rollData button=true owner=owner
+        editable=editable}}
+      </div> --}}
+      <div class="characteristics flexcol">
+        {{#each details as |detail key|}}
+        <label>{{localize detail.label}}</label>
+        {{#if detail.isCutieMark}}
+        <img class="profile-img" src="{{detail.img}}" data-edit="data.details.{{key}}.img"
+          title="{{actor.name}}" height="100" width="100" />
+        {{/if}}
+        <input name="data.details.{{key}}.value" value="{{detail.value}}" />
+        {{/each}}
+      </div>
+      <div class="biography">
+        {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner
+        editable=editable rollData=rollData}}
+      </div>
     </div>
 
   </section>
