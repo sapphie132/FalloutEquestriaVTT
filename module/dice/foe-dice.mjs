@@ -68,11 +68,10 @@ export default class FoERoll {
             const success = await consumeResourceCallback(resourceCheckbox.checked);
             // User lacks the resources to consume
             if (!success) {
-                // LOCALIZATION
                 await Dialog.prompt({
-                    title: "Insufficient resources",
-                    content: "You lack the resources for this action (forgot to reload?)",
-                    label: "Sorry, master",
+                    title: game.i18n.localize("FOE.InsufficientResources"),
+                    content: game.i18n.localize("FOE.InsufficientResourcesLong"),
+                    label: game.i18n.localize("FOE.OkError"),
                     callback: () => {},
                     rejectClose: false
                 });

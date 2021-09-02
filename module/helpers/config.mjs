@@ -114,6 +114,21 @@ FOE.skillDifficulties = {
   vHard: -30
 }
 
+FOE.details = {
+  race: "FOE.Race",
+  coatColor: "FOE.CoatColor",
+  maneColor: "FOE.ManeColor",
+  cutieMark: "FOE.CutieMark",
+  eyeColor: "FOE.EyeColor",
+  weight: "FOE.Weight",
+  age: "FOE.Age",
+  gender: "FOE.Gender",
+  virtue: "FOE.Virtue",
+  player: "FOE.Player",
+  height: "FOE.Height",
+  karma: "FOE.Karma"
+}
+
 // Note: Lower is excluded, upper is included
 FOE.conditionModifiers = {
   perfect: {

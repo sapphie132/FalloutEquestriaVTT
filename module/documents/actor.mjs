@@ -4,6 +4,9 @@ import { FOE } from "../helpers/config.mjs";
  * @extends {Actor}
  */
 export class FalloutEquestriaActor extends Actor {
+  constructor(data) {
+    super(data);
+  }
 
   /** @override */
   prepareData() {

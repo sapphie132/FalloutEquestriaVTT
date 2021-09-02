@@ -295,6 +295,44 @@
             "temp": 0
           }
         }
+      },
+      "details": {
+        "race": {
+          "value": ""
+        },
+        "coatColor": {
+          "value": ""
+        },
+        "maneColor": {
+          "value": ""
+        },
+        "cutieMark": {
+          "value": ""
+        },
+        "eyeColor": {
+          "value": ""
+        },
+        "weight": {
+          "value": ""
+        },
+        "age": {
+          "value": ""
+        },
+        "gender": {
+          "value": ""
+        },
+        "virtue": {
+          "value": ""
+        },
+        "karma": {
+          "value": ""
+        },
+        "player": {
+          "value": ""
+        },
+        "height": {
+          "value": ""
+        }
       }
     },
     "npc": {
