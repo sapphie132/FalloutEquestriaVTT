@@ -60,7 +60,12 @@
           </div>
         </div>
         <div class="resource flex-group-center">
-
+          <label for="data.tp.value" class="resource-label">Trick Points</label>
+          <div class="resource-content flexrow flex-center flex-between">
+            <input type="number" data-dtype="Number" name="data.resources.tp.value" value="{{data.tp.value}}" />
+            <span> / </span>
+            <input type="number" data-dtype="Number" name="data.resources.tp.max" value="{{data.tp.max}}" disabled/>
+          </div>
         </div>
 
 
@@ -117,8 +122,45 @@
       <div class="flexrow">
         {{!-- <div class="quick-skills flexcol"> --}}
           {{> "systems/foe/templates/actor/parts/actor-quick-skills.html"}}
-        {{!-- <div class="limbs"> --}}
-          {{> "systems/foe/templates/actor/parts/actor-limbs.html"}}
+          <div class="flexcol">
+            {{> "systems/foe/templates/actor/parts/actor-limbs.html"}}
+            <table>
+              <tr>
+                <th>Buying</th>
+                <th>Selling</th>
+              </tr>
+              <tr class="align-center">
+                {{!-- TODO: automatic --}}
+                <td><input type="number" data-dtype="Number" name="data.skills.barter.selling"
+                    value={{data.skills.barter.selling}} /></td>
+                <td><input type="number" data-dtype="Number" name="data.skills.barter.buying"
+                    value={{data.skills.barter.buying}} /></td>
+              </tr>
+            </table>
+          </div>
+          <div class="flexcol">
+            <div>Critical Success: {{maxCrit}}</div>
+            <div>Critical Fumble: {{minFumble}}</div>
+            <div>Potency: {{data.attributes.potency}}</div>
+            <div>Versatility: {{data.attributes.versatility}}</div>
+            <div>Willpower: {{data.attributes.willpower}}</div>
+            <div>Spirit Afinity: {{data.attributes.spiritaffinity}}</div>
+            <div>Initiative: {{data.attributes.initiative}}</div>
+            <table>
+              <tr>
+                {{#each data.attributes.resistances as |resistance key|}}
+                <td>{{resistance.label}}</td>
+                {{/each}}
+              </tr>
+              <tr>
+                {{#each data.attributes.resistances as |resistance key|}}
+                <td><input type="number" data-dtype="Number" name="data.attributes.resistances.{{key}}.value"
+                    value="{{resistance.value}}" /> </td>
+                {{/each}}
+              </tr>
+            </table>
+          </div>
+
         </div>
       </div>
     </div>
@@ -153,7 +195,8 @@
 
     {{!-- Biography Tab --}}
     <div class="tab flexrow" data-group="primary" data-tab="biography">
-      {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to
+      {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data
+      to
       the rollData property. --}}
       {{!-- <aside>
         <p>hi</p>

@@ -72,12 +72,14 @@ export class FalloutEquestriaActor extends Actor {
 
     const end = data.abilities.end.tot;
     const int = data.abilities.int.tot;
-    const lvl = data.attributes.level?.value ?? 0;
+    const cha = data.abilities.cha.tot;
     const agi = data.abilities.agi.tot;
+    const lvl = data.attributes.level?.value ?? 0;
 
     resources.strain.base = end + int;
     resources.hp.base = 100+(end*2)+(end*lvl);
     resources.ap.base = 55+(agi*3);
+    resources.tp.base = Math.round((cha + agi)/2) + lvl - 1;
 
     if (resources.hp.regen == null) {
       resources.hp.regen = Math.floor(end/3);

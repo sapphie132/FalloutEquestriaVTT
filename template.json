@@ -90,7 +90,7 @@
               "perm": 0
             }
           },
-          "TP": {
+          "tp": {
             "value": 0,
             "bonus": {
               "temp": 0,
@@ -123,7 +123,18 @@
           "nextLevel": 0
         },
         "fumbleMod": 0,
-        "critMod": 0
+        "critMod": 0,
+        "resistances": {
+          "fire": {
+            "value": 0
+          },
+          "cold": {
+            "value": 0
+          },
+          "lightning": {
+            "value": 0
+          }
+        }
       },
       "abilities": {
         "str": {

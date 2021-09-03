@@ -14,7 +14,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       classes: ["foe", "sheet", "actor"],
       template: "systems/foe/templates/actor/actor-sheet.html",
       width: 820,
-      height: 770,
+      height: 810,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "vital" }]
     });
   }
@@ -84,6 +84,11 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
 
     for (let [k, v] of Object.entries(context.data.resources.hp.limbs)) {
       v.label = game.i18n.localize(CONFIG.FOE.limbs[k]) ?? k;
+    }
+
+    for (let [k, v] of Object.entries(context.data.attributes.resistances)) {
+      if (typeof(v) != "object") v = {};
+      v.label = game.i18n.localize(CONFIG.FOE.resistances[k]) ?? k;
     }
 
     context.limbs = context.data.resources.hp.limbs;
@@ -211,6 +216,8 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     context.equippable = equippable;
     context.perks = perks;
     context.details = details;
+    context.maxCrit = context.data.attributes.crit;
+    context.minFumble = 94 + context.data.attributes.fumble;
     // context.features = features;
     // context.spells = spells;
   }

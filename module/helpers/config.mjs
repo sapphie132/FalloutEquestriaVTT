@@ -88,6 +88,10 @@ FOE.limbs = {
   horn: "FOE.Horn"
 }
 
+FOE.resistances = {
+
+}
+
 FOE.rollDifficulties = {
   vEasy: "FOE.VeryEasy",
   easy: "FOE.Easy",
