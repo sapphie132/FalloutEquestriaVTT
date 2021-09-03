@@ -91,7 +91,6 @@
     border-right: 1px solid #c9c7b8;
     font-size: 12px;
   }
-
   // Section Header
   .items-header {
     height: 28px;
@@ -113,12 +112,11 @@
   }
 }
 
-input.item {
-  max-width: 50px;
+.item-limited {
+    flex: 0 0 20px;
 }
 
-/* Example style for FalloutEquestria (can be removed if not needed) */
-.item-formula {
-  flex: 0 0 200px;
-  padding: 0 8px;
+
+input.item {
+  max-width: 50px;
 }

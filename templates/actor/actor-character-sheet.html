@@ -71,72 +71,63 @@
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
     {{!-- Default tab is specified in actor-sheet.mjs --}}
-    <a class="item" data-tab="vital">Vital</a>
-    <a class="item" data-tab="skills">Skills</a>
-    <a class="item" data-tab="perks-traits">Perks &amp; Traits</a>
-    <a class="item" data-tab="inventory">Inventory</a>
-    <a class="item" data-tab="magic">Magic</a>
-    <!--& effects-->
-    <a class="item" data-tab="misc">Miscellaneous</a>
-    <a class="item" data-tab="bonuses">Bonuses</a>
-    <a class="item" data-tab="biography">Biography</a>
+    <a class="item tab-link" data-tab="vital">Vital</a>
+    <a class="item tab-link" data-tab="skills">Skills</a>
+    <a class="item tab-link" data-tab="perks-traits">Perks &amp; Traits</a>
+    <a class="item tab-link" data-tab="inventory">Inventory</a>
+    <a class="item tab-link" data-tab="magic">Magic</a>
+    <a class="item tab-link" data-tab="misc">Miscellaneous</a>
+    <a class="item tab-link" data-tab="bonuses">Bonuses</a>
+    <a class="item tab-link" data-tab="biography">Biography</a>
   </nav>
 
   {{!-- Sheet Body --}}
   <section class="sheet-body">
 
     <div class="tab bonuses" data-group="primary" data-tab="bonuses">
-      {{> "systems/foe/templates/actor/parts/actor-bonuses.html"}}
+      {{!-- {{> "systems/foe/templates/actor/parts/actor-bonuses.html"}} --}}
     </div>
     {{!-- Vital Information Tab --}}
-    <div class="tab vital" data-group="primary" data-tab="vital">
-      <section class="grid grid-2col">
-        <div class="sidebar">
-          {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
-          use both the "grid" and "grid-Ncol" class where "N" can be any number
-          from 1 to 12 and will create that number of columns. --}}
-          <div class="abilities flexcol flex-block">
-            {{#each data.abilities as |ability key|}}
-            <div class="ability flexrow align-left">
-              <label for="data.abilities.{{key}}.value" class="resource-label rollable flexlarge"
-                data-roll-type="special" data-roll-stat="{{key}}"
-                data-label="{{ability.label}}">{{ability.label}}</label>
-              <input type="text" name="data.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number" />
-              <div>
-                &nbsp;({{ability.tot}})
-              </div>
-              <!-- <span class="ability-mod rollable" data-roll="d20+@abilities.{{key}}.mod" data-label="{{ability.label}}">{{numberFormat ability.mod decimals=0 sign=true}}</span> -->
+    <div class="tab vital flexcol" data-group="primary" data-tab="vital">
+      {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
+      use both the "grid" and "grid-Ncol" class where "N" can be any number
+      from 1 to 12 and will create that number of columns. --}}
+      <table class="abilities flexrow flex-group-center">
+        <tr>
+          {{#each data.abilities as |ability key|}}
+          <td class="ability">
+            <h4 class="ability-name box-title rollable" data-roll-type="special" data-roll-stat="{{key}}">
+              {{ability.label}}</h4>
+            <div class="ability-total">
+              {{ability.tot}}
             </div>
-            {{/each}}
-          </div>
-          <div class="equipped flexcol align-left">
-            {{> "systems/foe/templates/actor/parts/actor-equipped.html"}}
-          </div>
+            <div class="flexrow">
+              <input class="ability" title="{{localize 'FOE.BaseValue'}}" type="number"
+                name="data.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number" />
+              <input class="ability" title="{{localize 'FOE.TempBonus'}}" type="number"
+                name="data.abilities.{{key}}.bonus.temp" value="{{ability.bonus.temp}}" data-dtype="Number" />
+              <input class="ability" title="{{localize 'FOE.PermBonus'}}" type="number"
+                name="data.abilities.{{key}}.bonus.perm" value="{{ability.bonus.perm}}" data-dtype="Number" />
+            </div>
+          </td>
+
+          {{/each}}
+        </tr>
+      </table>
+      <div class="flexrow">
+        {{!-- <div class="quick-skills flexcol"> --}}
+          {{> "systems/foe/templates/actor/parts/actor-quick-skills.html"}}
+        {{!-- <div class="limbs"> --}}
+          {{> "systems/foe/templates/actor/parts/actor-limbs.html"}}
         </div>
-        <div>
-          <h3>Limb condition</h3>
-          <ul class="items-list">
-            <li class="items-header flexrow">
-              <div>Location</div>
-              <div>Current</div>
-              <div>Total</div>
-              <div>Percent</div>
-            </li>
-            {{#each limbs as |limb key|}}
-            <li class="item flex-group-center flexrow">
-              <div>{{limb.label}}</div>
-              <input type="number" name="data.resources.hp.limbs.{{key}}.condition.value" value="{{limb.condition.value}}"
-                data-dtype="Number">
-              <input type="number" name="data.resources.hp.limbs.{{key}}.condition.max" value="{{limb.condition.max}}"
-                data-dtype="Number" disabled>
-              <div> {{numberFormat limb.condition.percent decimals=0 sign=false}}% </div>
-            </li>
-            {{/each}}
-          </ul>
-        </div>
-      </section>
+      </div>
     </div>
 
+    <div class="tab equipped" data-group="primary" data-tab="equipped">
+      <div class="equipped flexcol align-left">
+        {{> "systems/foe/templates/actor/parts/actor-equipped.html"}}
+      </div>
+    </div>
     <div class="tab skills" data-group="primary" data-tab="skills">
       {{> "systems/foe/templates/actor/parts/actor-skills.html"}}
     </div>

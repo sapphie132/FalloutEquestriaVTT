@@ -34,6 +34,19 @@
   }
 }
 
+input {
+    border: 1px solid transparent;
+    background-color: inherit;
+    &:hover {
+        border: 1px solid;
+        box-shadow: 0 0 8px red;
+    }
+    &:disabled {
+        border: 1px solid transparent;
+        box-shadow: inherit;
+    }
+}
+
 .sheet-tabs {
   flex: 0;
 }

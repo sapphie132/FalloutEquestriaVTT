@@ -1,0 +1,58 @@
+@import '../utils/variables';
+
+table.abilities {
+    flex: 0 0 100px;
+    border-collapse: collapse;
+    padding: 2px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: 2px;
+    background-color: $elem-background-color;
+}
+
+td.ability {
+    border-style: groove;
+    border-color: #c7c7c7;
+    border-width: 1px;
+    border-top: none;
+    border-bottom: none;
+    border-collapse: collapse;
+    padding: 1px;
+    min-width: 100px;
+}
+
+.ability {
+    &-name {
+        font-weight: 700;
+        font-size: 15px;
+    }
+    &-total {
+        font-weight: 700;
+        font-size: 22px;
+    }
+}
+
+.skill-label {
+    font-weight: 700;
+}
+
+
+.quick-skills {
+    flex: 0 0 200px;
+    gap: 0px;
+    margin: 2px;
+    background-color: $elem-background-color;
+    border-style: groove;
+    border-color: #c7c7c7;
+    border-width: 1px;
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+table.quick-skills {
+    td {
+        padding: 0.1em;
+        padding-left: 0.25em;
+        padding-right: 0.25em;
+    }
+}
