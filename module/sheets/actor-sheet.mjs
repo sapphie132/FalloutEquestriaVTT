@@ -91,6 +91,10 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       v.label = game.i18n.localize(CONFIG.FOE.resistances[k]) ?? k;
     }
 
+    const movementTypes = foundry.utils.deepClone(FOE.localizedMovementTypes);
+
+    context.movementTypes = movementTypes;
+
     context.limbs = context.data.resources.hp.limbs;
   }
 

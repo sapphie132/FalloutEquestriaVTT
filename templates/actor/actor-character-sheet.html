@@ -64,7 +64,7 @@
           <div class="resource-content flexrow flex-center flex-between">
             <input type="number" data-dtype="Number" name="data.resources.tp.value" value="{{data.tp.value}}" />
             <span> / </span>
-            <input type="number" data-dtype="Number" name="data.resources.tp.max" value="{{data.tp.max}}" disabled/>
+            <input type="number" data-dtype="Number" name="data.resources.tp.max" value="{{data.tp.max}}" disabled />
           </div>
         </div>
 
@@ -158,6 +158,20 @@
                     value="{{resistance.value}}" /> </td>
                 {{/each}}
               </tr>
+            </table>
+            <table>
+              <tr>
+                <th>{{localize "FOE.MovementActions"}}</th>
+                <th>{{localize "FOE.ft"}}</th>
+                <th>{{localize "FOE.APCost"}}</th>
+              </tr>
+              {{#each movementTypes as |type key|}}
+              <tr>
+                <td>{{type.name}}</td>
+                <td>{{type.distance}}</td>
+                <td>{{type.apCost}}</td>
+              </tr>
+              {{/each}}
             </table>
           </div>
 

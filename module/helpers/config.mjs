@@ -92,6 +92,67 @@ FOE.resistances = {
 
 }
 
+FOE.movementTypes = {
+  regular: {
+    name: "FOE.Regular",
+    apCost: 15
+  },
+  sprint: {
+    apCost: 15,
+    name: "FOE.Regular",
+    extra: {
+      name: "FOE.SlowDown",
+      cost: 15
+    }
+  },
+  charge: {
+    apCost: 10,
+    name: "FOE.Charge"
+  },
+  jump: {
+    apCost: 15,
+    name: "FOE.Jump"
+  },
+  climb: {
+    apCost: 30,
+    name: "FOE.Climb"
+  },
+  drop: {
+    apCost: 0,
+    name: "FOE.Drop"
+  },
+  standUp: {
+    apCost: 10,
+    name: "FOE.StandUp",
+    extra: {
+      name: "FOE.Lying",
+      cost: 20
+    }
+  },
+  fly: {
+    apCost: 15,
+    name: "FOE.Fly"
+  },
+  flySprint: {
+    name: "FOE.FlySprint",
+    apCost: 15,
+    extra: {
+      name: "FOE.SlowDown",
+      cost: 15
+    }
+  },
+  flyCharge: {
+    name: "FOE.FlyCharge",
+    apCost: 10,
+  },
+  swim: {
+    name: "FOE.Swim",
+    apCost: 15
+  }
+}
+
+FOE.localizedMovementTypes = FOE.movementTypes;
+
 FOE.rollDifficulties = {
   vEasy: "FOE.VeryEasy",
   easy: "FOE.Easy",
