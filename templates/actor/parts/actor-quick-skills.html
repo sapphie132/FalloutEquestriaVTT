@@ -1,0 +1,8 @@
+<table class="quick-skills">
+    {{#each data.skills as |skill key|}}
+    <tr>
+        <td class="skill-label rollable flexlarge" data-roll-type="skill">{{skill.label}}</td>
+        <td class="item-limited">{{skill.tot}}</td>
+    </tr>
+    {{/each}}
+</table>

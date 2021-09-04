@@ -79,6 +79,7 @@ export class FalloutEquestriaActor extends Actor {
     resources.strain.base = end + int;
     resources.hp.base = 100+(end*2)+(end*lvl);
     resources.ap.base = 55+(agi*3);
+    resources.stun.base = resources.hp.base;
     resources.tp.base = Math.round((cha + agi)/2) + lvl - 1;
 
     if (resources.hp.regen == null) {
@@ -87,6 +88,10 @@ export class FalloutEquestriaActor extends Actor {
 
     for (let [key, resource] of Object.entries(resources)) {
       resource.max = resource.base + resource.bonus.tot;
+      // First initialisation of a character
+      if (resource.value == null) {
+        resource.value = resource.max;
+      }
       resource.percent = (resource.value / resource.max) * 100;
     }
 

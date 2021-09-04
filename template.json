@@ -9,7 +9,7 @@
         "resources": {
           "hp": {
             "regen": null,
-            "value": 0,
+            "value": null,
             "bonus": {
               "temp": 0,
               "perm": 0
@@ -63,35 +63,28 @@
             }
           },
           "ap": {
-            "value": 0,
+            "value": null,
             "bonus": {
               "temp": 0,
               "perm": 0
             }
           },
           "strain": {
-            "value": 0,
-            "bonus": {
-              "temp": 0,
-              "perm": 0
-            }
-          },
-          "illusion": {
-            "value": 0,
+            "value": null,
             "bonus": {
               "temp": 0,
               "perm": 0
             }
           },
           "stun": {
-            "value": 0,
+            "value": null,
             "bonus": {
               "temp": 0,
               "perm": 0
             }
           },
           "tp": {
-            "value": 0,
+            "value": null,
             "bonus": {
               "temp": 0,
               "perm": 0

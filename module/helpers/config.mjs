@@ -63,9 +63,9 @@ FOE.combatSkills = ["unarmed", "melee", "throwing", "firearms", "mew", "explosiv
 FOE.resources = {
   "hp": "FOE.ResourceHP",
   "strain": "FOE.ResourceStrain",
-  "stun": "FOE.ResourceStun",
+  "stun": "FOE.ResourceFatigue",
   "illusion": "FOE.ResourceIllusion",
-  "TP": "FOE.ResourceTP",
+  "tp": "FOE.ResourceTP",
   "ap": "FOE.ActionPoints",
 }
 

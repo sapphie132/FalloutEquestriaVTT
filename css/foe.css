@@ -338,6 +338,24 @@
   border-collapse: collapse;
 }
 
+.foe .resource-percent {
+  font-size: 12px;
+}
+
+.foe .resource-content {
+  font-size: 17px;
+}
+
+.foe .resource-sep {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.foe .resource-label {
+  font-size: 17px;
+  font-weight: 700;
+}
+
 .foe .items-header {
   height: 28px;
   margin: 2px 0;
@@ -522,7 +540,7 @@
 
 .foe .ability-name {
   font-weight: 700;
-  font-size: 15px;
+  font-size: 17px;
 }
 
 .foe .ability-total {
