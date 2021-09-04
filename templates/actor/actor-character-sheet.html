@@ -51,8 +51,7 @@
         <div class="resource flex-group-center">
           <label for="data.resources.{{key}}.value" class="resource-label">{{resource.label}}</label>
           <div class="resource-content flexrow flex-center flex-between">
-            <input type="number" name="data.resources.{{key}}.value" value="{{resource.value}}"
-              data-dtype="Number" />
+            <input type="number" name="data.resources.{{key}}.value" value="{{resource.value}}" data-dtype="Number" />
             <div class="resource-sep">/</div>
             <input disabled type="number" name="data.resources.{{key}}.max" value="{{resource.max}}"
               data-dtype="Number" />
@@ -153,56 +152,88 @@
       </table>
       <div class="flexrow">
         {{!-- <div class="quick-skills flexcol"> --}}
-          {{> "systems/foe/templates/actor/parts/actor-quick-skills.html"}}
-          <div class="flexcol">
-            {{> "systems/foe/templates/actor/parts/actor-limbs.html"}}
-            <table>
-              <tr>
-                <th>Buying</th>
-                <th>Selling</th>
-              </tr>
-              <tr class="align-center">
-                {{!-- TODO: automatic --}}
-                <td><input type="number" data-dtype="Number" name="data.skills.barter.selling"
-                    value="{{data.skills.barter.selling}}" /></td>
-                <td><input type="number" data-dtype="Number" name="data.skills.barter.buying"
-                    value="{{data.skills.barter.buying}}" /></td>
-              </tr>
-            </table>
+          <div class="vital-block quick-skills">
+            <h3>Quick Skills</h3>
+            {{> "systems/foe/templates/actor/parts/actor-quick-skills.html"}}
           </div>
           <div class="flexcol">
-            <div>Potency: {{data.attributes.potency}}</div>
-            <div>Versatility: {{data.attributes.versatility}}</div>
-            <div>Willpower: {{data.attributes.willpower}}</div>
-            <div>Spirit Afinity: {{data.attributes.spiritaffinity}}</div>
-            <div>Initiative: {{data.attributes.initiative}}</div>
-            <table>
-              <tr>
-                {{#each data.attributes.resistances as |resistance key|}}
-                <td>{{resistance.label}}</td>
+            <div class="vital-block limbs">
+              <h3>Limb condition</h3>
+              {{> "systems/foe/templates/actor/parts/actor-limbs.html"}}
+            </div>
+            <div class="vital-block resistances">
+              <h3>Resistances</h3>
+              <table>
+                <tr>
+                  {{#each data.attributes.resistances as |resistance key|}}
+                  <td>{{resistance.label}}</td>
+                  {{/each}}
+                </tr>
+                <tr>
+                  {{#each data.attributes.resistances as |resistance key|}}
+                  <td><input type="number" data-dtype="Number" name="data.attributes.resistances.{{key}}.value"
+                      value="{{resistance.value}}" /> </td>
+                  {{/each}}
+                </tr>
+              </table>
+            </div>
+            <div class="filler"></div>
+          </div>
+          <div class="flexcol">
+            <div class="vital-block">
+              <table>
+                <tr>
+                  <th>{{localize "FOE.MovementActions"}}</th>
+                  <th>{{localize "FOE.ft"}}</th>
+                  <th>{{localize "FOE.Cost"}}</th>
+                </tr>
+                {{#each movementTypes as |type key|}}
+                <tr>
+                  <td>{{type.name}}</td>
+                  <td>{{type.distance}}</td>
+                  <td>{{type.apCost}}</td>
+                </tr>
                 {{/each}}
+              </table>
+            </div>
+            <div class="misc vital-block">
+              <h3>Miscellaneous</h3>
               </tr>
-              <tr>
-                {{#each data.attributes.resistances as |resistance key|}}
-                <td><input type="number" data-dtype="Number" name="data.attributes.resistances.{{key}}.value"
-                    value="{{resistance.value}}" /> </td>
-                {{/each}}
-              </tr>
-            </table>
-            <table>
-              <tr>
-                <th>{{localize "FOE.MovementActions"}}</th>
-                <th>{{localize "FOE.ft"}}</th>
-                <th>{{localize "FOE.APCost"}}</th>
-              </tr>
-              {{#each movementTypes as |type key|}}
-              <tr>
-                <td>{{type.name}}</td>
-                <td>{{type.distance}}</td>
-                <td>{{type.apCost}}</td>
-              </tr>
-              {{/each}}
-            </table>
+              </table>
+              <table>
+                <tr>
+                  <td>Potency</td>
+                  <td> {{data.attributes.potency}}</td>
+                </tr>
+                <tr>
+                  <td>Versatility</td>
+                  <td> {{data.attributes.versatility}}</td>
+                </tr>
+                <tr>
+                  <td>Willpower</td>
+                  <td> {{data.attributes.willpower}}</td>
+                </tr>
+                <tr>
+                  <td>Spirit Afinity</td>
+                  <td> {{data.attributes.spiritaffinity}}</td>
+                </tr>
+                <tr>
+                  <td>Initiative</td>
+                  <td> {{data.attributes.initiative}}</td>
+                </tr>
+                <tr>
+                  <td>Buying multiplier</td>
+                  <td><input type="number" data-dtype="Number" name="data.skills.barter.selling"
+                      value="{{data.skills.barter.selling}}" /></td>
+                </tr>
+                <tr>
+                  <td>Selling multiplier</td>
+                  {{!-- TODO: automatic --}}
+                  <td><input type="number" data-dtype="Number" name="data.skills.barter.buying"
+                      value="{{data.skills.barter.buying}}" /></td>
+                </tr>
+              </table>
+            </div>
           </div>
 
         </div>

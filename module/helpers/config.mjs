@@ -85,7 +85,15 @@ FOE.ratesOfFire = {
 }
 
 FOE.limbs = {
-  horn: "FOE.Horn"
+  horn: "FOE.Horn",
+  lForeleg: "FOE.LeftForeleg",
+  rForeleg: "FOE.RightForeleg",
+  lHindleg: "FOE.LeftHindleg",
+  rHindleg: "FOE.RightHindleg",
+  rWing: "FOE.RightWing",
+  lWing: "FOE.LeftWing",
+  head: "FOE.Head",
+  torso: "FOE.Torso"
 }
 
 FOE.resistances = {
@@ -99,7 +107,7 @@ FOE.movementTypes = {
   },
   sprint: {
     apCost: 15,
-    name: "FOE.Regular",
+    name: "FOE.Sprint",
     extra: {
       name: "FOE.SlowDown",
       cost: 15

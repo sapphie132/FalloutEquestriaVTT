@@ -85,6 +85,12 @@ Hooks.once("ready", async function () {
     }
   }
 
+  FOE.localizedMovementTypes = {};
+  for (let [key, mvt] of Object.entries(FOE.movementTypes)) {
+    FOE.localizedMovementTypes[key] = foundry.utils.deepClone(mvt);
+    FOE.localizedMovementTypes[key].name = game.i18n.localize(mvt.name);
+  }
+
   FOE.localizedConditionModTypes = localizeObject(FOE.conditionModTypes);
   FOE.localizedRatesOfFire = localizeObject(FOE.ratesOfFire);
 
