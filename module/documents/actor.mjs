@@ -54,8 +54,8 @@ export class FalloutEquestriaActor extends Actor {
 
     // Loop through ability scores, and add their modifiers to our sheet output.
     // for (let [key, ability] of Object.entries(data.abilities)) {
-      // Calculate the modifier using d20 rules.
-      // ability.mod = Math.floor((ability.value - 10) / 2);
+    // Calculate the modifier using d20 rules.
+    // ability.mod = Math.floor((ability.value - 10) / 2);
     // }
     const resources = data.resources;
     const abilities = data.abilities;
@@ -70,20 +70,22 @@ export class FalloutEquestriaActor extends Actor {
       ability.tot = ability.value + bonus.tot;
     }
 
+    const str = data.abilities.str.tot;
+    const per = data.abilities.per.tot;
     const end = data.abilities.end.tot;
-    const int = data.abilities.int.tot;
     const cha = data.abilities.cha.tot;
+    const int = data.abilities.int.tot;
     const agi = data.abilities.agi.tot;
     const lvl = data.attributes.level?.value ?? 0;
 
     resources.strain.base = end + int;
-    resources.hp.base = 100+(end*2)+(end*lvl);
-    resources.ap.base = 55+(agi*3);
+    resources.hp.base = 100 + (end * 2) + (end * lvl);
+    resources.ap.base = 55 + (agi * 3);
     resources.stun.base = resources.hp.base;
-    resources.tp.base = Math.round((cha + agi)/2) + lvl - 1;
+    resources.tp.base = Math.round((cha + agi) / 2) + lvl - 1;
 
     if (resources.hp.regen == null) {
-      resources.hp.regen = Math.floor(end/3);
+      resources.hp.regen = Math.floor(end / 3);
     }
 
     for (let [key, resource] of Object.entries(resources)) {
@@ -97,8 +99,12 @@ export class FalloutEquestriaActor extends Actor {
 
     for (let [key, limb] of Object.entries(resources.hp.limbs)) {
       const cond = limb.condition;
-      
-      cond.max = Math.floor(resources.hp.max/2);
+
+      if (key != "head" && key != "torso") {
+        cond.max = Math.floor(resources.hp.max / 3);
+      } else {
+        cond.max = Math.floor(resources.hp.max / 2);
+      }
       cond.percent = (cond.value / cond.max) * 100;
     }
 
@@ -107,6 +113,49 @@ export class FalloutEquestriaActor extends Actor {
       bonus.tot = bonus.perm + bonus.temp;
       skill.tot = skill.value + bonus.tot;
     }
+
+    const misc = data.misc;
+    misc.potency.base = Math.ceil(end / 2);
+    misc.versatility.base = Math.ceil(int / 2);
+    misc.willpower.base = Math.round((end + cha + int / 2) / 2.5);
+    misc.spiritaffinity.base = Math.ceil(cha / 2);
+    misc.initiative.base = Math.round((agi + per) / 2);
+    data.skills.barter.buying = 1.55 - (data.skills.barter.tot) * 0.0045;
+    data.skills.barter.selling = 0.45 + (data.skills.barter.tot) * 0.0045;
+
+    for (let [key, attribute] of Object.entries(misc)) {
+      if (typeof (attribute) == 'object') {
+        attribute.bonus.tot = attribute.bonus.perm + attribute.bonus.temp;
+        attribute.tot = attribute.bonus.tot + attribute.base;
+      }
+    }
+
+    const movement = data.movement;
+    movement.regular.base = Math.round(end / 2 + agi);
+    movement.sprint.base = Math.round(end + agi * 2);
+    movement.charge.base = Math.round(end + agi * 2);
+    movement.jump.base = Math.round((str + agi) / 2);
+    movement.jump.isFt = true;
+    movement.climb.base = Math.round((str + end + agi) / 2);
+    movement.drop.base = 0;
+    movement.standUp.base = 0;
+    movement.fly.base = Math.round(end + agi * 2 * data.skills.flight.tot);
+    movement.flySprint.base = Math.round(2 * end + agi * 4 * data.skills.flight.tot);
+    movement.flyCharge.base = Math.round(2 * end + agi * 4 * data.skills.flight.tot);
+    movement.swim.base = Math.round(str + end + agi);
+
+    for (let [key, mvt] of Object.entries(movement)) {
+      mvt.bonus.tot = mvt.bonus.perm + mvt.bonus.temp;
+      mvt.tot = mvt.base + mvt.bonus.tot;
+      if (mvt.isFt) {
+        mvt.totFt = mvt.tot;
+        mvt.totYds = Math.round(mvt.tot / 3);
+      } else {
+        mvt.totYds = mvt.tot;
+        mvt.totFt = mvt.tot * 3;
+      }
+    }
+
 
     data.attributes.crit = this.critVal(0, data);
     data.attributes.fumble = this.fumbleVal(0, data);
@@ -131,7 +180,7 @@ export class FalloutEquestriaActor extends Actor {
     if (extraLuck) {
       effLuck += extraLuck;
     }
-    return Math.floor(effLuck/2) + data.attributes.fumbleMod;
+    return Math.floor(effLuck / 2) + data.attributes.fumbleMod;
   }
   /**
    * Prepare NPC type specific data.

@@ -97,7 +97,9 @@ FOE.limbs = {
 }
 
 FOE.resistances = {
-
+  fire: "FOE.Fire",
+  cold: "FOE.Cold",
+  lightning: "FOE.Lightning"
 }
 
 FOE.movementTypes = {
@@ -160,6 +162,13 @@ FOE.movementTypes = {
 }
 
 FOE.localizedMovementTypes = FOE.movementTypes;
+
+FOE.misc = {
+  potency: "FOE.Potency",
+  versatility: "FOE.Versatility",
+  spiritaffinity: "FOE.SpiritAffinity",
+  initiative: "FOE.Initiative"
+}
 
 FOE.rollDifficulties = {
   vEasy: "FOE.VeryEasy",

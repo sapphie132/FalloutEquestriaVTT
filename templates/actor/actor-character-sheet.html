@@ -183,15 +183,17 @@
             <div class="vital-block">
               <table>
                 <tr>
-                  <th>{{localize "FOE.MovementActions"}}</th>
+                  <th>{{localize "FOE.MovementAction"}}</th>
                   <th>{{localize "FOE.ft"}}</th>
+                  <th>{{localize "FOE.yds"}}</th>
                   <th>{{localize "FOE.Cost"}}</th>
                 </tr>
                 {{#each movementTypes as |type key|}}
                 <tr>
                   <td>{{type.name}}</td>
-                  <td>{{type.distance}}</td>
-                  <td>{{type.apCost}}</td>
+                  <td class="align-center">{{type.totFt}}</td>
+                  <td class="align-center">{{type.totYds}}</td>
+                  <td class="align-right">{{type.apCost}}</td>
                 </tr>
                 {{/each}}
               </table>
@@ -201,36 +203,21 @@
               </tr>
               </table>
               <table>
+                {{#each data.misc as |attribute key|}}
                 <tr>
-                  <td>Potency</td>
-                  <td> {{data.attributes.potency}}</td>
+                  <td>{{attribute.label}}</td>
+                  <td class="align-right">{{attribute.tot}}</td>
                 </tr>
-                <tr>
-                  <td>Versatility</td>
-                  <td> {{data.attributes.versatility}}</td>
-                </tr>
-                <tr>
-                  <td>Willpower</td>
-                  <td> {{data.attributes.willpower}}</td>
-                </tr>
-                <tr>
-                  <td>Spirit Afinity</td>
-                  <td> {{data.attributes.spiritaffinity}}</td>
-                </tr>
-                <tr>
-                  <td>Initiative</td>
-                  <td> {{data.attributes.initiative}}</td>
-                </tr>
+                {{/each}}
                 <tr>
                   <td>Buying multiplier</td>
-                  <td><input type="number" data-dtype="Number" name="data.skills.barter.selling"
-                      value="{{data.skills.barter.selling}}" /></td>
+                  <td class="align-right"><input disabled type="number" data-dtype="Number" name="data.skills.barter.selling"
+                      value="{{data.skills.barter.buying}}" /></td>
                 </tr>
                 <tr>
                   <td>Selling multiplier</td>
-                  {{!-- TODO: automatic --}}
-                  <td><input type="number" data-dtype="Number" name="data.skills.barter.buying"
-                      value="{{data.skills.barter.buying}}" /></td>
+                  <td class="align-right"><input disabled type="number" data-dtype="Number" name="data.skills.barter.buying"
+                      value="{{data.skills.barter.selling}}" /></td>
                 </tr>
               </table>
             </div>
