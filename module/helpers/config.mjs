@@ -167,7 +167,8 @@ FOE.misc = {
   potency: "FOE.Potency",
   versatility: "FOE.Versatility",
   spiritaffinity: "FOE.SpiritAffinity",
-  initiative: "FOE.Initiative"
+  initiative: "FOE.Initiative",
+  willpower: "FOE.Willpower"
 }
 
 FOE.rollDifficulties = {

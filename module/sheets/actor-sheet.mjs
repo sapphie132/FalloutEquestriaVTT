@@ -1,6 +1,7 @@
 import { onManageActiveEffect, prepareActiveEffectCategories } from "../helpers/effects.mjs";
 import { skillRoll, specialRoll } from "../dice.mjs"
 import { FOE } from "../helpers/config.mjs";
+import { fetchAndLocalize } from "../helpers/util.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -70,29 +71,12 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
    */
   _prepareCharacterData(context) {
     // Handle ability scores.
-    for (let [k, v] of Object.entries(context.data.abilities)) {
-      v.label = game.i18n.localize(CONFIG.FOE.abilities[k]) ?? k;
-    }
-
-    for (let [k, v] of Object.entries(context.data.resources)) {
-      v.label = game.i18n.localize(CONFIG.FOE.resources[k]) ?? k;
-    }
-
-    for (let [k, v] of Object.entries(context.data.skills)) {
-      v.label = game.i18n.localize(CONFIG.FOE.skills[k]) ?? k;
-    }
-
-    for (let [k, v] of Object.entries(context.data.resources.hp.limbs)) {
-      v.label = game.i18n.localize(CONFIG.FOE.limbs[k]) ?? k;
-    }
-
-    for (let [k, v] of Object.entries(context.data.attributes.resistances)) {
-      v.label = game.i18n.localize(CONFIG.FOE.resistances[k]) ?? k;
-    }
-
-    for (let [k, v] of Object.entries(context.data.misc)) {
-      v.label = game.i18n.localize(CONFIG.FOE.misc[k] ?? k);
-    }
+    fetchAndLocalize(context.data.abilities, CONFIG.FOE.abilities)
+    fetchAndLocalize(context.data.resources, CONFIG.FOE.resources)
+    fetchAndLocalize(context.data.skills, CONFIG.FOE.skills)
+    fetchAndLocalize(context.data.resources.hp.limbs, CONFIG.FOE.limbs)
+    fetchAndLocalize(context.data.attributes.resistances, CONFIG.FOE.resistances)
+    fetchAndLocalize(context.data.misc, CONFIG.FOE.misc)
 
 
     const movementTypes = foundry.utils.deepClone(FOE.localizedMovementTypes);
@@ -170,7 +154,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     const details = {};
     for (let [k, v] of Object.entries(context.data.details)) {
       details[k] = foundry.utils.deepClone(v);
-      if (typeof(details[k]) != "object") {
+      if (typeof (details[k]) != "object") {
         details[k] = {}
       }
       details[k].label = FOE.details[k] ?? k;
