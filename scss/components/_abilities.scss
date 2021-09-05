@@ -38,7 +38,7 @@ td.ability {
 
 
 table.quick-skills {
-    flex: 0 0 200px;
+    // flex: 0 0 200px;
     gap: 0px;
     margin: 2px;
     background-color: $elem-background-color;
@@ -47,7 +47,7 @@ table.quick-skills {
     // border-width: 1px;
     border-collapse: collapse;
     padding: 5px;
-    td {
+    td th {
         padding: 0.1em;
         // padding-left: 0.25em;
         // padding-right: 0.25em;
@@ -59,11 +59,33 @@ table.quick-skills {
 // }
 
 div.quick-skills {
+    flex: 0 0 200px;
     max-height: 463px;
 }
 
 div.resistances {
     max-height: 80px;
+}
+
+thead {
+    background: rgba(0, 0, 0, 0.05);
+    color: #191813;
+    text-shadow: none;
+}
+
+table.skills {
+    gap: 0px;
+    border: none;
+    td {
+        padding: 0.1em;
+    }
+    th {
+        padding: 0.1em;
+    }
+}
+
+input.skills {
+    max-height: 14px;
 }
 
 .vital-block {

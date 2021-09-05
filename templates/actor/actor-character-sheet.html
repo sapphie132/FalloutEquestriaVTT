@@ -108,8 +108,7 @@
   <nav class="sheet-tabs tabs" data-group="primary">
     {{!-- Default tab is specified in actor-sheet.mjs --}}
     <a class="item tab-link" data-tab="vital">Vital</a>
-    <a class="item tab-link" data-tab="skills">Skills</a>
-    <a class="item tab-link" data-tab="perks-traits">Perks &amp; Traits</a>
+    <a class="item tab-link" data-tab="perks-traits">{{localize "FOE.PerksTraitsSkills"}}</a>
     <a class="item tab-link" data-tab="inventory">Inventory</a>
     <a class="item tab-link" data-tab="magic">Magic</a>
     <a class="item tab-link" data-tab="misc">Miscellaneous</a>
@@ -232,12 +231,9 @@
         {{> "systems/foe/templates/actor/parts/actor-equipped.html"}}
       </div>
     </div>
-    <div class="tab skills" data-group="primary" data-tab="skills">
-      {{> "systems/foe/templates/actor/parts/actor-skills.html"}}
-    </div>
 
     <div class="tab perks-traits" data-group="primary" data-tab="perks-traits">
-      {{> "systems/foe/templates/actor/parts/actor-perks.html"}}
+      {{> "systems/foe/templates/actor/parts/actor-perks-skills.html"}}
     </div>
 
     {{!-- Inventory Tab --}}

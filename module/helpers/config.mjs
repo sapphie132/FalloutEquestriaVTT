@@ -55,7 +55,55 @@ FOE.skills = {
   profession: "FOE.Profession",
   shamanism: "FOE.Shamanism",
   magic: "FOE.Magic",
-  flightMagic: "FOE.FlightMagic"
+  flight: "FOE.FlightMagic"
+}
+
+FOE.getBaseSkills = (str, per, end, cha, int, agi, luck) => {
+  const res = {
+    unarmed: end + agi,
+    throwing: str + agi,
+    mew: per * 2,
+    melee: str + agi,
+    firearms: per + agi,
+    explosives: per * 2,
+    bSaddles: end + per,
+    survival: int + end + per - 5,
+    intimidation: cha * 2,
+    persuasion: cha * 2,
+    barter: cha * 2,
+    sneak: agi * 2,
+    lockpick: per * 2,
+    sleightHoof: cha + agi,
+    tech: int * 2,
+    chem: int * 2,
+    medicine: int * 2,
+    history: int * 2,
+    repair: int * 2,
+    shamanism: cha * 2,
+    magic: int + per,
+    flight: agi + end + cha - 5,
+    gambling: luck * 1.5 + 3, // To compensate for the global + 0.5 luck
+    athletics: str + end + agi - 5,
+  }
+
+  for (let [k, v] of Object.entries(res)) {
+    res[k] = Math.ceil(v + luck / 2);
+  }
+
+  return res;
+}
+
+FOE.skillValueLabels = {
+  base: "FOE.Base",
+  tag: "FOE.Tag",
+  total: "FOE.Total",
+  tag: "FOE.Tag",
+  tagRanks: "FOE.TagRanks",
+  ranks: "FOE.Ranks",
+  perks: "FOE.Perks",
+  traits: "FOE.Traits",
+  books: "FOE.Books",
+  items: "FOE.Items"
 }
 
 FOE.combatSkills = ["unarmed", "melee", "throwing", "firearms", "mew", "explosives", "bSaddles"];

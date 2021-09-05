@@ -76,6 +76,8 @@ export class FalloutEquestriaActor extends Actor {
     const cha = data.abilities.cha.tot;
     const int = data.abilities.int.tot;
     const agi = data.abilities.agi.tot;
+    const luck = data.abilities.luck.tot;
+
     const lvl = data.attributes.level?.value ?? 0;
 
     resources.strain.base = end + int;
@@ -111,10 +113,16 @@ export class FalloutEquestriaActor extends Actor {
       cond.percent = (cond.value / cond.max) * 100;
     }
 
+    const bases = FOE.getBaseSkills(str, per, end, cha, int, agi, luck);
+
     for (let [key, skill] of Object.entries(skills)) {
-      const bonus = skill.bonus;
-      bonus.tot = bonus.perm + bonus.temp;
-      skill.tot = skill.value + bonus.tot;
+      const value = skill.value;
+      value.base = bases[key] ?? 0;
+      value.total = 0;
+      for (let [valKey, val] of Object.entries(value)) {
+        value.total += val;
+      }
+      skill.tot = value.total;
     }
 
     const misc = data.misc;

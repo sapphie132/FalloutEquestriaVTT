@@ -178,7 +178,7 @@
             "temp": 0
           }
         },
-         "flyCharge": {
+        "flyCharge": {
           "bonus": {
             "perm": 0,
             "temp": 0
@@ -282,171 +282,292 @@
       },
       "skills": {
         "unarmed": {
-          "value": 0,
-          "bonus": {
+          "value": {
+            "total": null,
             "perm": 0,
-            "temp": 0
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "throwing": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "melee": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "firearms": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "mew": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "explosives": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "bSaddles": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "survival": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "barter": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "intimidation": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "persuasion": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "sneak": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "lockpick": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "sleightHoof": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "tech": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "chem": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "history": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "repair": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "gambling": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "athletics": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "profession": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "shamanism": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "magic": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         },
         "flight": {
-          "value": 0,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
+          "value": {
+            "total": null,
+            "tag": 0,
+            "tagRanks": 0,
+            "ranks": 0,
+            "perks": 0,
+            "traits": 0,
+            "books": 0,
+            "items": 0
           }
         }
       },

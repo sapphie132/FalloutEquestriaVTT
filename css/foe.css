@@ -553,9 +553,6 @@
 }
 
 .foe table.quick-skills {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 200px;
-  flex: 0 0 200px;
   gap: 0px;
   margin: 2px;
   background-color: rgba(0, 0, 0, 0.05);
@@ -564,16 +561,42 @@
   padding: 5px;
 }
 
-.foe table.quick-skills td {
+.foe table.quick-skills td th {
   padding: 0.1em;
 }
 
 .foe div.quick-skills {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 200px;
+  flex: 0 0 200px;
   max-height: 463px;
 }
 
 .foe div.resistances {
   max-height: 80px;
+}
+
+.foe thead {
+  background: rgba(0, 0, 0, 0.05);
+  color: #191813;
+  text-shadow: none;
+}
+
+.foe table.skills {
+  gap: 0px;
+  border: none;
+}
+
+.foe table.skills td {
+  padding: 0.1em;
+}
+
+.foe table.skills th {
+  padding: 0.1em;
+}
+
+.foe input.skills {
+  max-height: 14px;
 }
 
 .foe .vital-block {

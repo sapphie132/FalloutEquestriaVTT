@@ -85,9 +85,24 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       movementTypes[k].totFt = v.totFt;
     }
 
+    const values = {
+      total: {},
+      base: {},
+      tag: {},
+      tagRanks: {},
+      ranks: {},
+      perks: {},
+      traits: {},
+      books: {},
+      items: {},
+    }
+
+    fetchAndLocalize(values, FOE.skillValueLabels);
+
     context.movementTypes = movementTypes;
 
     context.limbs = context.data.resources.hp.limbs;
+    context.values = values;
   }
 
   /**
