@@ -105,6 +105,9 @@ export class FalloutEquestriaActor extends Actor {
       } else {
         cond.max = Math.floor(resources.hp.max / 2);
       }
+      if (cond.value == null) {
+        cond.value = cond.max;
+      }
       cond.percent = (cond.value / cond.max) * 100;
     }
 

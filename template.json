@@ -17,47 +17,47 @@
             "limbs": {
               "horn": {
                 "condition": {
-                  "value": 0
+                  "value": null
                 }
               },
               "head": {
                 "condition": {
-                  "value": 0
+                  "value": null
                 }
               },
               "torso": {
                 "condition": {
-                  "value": 0
+                  "value": null
                 }
               },
               "lForeleg": {
                 "condition": {
-                  "value": 0
+                  "value": null
                 }
               },
               "lHindleg": {
                 "condition": {
-                  "value": 0
+                  "value": null
                 }
               },
               "lWing": {
                 "condition": {
-                  "value": 0
+                  "value": null
                 }
               },
               "rForeleg": {
                 "condition": {
-                  "value": 0
+                  "value": null
                 }
               },
               "rHindleg": {
                 "condition": {
-                  "value": 0
+                  "value": null
                 }
               },
               "rWing": {
                 "condition": {
-                  "value": 0
+                  "value": null
                 }
               }
             }
