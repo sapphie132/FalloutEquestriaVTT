@@ -111,7 +111,7 @@
     <a class="item tab-link" data-tab="perks-traits">{{localize "FOE.PerksTraitsSkills"}}</a>
     <a class="item tab-link" data-tab="inventory">Inventory</a>
     <a class="item tab-link" data-tab="magic">Magic</a>
-    <a class="item tab-link" data-tab="misc">Miscellaneous</a>
+    <a class="item tab-link" data-tab="misc">{{localize "FOE.Miscellaneous"}}</a>
     <a class="item tab-link" data-tab="bonuses">Bonuses</a>
     <a class="item tab-link" data-tab="biography">Biography</a>
   </nav>
@@ -124,9 +124,8 @@
     </div>
     {{!-- Vital Information Tab --}}
     <div class="tab vital flexcol" data-group="primary" data-tab="vital">
-      {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
-      use both the "grid" and "grid-Ncol" class where "N" can be any number
-      from 1 to 12 and will create that number of columns. --}}
+
+      {{! SPECIAL Stats}}
       <table class="abilities flexrow flex-group-center">
         <tr>
           {{#each data.abilities as |ability key|}}
@@ -149,44 +148,104 @@
           {{/each}}
         </tr>
       </table>
+
+      {{! Body}}
       <div class="flexrow">
-        {{!-- <div class="quick-skills flexcol"> --}}
+        {{! First Column}}
+        <div>
           <div class="vital-block quick-skills">
             <h3>Quick Skills</h3>
             {{> "systems/foe/templates/actor/parts/actor-quick-skills.html"}}
           </div>
-          <div class="flexcol">
-            <div class="vital-block limbs">
-              <h3>Limb condition</h3>
-              {{> "systems/foe/templates/actor/parts/actor-limbs.html"}}
-            </div>
-            <div class="vital-block resistances">
-              <h3>Resistances</h3>
-              <table>
-                <tr>
-                  {{#each data.attributes.resistances as |resistance key|}}
-                  <td>{{resistance.label}}</td>
-                  {{/each}}
-                </tr>
-                <tr>
-                  {{#each data.attributes.resistances as |resistance key|}}
-                  <td><input type="number" data-dtype="Number" name="data.attributes.resistances.{{key}}.value"
-                      value="{{resistance.value}}" /> </td>
-                  {{/each}}
-                </tr>
-              </table>
-            </div>
-            <div class="filler"></div>
+        </div>
+
+        {{! Second Column}}
+        <div class="flexcol">
+
+          {{! Limbs}}
+          <div class="vital-block limbs">
+            <h3>Limb condition</h3>
+            {{> "systems/foe/templates/actor/parts/actor-limbs.html"}}
           </div>
-          <div class="flexcol">
-            <div class="vital-block">
-              <table>
+
+          {{! Resistances}}
+          <div class="vital-block resistances">
+            <h3>Resistances</h3>
+            <table class="resistances">
+              <tr>
+                {{#each data.attributes.resistances as |resistance key|}}
+                <td>{{resistance.label}}</td>
+                {{/each}}
+              </tr>
+              <tr>
+                {{#each data.attributes.resistances as |resistance key|}}
+                <td><input class="resistances" type="number" data-dtype="Number"
+                    name="data.attributes.resistances.{{key}}.value" value="{{resistance.value}}" /> </td>
+                {{/each}}
+              </tr>
+            </table>
+          </div>
+
+          {{! Radiation}}
+          <div class="vital-block radiation">
+            <h3>Radation</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>{{localize "FOE.Rads"}}</th>
+                  <th>{{localize "FOE.Resistance"}}</th>
+                  <th>{{localize "FOE.Sickness"}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="number" data-dtype="Number" name="data.rads.value" value="{{data.rads.value}}" />
+                  </td>
+                  <td><input type="number" data-dtype="Number" name="data.rads.resistance"
+                      value="{{data.rads.resistance}}" /></td>
+                  <td><input type="text" data-dtype="String" name="data.rads.sickness" value="{{data.rads.sickness}}" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          {{! Poison}}
+          <div class="vital-block radiation">
+            <h3>{{localize "FOE.Poison"}}</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>{{localize "FOE.Resistance"}}</th>
+                  <th>{{localize "FOE.Effect"}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="number" data-dtype="Number" name="data.poison.resistance"
+                      value="{{data.poison.resistance}}" />
+                  </td>
+                  <td><input type="text" data-dtype="String" name="data.poison.effect" value="{{data.poison.effect}}" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="filler" style="height: 100%;">
+          </div>
+        </div>
+        {{! Third Column}}
+        <div class="flexcol">
+          <div class="vital-block">
+            <table>
+              <thead>
                 <tr>
                   <th>{{localize "FOE.MovementAction"}}</th>
                   <th>{{localize "FOE.ft"}}</th>
                   <th>{{localize "FOE.yds"}}</th>
                   <th>{{localize "FOE.Cost"}}</th>
                 </tr>
+              </thead>
+              <tbody>
                 {{#each movementTypes as |type key|}}
                 <tr>
                   <td>{{type.name}}</td>
@@ -195,35 +254,39 @@
                   <td class="align-right">{{type.apCost}}</td>
                 </tr>
                 {{/each}}
-              </table>
-            </div>
-            <div class="misc vital-block">
-              <h3>Miscellaneous</h3>
-              </tr>
-              </table>
-              <table>
-                {{#each data.misc as |attribute key|}}
-                <tr>
-                  <td>{{attribute.label}}</td>
-                  <td class="align-right">{{attribute.tot}}</td>
-                </tr>
-                {{/each}}
-                <tr>
-                  <td>Buying multiplier</td>
-                  <td class="align-right"><input disabled type="number" data-dtype="Number" name="data.skills.barter.selling"
-                      value="{{data.skills.barter.buying}}" /></td>
-                </tr>
-                <tr>
-                  <td>Selling multiplier</td>
-                  <td class="align-right"><input disabled type="number" data-dtype="Number" name="data.skills.barter.buying"
-                      value="{{data.skills.barter.selling}}" /></td>
-                </tr>
-              </table>
-            </div>
+              </tbody>
+            </table>
           </div>
-
+          <div class="misc vital-block">
+            <h3>{{localize "FOE.Miscellaneous"}}</h3>
+            </tr>
+            </table>
+            <table width="100%">
+              <col style="width: 80%;"/>
+              {{#each data.misc as |attribute key|}}
+              <tr>
+                <td>{{attribute.label}}</td>
+                <td class="align-right">{{attribute.tot}}</td>
+              </tr>
+              {{/each}}
+              <tr>
+                <td>Buying multiplier</td>
+                <td class="align-right"><input disabled type="number" data-dtype="Number"
+                    name="data.skills.barter.selling" value="{{data.skills.barter.buying}}" /></td>
+              </tr>
+              <tr>
+                <td>Selling multiplier</td>
+                <td class="align-right"><input disabled type="number" data-dtype="Number"
+                    name="data.skills.barter.buying" value="{{data.skills.barter.selling}}" /></td>
+              </tr>
+            </table>
+          </div>
+          <div class="filler" style="height: 100%;">
+          </div>
         </div>
+
       </div>
+    </div>
     </div>
 
     <div class="tab equipped" data-group="primary" data-tab="equipped">

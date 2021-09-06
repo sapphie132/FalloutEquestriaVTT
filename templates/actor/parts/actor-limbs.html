@@ -1,24 +1,29 @@
-<table>
-    <tr>
-        <th>Location</th>
-        <th>Current</th>
-        <th>Total</th>
-        <th>Percent</th>
-    </tr>
-    {{#each limbs as |limb key|}}
-    <tr class="align-center">
-        <td>{{limb.label}}</td>
-        <td>
-            <input type="number" name="data.resources.hp.limbs.{{key}}.condition.value" value="{{limb.condition.value}}"
-                data-dtype="Number">
-        </td>
-        <td>
-            <input type="number" name="data.resources.hp.limbs.{{key}}.condition.max" value="{{limb.condition.max}}"
-                data-dtype="Number" disabled>
-        </td>
-        <td>
-            <div> {{numberFormat limb.condition.percent decimals=0 sign=false}}% </div>
-        </td>
-    </tr>
-    {{/each}}
+<table width="100%">
+    <col style="width:37%"/>
+    <thead>
+        <tr>
+            <th>Location</th>
+            <th>Current</th>
+            <th>Total</th>
+            <th>Percent</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each limbs as |limb key|}}
+        <tr class="align-center">
+            <td class="align-left">{{limb.label}}</td>
+            <td>
+                <input type="number" name="data.resources.hp.limbs.{{key}}.condition.value"
+                    value="{{limb.condition.value}}" data-dtype="Number">
+            </td>
+            <td>
+                <input type="number" name="data.resources.hp.limbs.{{key}}.condition.max" value="{{limb.condition.max}}"
+                    data-dtype="Number" disabled>
+            </td>
+            <td>
+                <div> {{numberFormat limb.condition.percent decimals=0 sign=false}}% </div>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
 </table>

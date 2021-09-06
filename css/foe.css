@@ -569,33 +569,30 @@
   -webkit-box-flex: 0;
   -ms-flex: 0 0 200px;
   flex: 0 0 200px;
-  max-height: 463px;
-}
-
-.foe div.resistances {
-  max-height: 80px;
 }
 
 .foe thead {
+  border-color: rgba(0, 0, 0, 0.2);
   background: rgba(0, 0, 0, 0.05);
   color: #191813;
   text-shadow: none;
 }
 
-.foe table.skills, .foe table.quick-skills {
+.foe table {
   gap: 0px;
   border: none;
+  margin: 0px;
 }
 
-.foe table.skills td, .foe table.quick-skills td {
+.foe table td, .foe table th {
   padding: 0.1em;
 }
 
-.foe table.skills th, .foe table.quick-skills th {
-  padding: 0.1em;
+.foe table td input, .foe table th input {
+  max-height: 14px;
 }
 
-.foe input.skills {
+.foe input.skills, .foe input.resistances {
   max-height: 14px;
 }
 

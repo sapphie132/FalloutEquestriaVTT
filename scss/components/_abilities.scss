@@ -60,31 +60,34 @@ table.quick-skills {
 
 div.quick-skills {
     flex: 0 0 200px;
-    max-height: 463px;
+    // max-height: 463px;
 }
 
 div.resistances {
-    max-height: 80px;
+    // max-height: 65px;
 }
 
 thead {
+    // border: none;
+    border-color: rgba(0, 0, 0, 0.2);
     background: rgba(0, 0, 0, 0.05);
     color: #191813;
     text-shadow: none;
 }
 
-table.skills, table.quick-skills {
+table {
     gap: 0px;
     border: none;
-    td {
+    margin: 0px;
+    td, th {
         padding: 0.1em;
-    }
-    th {
-        padding: 0.1em;
+        input {
+            max-height: 14px;
+        }
     }
 }
 
-input.skills {
+input.skills, input.resistances {
     max-height: 14px;
 }
 
