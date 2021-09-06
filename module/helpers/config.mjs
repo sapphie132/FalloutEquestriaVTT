@@ -58,6 +58,12 @@ FOE.skills = {
   flight: "FOE.FlightMagic"
 }
 
+FOE.magicTypes = {
+  arcaneMagic: "FOE.ArcaneMagic",
+  flightMagic: "FOE.FlightMagic",
+  shamanism: "FOE.Shamanism",
+}
+
 FOE.getBaseSkills = (str, per, end, cha, int, agi, luck) => {
   const res = {
     unarmed: end + agi,

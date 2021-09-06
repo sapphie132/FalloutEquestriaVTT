@@ -144,6 +144,19 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       }
     };
 
+    const magic = {
+      arcaneMagic: {
+        content: []
+      },
+      flightMagic: {
+        content: []
+      },
+      shamanism: {
+        content: []
+      }
+    }
+    
+    fetchAndLocalize(magic, FOE.magicTypes);
     const equippable = {
       weapon: {}
     }
