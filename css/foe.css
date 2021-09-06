@@ -582,16 +582,16 @@
   text-shadow: none;
 }
 
-.foe table.skills {
+.foe table.skills, .foe table.quick-skills {
   gap: 0px;
   border: none;
 }
 
-.foe table.skills td {
+.foe table.skills td, .foe table.quick-skills td {
   padding: 0.1em;
 }
 
-.foe table.skills th {
+.foe table.skills th, .foe table.quick-skills th {
   padding: 0.1em;
 }
 
