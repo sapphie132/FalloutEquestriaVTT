@@ -59,47 +59,6 @@
           <div class="resource-percent">{{numberFormat resource.percent decimals=0 sign=false}}%</div>
         </div>
         {{/each}}
-        {{!-- <div class="resource flex-group-center">
-          <label for="data.resources.hp.value" class="resource-label">{{localize "FOE.HP"}}</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <input type="number" name="data.resources.hp.value" value="{{data.resources.hp.value}}"
-              data-dtype="Number" />
-            <div class="resource-sep">/</div>
-            <input disabled type="number" name="data.resources.hp.max" value="{{data.resources.hp.max}}"
-              data-dtype="Number" />
-          </div>
-          <div class="resource-percent">{{numberFormat data.hp.percent decimals=0 sign=false}}%</div>
-        </div> --}}
-        {{!--
-        <div class="resource flex-group-center">
-          <label for="data.resources.ap.value" class="resource-label">{{localize "FOE.AP"}}</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <input type="number" name="data.resources.ap.value" value="{{data.ap.value}}" data-dtype="Number" />
-            <div class="resource-sep">/</div>
-            <input disabled type="number" name="data.resources.ap.max" value="{{data.ap.max}}" data-dtype="Number" />
-          </div>
-          <div class="resource-percent">{{numberFormat data.ap.percent decimals=0 sign=false}}%</div>
-        </div>
-        <div class="resource flex-group-center">
-          <label for="data.strain.value" class="resource-label">{{localize "FOE.Strain"}}</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <input type="number" name="data.resources.strain.value" value="{{data.strain.value}}" data-dtype="Number" />
-            <div class="resource-sep">/</div>
-            <input disabled type="number" name="data.resources.strain.max" value="{{data.strain.max}}"
-              data-dtype="Number" />
-          </div>
-          <div class="resource-percent">{{numberFormat data.ap.percent decimals=0 sign=false}}%</div>
-        </div>
-        <div class="resource flex-group-center">
-          <label for="data.tp.value" class="resource-label">Trick Points</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <input type="number" data-dtype="Number" name="data.resources.tp.value" value="{{data.tp.value}}" />
-            <div class="resource-sep">/</div>
-            <input type="number" data-dtype="Number" name="data.resources.tp.max" value="{{data.tp.max}}" disabled />
-          </div>
-        </div> --}}
-
-
       </div>
     </div>
   </header>
@@ -108,6 +67,7 @@
   <nav class="sheet-tabs tabs" data-group="primary">
     {{!-- Default tab is specified in actor-sheet.mjs --}}
     <a class="item tab-link" data-tab="vital">Vital</a>
+    <a class="item tab-link" data-tab="actions">{{localize "FOE.Actions"}}</a>
     <a class="item tab-link" data-tab="perks-traits">{{localize "FOE.PerksTraitsSkills"}}</a>
     <a class="item tab-link" data-tab="inventory">Inventory</a>
     <a class="item tab-link" data-tab="magic">Magic</a>
@@ -118,6 +78,9 @@
 
   {{!-- Sheet Body --}}
   <section class="sheet-body">
+    <div class="tab actions" data-group="primary" data-tab="actions">
+  {{> "systems/foe/templates/actor/parts/actor-actions.html"}}
+    </div>
 
     <div class="tab bonuses" data-group="primary" data-tab="bonuses">
       {{!-- {{> "systems/foe/templates/actor/parts/actor-bonuses.html"}} --}}
@@ -235,28 +198,7 @@
         </div>
         {{! Third Column}}
         <div class="flexcol">
-          <div class="vital-block">
-            <table>
-              <thead>
-                <tr>
-                  <th>{{localize "FOE.MovementAction"}}</th>
-                  <th>{{localize "FOE.ft"}}</th>
-                  <th>{{localize "FOE.yds"}}</th>
-                  <th>{{localize "FOE.Cost"}}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {{#each movementTypes as |type key|}}
-                <tr>
-                  <td>{{type.name}}</td>
-                  <td class="align-center">{{type.totFt}}</td>
-                  <td class="align-center">{{type.totYds}}</td>
-                  <td class="align-right">{{type.apCost}}</td>
-                </tr>
-                {{/each}}
-              </tbody>
-            </table>
-          </div>
+
           <div class="misc vital-block">
             <h3>{{localize "FOE.Miscellaneous"}}</h3>
             </tr>

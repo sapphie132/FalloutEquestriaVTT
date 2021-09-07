@@ -1,0 +1,27 @@
+<div class="flexrow">
+    <div class="movement vital-block">
+        <table>
+            <thead>
+                <tr>
+                    <th>{{localize "FOE.MovementAction"}}</th>
+                    <th>{{localize "FOE.ft"}}</th>
+                    <th>{{localize "FOE.yds"}}</th>
+                    <th>{{localize "FOE.Cost"}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each movementTypes as |type key|}}
+                <tr>
+                    <td>{{type.name}}</td>
+                    <td class="align-center">{{type.totFt}}</td>
+                    <td class="align-center">{{type.totYds}}</td>
+                    <td class="align-right">{{type.apCost}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="flexcol">
+    {{> "systems/foe/templates/actor/parts/actor-equipped.html"}}
+    </div>
+</div>

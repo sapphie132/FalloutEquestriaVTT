@@ -11,6 +11,7 @@
     "systems/foe/templates/actor/parts/actor-items.html",
     "systems/foe/templates/actor/parts/actor-bonuses.html",
     "systems/foe/templates/actor/parts/actor-quick-skills.html",
+    "systems/foe/templates/actor/parts/actor-actions.html",
     "systems/foe/templates/actor/parts/actor-limbs.html",
     "systems/foe/templates/actor/parts/actor-spells.html",
     "systems/foe/templates/actor/parts/actor-effects.html",

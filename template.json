@@ -204,6 +204,13 @@
             "perm": 0
           }
         },
+        "flightRank": {
+          "value": 0,
+          "bonus": {
+            "temp": 0,
+            "perm": 0
+          }
+        },
         "versatility": {
           "bonus": {
             "temp": 0,

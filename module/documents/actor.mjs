@@ -137,7 +137,7 @@ export class FalloutEquestriaActor extends Actor {
     for (let [key, attribute] of Object.entries(misc)) {
       if (typeof (attribute) == 'object') {
         attribute.bonus.tot = attribute.bonus.perm + attribute.bonus.temp;
-        attribute.tot = attribute.bonus.tot + attribute.base;
+        attribute.tot = attribute.bonus.tot + (attribute.base ?? attribute.value);
       }
     }
 
@@ -150,9 +150,10 @@ export class FalloutEquestriaActor extends Actor {
     movement.climb.base = Math.round((str + end + agi) / 2);
     movement.drop.base = 0;
     movement.standUp.base = 0;
-    movement.fly.base = Math.round(end + agi * 2 * data.skills.flight.tot);
-    movement.flySprint.base = Math.round(2 * end + agi * 4 * data.skills.flight.tot);
-    movement.flyCharge.base = Math.round(2 * end + agi * 4 * data.skills.flight.tot);
+    const fr = data.misc.flightRank.tot;
+    movement.fly.base = Math.round(end + agi * 2 * fr);
+    movement.flySprint.base = Math.round(2 * end + agi * 4 * fr);
+    movement.flyCharge.base = Math.round(2 * end + agi * 4 * fr);
     movement.swim.base = Math.round(str + end + agi);
 
     for (let [key, mvt] of Object.entries(movement)) {
