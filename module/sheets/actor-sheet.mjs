@@ -146,16 +146,26 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
 
     const magic = {
       arcaneMagic: {
-        content: []
+        content: {},
+        attributes: {},
       },
       flightMagic: {
-        content: []
+        content: {},
+        attributes: {},
       },
-      shamanism: {
-        content: []
+    }
+
+    // for (let [k, v] of Object.entries(FOE.commonSpellAttributes)) {
+      // magic.arcaneMagic.attributes[k] = { label: game.i18n.localize(v.label) };
+      // magic.flightMagic.attributes[k] = { label: game.i18n.localize(v.label) };
+    // }
+
+    for (let [magicKey, attributes] of Object.entries(FOE.spellAttributes)) {
+      for (let [k, v] of Object.entries(attributes)) {
+        magic[magicKey].attributes[k] = { label: game.i18n.localize(v.label) };
       }
     }
-    
+
     fetchAndLocalize(magic, FOE.magicTypes);
     const equippable = {
       weapon: {}
@@ -228,6 +238,12 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
         }
       } else if (i.type == 'perk') {
         perks[i.data.subtype].content[i._id] = i;
+      } else if (i.type == 'spell') {
+        if (i.data.subtype) {
+          magic[i.data.subtype].content[i._id] = i;
+        }
+      } else {
+        console.log(`Unknown item type: ${i.type}`);
       }
     }
 
@@ -235,15 +251,12 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
 
     // Assign and return
     context.inventory = inventory;
-    // context.equipped = equipped;
-    // context.equipped = equipped; 
     context.equippable = equippable;
     context.perks = perks;
     context.details = details;
     context.maxCrit = context.data.attributes.crit;
     context.minFumble = 94 + context.data.attributes.fumble;
-    // context.features = features;
-    // context.spells = spells;
+    context.magic = magic;
   }
 
   /* -------------------------------------------- */
@@ -311,6 +324,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     const type = header.dataset.type;
     // Grab any data associated with this control.
     const data = duplicate(header.dataset);
+    // console.log(data);
     // Initialize a default name.
     const name = `New ${(data.subtype ?? type).capitalize()}`;
     // Prepare the item object.
@@ -321,6 +335,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     };
     // Remove the type from the dataset since it's in the itemData.type prop.
     delete itemData.data["type"];
+    console.log(itemData);
 
     // Finally, create the item!
     await Item.create(itemData, { parent: this.actor });

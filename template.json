@@ -709,7 +709,15 @@
     "spell": {
       "templates": [
         "base"
-      ]
+      ],
+      "subtype": "arcaneMagic",
+      "level": "Basic",
+      "effect": "",
+      "tpCost": 0,
+      "extraTpCost": "",
+      "school": "Illusion",
+      "strainCost": 0,
+      "duration": ""
     },
     "perk": {
       "templates": [

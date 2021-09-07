@@ -20,7 +20,6 @@ FOE.weaponSlots = {
   2: "FOE.Tertiary"
 }
 
-
 FOE.abilityAbbreviations = {
   "str": "FOE.AbilityStrAbbr",
   "per": "FOE.AbilityPerAbbr",
@@ -59,9 +58,43 @@ FOE.skills = {
 }
 
 FOE.magicTypes = {
-  arcaneMagic: "FOE.ArcaneMagic",
-  flightMagic: "FOE.FlightMagic",
-  shamanism: "FOE.Shamanism",
+  arcaneMagic: "FOE.Spell",
+  flightMagic: "FOE.Trick",
+}
+
+FOE.spellAttributes = {
+  arcaneMagic: {
+    school: {
+      label: "FOE.School",
+      type: "String",
+    },
+    strainCost: {
+      label: "FOE.StrainCost",
+      type: "Number",
+    },
+    duration: {
+      label: "FOE.Duration",
+      type:  "String",
+    },
+  },
+  flightMagic: {
+    tpCost: {
+      label: "FOE.TPCost",
+      type: "Number",
+    },
+    extraTpCost: {
+      label: "FOE.AdditionalTPCost",
+      type: "String",
+    }
+  }
+}
+
+
+FOE.commonSpellAttributes = {
+  level: {
+    label: "FOE.Level",
+    type: "String",
+  },
 }
 
 FOE.getBaseSkills = (str, per, end, cha, int, agi, luck) => {

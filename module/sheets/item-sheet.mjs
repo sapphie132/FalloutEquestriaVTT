@@ -65,6 +65,16 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
       }
     }
 
+    if (item.type == 'spell') {
+      context.attributes = {};
+      const subtype = itemData.data.subtype;
+      console.log(itemData);
+      console.log(subtype)
+      for (let [k, v] of Object.entries(FOE.spellAttributes[subtype])) {
+        context.attributes[k] = v;
+      }
+    }
+
     context.compatAmmo = compatAmmo;
 
     return context;
