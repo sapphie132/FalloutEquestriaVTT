@@ -99,14 +99,17 @@
         "base"
       ],
       "equipped": {
-        "0": {
-          "item": "none"
+        "weapons": {
+          "0": "none",
+          "1": "none",
+          "2": "none"
         },
-        "1": {
-          "item": "none"
-        },
-        "2": {
-          "item": "none"
+        "armor": {
+          "horn": "none",
+          "head": "none",
+          "wings": "none",
+          "body": "none",
+          "legs": "none"
         }
       },
       "attributes": {
@@ -690,7 +693,8 @@
         "base",
         "physical",
         "equipment"
-      ]
+      ],
+      "slots": []
     },
     "crafting": {
       "templates": [

@@ -79,7 +79,7 @@
   {{!-- Sheet Body --}}
   <section class="sheet-body">
     <div class="tab actions" data-group="primary" data-tab="actions">
-  {{> "systems/foe/templates/actor/parts/actor-actions.html"}}
+      {{> "systems/foe/templates/actor/parts/actor-actions.html"}}
     </div>
 
     <div class="tab bonuses" data-group="primary" data-tab="bonuses">
@@ -198,13 +198,42 @@
         </div>
         {{! Third Column}}
         <div class="flexcol">
+          <div class="armor vital-block">
+            <h3>{{localize "FOE.Armor"}}</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>{{localize "FOE.Type"}}</th>
+                  <th>{{localize "FOE.Equipped"}}</th>
+                  <th>{{localize "FOE.DT"}}</th>
+                  <th>{{localize "FOE.DR"}}</th>
+                  <th>{{localize "FOE.Condition"}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each equippable.armor as |slot key|}}
+                <tr>
+                  <td>{{slot.label}}</td>
+                  <td>
+                    <select class="armor-slot">
+                      {{selectOptions slot.options selected=slot.item}}
+                    </select>
+                  </td>
+                  <td>{{slot.equippedItem.data.DT}}</td>
+                  <td>{{slot.equippedItem.data.DR}}</td>
+                  <td>{{slot.equippedItem.data.condition}}</td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
 
           <div class="misc vital-block">
             <h3>{{localize "FOE.Miscellaneous"}}</h3>
             </tr>
             </table>
             <table width="100%">
-              <col style="width: 80%;"/>
+              <col style="width: 80%;" />
               {{#each data.misc as |attribute key|}}
               <tr>
                 <td>{{attribute.label}}</td>

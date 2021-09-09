@@ -1,4 +1,5 @@
 import { FOE } from "../helpers/config.mjs";
+import { fetchAndLocalize } from "../helpers/util.mjs"
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -68,11 +69,20 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
     if (item.type == 'spell') {
       context.attributes = {};
       const subtype = itemData.data.subtype;
-      console.log(itemData);
-      console.log(subtype)
       for (let [k, v] of Object.entries(FOE.spellAttributes[subtype])) {
         context.attributes[k] = v;
       }
+    }
+
+    if (item.type == 'armor') {
+      const possibleSlots = foundry.utils.deepClone(FOE.armorLimbs);
+      for (let [k, v] of Object.entries(possibleSlots)) {
+        possibleSlots[k] = {
+          label: game.i18n.localize(v),
+          checked: item.data.data.slots.includes(k)
+        };
+      }
+      context.possibleSlots = possibleSlots;
     }
 
     context.compatAmmo = compatAmmo;
@@ -89,6 +99,28 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
     // Everything below here is only needed if the sheet is editable
     if (!this.isEditable) return;
 
+    const slotChecks = html.find("input.slot");
+    slotChecks.click(this._onSlotSelect.bind(this));
+
     // Roll handlers, click handlers, etc. would go here.
+  }
+
+  _onSlotSelect(ev) {
+    ev.preventDefault();
+    const box = ev.currentTarget;
+    const slotId = box.dataset.slot;
+    const slots = this.item.data.data.slots;
+    if (box.checked) {
+      if (!slots.includes(slotId)) {
+        slots.push(slotId);
+      }
+    } else {
+      let idx = slots.indexOf(slotId);
+      if (idx > 0) {
+        slots.splice(idx, 1);
+      }
+    }
+
+    return this.item.update({ 'data.slots': slots });
   }
 }

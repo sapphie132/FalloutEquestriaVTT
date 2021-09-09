@@ -156,8 +156,8 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     }
 
     // for (let [k, v] of Object.entries(FOE.commonSpellAttributes)) {
-      // magic.arcaneMagic.attributes[k] = { label: game.i18n.localize(v.label) };
-      // magic.flightMagic.attributes[k] = { label: game.i18n.localize(v.label) };
+    // magic.arcaneMagic.attributes[k] = { label: game.i18n.localize(v.label) };
+    // magic.flightMagic.attributes[k] = { label: game.i18n.localize(v.label) };
     // }
 
     for (let [magicKey, attributes] of Object.entries(FOE.spellAttributes)) {
@@ -168,7 +168,8 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
 
     fetchAndLocalize(magic, FOE.magicTypes);
     const equippable = {
-      weapon: {}
+      weapon: {},
+      armor: {},
     }
 
     const perks = {
@@ -198,6 +199,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       details[k].label = FOE.details[k] ?? k;
       details[k].isCutieMark = k == "cutieMark";
     }
+
     // Set up the slots dropdowns
     for (let j = 0; j < 3; j++) {
       equippable.weapon[j] = {
@@ -205,15 +207,30 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
           "none": "None"
         },
         label: FOE.weaponSlots[j],
-        item: equipped[j].item
+        item: equipped.weapons[j]
       }
     }
+
+    for (let [k, v] of Object.entries(equipped.armor)) {
+      equippable.armor[k] = {
+        options: {
+          "none": "None"
+        },
+        label: game.i18n.localize(FOE.armorLimbs[k] ?? k),
+        item: v,
+      }
+    }
+
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       i.img = i.img || DEFAULT_TOKEN;
       // Append to gear.
       if (inventory[i.type]) {
+        // Add it to the proper inventory
         inventory[i.type].content.push(i);
+
+        // If it's a weapon or a piece of armour, add it
+        // to the proper slot as an option
         if (i.type == "weapon") {
           for (let j = 0; j < 3; j++) {
             // Add the weapon to each selectable slot
@@ -231,7 +248,19 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
               currSlot.loadedAmmo = loadedAmmo;
             }
           }
-
+        } else if (i.type == "armor") {
+          for (let [slotId, slot] of Object.entries(equippable.armor)) {
+            // Only add the item to the slot if the item can be equipped in that
+            // slot
+            if (i.data.slots.includes(slotId)) {
+              // Add it as an option
+              slot.options[i._id] = i.name;
+              // Create a link if it's the equipped piece
+              if (slot.item == i._id) {
+                slot.equippedItem = i;
+              }
+            }
+          }
         }
         if (i.data.amount) {
           i.data.totalWeight = i.data.weight * i.data.amount;
@@ -346,7 +375,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     const actor = this.actor.data;
     const header = event.currentTarget;
     const slotIdx = header.dataset.slotId;
-    const itemId = actor.data.equipped[slotIdx].item;
+    const itemId = actor.data.equipped.weapons[slotIdx];
     const weapon = actor.items.get(itemId);
     const ammoId = weapon.data.data.ammo.loaded;
     const ammo = actor.items.get(ammoId);
@@ -388,7 +417,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     event.preventDefault();
     const input = event.currentTarget;
     const slotIdx = input.dataset.slotId;
-    const itemId = this.actor.data.data.equipped[slotIdx].item;
+    const itemId = this.actor.data.data.equipped.weapons[slotIdx];
     const weapon = this.actor.items.get(itemId);
     if (weapon) {
       const ammoCap = foundry.utils.deepClone(weapon.data.data.ammo.capacity);
@@ -407,10 +436,18 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     const header = event.currentTarget;
     const sel = header.options[header.selectedIndex];
     const slotIdx = header.dataset.index;
-    const newData = { data: { equipped: {} } };
-    newData.data.equipped = {};
-    newData.data.equipped[slotIdx] = { item: sel.value };
+    const newData = { data: { equipped: { weapons: {} } } };
+    newData.data.equipped.weapons[slotIdx] = sel.value;
     this.actor.update(newData);
+  }
+  
+  async _onArmorChange(event) {
+    const header = event.currentTarget;
+    const sel = header.options[header.selectedIndex];
+    const slotIdx = header.dataset.index
+    const itemId = sel.value;
+    const item = this.actor.items.get(itemId)
+    console.log(item)
   }
 
   /**

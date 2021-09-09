@@ -57,6 +57,14 @@ FOE.skills = {
   flight: "FOE.FlightMagic"
 }
 
+FOE.armorLimbs = {
+  horn: "FOE.Horn",
+  head: "FOE.Head",
+  wings: "FOE.Wings",
+  body: "FOE.Body",
+  legs: "FOE.Legs"
+}
+
 FOE.magicTypes = {
   arcaneMagic: "FOE.Spell",
   flightMagic: "FOE.Trick",
