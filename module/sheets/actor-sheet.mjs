@@ -308,6 +308,9 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     // Add Inventory Item
     html.find('.item-create').click(this._onItemCreate.bind(this));
 
+    // Equipped Armour
+    html.find('.armor-slot').change(this._onArmorChange.bind(this))
+
     // Equipped Item
     html.find('.equipped-form').change(this._onSelectChange.bind(this));
 
@@ -364,7 +367,6 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     };
     // Remove the type from the dataset since it's in the itemData.type prop.
     delete itemData.data["type"];
-    console.log(itemData);
 
     // Finally, create the item!
     await Item.create(itemData, { parent: this.actor });
@@ -440,14 +442,23 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     newData.data.equipped.weapons[slotIdx] = sel.value;
     this.actor.update(newData);
   }
-  
+
   async _onArmorChange(event) {
     const header = event.currentTarget;
     const sel = header.options[header.selectedIndex];
-    const slotIdx = header.dataset.index
-    const itemId = sel.value;
-    const item = this.actor.items.get(itemId)
-    console.log(item)
+    const slotIdx = header.dataset.slot;
+    const itemId = sel.value == 'none' ? this.actor.data.data.equipped.armor[slotIdx] : sel.value;
+    const item = this.actor.items.get(itemId);
+    const newArmor = {};
+    if (item) {
+      for (let slot of item.data.data.slots) {
+        newArmor[slot] = sel.value;
+      }
+    } else {
+      newArmor[slotIdx] = itemId;
+    }
+    const newData = { 'data.equipped.armor': newArmor }
+    return this.actor.update(newData);
   }
 
   /**

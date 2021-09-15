@@ -694,7 +694,9 @@
         "physical",
         "equipment"
       ],
-      "slots": []
+      "slots": [],
+      "dt": 0,
+      "dr": 0
     },
     "crafting": {
       "templates": [
