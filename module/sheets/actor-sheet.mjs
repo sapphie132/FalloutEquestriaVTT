@@ -452,6 +452,14 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     const newArmor = {};
     if (item) {
       for (let slot of item.data.data.slots) {
+        // Overrode a slot, have to unequip every slot
+        const otherId = this.actor.data.data.equipped.armor[slot];
+        if (otherId != "none") {
+          const otherItem = this.actor.items.get(otherId);
+          for (let otherSlot of otherItem.data.data.slots) {
+            newArmor[otherSlot] = "none";
+          }
+        }
         newArmor[slot] = sel.value;
       }
     } else {
@@ -460,6 +468,8 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     const newData = { 'data.equipped.armor': newArmor }
     return this.actor.update(newData);
   }
+
+
 
   /**
    * Handle clickable rolls.
