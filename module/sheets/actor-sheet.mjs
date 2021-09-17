@@ -268,6 +268,8 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       } else if (i.type == 'perk') {
         perks[i.data.subtype].content[i._id] = i;
       } else if (i.type == 'spell') {
+        fetchAndLocalize(i.data.levels, FOE.spellLevels);
+        // Add the spell to the correct category
         if (i.data.subtype) {
           magic[i.data.subtype].content[i._id] = i;
         }

@@ -17,8 +17,34 @@
 
     {{!-- Description Tab --}}
     <div class="tab" data-group="primary" data-tab="description">
-      {{editor content=data.description target="data.description" rollData=rollData button=true owner=owner
-      editable=editable}}
+      <label for="data.description">{{localize "FOE.Description"}}</label>
+      <textarea name="data.description">{{data.description}}</textarea>
+      <table>
+        <thead>
+          <tr>
+            <th>{{localize "FOE.Level"}}</th>
+            <th>{{localize "FOE.Enabled"}}</th>
+            <th>{{localize "FOE.Description"}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each levels as |level key|}}
+          <tr>
+            <td>
+              <label>{{level.label}}</label>
+            </td>
+
+            <td>
+              <input data-dtype="Bool" type="checkbox" name="data.levels.{{key}}.enabled" {{#if
+                level.enabled}}checked{{/if}}>
+            </td>
+            <td>
+              <textarea name="data.levels.{{key}}.description">{{level.description}}</textarea>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
     </div>
 
     {{!-- Attributes Tab --}}
@@ -29,7 +55,7 @@
         <div class="resource">
           <label class="resource-label" for="data.{{attributeKey}}">{{localize attribute.label}}</label>
           <input type="{{attribute.inputType}}" data-dtype="{{attribute.type}}" name="data.{{attributeKey}}"
-            value="{{lookup item.data attributeKey}}" />
+            value="{{lookup ../data attributeKey}}" />
         </div>
         {{/each}}
       </div>

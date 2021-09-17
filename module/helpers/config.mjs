@@ -65,6 +65,13 @@ FOE.armorLimbs = {
   legs: "FOE.Legs"
 }
 
+FOE.spellLevels = {
+  basic: "FOE.Basic",
+  advanced: "FOE.Advanced",
+  expert: "FOE.Expert",
+  gAndP: "FOE.GreatAndPowerful",
+}
+
 FOE.magicTypes = {
   arcaneMagic: "FOE.Spell",
   flightMagic: "FOE.Trick",

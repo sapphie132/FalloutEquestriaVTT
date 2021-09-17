@@ -27,6 +27,16 @@
       <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
     </div>
   </li>
+  <li>
+    {{#each item.data.levels as |level levelKey|}}
+    {{#if level.enabled}}
+    <div class="flexrow">
+      <div>{{level.label}}</div>
+      <div>{{level.description}}</div>
+    </div>
+    {{/if}}
+    {{/each}}
+  </li>
   {{/each}}
   {{/each}}
 </ol>

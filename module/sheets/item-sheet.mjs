@@ -72,6 +72,9 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
       for (let [k, v] of Object.entries(FOE.spellAttributes[subtype])) {
         context.attributes[k] = v;
       }
+
+      fetchAndLocalize(itemData.data.levels, FOE.spellLevels);
+      context.levels = itemData.data.levels;
     }
 
     if (item.type == 'armor') {

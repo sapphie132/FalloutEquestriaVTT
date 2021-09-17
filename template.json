@@ -725,6 +725,24 @@
       ],
       "subtype": "arcaneMagic",
       "level": "Basic",
+      "levels": {
+        "basic": {
+          "description": "",
+          "enabled": true
+        },
+        "advanced": {
+          "description": "",
+          "enabled": true
+        },
+        "expert": {
+          "description": "",
+          "enabled": true
+        },
+        "gAndP": {
+          "description": "",
+          "enabled": true
+        }
+      },
       "effect": "",
       "tpCost": 0,
       "extraTpCost": "",
