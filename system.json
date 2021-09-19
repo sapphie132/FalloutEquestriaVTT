@@ -2,7 +2,7 @@
   "name": "foe",
   "title": "Fallout Equestria",
   "description": "The Fallout Equestria system for FoundryVTT!",
-  "version": "0.3.0",
+  "version": "0.8.0",
   "minimumCoreVersion": "0.8.5",
   "compatibleCoreVersion": "0.8.9",
   "author": "Sapphie",
@@ -17,12 +17,12 @@
       "path": "lang/en.json"
     }
   ],
-  "gridDistance": 5,
-  "gridUnits": "ft",
+  "gridDistance": 1,
+  "gridUnits": "yd",
   "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": "power",
   "url": "https://github.com/sapphie132/FalloutEquestriaVTT",
   "manifest": "https://raw.githubusercontent.com/sapphie132/FalloutEquestriaVTT/master/system.json",
-  "download": "https://github.com/sapphie132/FalloutEquestriaVTT/archive/refs/tags/0.3.0.zip",
+  "download": "https://github.com/sapphie132/FalloutEquestriaVTT/archive/refs/tags/0.8.0.zip",
   "license": "LICENSE.txt"
 }
