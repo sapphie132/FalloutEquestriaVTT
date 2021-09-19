@@ -4,10 +4,14 @@
   font-family: "Roboto", sans-serif;
 }
 
-.rollable:hover, .rollable:focus {
+.rollable:hover, .rollable:focus, .clickable-action:hover, .clickable-action:focus {
   color: #000;
   text-shadow: 0 0 10px red;
   cursor: pointer;
+}
+
+.clickable-action {
+  font-weight: 700;
 }
 
 .reload-button:hover, .reload-button:focus {

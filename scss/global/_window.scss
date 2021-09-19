@@ -2,13 +2,17 @@
   font-family: $font-primary;
 }
 
-.rollable {
+.rollable, .clickable-action {
   &:hover,
   &:focus {
     color: #000;
     text-shadow: 0 0 10px red;
     cursor: pointer;
   }
+}
+
+.clickable-action {
+  font-weight: 700;
 }
 
 .reload-button {

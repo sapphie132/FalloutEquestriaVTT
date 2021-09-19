@@ -12,7 +12,8 @@
             <tbody>
                 {{#each movementTypes as |type key|}}
                 <tr>
-                    <td>{{type.name}}</td>
+                    <td class="clickable-action" data-yds="{{type.totYds}}"" data-action-type="movement" data-label="{{type.name}}"
+                        data-cost="{{type.apCost}}">{{type.name}}</td>
                     <td class="align-center">{{type.totFt}}</td>
                     <td class="align-center">{{type.totYds}}</td>
                     <td class="align-right">{{type.apCost}}</td>
@@ -22,6 +23,6 @@
         </table>
     </div>
     <div class="flexcol">
-    {{> "systems/foe/templates/actor/parts/actor-equipped.html"}}
+        {{> "systems/foe/templates/actor/parts/actor-equipped.html"}}
     </div>
 </div>

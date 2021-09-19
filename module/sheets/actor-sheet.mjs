@@ -307,11 +307,13 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     // Everything below here is only needed if the sheet is editable
     if (!this.isEditable) return;
 
+    html.find('.clickable-action').click(this._onActionClick.bind(this));
+
     // Add Inventory Item
     html.find('.item-create').click(this._onItemCreate.bind(this));
 
     // Equipped Armour
-    html.find('.armor-slot').change(this._onArmorChange.bind(this))
+    html.find('.armor-slot').change(this._onArmorChange.bind(this));
 
     // Equipped Item
     html.find('.equipped-form').change(this._onSelectChange.bind(this));
@@ -346,6 +348,34 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     }
   }
 
+  async _onActionClick(event) {
+    event.preventDefault();
+    const button = event.currentTarget;
+    const cost = button.dataset.cost;
+    const label = button.dataset.label;
+    const ap = this.actor.data.data.resources.ap;
+    const value = ap.value - cost;
+    const type = button.dataset.actionType;
+    if (value >= 0) {
+      let content = `${label} (${cost} AP)`
+      if (type == "movement") {
+        content += ` (${button.dataset.yds + "yds"})`
+      }
+      const a = this.actor.update({ 'data.resources.ap.value': value });
+      const msgData = {
+        content,
+        speaker: {
+          actor: this.actor
+        },
+        flavor: `[${game.i18n.localize("FOE.Action")}]`
+      };
+      const b = ChatMessage.create(msgData)
+      return Promise.all([a, b]);
+    } else {
+      ui.notifications.warn(game.i18n.localize("FOE.InsufficientAP"));
+      return;
+    }
+  }
   /**
    * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
    * @param {Event} event   The originating click event
@@ -401,8 +431,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       const a = ammo.update({ 'data.amount': newAmmoCount });
       const b = weapon.update({ 'data.ammo.capacity.value': reloadedAmount + ammoCap.value });
 
-      await a;
-      await b;
+      return Promise.all([a, b])
     } else {
       throw new Error(`Unknown ammo id: ${ammoId}`)
     }
@@ -503,6 +532,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
           }
         }
         case 'skill': {
+          if (!data.rollSkill) throw Error("No skill provided");
           const r = await skillRoll(dataset.rollSkill, label, this.actor.getRollData());
 
           const speaker = { actor: this.actor };
