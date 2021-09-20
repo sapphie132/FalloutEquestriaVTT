@@ -1,5 +1,5 @@
 {{#each equippable.weapon as |slot idx|}}
-<div class="flex-block">
+<div class="vital-block">
     <div class="flexlarge flexrow resource-label" data-item-id="{{slot.item}}">
         <div>
             {{localize slot.label}}
@@ -29,7 +29,7 @@
         <div class="item-damage">{{localize "FOE.Damage"}}</div>
         <div class="item-range">{{localize "FOE.Range"}}</div>
         <div class="item-cost">{{localize "FOE.APCost"}}</div>
-        <div class="item-firerate">{{localize "FOE.RateOfFire"}}</div>
+        <div class="item-firerate">{{localize "FOE.RateOfFireShort"}}</div>
         <div class="item-condition">{{localize "FOE.Condition"}}</div>
     </div>
     <div class="item flexrow align-left">
@@ -37,7 +37,8 @@
         <div class="item-range">{{slot.equippedItem.data.range}}</div>
         <div class="item-cost">{{slot.equippedItem.data.cost}}</div>
         <div class="item-firerate">{{slot.equippedItem.data.firerate}}</div>
-        <div class="item-condition">{{slot.equippedItem.data.condition}}</div>
+        <input type="number" data-dtype="Number" class="item-condition" data-item-id="{{slot.equippedItem._id}}"
+            value="{{slot.equippedItem.data.condition}}" />
     </div>
     <hr />
     <div class="flexlarge resource-label">{{localize "FOE.Ammunition"}}&nbsp;<span class="reload-button"

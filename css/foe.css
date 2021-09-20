@@ -594,7 +594,6 @@
 
 .foe table td input, .foe table th input {
   max-height: 14px;
-  max-width: 50px;
 }
 
 .foe input.skills, .foe input.resistances {
@@ -611,6 +610,16 @@
 .foe .vital-block table {
   padding: 0px;
   border: none;
+}
+
+.foe .movement {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 200px;
+  flex: 0 0 200px;
+}
+
+.foe select {
+  max-width: 150px;
 }
 
 .fumble {

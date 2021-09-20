@@ -115,11 +115,9 @@
       {{! Body}}
       <div class="flexrow">
         {{! First Column}}
-        <div>
-          <div class="vital-block quick-skills">
-            <h3>Quick Skills</h3>
-            {{> "systems/foe/templates/actor/parts/actor-quick-skills.html"}}
-          </div>
+        <div class="vital-block quick-skills">
+          <h3>Quick Skills</h3>
+          {{> "systems/foe/templates/actor/parts/actor-quick-skills.html"}}
         </div>
 
         {{! Second Column}}
@@ -207,7 +205,7 @@
                   <th>{{localize "FOE.Equipped"}}</th>
                   <th>{{localize "FOE.DT"}}</th>
                   <th>{{localize "FOE.DR"}}</th>
-                  <th>{{localize "FOE.Condition"}}</th>
+                  <th>{{localize "FOE.ConditionShort"}}</th>
                 </tr>
               </thead>
               <tbody>
@@ -223,8 +221,8 @@
                   <td>{{slot.equippedItem.data.dr}}</td>
                   <td>
                     {{#if slot.equippedItem.data}}
-                    <input class="item-condition" data-item-id="{{slot.equippedItem._id}}"
-                      value="{{slot.equippedItem.data.condition}}" />
+                    <input type="number" data-dtype="Number" class="item-condition"
+                      data-item-id="{{slot.equippedItem._id}}" value="{{slot.equippedItem.data.condition}}" />
                     {{/if}}
                   </td>
                 </tr>

@@ -83,7 +83,6 @@ table {
         padding: 0.1em;
         input {
             max-height: 14px;
-            max-width: 50px;
         }
     }
 }
@@ -101,4 +100,12 @@ input.skills, input.resistances {
         padding: 0px;
         border: none;
     }
+}
+
+.movement {
+    flex: 0 0 200px;
+}
+
+select {
+    max-width: 150px;
 }
