@@ -594,6 +594,7 @@
 
 .foe table td input, .foe table th input {
   max-height: 14px;
+  max-width: 50px;
 }
 
 .foe input.skills, .foe input.resistances {

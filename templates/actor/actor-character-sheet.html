@@ -219,9 +219,14 @@
                       {{selectOptions slot.options selected=slot.item}}
                     </select>
                   </td>
-                  <td>{{slot.equippedItem.data.DT}}</td>
-                  <td>{{slot.equippedItem.data.DR}}</td>
-                  <td>{{slot.equippedItem.data.condition}}</td>
+                  <td>{{slot.equippedItem.data.dt}}</td>
+                  <td>{{slot.equippedItem.data.dr}}</td>
+                  <td>
+                    {{#if slot.equippedItem.data}}
+                    <input class="item-condition" data-item-id="{{slot.equippedItem._id}}"
+                      value="{{slot.equippedItem.data.condition}}" />
+                    {{/if}}
+                  </td>
                 </tr>
                 {{/each}}
               </tbody>

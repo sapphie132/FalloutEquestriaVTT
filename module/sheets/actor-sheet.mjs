@@ -439,7 +439,8 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
 
   async _onConditionChange(event) {
     event.preventDefault();
-    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const itemId = event.currentTarget.dataset.itemId ?? event.currentTarget.closest(".item").dataset.itemId;
+    console.log(itemId);
     const item = this.actor.items.get(itemId);
     const condition = Math.clamped(0, parseInt(event.target.value), 120);
     event.target.value = condition;
