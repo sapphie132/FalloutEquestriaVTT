@@ -72,7 +72,7 @@
     <a class="item tab-link" data-tab="inventory">Inventory</a>
     <a class="item tab-link" data-tab="magic">Magic</a>
     <a class="item tab-link" data-tab="misc">{{localize "FOE.Miscellaneous"}}</a>
-    <a class="item tab-link" data-tab="bonuses">Bonuses</a>
+    <a class="item tab-link" data-tab="bonuses">{{localize "FOE.Effects"}}</a>
     <a class="item tab-link" data-tab="biography">Biography</a>
   </nav>
 
@@ -244,12 +244,12 @@
               </tr>
               {{/each}}
               <tr>
-                <td>Buying multiplier</td>
+                <td>{{localize "FOE.BuyMultiplier"}}</td>
                 <td class="align-right"><input disabled type="number" data-dtype="Number"
                     name="data.skills.barter.selling" value="{{data.skills.barter.buying}}" /></td>
               </tr>
               <tr>
-                <td>Selling multiplier</td>
+                <td>{{localize "FOE.SellMultiplier"}}</td>
                 <td class="align-right"><input disabled type="number" data-dtype="Number"
                     name="data.skills.barter.buying" value="{{data.skills.barter.selling}}" /></td>
               </tr>

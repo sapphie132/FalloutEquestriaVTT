@@ -66,10 +66,10 @@ FOE.armorLimbs = {
 }
 
 FOE.spellLevels = {
-  basic: "FOE.Basic",
-  advanced: "FOE.Advanced",
-  expert: "FOE.Expert",
-  gAndP: "FOE.GreatAndPowerful",
+  basic: "FOE.MagicBasic",
+  advanced: "FOE.MagicAdvanced",
+  expert: "FOE.MagicExpert",
+  gAndP: "FOE.MagicGreatAndPowerful",
 }
 
 FOE.magicTypes = {
@@ -274,13 +274,13 @@ FOE.misc = {
 }
 
 FOE.rollDifficulties = {
-  vEasy: "FOE.VeryEasy",
-  easy: "FOE.Easy",
-  normal: "FOE.Normal",
-  none: "FOE.Default",
-  difficult: "FOE.Difficult",
-  hard: "FOE.Hard",
-  vHard: "FOE.VeryHard",
+  vEasy: "FOE.DifficultyVeryEasy",
+  easy: "FOE.DifficultyEasy",
+  normal: "FOE.DifficultyNormal",
+  none: "FOE.DifficultyDefault",
+  difficult: "FOE.DifficultyDifficult",
+  hard: "FOE.DifficultyHard",
+  vHard: "FOE.DifficultyVeryHard",
 }
 
 FOE.specialDifficulties = {

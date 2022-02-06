@@ -131,8 +131,8 @@ export class FalloutEquestriaActor extends Actor {
     misc.willpower.base = Math.round((end + cha + int / 2) / 2.5);
     misc.spiritaffinity.base = Math.ceil(cha / 2);
     misc.initiative.base = Math.round((agi + per) / 2);
-    data.skills.barter.buying = 1.55 - (data.skills.barter.tot) * 0.0045;
-    data.skills.barter.selling = 0.45 + (data.skills.barter.tot) * 0.0045;
+    data.skills.barter.buying = (1.55 - (data.skills.barter.tot) * 0.0045).toFixed(2);
+    data.skills.barter.selling = (0.45 + (data.skills.barter.tot) * 0.0045).toFixed(2);
 
     for (let [key, attribute] of Object.entries(misc)) {
       if (typeof (attribute) == 'object') {
