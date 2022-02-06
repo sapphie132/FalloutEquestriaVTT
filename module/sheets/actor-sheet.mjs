@@ -533,7 +533,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
           }
         }
         case 'skill': {
-          if (!data.rollSkill) throw Error("No skill provided");
+          if (!dataset.rollSkill) throw Error("No skill provided");
           const r = await skillRoll(dataset.rollSkill, label, this.actor.getRollData());
 
           const speaker = { actor: this.actor };
