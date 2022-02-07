@@ -68,11 +68,11 @@
     {{!-- Default tab is specified in actor-sheet.mjs --}}
     <a class="item tab-link" data-tab="vital">Vital</a>
     <a class="item tab-link" data-tab="actions">{{localize "FOE.Actions"}}</a>
-    <a class="item tab-link" data-tab="perks-traits">{{localize "FOE.PerksTraitsSkills"}}</a>
+    <a class="item tab-link" data-tab="perks-traits">{{localize "FOE.PerksTraits"}}</a>
+    <a class="item tab-link" data-tab="skills-stats">{{localize "FOE.SkillsStats"}}</a>
     <a class="item tab-link" data-tab="inventory">Inventory</a>
     <a class="item tab-link" data-tab="magic">Magic</a>
-    <a class="item tab-link" data-tab="misc">{{localize "FOE.Miscellaneous"}}</a>
-    <a class="item tab-link" data-tab="bonuses">{{localize "FOE.Effects"}}</a>
+    <a class="item tab-link" data-tab="effects">{{localize "FOE.Effects"}}</a>
     <a class="item tab-link" data-tab="biography">Biography</a>
   </nav>
 
@@ -82,9 +82,6 @@
       {{> "systems/foe/templates/actor/parts/actor-actions.html"}}
     </div>
 
-    <div class="tab bonuses" data-group="primary" data-tab="bonuses">
-      {{!-- {{> "systems/foe/templates/actor/parts/actor-bonuses.html"}} --}}
-    </div>
     {{!-- Vital Information Tab --}}
     <div class="tab vital flexcol" data-group="primary" data-tab="vital">
 
@@ -96,15 +93,7 @@
             <h4 class="ability-name box-title rollable" data-roll-type="special" data-roll-stat="{{key}}">
               {{ability.label}}</h4>
             <div class="ability-total">
-              {{ability.tot}}
-            </div>
-            <div class="flexrow">
-              <input class="ability" title="{{localize 'FOE.BaseValue'}}" type="number"
-                name="data.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number" />
-              <input class="ability" title="{{localize 'FOE.TempBonus'}}" type="number"
-                name="data.abilities.{{key}}.bonus.temp" value="{{ability.bonus.temp}}" data-dtype="Number" />
-              <input class="ability" title="{{localize 'FOE.PermBonus'}}" type="number"
-                name="data.abilities.{{key}}.bonus.perm" value="{{ability.bonus.perm}}" data-dtype="Number" />
+              {{ability.value}}
             </div>
           </td>
 
@@ -231,8 +220,8 @@
             </table>
           </div>
 
-          <div class="misc vital-block">
-            <h3>{{localize "FOE.Miscellaneous"}}</h3>
+          <div class="effects vital-block">
+            <h3>{{localize "FOE.Effects"}}</h3>
             </tr>
             </table>
             <table width="100%">
@@ -270,7 +259,10 @@
     </div>
 
     <div class="tab perks-traits" data-group="primary" data-tab="perks-traits">
-      {{> "systems/foe/templates/actor/parts/actor-perks-skills.html"}}
+      {{> "systems/foe/templates/actor/parts/actor-perks.html"}}
+    </div>
+    <div class="tab perks-traits" data-group="primary" data-tab="skills-stats">
+      {{> "systems/foe/templates/actor/parts/actor-skills-stats.html"}}
     </div>
 
     {{!-- Inventory Tab --}}
@@ -284,7 +276,7 @@
     </div>
 
     {{!-- Active Effects Tab --}}
-    <div class="tab misc" data-group="primary" data-tab="misc">
+    <div class="tab effects" data-group="primary" data-tab="effects">
       {{> "systems/foe/templates/actor/parts/actor-effects.html"}}
     </div>
 

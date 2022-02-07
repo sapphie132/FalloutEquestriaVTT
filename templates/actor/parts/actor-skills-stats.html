@@ -1,0 +1,49 @@
+<div class="flexrow">
+  <div>
+    <table class="skills">
+      <col style="width:30%" />
+      <thead>
+        <tr>
+          {{!-- This helps ensure that the orders are consistent --}}
+          <th>{{localize "FOE.SkillName"}}</th>
+          {{#each values as |val key|}}
+          <th>{{val.label}}</th>
+          {{/each}}
+        </tr>
+      </thead>
+      {{#each data.skills as |skill skillKey|}}
+      <tr>
+        <th class="align-left">{{skill.label}}</th>
+        {{#each ../values as |val valKey|}}
+        <td class="align-center">
+          <input class="skills" title="{{val.label}}" type="number" data-dtype="Number"
+            value="{{lookup skill.value valKey}}" name="data.skills.{{skillKey}}.value.{{valKey}}" />
+        </td>
+        {{/each}}
+      </tr>
+      {{/each}}
+    </table>
+  </div>
+  <div>
+    <table class="special">
+      {{!-- <col style="width:25%" /> --}}
+      <thead>
+        <tr>
+          <th>{{localize "FOE.AbilityName"}}</th>
+          <th>{{localize "FOE.BaseValue"}}</th>
+        </tr>
+      </thead>
+      {{#each data.abilities as |ability abilityKey|}}
+      <tr>
+        <th>
+          {{ability.label}}
+        </th>
+        <td>
+          <input class="abilities" title="FOE.BaseValue" type="number" data-dtype="Number"
+            value="{{ability.rawValue}}" name="data.abilities.{{abilityKey}}.rawValue" />
+        </td>
+      </tr>
+      {{/each}}
+    </table>
+  </div>
+</div>

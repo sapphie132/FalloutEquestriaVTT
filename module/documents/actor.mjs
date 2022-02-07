@@ -65,18 +65,16 @@ export class FalloutEquestriaActor extends Actor {
     }
 
     for (let [key, ability] of Object.entries(abilities)) {
-      const bonus = ability.bonus;
-      bonus.tot = bonus.perm + bonus.temp;
-      ability.tot = ability.value + bonus.tot;
+      ability.value = ability.rawValue + ability.bonus;
     }
 
-    const str = data.abilities.str.tot;
-    const per = data.abilities.per.tot;
-    const end = data.abilities.end.tot;
-    const cha = data.abilities.cha.tot;
-    const int = data.abilities.int.tot;
-    const agi = data.abilities.agi.tot;
-    const luck = data.abilities.luck.tot;
+    const str  = data.abilities.str.value;
+    const per  = data.abilities.per.value;
+    const end  = data.abilities.end.value;
+    const cha  = data.abilities.cha.value;
+    const int  = data.abilities.int.value;
+    const agi  = data.abilities.agi.value;
+    const luck = data.abilities.luck.value;
 
     const lvl = data.attributes.level?.value ?? 0;
 
