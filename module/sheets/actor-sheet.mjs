@@ -15,7 +15,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       classes: ["foe", "sheet", "actor"],
       template: "systems/foe/templates/actor/actor-sheet.html",
       width: 720,
-      height: 810,
+      height: 845,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "vital" }]
     });
   }

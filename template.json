@@ -241,53 +241,32 @@
       },
       "abilities": {
         "str": {
-          "value": 5,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
-          }
+          "rawValue": 5,
+          "bonus": 0
         },
         "per": {
-          "value": 5,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
-          }
+          "rawValue": 5,
+          "bonus": 0
         },
         "end": {
-          "value": 5,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
-          }
+          "rawValue": 5,
+          "bonus": 0
         },
         "cha": {
-          "value": 5,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
-          }
+          "rawValue": 5,
+          "bonus": 0
         },
         "int": {
-          "value": 5,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
-          }
+          "rawValue": 5,
+          "bonus": 0
         },
         "agi": {
-          "value": 5,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
-          }
+          "rawValue": 5,
+          "bonus": 0
         },
         "luck": {
-          "value": 5,
-          "bonus": {
-            "perm": 0,
-            "temp": 0
-          }
+          "rawValue": 5,
+          "bonus": 0
         }
       },
       "skills": {
