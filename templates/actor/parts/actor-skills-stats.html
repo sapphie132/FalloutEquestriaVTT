@@ -1,35 +1,40 @@
 <div class="flexrow">
-  <div>
-    <table class="skills">
-      <col style="width:30%" />
-      <thead>
-        <tr>
-          {{!-- This helps ensure that the orders are consistent --}}
-          <th>{{localize "FOE.SkillName"}}</th>
-          {{#each values as |val key|}}
-          <th>{{val.label}}</th>
-          {{/each}}
-        </tr>
-      </thead>
-      {{#each data.skills as |skill skillKey|}}
+  <table class="skills">
+    <col style="width:35%" />
+    <thead>
       <tr>
-        <th class="align-left">{{skill.label}}</th>
-        {{#each ../values as |val valKey|}}
-        <td class="align-center">
-          <input class="skills" title="{{val.label}}" type="number" data-dtype="Number"
-            value="{{lookup skill.value valKey}}" name="data.skills.{{skillKey}}.value.{{valKey}}" />
-        </td>
+        {{!-- This helps ensure that the orders are consistent --}}
+        <th>{{localize "FOE.SkillName"}}</th>
+        <th>{{localize "FOE.Total"}}</th>
+        {{#each values as |val key|}}
+        <th>{{val.label}}</th>
         {{/each}}
       </tr>
+    </thead>
+    {{#each data.skills as |skill skillKey|}}
+    <tr>
+      <th class="align-left">{{skill.label}}</th>
+      <td class="align-center">
+        {{skill.total}}
+      </td>
+      {{#each ../values as |val valKey|}}
+      <td class="align-center">
+        <input class="skills" title="{{val.label}}" {{#if val.isBool}} type="checkbox" data-dtype="Boolean" {{#if
+          (lookup skill.value valKey)}} checked {{/if}} {{else}} type="number" data-dtype="Number"
+          value="{{lookup skill.value valKey}}" {{/if}} {{#if val.disabled}} disabled {{/if}}
+          name="data.skills.{{skillKey}}.value.{{valKey}}" />
+      </td>
       {{/each}}
-    </table>
-  </div>
+    </tr>
+    {{/each}}
+  </table>
   <div>
     <table class="special">
-      {{!-- <col style="width:25%" /> --}}
+      {{!--
+      <col style="width:25%" /> --}}
       <thead>
         <tr>
-          <th>{{localize "FOE.AbilityName"}}</th>
+          <th>{{localize "FOE.SpecialName"}}</th>
           <th>{{localize "FOE.BaseValue"}}</th>
         </tr>
       </thead>
@@ -39,8 +44,8 @@
           {{ability.label}}
         </th>
         <td>
-          <input class="abilities" title="FOE.BaseValue" type="number" data-dtype="Number"
-            value="{{ability.rawValue}}" name="data.abilities.{{abilityKey}}.rawValue" />
+          <input class="abilities" title="FOE.BaseValue" type="number" data-dtype="Number" value="{{ability.rawValue}}"
+            name="data.abilities.{{abilityKey}}.rawValue" />
         </td>
       </tr>
       {{/each}}

@@ -116,11 +116,13 @@ export class FalloutEquestriaActor extends Actor {
     for (let [key, skill] of Object.entries(skills)) {
       const value = skill.value;
       value.base = bases[key] ?? 0;
-      value.total = 0;
+      let total = (value.tagged ? 15 : 0);
       for (let [valKey, val] of Object.entries(value)) {
-        value.total += val;
+        if (valKey != "tagged") {
+          total += val;
+        }
       }
-      skill.tot = value.total;
+      skill.total = total;
     }
 
     const misc = data.misc;

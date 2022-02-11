@@ -86,15 +86,13 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     }
 
     const values = {
-      total: {},
-      base: {},
+      base: {disabled: true},
+      tagged: {isBool: true},
       tag: {},
-      tagRanks: {},
       ranks: {},
       perks: {},
       traits: {},
       books: {},
-      items: {},
     }
 
     fetchAndLocalize(values, FOE.skillValueLabels);

@@ -629,3 +629,7 @@
 .critical {
   color: green;
 }
+
+table.skills {
+    flex: 2 0 350px;
+}
