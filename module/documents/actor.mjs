@@ -64,13 +64,12 @@ export class FalloutEquestriaActor extends Actor {
       ability.value = ability.rawValue + ability.bonus;
     }
 
-    const str  = data.abilities.str.value;
-    const per  = data.abilities.per.value;
-    const end  = data.abilities.end.value;
-    const cha  = data.abilities.cha.value;
-    const int  = data.abilities.int.value;
-    const agi  = data.abilities.agi.value;
-    const luck = data.abilities.luck.value;
+    const str = data.abilities.str.value;
+    const per = data.abilities.per.value;
+    const end = data.abilities.end.value;
+    const cha = data.abilities.cha.value;
+    const int = data.abilities.int.value;
+    const agi = data.abilities.agi.value;
 
     const lvl = data.attributes.level?.value ?? 0;
 
@@ -107,60 +106,74 @@ export class FalloutEquestriaActor extends Actor {
       cond.percent = (cond.value / cond.max) * 100;
     }
 
+    // Compute subvalues and totals for each skill
     for (let [key, skill] of Object.entries(skills)) {
       const value = skill.value;
-      let formula = skill.customFormula ?? FOE.skills[key].formula;
-      const rollData = this.getRollData()
-      try {
-        const replaced = Roll.replaceFormulaData(formula, rollData);
-        value.base = Roll.safeEval(replaced);
-      } catch (err) {
-        const replaced = Roll.replaceFormulaData(FOE.skills[key].formula, rollData);
-        value.base = Roll.safeEval(replaced);
-        this._preparationWarnings.push(game.i18n.localize("FOE.WarnBadSkillFormula"));
-      }
-      value.base = Math.round(value.base);
-      let total = (value.tagged ? 15 : 0);
-      for (let [valKey, val] of Object.entries(value)) {
-        if (valKey != "tagged") {
-          total += val;
+
+      // Compute base value for the skill
+      value.base = (function (rollData, warnings) {
+        let formula = skill.customFormula ?? FOE.skills[key].formula;
+        try {
+          const replaced = Roll.replaceFormulaData(formula, rollData);
+          value.base = Roll.safeEval(replaced);
+        } catch (err) {
+          const replaced = Roll.replaceFormulaData(FOE.skills[key].formula, rollData);
+          value.base = Roll.safeEval(replaced);
+          warnings.push(game.i18n.localize("FOE.WarnBadSkillFormula"));
         }
+        return Math.round(value.base);
+      })(this.getRollData(), this._preparationWarnings);
+
+      let total = (skill.tagged ? 15 : 0);
+      skill.bonus = Number(skill.bonus ?? 0);
+      total += skill.bonus;
+      for (let [valKey, _] of Object.entries(FOE.skillsSubValues)) {
+        skill.value[valKey] = skill.value[valKey] ?? 0;
+        total += skill.value[valKey]
       }
+
+      skill.value.bonus = skill.bonus;
       skill.total = total;
     }
 
-    const misc = data.misc;
-    misc.potency.base = Math.ceil(end / 2);
-    misc.versatility.base = Math.ceil(int / 2);
-    misc.willpower.base = Math.round((end + cha + int / 2) / 2.5);
-    misc.spiritaffinity.base = Math.ceil(cha / 2);
-    misc.initiative.base = Math.round((agi + per) / 2);
-    data.skills.barter.buying = (1.55 - (data.skills.barter.total) * 0.0045).toFixed(2);
-    data.skills.barter.selling = (0.45 + (data.skills.barter.total) * 0.0045).toFixed(2);
+    // Initialise various hard-coded miscellaneous bits of data
+    (function (misc) {
+      misc.potency.base = Math.ceil(end / 2);
+      misc.versatility.base = Math.ceil(int / 2);
+      misc.willpower.base = Math.round((end + cha + int / 2) / 2.5);
+      misc.spiritaffinity.base = Math.ceil(cha / 2);
+      misc.initiative.base = Math.round((agi + per) / 2);
+      // TODO: move this to misc
+      data.skills.barter.buying = (1.55 - (data.skills.barter.total) * 0.0045).toFixed(2);
+      data.skills.barter.selling = (0.45 + (data.skills.barter.total) * 0.0045).toFixed(2);
+    })(data.misc);
 
-    for (let [key, attribute] of Object.entries(misc)) {
+    for (let [key, attribute] of Object.entries(data.misc)) {
       if (typeof (attribute) == 'object') {
         attribute.value = attribute.bonus + (attribute.base ?? attribute.rawValue);
       }
     }
 
-    const movement = data.movement;
-    movement.regular.base = Math.round(end / 2 + agi);
-    movement.sprint.base = Math.round(end + agi * 2);
-    movement.charge.base = Math.round(end + agi * 2);
-    movement.jump.base = Math.round((str + agi) / 2);
-    movement.jump.isFt = true;
-    movement.climb.base = Math.round((str + end + agi) / 2);
-    movement.drop.base = 0;
-    movement.standUp.base = 0;
-    // TODO: figure out flight rank properly
-    const fr = data.misc.flightRank.value;
-    movement.fly.base = Math.round(end + agi * 2 * fr);
-    movement.flySprint.base = Math.round(2 * end + agi * 4 * fr);
-    movement.flyCharge.base = Math.round(2 * end + agi * 4 * fr);
-    movement.swim.base = Math.round(str + end + agi);
+    // Compute various movement speeds
+    // TODO: make configurable and overridable
+    (function (movement) {
+      movement.regular.base = Math.round(end / 2 + agi);
+      movement.sprint.base = Math.round(end + agi * 2);
+      movement.charge.base = Math.round(end + agi * 2);
+      movement.jump.base = Math.round((str + agi) / 2);
+      movement.jump.isFt = true;
+      movement.climb.base = Math.round((str + end + agi) / 2);
+      movement.drop.base = 0;
+      movement.standUp.base = 0;
+      // TODO: figure out flight rank properly
+      const fr = data.misc.flightRank.value;
+      movement.fly.base = Math.round(end + agi * 2 * fr);
+      movement.flySprint.base = Math.round(2 * end + agi * 4 * fr);
+      movement.flyCharge.base = Math.round(2 * end + agi * 4 * fr);
+      movement.swim.base = Math.round(str + end + agi);
+    })(data.movement)
 
-    for (let [key, mvt] of Object.entries(movement)) {
+    for (let [key, mvt] of Object.entries(data.movement)) {
       mvt.value = mvt.base + mvt.bonus;
       if (mvt.isFt) {
         mvt.valFt = mvt.value;
@@ -170,7 +183,6 @@ export class FalloutEquestriaActor extends Actor {
         mvt.valFt = mvt.value * 3;
       }
     }
-
 
     data.attributes.crit = this.critVal(0, data);
     data.attributes.fumble = this.fumbleVal(0, data);

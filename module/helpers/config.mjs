@@ -30,6 +30,32 @@ FOE.abilityAbbreviations = {
   "luck": "FOE.AbilityLuckAbbr",
 };
 
+FOE.skillsSubValues = {
+  base: {
+    label: "FOE.Base",
+    readOnly: true
+  },
+  bonus: {
+    label: "FOE.Bonus",
+    readOnly: true
+  },
+  tag: {
+    label: "FOE.TagRanks",
+  },
+  ranks: {
+    label: "FOE.Ranks",
+  },
+  perks: {
+    label: "FOE.Perks",
+  },
+  traits: {
+    label: "FOE.Traits",
+  },
+  books: {
+    label: "FOE.Books"
+  },
+}
+
 FOE.skills = {
   unarmed: {
     label: "FOE.Unarmed",

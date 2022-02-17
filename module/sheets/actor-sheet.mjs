@@ -86,22 +86,10 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       movementTypes[k].valFt = v.valFt;
     }
 
-    const values = {
-      base: {disabled: true},
-      tagged: {isBool: true},
-      tag: {},
-      ranks: {},
-      perks: {},
-      traits: {},
-      books: {},
-    }
-
-    fetchAndLocalize(values, FOE.skillValueLabels);
-
     context.movementTypes = movementTypes;
 
     context.limbs = context.data.resources.hp.limbs;
-    context.values = values;
+    context.subValues = FOE.skillsSubValues;
   }
 
   /**
@@ -114,7 +102,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
   _prepareItems(context) {
     const equipped = foundry.utils.deepClone(context.data.equipped);
     // Initialize containers.
-    // TODO: move this to config?
+    // TODO: move this to config
     const inventory = {
       weapon: {
         label: "FOE.Weapons",

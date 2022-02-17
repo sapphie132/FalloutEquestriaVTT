@@ -6,8 +6,9 @@
         {{!-- This helps ensure that the orders are consistent --}}
         <th>{{localize "FOE.SkillName"}}</th>
         <th>{{localize "FOE.Total"}}</th>
-        {{#each values as |val key|}}
-        <th>{{val.label}}</th>
+        <th>{{localize "FOE.Tagged?"}}</th>
+        {{#each subValues as |subVal key|}}
+        <th>{{localize subVal.label}}</th>
         {{/each}}
       </tr>
     </thead>
@@ -17,11 +18,14 @@
       <td class="align-center">
         {{skill.total}}
       </td>
-      {{#each ../values as |val valKey|}}
       <td class="align-center">
-        <input class="skills" title="{{val.label}}" {{#if val.isBool}} type="checkbox" data-dtype="Boolean" {{#if
-          (lookup skill.value valKey)}} checked {{/if}} {{else}} type="number" data-dtype="Number"
-          value="{{lookup skill.value valKey}}" {{/if}} {{#if val.disabled}} disabled {{/if}}
+        <input class="skills" title="{{localize " FOE.Tagged?"}}" type="checkbox" data-dtype="Boolean"
+          name="data.skills.{{skillKey}}.tagged" {{#if skill.tagged}}checked{{/if}} />
+      </td>
+      {{#each ../subValues as |subVal valKey|}}
+      <td class="align-center">
+        <input class="skills" title="{{localize subVal.label}}" type="number" data-dtype="Number"
+          value="{{lookup skill.value valKey}}" {{#if subVal.readOnly}} disabled {{/if}}
           name="data.skills.{{skillKey}}.value.{{valKey}}" />
       </td>
       {{/each}}
