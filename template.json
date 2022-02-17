@@ -175,299 +175,123 @@
       },
       "abilities": {
         "str": {
-          "rawValue": 5,
-          "bonus": 0
+          "rawValue": 5
         },
         "per": {
-          "rawValue": 5,
-          "bonus": 0
+          "rawValue": 5
         },
         "end": {
-          "rawValue": 5,
-          "bonus": 0
+          "rawValue": 5
         },
         "cha": {
-          "rawValue": 5,
-          "bonus": 0
+          "rawValue": 5
         },
         "int": {
-          "rawValue": 5,
-          "bonus": 0
+          "rawValue": 5
         },
         "agi": {
-          "rawValue": 5,
-          "bonus": 0
+          "rawValue": 5
         },
         "luck": {
-          "rawValue": 5,
-          "bonus": 0
+          "rawValue": 5
         }
       },
       "skills": {
         "unarmed": {
-          "value": {
-            "perm": 0,
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "throwing": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "melee": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "firearms": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "mew": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "explosives": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "bSaddles": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "survival": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "barter": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "intimidation": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "persuasion": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "sneak": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "lockpick": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "sleightHoof": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "tech": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "chem": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "history": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "repair": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "gambling": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "athletics": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "profession": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "shamanism": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "magic": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         },
         "flight": {
-          "value": {
-            "tagged": false,
-            "tag": 0,
-            "ranks": 0,
-            "perks": 0,
-            "traits": 0,
-            "books": 0,
-            "items": 0
-          }
+          "value": {},
+          "tagged": false
         }
       },
       "details": {

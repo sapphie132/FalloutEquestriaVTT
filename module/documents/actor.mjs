@@ -61,6 +61,7 @@ export class FalloutEquestriaActor extends Actor {
     const skills = data.skills;
 
     for (let [key, ability] of Object.entries(abilities)) {
+      ability.bonus = ability.bonus ?? 0;
       ability.value = ability.rawValue + ability.bonus;
     }
 
@@ -70,6 +71,8 @@ export class FalloutEquestriaActor extends Actor {
     const cha = data.abilities.cha.value;
     const int = data.abilities.int.value;
     const agi = data.abilities.agi.value;
+
+    console.log(data.abilities)
 
     const lvl = data.attributes.level?.value ?? 0;
 
@@ -108,31 +111,28 @@ export class FalloutEquestriaActor extends Actor {
 
     // Compute subvalues and totals for each skill
     for (let [key, skill] of Object.entries(skills)) {
-      const value = skill.value;
-
       // Compute base value for the skill
-      value.base = (function (rollData, warnings) {
+      skill.value.base = (function (rollData, warnings) {
         let formula = skill.customFormula ?? FOE.skills[key].formula;
+        let base = 0;
         try {
           const replaced = Roll.replaceFormulaData(formula, rollData);
-          value.base = Roll.safeEval(replaced);
+          base = Roll.safeEval(replaced);
         } catch (err) {
           const replaced = Roll.replaceFormulaData(FOE.skills[key].formula, rollData);
-          value.base = Roll.safeEval(replaced);
+          base = Roll.safeEval(replaced);
           warnings.push(game.i18n.localize("FOE.WarnBadSkillFormula"));
         }
-        return Math.round(value.base);
+        return Math.round(base);
       })(this.getRollData(), this._preparationWarnings);
 
       let total = (skill.tagged ? 15 : 0);
-      skill.bonus = Number(skill.bonus ?? 0);
-      total += skill.bonus;
+      skill.value.bonus = Number(skill.bonus ?? 0);
       for (let [valKey, _] of Object.entries(FOE.skillsSubValues)) {
         skill.value[valKey] = skill.value[valKey] ?? 0;
         total += skill.value[valKey]
       }
 
-      skill.value.bonus = skill.bonus;
       skill.total = total;
     }
 
