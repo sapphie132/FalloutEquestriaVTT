@@ -151,7 +151,7 @@ FOE.skillValueLabels = {
   base: "FOE.Base",
   tag: "FOE.Tag",
   total: "FOE.Total",
-  tag: "FOE.Tag",
+  tagged: "FOE.Tagged?",
   ranks: "FOE.Ranks",
   perks: "FOE.Perks",
   traits: "FOE.Traits",
