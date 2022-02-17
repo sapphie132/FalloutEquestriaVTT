@@ -108,11 +108,20 @@ export class FalloutEquestriaActor extends Actor {
       cond.percent = (cond.value / cond.max) * 100;
     }
 
-    const bases = FOE.getBaseSkills(str, per, end, cha, int, agi, luck);
-
     for (let [key, skill] of Object.entries(skills)) {
       const value = skill.value;
-      value.base = bases[key] ?? 0;
+      let formula = skill.customFormula ?? FOE.skills[key].formula;
+      const rollData = this.getRollData()
+      try {
+        const replaced = Roll.replaceFormulaData(formula, rollData);
+        value.base = Roll.safeEval(replaced);
+      } catch (err) {
+        const replaced = Roll.replaceFormulaData(FOE.skills[key].formula, rollData);
+        value.base = Roll.safeEval(replaced);
+        // TODO
+        // _preparationWarnings.push()
+      }
+      value.base = Math.round(value.base);
       let total = (value.tagged ? 15 : 0);
       for (let [valKey, val] of Object.entries(value)) {
         if (valKey != "tagged") {
@@ -224,7 +233,7 @@ export class FalloutEquestriaActor extends Actor {
     // formulas like `@str.mod + 4`.
     if (data.abilities) {
       for (let [k, v] of Object.entries(data.abilities)) {
-        data[k] = foundry.utils.deepClone(v);
+        data[k] = v.value;
       }
     }
 

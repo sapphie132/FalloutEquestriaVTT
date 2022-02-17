@@ -81,7 +81,7 @@ Hooks.once("ready", async function () {
   if (!FOE.localizedCombatSkills) {
     FOE.localizedCombatSkills = {};
     for (let skill of FOE.combatSkills) {
-      FOE.localizedCombatSkills[skill] = game.i18n.localize(FOE.skills[skill])
+      FOE.localizedCombatSkills[skill] = game.i18n.localize(FOE.skills[skill].label)
     }
   }
 

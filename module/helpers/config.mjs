@@ -31,30 +31,102 @@ FOE.abilityAbbreviations = {
 };
 
 FOE.skills = {
-  unarmed: "FOE.Unarmed",
-  throwing: "FOE.Throwing",
-  melee: "FOE.Melee",
-  firearms: "FOE.Firearms",
-  mew: "FOE.MEW",
-  explosives: "FOE.Explosives",
-  bSaddles: "FOE.BattleSaddles",
-  survival: "FOE.AlchemySurvivalTraps",
-  barter: "FOE.Barter",
-  intimidation: "FOE.BluffIntimidation",
-  persuasion: "FOE.NegotiationSeduction",
-  sneak: "FOE.Sneak",
-  lockpick: "FOE.Lockpick",
-  sleightHoof: "FOE.SleightOfHoof",
-  tech: "FOE.HackingMatrixTech",
-  chem: "FOE.Chemistry",
-  history: "FOE.AcademicsLore",
-  repair: "FOE.RepairMechanics",
-  gambling: "FOE.Gambling",
-  athletics: "FOE.Athletics",
-  profession: "FOE.Profession",
-  shamanism: "FOE.Shamanism",
-  magic: "FOE.Magic",
-  flight: "FOE.FlightMagic"
+  unarmed: {
+    label: "FOE.Unarmed",
+    formula: "@end+@agi+@luck/2"
+  },
+  throwing: {
+    label: "FOE.Throwing",
+    formula: "@str+@agi+@luck/2"
+  },
+  melee: {
+    label: "FOE.Melee",
+    formula: "@str+@agi+@luck/2"
+  },
+  firearms: {
+    label: "FOE.Firearms",
+    formula: "@per+@agi+@luck/2"
+  },
+  mew: {
+    label: "FOE.MEW",
+    formula: "@per*2+@luck/2"
+  },
+  explosives: {
+    label: "FOE.Explosives",
+    formula: "@per*2+@luck/2"
+  },
+  bSaddles: {
+    label: "FOE.BattleSaddles",
+    formula: "@per+@end*2+@str+@luck/2-10"
+  },
+  survival: {
+    label: "FOE.AlchemySurvivalTraps",
+    formula: "@end+@per+@luck/2"
+  },
+  barter: {
+    label: "FOE.Barter",
+    formula: "@cha*2+@luck/2"
+  },
+  intimidation: {
+    label: "FOE.BluffIntimidation",
+    formula: "@cha*2+@luck/2"
+  },
+  persuasion: {
+    label: "FOE.NegotiationSeduction",
+    formula: "@cha*2+@luck/2"
+  },
+  sneak: {
+    label: "FOE.Sneak",
+    formula: "@agi*2+@luck/2"
+  },
+  lockpick: {
+    label: "FOE.Lockpick",
+    formula: "@per*2+@luck/2"
+  },
+  sleightHoof: {
+    label: "FOE.SleightOfHoof",
+    formula: "@cha+@agi+@luck/2"
+  },
+  tech: {
+    label: "FOE.HackingMatrixTech",
+    formula: "@int*2+@luck/2"
+  },
+  chem: {
+    label: "FOE.Chemistry",
+    formula: "@int*2+@luck/2"
+  },
+  history: {
+    label: "FOE.AcademicsLore",
+    formula: "@int*2+@luck/2"
+  },
+  repair: {
+    label: "FOE.RepairMechanics",
+    formula: "@int*2+@luck/2"
+  },
+  gambling: {
+    label: "FOE.Gambling",
+    formula: "@luck*2+3"
+  },
+  athletics: {
+    label: "FOE.Athletics",
+    formula: "@str+@agi+@end+@luck/2-5"
+  },
+  profession: {
+    label: "FOE.Profession",
+    formula: "@cha*2+@luck/2"
+  },
+  shamanism: {
+    label: "FOE.Shamanism",
+    formula: "@cha*2+@luck/2"
+  },
+  magic: {
+    label: "FOE.Magic",
+    formula: "@per+@int+@luck/2"
+  },
+  flight: {
+    label: "FOE.FlightMagic",
+    formula: "@end+@agi+@cha+@luck/2"
+  }
 }
 
 FOE.armorLimbs = {
@@ -112,40 +184,6 @@ FOE.commonSpellAttributes = {
   },
 }
 
-FOE.getBaseSkills = (str, per, end, cha, int, agi, luck) => {
-  const res = {
-    unarmed: end + agi,
-    throwing: str + agi,
-    mew: per * 2,
-    melee: str + agi,
-    firearms: per + agi,
-    explosives: per * 2,
-    bSaddles: end + per,
-    survival: int + end + per - 5,
-    intimidation: cha * 2,
-    persuasion: cha * 2,
-    barter: cha * 2,
-    sneak: agi * 2,
-    lockpick: per * 2,
-    sleightHoof: cha + agi,
-    tech: int * 2,
-    chem: int * 2,
-    medicine: int * 2,
-    history: int * 2,
-    repair: int * 2,
-    shamanism: cha * 2,
-    magic: int + per,
-    flight: agi + end + cha - 5,
-    gambling: luck * 1.5 + 3, // To compensate for the global + 0.5 luck
-    athletics: str + end + agi - 5,
-  }
-
-  for (let [k, v] of Object.entries(res)) {
-    res[k] = Math.ceil(v + luck / 2);
-  }
-
-  return res;
-}
 
 FOE.skillValueLabels = {
   base: "FOE.Base",
