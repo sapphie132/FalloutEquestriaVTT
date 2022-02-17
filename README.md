@@ -19,6 +19,49 @@ For Strength, the primary attribute key is `str`, meaning that the data key is
 `data.abilities.str.bonus`. The bonus gets added as a flat value on top of the
 base score. There is no way to currently override your total score, but you can
 override the raw value (the one visible and editable on your character sheet) by
-using the data key `data.abilities.str.rawValue`.
+using the data key `data.abilities.str.rawValue`. This is mostly useful if you want
+to temporarily change your base score for that stat.
+
+The primary attribute keys are
+* Strength: `str`
+* Perception: `per`
+* Endurance: `end`
+* Charisma: `cha`
+* Intelligence: `int`
+* Agitility: `agi`
+* Luck: `luck`
 
 ![](readme_images/special_score_effect.png)
+
+#### Skills
+Skills can also have their bonus edited. The key to do that is, for instance for
+Unarmed, `data.skills.unarmed.bonus`. However, the formula to compute the base can
+also be edited by overriding `data.skills.unarmed.customFormula`.
+
+The keys for each skill can be found below.
+* Unarmed: `unarmed`
+* Throwing: `throwing`
+* Melee: `melee`
+* Firearms: `firearms`
+* Magical Energy Weapons (M.E.W.): `mew`
+* Explosives: `explosives`
+* Battle Saddles: `bSaddles`
+* Survival: `survival`
+* Barter: `barter`
+* Intimidation & Deception: `intimidation`
+* Negotiation & Seduction: `persuasion`
+* Sneak: `sneak`
+* Lockpick: `lockpick`
+* Sleight of Hoof: `sleightHoof`
+* Hacking & Matrix Tech: `tech`
+* Chemistry: `chem`
+* Academic & Lore: `history`
+* Repair: `repair`
+* Gampling: `gambling`
+* Athletics: `athletics`
+* Profession: `profession`
+* Shamanism: `shamanism`
+* Arcane Magic: `magic`
+* Flight Magic: `flight`
+
+#### 
