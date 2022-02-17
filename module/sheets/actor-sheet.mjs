@@ -58,6 +58,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
 
     // Prepare active effects
     context.effects = prepareActiveEffectCategories(this.actor.effects);
+    context.warnings = this.actor._preparationWarnings
 
     return context;
   }
@@ -113,6 +114,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
   _prepareItems(context) {
     const equipped = foundry.utils.deepClone(context.data.equipped);
     // Initialize containers.
+    // TODO: move this to config?
     const inventory = {
       weapon: {
         label: "FOE.Weapons",
@@ -152,11 +154,6 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
         attributes: {},
       },
     }
-
-    // for (let [k, v] of Object.entries(FOE.commonSpellAttributes)) {
-    // magic.arcaneMagic.attributes[k] = { label: game.i18n.localize(v.label) };
-    // magic.flightMagic.attributes[k] = { label: game.i18n.localize(v.label) };
-    // }
 
     for (let [magicKey, attributes] of Object.entries(FOE.spellAttributes)) {
       for (let [k, v] of Object.entries(attributes)) {

@@ -196,6 +196,7 @@
   "FOE.Unarmed": "Unarmed",
   "FOE.Versatility": "Versatility",
   "FOE.Virtue": "Virtue",
+  "FOE.WarnBadSkillFormula": "One of the provided formulas for a base skill could not be evaluated.",
   "FOE.WeaponSkill": "Combat Skill",
   "FOE.Weapons": "Weapons",
   "FOE.Weight": "Weight",

@@ -10,6 +10,7 @@ export class FalloutEquestriaActor extends Actor {
 
   /** @override */
   prepareData() {
+    this._preparationWarnings = []
     // Prepare data for the actor. Calling the super version of this executes
     // the following, in order: data reset (to clear active effects),
     // prepareBaseData(), prepareEmbeddedDocuments() (including active effects),
@@ -34,8 +35,6 @@ export class FalloutEquestriaActor extends Actor {
    */
   prepareDerivedData() {
     const actorData = this.data;
-    const data = actorData.data;
-    const flags = actorData.flags.foe || {};
 
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
@@ -118,8 +117,7 @@ export class FalloutEquestriaActor extends Actor {
       } catch (err) {
         const replaced = Roll.replaceFormulaData(FOE.skills[key].formula, rollData);
         value.base = Roll.safeEval(replaced);
-        // TODO
-        // _preparationWarnings.push()
+        this._preparationWarnings.push(game.i18n.localize("FOE.WarnBadSkillFormula"));
       }
       value.base = Math.round(value.base);
       let total = (value.tagged ? 15 : 0);
