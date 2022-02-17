@@ -60,9 +60,6 @@ export class FalloutEquestriaActor extends Actor {
     const resources = data.resources;
     const abilities = data.abilities;
     const skills = data.skills;
-    for (let [key, resource] of Object.entries(resources)) {
-      resource.bonus.tot = resource.bonus.temp + resource.bonus.perm;
-    }
 
     for (let [key, ability] of Object.entries(abilities)) {
       ability.value = ability.rawValue + ability.bonus;
@@ -89,7 +86,7 @@ export class FalloutEquestriaActor extends Actor {
     }
 
     for (let [key, resource] of Object.entries(resources)) {
-      resource.max = resource.base + resource.bonus.tot;
+      resource.max = resource.base + resource.bonus;
       // First initialisation of a character
       if (resource.value == null) {
         resource.value = resource.max;
@@ -131,13 +128,12 @@ export class FalloutEquestriaActor extends Actor {
     misc.willpower.base = Math.round((end + cha + int / 2) / 2.5);
     misc.spiritaffinity.base = Math.ceil(cha / 2);
     misc.initiative.base = Math.round((agi + per) / 2);
-    data.skills.barter.buying = (1.55 - (data.skills.barter.tot) * 0.0045).toFixed(2);
-    data.skills.barter.selling = (0.45 + (data.skills.barter.tot) * 0.0045).toFixed(2);
+    data.skills.barter.buying = (1.55 - (data.skills.barter.total) * 0.0045).toFixed(2);
+    data.skills.barter.selling = (0.45 + (data.skills.barter.total) * 0.0045).toFixed(2);
 
     for (let [key, attribute] of Object.entries(misc)) {
       if (typeof (attribute) == 'object') {
-        attribute.bonus.tot = attribute.bonus.perm + attribute.bonus.temp;
-        attribute.tot = attribute.bonus.tot + (attribute.base ?? attribute.value);
+        attribute.value = attribute.bonus + (attribute.base ?? attribute.rawValue);
       }
     }
 
@@ -150,21 +146,21 @@ export class FalloutEquestriaActor extends Actor {
     movement.climb.base = Math.round((str + end + agi) / 2);
     movement.drop.base = 0;
     movement.standUp.base = 0;
-    const fr = data.misc.flightRank.tot;
+    // TODO: figure out flight rank properly
+    const fr = data.misc.flightRank.value;
     movement.fly.base = Math.round(end + agi * 2 * fr);
     movement.flySprint.base = Math.round(2 * end + agi * 4 * fr);
     movement.flyCharge.base = Math.round(2 * end + agi * 4 * fr);
     movement.swim.base = Math.round(str + end + agi);
 
     for (let [key, mvt] of Object.entries(movement)) {
-      mvt.bonus.tot = mvt.bonus.perm + mvt.bonus.temp;
-      mvt.tot = mvt.base + mvt.bonus.tot;
+      mvt.value = mvt.base + mvt.bonus;
       if (mvt.isFt) {
-        mvt.totFt = mvt.tot;
-        mvt.totYds = Math.round(mvt.tot / 3);
+        mvt.valFt = mvt.value;
+        mvt.valYds = Math.round(mvt.value / 3);
       } else {
-        mvt.totYds = mvt.tot;
-        mvt.totFt = mvt.tot * 3;
+        mvt.valYds = mvt.value;
+        mvt.valFt = mvt.value * 3;
       }
     }
 

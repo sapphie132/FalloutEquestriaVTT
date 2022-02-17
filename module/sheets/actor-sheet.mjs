@@ -81,8 +81,8 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
 
     const movementTypes = foundry.utils.deepClone(FOE.localizedMovementTypes);
     for (let [k, v] of Object.entries(context.data.movement)) {
-      movementTypes[k].totYds = v.totYds;
-      movementTypes[k].totFt = v.totFt;
+      movementTypes[k].valYds = v.valYds;
+      movementTypes[k].valFt = v.valFt;
     }
 
     const values = {

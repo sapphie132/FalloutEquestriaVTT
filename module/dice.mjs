@@ -4,7 +4,7 @@ export {default as FoERoll} from "./dice/foe-dice.mjs"
 export {specialRoll, skillRoll}
 
 async function specialRoll(ability, label, data = {}) {
-    const r = new CONFIG.Dice.FoERoll("1d10", `@${ability}.tot`, data, {label: label})
+    const r = new CONFIG.Dice.FoERoll("1d10", `@${ability}.value`, data, {label: label})
 
     const configured = await r.configureDialog({
         chooseDifficulty: true,

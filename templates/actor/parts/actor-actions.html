@@ -12,10 +12,10 @@
             <tbody>
                 {{#each movementTypes as |type key|}}
                 <tr>
-                    <td class="clickable-action" data-yds="{{type.totYds}}" data-action-type="movement" data-label="{{type.name}}"
+                    <td class="clickable-action" data-yds="{{type.valYds}}" data-action-type="movement" data-label="{{type.name}}"
                         data-cost="{{type.apCost}}">{{type.name}}</td>
-                    <td class="align-center">{{type.totFt}}</td>
-                    <td class="align-center">{{type.totYds}}</td>
+                    <td class="align-center">{{type.valFt}}</td>
+                    <td class="align-center">{{type.valYds}}</td>
                     <td class="align-right">{{type.apCost}}</td>
                 </tr>
                 {{/each}}

@@ -10,10 +10,7 @@
           "hp": {
             "regen": null,
             "value": null,
-            "bonus": {
-              "temp": 0,
-              "perm": 0
-            },
+            "bonus": 0,
             "limbs": {
               "horn": {
                 "condition": {
@@ -64,31 +61,19 @@
           },
           "ap": {
             "value": null,
-            "bonus": {
-              "temp": 0,
-              "perm": 0
-            }
+            "bonus": 0
           },
           "strain": {
             "value": null,
-            "bonus": {
-              "temp": 0,
-              "perm": 0
-            }
+            "bonus": 0
           },
           "stun": {
             "value": null,
-            "bonus": {
-              "temp": 0,
-              "perm": 0
-            }
+            "bonus": 0
           },
           "tp": {
             "value": null,
-            "bonus": {
-              "temp": 0,
-              "perm": 0
-            }
+            "bonus": 0
           }
         },
         "biography": ""
@@ -134,109 +119,58 @@
       },
       "movement": {
         "regular": {
-          "bonus": {
-            "perm": 0,
-            "temp": 0
-          }
+          "bonus": 0
         },
         "sprint": {
-          "bonus": {
-            "perm": 0,
-            "temp": 0
-          }
+          "bonus": 0
         },
         "charge": {
-          "bonus": {
-            "perm": 0,
-            "temp": 0
-          }
+          "bonus": 0
         },
         "jump": {
-          "bonus": {
-            "perm": 0,
-            "temp": 0
-          }
+          "bonus": 0
         },
         "climb": {
-          "bonus": {
-            "perm": 0,
-            "temp": 0
-          }
+          "bonus": 0
         },
         "drop": {
-          "bonus": {
-            "perm": 0,
-            "temp": 0
-          }
+          "bonus": 0
         },
         "standUp": {
-          "bonus": {
-            "perm": 0,
-            "temp": 0
-          }
+          "bonus": 0
         },
         "fly": {
-          "bonus": {
-            "perm": 0,
-            "temp": 0
-          }
+          "bonus": 0
         },
         "flyCharge": {
-          "bonus": {
-            "perm": 0,
-            "temp": 0
-          }
+          "bonus": 0
         },
         "flySprint": {
-          "bonus": {
-            "perm": 0,
-            "temp": 0
-          }
+          "bonus": 0
         },
         "swim": {
-          "bonus": {
-            "perm": 0,
-            "temp": 0
-          }
+          "bonus": 0
         }
       },
       "misc": {
         "potency": {
-          "bonus": {
-            "temp": 0,
-            "perm": 0
-          }
+          "bonus": 0
         },
         "flightRank": {
-          "value": 0,
-          "bonus": {
-            "temp": 0,
-            "perm": 0
-          }
+          "rawValue": 0,
+          "bonus": 0
         },
         "versatility": {
-          "bonus": {
-            "temp": 0,
-            "perm": 0
-          }
+          "bonus": 0
         },
         "spiritaffinity": {
-          "bonus": {
-            "temp": 0,
-            "perm": 0
-          }
+          "bonus": 0
         },
         "willpower": {
-          "bonus": {
-            "temp": 0,
-            "perm": 0
-          }
+          "bonus": 0
         },
         "initiative": {
-          "bonus": {
-            "temp": 0,
-            "perm": 0
-          }
+          "bonus": 0
         }
       },
       "abilities": {
