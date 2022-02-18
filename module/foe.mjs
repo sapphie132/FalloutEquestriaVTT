@@ -68,6 +68,18 @@ Handlebars.registerHelper('concat', function () {
   return outStr;
 });
 
+Handlebars.registerHelper("round", function (num, places) {
+  return num.toFixed(places)
+});
+
+Handlebars.registerHelper("ifObject", function (item, options) {
+  if (typeof (item) === "object") {
+    return options.fn(this);
+  } else {
+    return options.inverse(this);
+  }
+});
+
 Handlebars.registerHelper('toLowerCase', function (str) {
   return str.toLowerCase();
 });
@@ -97,7 +109,7 @@ Hooks.once("ready", async function () {
   for (let [k, v] of Object.entries(FOE.spellAttributes)) {
     // Set the input types based on the attribute type
 
-    FOE.spellAttributes[k] = mergeObject(FOE.commonSpellAttributes, v, {inplace: false});
+    FOE.spellAttributes[k] = mergeObject(FOE.commonSpellAttributes, v, { inplace: false });
     let v1 = FOE.spellAttributes[k];
     for (let [k2, v2] of Object.entries(v1)) {
       if (v2.type == "Number") {

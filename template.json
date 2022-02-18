@@ -153,25 +153,13 @@
         }
       },
       "misc": {
-        "potency": {
-          "bonus": 0
-        },
-        "flightRank": {
-          "rawValue": 0,
-          "bonus": 0
-        },
-        "versatility": {
-          "bonus": 0
-        },
-        "spiritaffinity": {
-          "bonus": 0
-        },
-        "willpower": {
-          "bonus": 0
-        },
-        "initiative": {
-          "bonus": 0
-        }
+        "barter": {},
+        "potency": {},
+        "flightRank": {},
+        "versatility": {},
+        "spiritaffinity": {},
+        "willpower": {},
+        "initiative": {}
       },
       "abilities": {
         "str": {

@@ -121,22 +121,17 @@ export class FalloutEquestriaActor extends Actor {
     })(rollData, data.skills);
 
     // Initialise various hard-coded miscellaneous bits of data
-    (function (misc) {
-      misc.potency.base = Math.ceil(end / 2);
-      misc.versatility.base = Math.ceil(int / 2);
-      misc.willpower.base = Math.round((end + cha + int / 2) / 2.5);
-      misc.spiritaffinity.base = Math.ceil(cha / 2);
-      misc.initiative.base = Math.round((agi + per) / 2);
-      // TODO: move this to misc
-      data.skills.barter.buying = (1.55 - (data.skills.barter.total) * 0.0045).toFixed(2);
-      data.skills.barter.selling = (0.45 + (data.skills.barter.total) * 0.0045).toFixed(2);
-    })(data.misc);
+    (function (rollData, misc) {
+      for (let [miscKey, miscItem] of Object.entries(misc)) {
+        for (let [miscSubkey, formula] of Object.entries(FOE.formulas.misc[miscKey] ?? {})) {
+          miscItem[miscSubkey] = evaluateFormula(formula, rollData());
+        }
 
-    for (let [key, attribute] of Object.entries(data.misc)) {
-      if (typeof (attribute) == 'object') {
-        attribute.value = attribute.bonus + (attribute.base ?? attribute.rawValue);
+        if (miscItem.base || miscItem.base === 0) {
+          miscItem.value = miscItem.bonus + miscItem.base;
+        }
       }
-    }
+    })(rollData, data.misc);
 
     // Compute various movement speeds
     // TODO: make configurable and overridable
@@ -239,7 +234,7 @@ export class FalloutEquestriaActor extends Actor {
 
     if (data.skills) {
       for (let [k, v] of Object.entries(data.skills)) {
-        data[k] = foundry.utils.deepClone(v);
+        data[k] = foundry.utils.deepClone(v.total);
       }
     }
 

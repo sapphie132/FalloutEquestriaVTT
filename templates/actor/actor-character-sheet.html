@@ -229,20 +229,20 @@
             <table width="100%">
               <col style="width: 80%;" />
               {{#each data.misc as |attribute key|}}
+              {{#if attribute.value}}
               <tr>
                 <td>{{attribute.label}}</td>
                 <td class="align-right">{{attribute.value}}</td>
               </tr>
+              {{/if}}
               {{/each}}
               <tr>
                 <td>{{localize "FOE.BuyMultiplier"}}</td>
-                <td class="align-right"><input disabled type="number" data-dtype="Number"
-                    name="data.skills.barter.selling" value="{{data.skills.barter.buying}}" /></td>
+                <td class="align-right">{{round data.misc.barter.buying 2}}</td>
               </tr>
               <tr>
                 <td>{{localize "FOE.SellMultiplier"}}</td>
-                <td class="align-right"><input disabled type="number" data-dtype="Number"
-                    name="data.skills.barter.buying" value="{{data.skills.barter.selling}}" /></td>
+                <td class="align-right"> {{round data.misc.barter.selling 2}}</td>
               </tr>
             </table>
           </div>

@@ -32,27 +32,40 @@ FOE.abilityAbbreviations = {
 
 FOE.formulas = {
   hp: {
-    regen: "floor(1+@end/3)",
+    regen: "floor(1 + @end / 3)",
     base: "100 + (@end * 2) + (@end * @lvl)"
   },
   stun: {
     base: "@hp.max"
   },
   strain: {
-    base: "@end+@int"
+    base: "@end + @int"
   },
   ap: {
-    base: "55 + @agi*3"
+    base: "55 + @agi * 3"
   },
   tp: {
-    base: "(@cha + @agi)/2 + @lvl - 1"
+    base: "(@cha + @agi) / 2 + @lvl - 1"
   }
 }
 
 FOE.formulas.limbs = {
-  head: "floor(@hp.max/2)",
-  torso: "floor(@hp.max/2)",
-  default: "floor(@hp.max/3)"
+  head: "floor(@hp.max / 2)",
+  torso: "floor(@hp.max / 2)",
+  default: "floor(@hp.max / 3)"
+}
+
+FOE.formulas.misc = {
+  barter: {
+    buying: "1.55 - @barter * 0.0045",
+    selling: "0.45 + @barter * 0.0045"
+  },
+  flightRank: { base: "0" }, // Can only be increased with perks->effects
+  initiative: { base: "round((@agi + @per) / 2)" },
+  spiritAffinity: { base: "ceil(@cha / 2)" },
+  willpower: { base: "floor((@end + @cha + @int / 2) / 2.5)" },
+  versatility: { base: "ceil(@int / 2)" },
+  potency: { base: "ceil(@end / 2)" }
 }
 
 FOE.skillsSubValues = {
@@ -84,99 +97,99 @@ FOE.skillsSubValues = {
 FOE.skills = {
   unarmed: {
     label: "FOE.Unarmed",
-    formula: "@end+@agi+@luck/2"
+    formula: "@end + @agi + @luck / 2"
   },
   throwing: {
     label: "FOE.Throwing",
-    formula: "@str+@agi+@luck/2"
+    formula: "@str + @agi + @luck / 2"
   },
   melee: {
     label: "FOE.Melee",
-    formula: "@str+@agi+@luck/2"
+    formula: "@str + @agi + @luck / 2"
   },
   firearms: {
     label: "FOE.Firearms",
-    formula: "@per+@agi+@luck/2"
+    formula: "@per + @agi + @luck / 2"
   },
   mew: {
     label: "FOE.MEW",
-    formula: "@per*2+@luck/2"
+    formula: "@per * 2 + @luck / 2"
   },
   explosives: {
     label: "FOE.Explosives",
-    formula: "@per*2+@luck/2"
+    formula: "@per * 2 + @luck / 2"
   },
   bSaddles: {
     label: "FOE.BattleSaddles",
-    formula: "@per+@end*2+@str+@luck/2-10"
+    formula: "@per + @end * 2 + @str + @luck / 2 - 10"
   },
   survival: {
     label: "FOE.AlchemySurvivalTraps",
-    formula: "@end+@per+@luck/2"
+    formula: "@end + @per + @luck / 2"
   },
   barter: {
     label: "FOE.Barter",
-    formula: "@cha*2+@luck/2"
+    formula: "@cha * 2 + @luck / 2"
   },
   intimidation: {
     label: "FOE.BluffIntimidation",
-    formula: "@cha*2+@luck/2"
+    formula: "@cha * 2 + @luck / 2"
   },
   persuasion: {
     label: "FOE.NegotiationSeduction",
-    formula: "@cha*2+@luck/2"
+    formula: "@cha * 2 + @luck / 2"
   },
   sneak: {
     label: "FOE.Sneak",
-    formula: "@agi*2+@luck/2"
+    formula: "@agi * 2 + @luck / 2"
   },
   lockpick: {
     label: "FOE.Lockpick",
-    formula: "@per*2+@luck/2"
+    formula: "@per * 2 + @luck / 2"
   },
   sleightHoof: {
     label: "FOE.SleightOfHoof",
-    formula: "@cha+@agi+@luck/2"
+    formula: "@cha + @agi + @luck / 2"
   },
   tech: {
     label: "FOE.HackingMatrixTech",
-    formula: "@int*2+@luck/2"
+    formula: "@int * 2 + @luck / 2"
   },
   chem: {
     label: "FOE.Chemistry",
-    formula: "@int*2+@luck/2"
+    formula: "@int * 2 + @luck / 2"
   },
   history: {
     label: "FOE.AcademicsLore",
-    formula: "@int*2+@luck/2"
+    formula: "@int * 2 + @luck / 2"
   },
   repair: {
     label: "FOE.RepairMechanics",
-    formula: "@int*2+@luck/2"
+    formula: "@int * 2 + @luck / 2"
   },
   gambling: {
     label: "FOE.Gambling",
-    formula: "@luck*2+3"
+    formula: "@luck * 2 + 3"
   },
   athletics: {
     label: "FOE.Athletics",
-    formula: "@str+@agi+@end+@luck/2-5"
+    formula: "@str + @agi + @end + @luck / 2 - 5"
   },
   profession: {
     label: "FOE.Profession",
-    formula: "@cha*2+@luck/2"
+    formula: "@cha * 2 + @luck / 2"
   },
   shamanism: {
     label: "FOE.Shamanism",
-    formula: "@cha*2+@luck/2"
+    formula: "@cha * 2 + @luck / 2"
   },
   magic: {
     label: "FOE.Magic",
-    formula: "@per+@int+@luck/2"
+    formula: "@per + @int + @luck / 2"
   },
   flight: {
     label: "FOE.FlightMagic",
-    formula: "@end+@agi+@cha+@luck/2"
+    formula: "@end + @agi + @cha + @luck / 2"
   }
 }
 
