@@ -1,4 +1,5 @@
 import { FOE } from "../helpers/config.mjs";
+import { evaluateFormula } from "../helpers/util.mjs";
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
@@ -72,8 +73,6 @@ export class FalloutEquestriaActor extends Actor {
     const int = data.abilities.int.value;
     const agi = data.abilities.agi.value;
 
-    console.log(data.abilities)
-
     const lvl = data.attributes.level?.value ?? 0;
 
     resources.strain.base = end + int;
@@ -113,16 +112,15 @@ export class FalloutEquestriaActor extends Actor {
     for (let [key, skill] of Object.entries(skills)) {
       // Compute base value for the skill
       skill.value.base = (function (rollData, warnings) {
-        let formula = skill.customFormula ?? FOE.skills[key].formula;
-        let base = 0;
-        try {
-          const replaced = Roll.replaceFormulaData(formula, rollData);
-          base = Roll.safeEval(replaced);
-        } catch (err) {
-          const replaced = Roll.replaceFormulaData(FOE.skills[key].formula, rollData);
-          base = Roll.safeEval(replaced);
+
+        let fallbackFormula = FOE.skills[key].formula;
+        let formula = skill.customFormula;
+
+        let [base, isFormulaBad] = evaluateFormula(formula, rollData, fallbackFormula);
+        if (isFormulaBad) {
           warnings.push(game.i18n.localize("FOE.WarnBadSkillFormula"));
         }
+
         return Math.round(base);
       })(this.getRollData(), this._preparationWarnings);
 
