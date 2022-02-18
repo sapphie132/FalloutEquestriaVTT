@@ -53,16 +53,10 @@ export class FalloutEquestriaActor extends Actor {
     const data = actorData.data;
     let rollData = this.getRollData.bind(this);
 
-    // Loop through ability scores, and add their modifiers to our sheet output.
-    // for (let [key, ability] of Object.entries(data.abilities)) {
-    // Calculate the modifier using d20 rules.
-    // ability.mod = Math.floor((ability.value - 10) / 2);
-    // }
     const resources = data.resources;
     const abilities = data.abilities;
-    const skills = data.skills;
 
-    for (let [key, ability] of Object.entries(abilities)) {
+    for (let [_, ability] of Object.entries(abilities)) {
       ability.bonus = ability.bonus ?? 0;
       ability.value = ability.rawValue + ability.bonus;
     }
@@ -103,30 +97,28 @@ export class FalloutEquestriaActor extends Actor {
     })(rollData, resources.hp.limbs);
 
     // Compute subvalues and totals for each skill
-    for (let [key, skill] of Object.entries(skills)) {
-      // Compute base value for the skill
-      skill.value.base = (function (rollData, warnings) {
+    (function (rollData, skills) {
+      for (let [key, skill] of Object.entries(skills)) {
 
+        // Compute base value for the skill
         let fallbackFormula = FOE.skills[key].formula;
         let formula = skill.customFormula;
-
-        let [base, isFormulaBad] = evaluateFormula(formula, rollData, fallbackFormula);
+        let [base, isFormulaBad] = evaluateFormula(formula, rollData(), fallbackFormula);
         if (isFormulaBad) {
           warnings.push(game.i18n.localize("FOE.WarnBadSkillFormula"));
         }
+        skill.value.base = Math.round(base);
 
-        return Math.round(base);
-      })(this.getRollData(), this._preparationWarnings);
-
-      let total = (skill.tagged ? 15 : 0);
-      skill.value.bonus = Number(skill.bonus ?? 0);
-      for (let [valKey, _] of Object.entries(FOE.skillsSubValues)) {
-        skill.value[valKey] = skill.value[valKey] ?? 0;
-        total += skill.value[valKey]
+        // Sum the subvalues to produce the main value
+        let total = (skill.tagged ? 15 : 0);
+        skill.value.bonus = Number(skill.bonus ?? 0);
+        for (let [valKey, _] of Object.entries(FOE.skillsSubValues)) {
+          skill.value[valKey] = skill.value[valKey] ?? 0;
+          total += skill.value[valKey]
+        }
+        skill.total = total;
       }
-
-      skill.total = total;
-    }
+    })(rollData, data.skills);
 
     // Initialise various hard-coded miscellaneous bits of data
     (function (misc) {
