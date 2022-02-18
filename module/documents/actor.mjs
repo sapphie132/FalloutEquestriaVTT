@@ -62,10 +62,7 @@ export class FalloutEquestriaActor extends Actor {
     }
 
     const str = data.abilities.str.value;
-    const per = data.abilities.per.value;
     const end = data.abilities.end.value;
-    const cha = data.abilities.cha.value;
-    const int = data.abilities.int.value;
     const agi = data.abilities.agi.value;
 
     // Compute resource maximums

@@ -80,6 +80,11 @@ Handlebars.registerHelper("ifObject", function (item, options) {
   }
 });
 
+Handlebars.registerHelper('damageString', function (itemObject) {
+  let n = itemObject.data.damage.d10;
+  return `${itemObject.data.damage.base}${'+'.repeat(n > 0 ? n : 0)}`
+})
+
 Handlebars.registerHelper('toLowerCase', function (str) {
   return str.toLowerCase();
 });

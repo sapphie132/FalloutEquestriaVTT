@@ -549,7 +549,3 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
   }
 }
 
-Handlebars.registerHelper('damageString', function (itemObject) {
-  let n = itemObject.data.damage.d10;
-  return `${itemObject.data.damage.base}${'+'.repeat(n > 0 ? n : 0)}`
-})
