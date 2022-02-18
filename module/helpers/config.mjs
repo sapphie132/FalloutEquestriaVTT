@@ -36,7 +36,7 @@ FOE.formulas = {
     base: "100 + (@end * 2) + (@end * @lvl)"
   },
   stun: {
-    base: "@resources.hp.max"
+    base: "@hp.max"
   },
   strain: {
     base: "@end+@int"
@@ -47,6 +47,12 @@ FOE.formulas = {
   tp: {
     base: "(@cha + @agi)/2 + @lvl - 1"
   }
+}
+
+FOE.formulas.limbs = {
+  head: "floor(@hp.max/2)",
+  torso: "floor(@hp.max/2)",
+  default: "floor(@hp.max/3)"
 }
 
 FOE.skillsSubValues = {

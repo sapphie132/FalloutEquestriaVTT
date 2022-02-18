@@ -51,6 +51,7 @@ export class FalloutEquestriaActor extends Actor {
 
     // Make modifications to data here. For example:
     const data = actorData.data;
+    let rollData = this.getRollData.bind(this);
 
     // Loop through ability scores, and add their modifiers to our sheet output.
     // for (let [key, ability] of Object.entries(data.abilities)) {
@@ -73,6 +74,7 @@ export class FalloutEquestriaActor extends Actor {
     const int = data.abilities.int.value;
     const agi = data.abilities.agi.value;
 
+    // Compute resource maximums
     (function (rollData, resources) {
       for (let [resourceKey, resource] of Object.entries(resources)) {
         for (let [resourceSubKey, formula] of Object.entries(FOE.formulas[resourceKey] ?? {})) {
@@ -84,21 +86,21 @@ export class FalloutEquestriaActor extends Actor {
         }
         resource.percent = (resource.value / resource.max) * 100;
       }
-    })(this.getRollData.bind(this), data.resources)
+    })(rollData, data.resources);
 
-    for (let [key, limb] of Object.entries(resources.hp.limbs)) {
-      const cond = limb.condition;
-
-      if (key != "head" && key != "torso") {
-        cond.max = Math.floor(resources.hp.max / 3);
-      } else {
-        cond.max = Math.floor(resources.hp.max / 2);
+    (function (rollData, limbs) {
+      for (let [limbKey, limb] of Object.entries(limbs)) {
+        const cond = limb.condition;
+        let formula = FOE.formulas.limbs[limbKey] ?? FOE.formulas.limbs.default;
+        cond.base = evaluateFormula(formula, rollData());
+        cond.bonus = cond.bonus ?? 0;
+        cond.max = cond.base + cond.bonus;
+        if (cond.value == null) {
+          cond.value = cond.max;
+        }
+        cond.percent = (cond.value / cond.max) * 100;
       }
-      if (cond.value == null) {
-        cond.value = cond.max;
-      }
-      cond.percent = (cond.value / cond.max) * 100;
-    }
+    })(rollData, resources.hp.limbs);
 
     // Compute subvalues and totals for each skill
     for (let [key, skill] of Object.entries(skills)) {
