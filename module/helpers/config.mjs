@@ -30,6 +30,25 @@ FOE.abilityAbbreviations = {
   "luck": "FOE.AbilityLuckAbbr",
 };
 
+FOE.formulas = {
+  hp: {
+    regen: "floor(1+@end/3)",
+    base: "100 + (@end * 2) + (@end * @lvl)"
+  },
+  stun: {
+    base: "@resources.hp.max"
+  },
+  strain: {
+    base: "@end+@int"
+  },
+  ap: {
+    base: "55 + @agi*3"
+  },
+  tp: {
+    base: "(@cha + @agi)/2 + @lvl - 1"
+  }
+}
+
 FOE.skillsSubValues = {
   base: {
     label: "FOE.Base",
@@ -187,7 +206,7 @@ FOE.spellAttributes = {
     },
     duration: {
       label: "FOE.Duration",
-      type:  "String",
+      type: "String",
     },
   },
   flightMagic: {

@@ -73,26 +73,18 @@ export class FalloutEquestriaActor extends Actor {
     const int = data.abilities.int.value;
     const agi = data.abilities.agi.value;
 
-    const lvl = data.attributes.level?.value ?? 0;
-
-    resources.strain.base = end + int;
-    resources.hp.base = 100 + (end * 2) + (end * lvl);
-    resources.ap.base = 55 + (agi * 3);
-    resources.stun.base = resources.hp.base;
-    resources.tp.base = Math.round((cha + agi) / 2) + lvl - 1;
-
-    if (resources.hp.regen == null) {
-      resources.hp.regen = Math.floor(end / 3);
-    }
-
-    for (let [key, resource] of Object.entries(resources)) {
-      resource.max = resource.base + resource.bonus;
-      // First initialisation of a character
-      if (resource.value == null) {
-        resource.value = resource.max;
+    (function (rollData, resources) {
+      for (let [resourceKey, resource] of Object.entries(resources)) {
+        for (let [resourceSubKey, formula] of Object.entries(FOE.formulas[resourceKey] ?? {})) {
+          resource[resourceSubKey] = evaluateFormula(formula, rollData());
+        }
+        resource.max = resource.base + resource.bonus;
+        if (!resource.value && resource.value !== 0) {
+          resource.value = resource.max;
+        }
+        resource.percent = (resource.value / resource.max) * 100;
       }
-      resource.percent = (resource.value / resource.max) * 100;
-    }
+    })(this.getRollData.bind(this), data.resources)
 
     for (let [key, limb] of Object.entries(resources.hp.limbs)) {
       const cond = limb.condition;

@@ -15,7 +15,18 @@ export function fetchAndLocalize(obj, table) {
     }
 }
 
-export function evaluateFormula(formula, rollData, fallbackFormula) {
+/**
+ * Evaluates the provided formula. If that fails, evaluate the
+ * fallback formula, and return a variable to indicate that it failed.
+ * 
+ * If no fallback formula was provided, throw an exception if it fails,
+ * otherwise return only the result
+ * @param {String} formula 
+ * @param {Dict} rollData 
+ * @param {String} fallbackFormula 
+ * @returns [result, isFormulaBad] if fallbackFormula provided. Otherwise, result
+ */
+export function evaluateFormula(formula, rollData, fallbackFormula = null) {
     let result;
     let sentry = false;
 
@@ -31,6 +42,7 @@ export function evaluateFormula(formula, rollData, fallbackFormula) {
             throw err
         }
     }
+
     if (fallbackFormula) {
         return [result, sentry]
     } else {
