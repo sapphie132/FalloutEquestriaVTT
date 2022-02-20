@@ -69,7 +69,7 @@ Handlebars.registerHelper('concat', function () {
 });
 
 Handlebars.registerHelper("round", function (num, places) {
-  return num.toFixed(places)
+  return num || num === 0 ? num.toFixed(places) : "";
 });
 
 Handlebars.registerHelper("ifObject", function (item, options) {

@@ -132,42 +132,27 @@ export class FalloutEquestriaActor extends Actor {
 
     // Compute various movement speeds
     // TODO: make configurable and overridable
-    (function (movement) {
-      movement.regular.base = Math.round(end / 2 + agi);
-      movement.sprint.base = Math.round(end + agi * 2);
-      movement.charge.base = Math.round(end + agi * 2);
-      movement.jump.base = Math.round((str + agi) / 2);
-      movement.jump.isFt = true;
-      movement.climb.base = Math.round((str + end + agi) / 2);
-      movement.drop.base = 0;
-      movement.standUp.base = 0;
-      // TODO: figure out flight rank properly
-      const fr = data.misc.flightRank.value;
-      movement.fly.base = Math.round(end + agi * 2 * fr);
-      movement.flySprint.base = Math.round(2 * end + agi * 4 * fr);
-      movement.flyCharge.base = Math.round(2 * end + agi * 4 * fr);
-      movement.swim.base = Math.round(str + end + agi);
-    })(data.movement)
-
-    for (let [key, mvt] of Object.entries(data.movement)) {
-      mvt.value = mvt.base + mvt.bonus;
-      if (mvt.isFt) {
-        mvt.valFt = mvt.value;
-        mvt.valYds = Math.round(mvt.value / 3);
-      } else {
-        mvt.valYds = mvt.value;
-        mvt.valFt = mvt.value * 3;
+    (function (rollData, movement) {
+      for (let [mvtKey, mvtItem] of Object.entries(movement)) {
+        for (let [mvtSubkey, formula] of Object.entries(FOE.formulas.movement[mvtKey] ?? {})) {
+          mvtItem[mvtSubkey] = evaluateFormula(formula, rollData())
+        }
+        mvtItem.value = mvtItem.base + mvtItem.bonus;
+        if (mvtItem.isFt) {
+          mvtItem.valFt = mvtItem.value;
+          mvtItem.valYds = Math.round(mvtItem.value / 3);
+        } else {
+          mvtItem.valYds = mvtItem.value;
+          mvtItem.valFt = mvtItem.value * 3;
+        }
       }
-    }
+    })(rollData, data.movement)
 
     data.attributes.crit = this.critVal(0, data);
     data.attributes.fumble = this.fumbleVal(0, data);
   }
 
   critVal(extraLuck, data) {
-    if (!data) {
-      data = this.data.data;
-    }
     let effLuck = data.abilities.luck.value;
     if (extraLuck) {
       effLuck += extraLuck;
@@ -176,9 +161,6 @@ export class FalloutEquestriaActor extends Actor {
   }
 
   fumbleVal(extraLuck, data) {
-    if (!data) {
-      data = this.data.data;
-    }
     let effLuck = data.abilities.luck.value;
     if (extraLuck) {
       effLuck += extraLuck;
@@ -239,6 +221,10 @@ export class FalloutEquestriaActor extends Actor {
       for (let [k, v] of Object.entries(data.attributes)) {
         data[k] = foundry.utils.deepClone(v);
       }
+    }
+
+    for (let [k, v] of Object.entries(data.misc)) {
+      data[k] = v.value;
     }
 
     // Add level for easier access, or fall back to 0.

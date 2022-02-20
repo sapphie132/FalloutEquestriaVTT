@@ -56,7 +56,7 @@ FOE.formulas.limbs = {
 }
 
 FOE.formulas.misc = {
-  barter: {
+  trade: {
     buying: "1.55 - @barter * 0.0045",
     selling: "0.45 + @barter * 0.0045"
   },
@@ -66,6 +66,20 @@ FOE.formulas.misc = {
   willpower: { base: "floor((@end + @cha + @int / 2) / 2.5)" },
   versatility: { base: "ceil(@int / 2)" },
   potency: { base: "ceil(@end / 2)" }
+}
+
+FOE.formulas.movement = {
+  regular: { base: "round(@end / 2 + @agi)" },
+  sprint: { base: "round(@end + @agi * 2)" },
+  charge: { base: "round(@end + @agi * 2)" },
+  jump: { base: "round((@str + @agi) / 2)" },
+  climb: { base: "round((@str + @agi + @end) / 2)" },
+  drop: { base: "0" },
+  standUp: { base: "0" },
+  fly: { base: "round((@end + @agi * 2) * @flightRank)" },
+  flySprint: { base: "round(((@end + @agi * 2) * 2) * @flightRank)" },
+  flyCharge: { base: "round(((@end + @agi * 2) * 2) * @flightRank)" },
+  swim: { base: "round(@end + @agi + @str)" }
 }
 
 FOE.skillsSubValues = {
