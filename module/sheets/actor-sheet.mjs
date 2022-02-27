@@ -1,4 +1,4 @@
-import { onManageActiveEffect, prepareActiveEffectCategories } from "../helpers/effects.mjs";
+import ActiveEffectFoE from "../active-effect.mjs"
 import { skillRoll, specialRoll } from "../dice.mjs"
 import { FOE } from "../helpers/config.mjs";
 import { fetchAndLocalize } from "../helpers/util.mjs";
@@ -57,7 +57,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     context.rollData = context.actor.getRollData();
 
     // Prepare active effects
-    context.effects = prepareActiveEffectCategories(this.actor.effects);
+    context.effects = ActiveEffectFoE.prepareActiveEffectCategories(this.actor.effects);
     context.warnings = this.actor._preparationWarnings
 
     return context;
@@ -313,7 +313,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     html.find('input.item-ammo-current').click(ev => ev.target.select()).change(this._onCurrentAmmoChange.bind(this));
 
     // Active Effect management
-    html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
+    html.find(".effect-control").click(ev => ActiveEffectFoE.onManageActiveEffect(ev, this.actor));
 
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this));
@@ -371,7 +371,6 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     const type = header.dataset.type;
     // Grab any data associated with this control.
     const data = duplicate(header.dataset);
-    // console.log(data);
     // Initialize a default name.
     const name = `New ${(data.subtype ?? type).capitalize()}`;
     // Prepare the item object.
@@ -423,7 +422,6 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
   async _onConditionChange(event) {
     event.preventDefault();
     const itemId = event.currentTarget.dataset.itemId ?? event.currentTarget.closest(".item").dataset.itemId;
-    console.log(itemId);
     const item = this.actor.items.get(itemId);
     const condition = Math.clamped(0, parseInt(event.target.value), 120);
     event.target.value = condition;
@@ -469,8 +467,8 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       for (let slot of item.data.data.slots) {
         // Overrode a slot, have to unequip every slot
         const otherId = this.actor.data.data.equipped.armor[slot];
-        if (otherId != "none") {
-          const otherItem = this.actor.items.get(otherId);
+        const otherItem = this.actor.items.get(otherId);
+        if (otherItem) {
           for (let otherSlot of otherItem.data.data.slots) {
             newArmor[otherSlot] = "none";
           }

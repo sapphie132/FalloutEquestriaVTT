@@ -20,6 +20,12 @@ export class FalloutEquestriaActor extends Actor {
   }
 
   /** @override */
+  applyActiveEffects() {
+    this.effects.forEach(e => {e.determineSuppression(), console.log(e)})
+    return super.applyActiveEffects()
+  }
+
+  /** @override */
   prepareBaseData() {
     // Data modifications in this step occur before processing embedded
     // documents or derived data.
@@ -57,7 +63,7 @@ export class FalloutEquestriaActor extends Actor {
     const abilities = data.abilities;
 
     for (let [_, ability] of Object.entries(abilities)) {
-      ability.bonus = ability.bonus ?? 0;
+      ability.bonus = Number(ability.bonus ?? 0);
       ability.value = ability.rawValue + ability.bonus;
     }
 

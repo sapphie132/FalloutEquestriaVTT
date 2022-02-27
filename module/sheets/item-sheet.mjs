@@ -1,5 +1,6 @@
 import { FOE } from "../helpers/config.mjs";
 import { fetchAndLocalize } from "../helpers/util.mjs"
+import ActiveEffectFoE from "../active-effect.mjs";
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -53,6 +54,7 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
     const compatAmmo = {
       "none": game.i18n.localize("FOE.None")
     };
+
     if (item.type == 'weapon') {
       for (let [itemId, thatItem] of this.actor.data.items.entries()) {
         const tpe = thatItem.type;
@@ -90,6 +92,7 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
 
     context.compatAmmo = compatAmmo;
 
+    context.effects = ActiveEffectFoE.prepareActiveEffectCategories(this.object.data.effects);
     return context;
   }
 
@@ -104,6 +107,11 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
 
     const slotChecks = html.find("input.slot");
     slotChecks.click(this._onSlotSelect.bind(this));
+
+    html.find(".effect-control").click(ev => {
+      if (this.item.isOwned) return ui.notifications.warn("Managing Active Effects within an Owned Item is not currently supported and will be added in a subsequent update.");
+      ActiveEffectFoE.onManageActiveEffect(ev, this.item);
+    });
 
     // Roll handlers, click handlers, etc. would go here.
   }

@@ -2,7 +2,6 @@
  * Extend the base ActiveEffect class to implement system-specific logic.
  * @extends {ActiveEffect}
  */
-// Copied from DND5E
 export default class ActiveEffectFoE extends ActiveEffect {
   /**
    * Is this active effect currently suppressed?
@@ -14,7 +13,9 @@ export default class ActiveEffectFoE extends ActiveEffect {
 
   /** @inheritdoc */
   apply(actor, change) {
-    if ( this.isSuppressed ) return null;
+    console.log("asoteuhsantuhe")
+    console.log(this)
+    if (this.isSuppressed) return null;
     return super.apply(actor, change);
   }
 
@@ -25,12 +26,26 @@ export default class ActiveEffectFoE extends ActiveEffect {
    */
   determineSuppression() {
     this.isSuppressed = false;
-    if ( this.data.disabled || (this.parent.documentName !== "Actor") ) return;
+    if (this.data.disabled || (this.parent.documentName !== "Actor")) return;
     const [parentType, parentId, documentType, documentId] = this.data.origin?.split(".") ?? [];
-    if ( (parentType !== "Actor") || (parentId !== this.parent.id) || (documentType !== "Item") ) return;
-    const item = this.parent.items.get(documentId);
-    if ( !item ) return;
-    this.isSuppressed = item.areEffectsSuppressed;
+    if ((parentType !== "Actor") || (parentId !== this.parent.id) || (documentType !== "Item")) return;
+    // const item = this.parent.items.get(documentId);
+    // if ( !item ) return;
+
+    if (parentType === "Actor") {
+      const equippedParent = this.parent.data.data.equipped
+      for (let [_, weaponId] of Object.entries(equippedParent.weapons)) {
+        if (weaponId == documentId) return;
+      }
+
+      for (let [_, armourId] of Object.entries(equippedParent.armor)) {
+        if (armourId == documentId) return;
+      }
+
+      // Couldn't find it in the equipped inventory -> not equipped, doesn't apply
+      this.isSuppressed = true;
+    }
+
   }
 
   /* --------------------------------------------- */
@@ -46,7 +61,7 @@ export default class ActiveEffectFoE extends ActiveEffect {
     const a = event.currentTarget;
     const li = a.closest("li");
     const effect = li.dataset.effectId ? owner.effects.get(li.dataset.effectId) : null;
-    switch ( a.dataset.action ) {
+    switch (a.dataset.action) {
       case "create":
         return owner.createEmbeddedDocuments("ActiveEffect", [{
           label: game.i18n.localize("FOE.EffectNew"),
@@ -60,7 +75,9 @@ export default class ActiveEffectFoE extends ActiveEffect {
       case "delete":
         return effect.delete();
       case "toggle":
-        return effect.update({disabled: !effect.data.disabled});
+        if (!effect.isSuppressed)
+          return effect.update({ disabled: !effect.data.disabled });
+        else return effect
     }
   }
 
@@ -98,11 +115,11 @@ export default class ActiveEffectFoE extends ActiveEffect {
     };
 
     // Iterate over active effects, classifying them into categories
-    for ( let e of effects ) {
+    for (let e of effects) {
       e._getSourceName(); // Trigger a lookup for the source name
-      if ( e.isSuppressed ) categories.suppressed.effects.push(e);
-      else if ( e.data.disabled ) categories.inactive.effects.push(e);
-      else if ( e.isTemporary ) categories.temporary.effects.push(e);
+      if (e.isSuppressed) categories.suppressed.effects.push(e);
+      else if (e.data.disabled) categories.inactive.effects.push(e);
+      else if (e.isTemporary) categories.temporary.effects.push(e);
       else categories.passive.effects.push(e);
     }
 

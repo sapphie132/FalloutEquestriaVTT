@@ -6,6 +6,7 @@ import { FalloutEquestriaActorSheet } from "./sheets/actor-sheet.mjs";
 import { FalloutEquestriaItemSheet } from "./sheets/item-sheet.mjs";
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
+import ActiveEffectFoE from "../module/active-effect.mjs"
 import { FOE } from "./helpers/config.mjs";
 
 import * as dice from './dice.mjs'
@@ -30,6 +31,7 @@ Hooks.once('init', async function () {
   CONFIG.Dice.FoERoll = dice.FoERoll;
   CONFIG.Dice.rolls.push(dice.FoERoll);
 
+
   /**
    * Set an initiative formula for the system
    * @type {String}
@@ -41,6 +43,7 @@ Hooks.once('init', async function () {
 
   // Define custom Document classes
   CONFIG.Actor.documentClass = FalloutEquestriaActor;
+  CONFIG.ActiveEffect.documentClass = ActiveEffectFoE;
   CONFIG.Item.documentClass = FalloutEquestriaItem;
 
   // Register sheet application classes
