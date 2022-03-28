@@ -60,8 +60,8 @@ export class FalloutEquestriaItem extends Item {
     }
   }
 
-  async decrementBullets(arg) {
-    if (arg) {
+  async decrementBullets(enabled) {
+    if (enabled) {
       const item = this.data;
       const ammoCap = item.data.ammo.capacity;
       const decAmount = item.data.ammo.perShot;
@@ -72,6 +72,8 @@ export class FalloutEquestriaItem extends Item {
       } else {
         return false;
       }
+    } else {
+      return true
     }
   }
 
@@ -125,8 +127,8 @@ export class FalloutEquestriaItem extends Item {
         } else if (damageOrAttack == "attack") {
           label = `[${item.data.rollSkill}] ${item.name} (${this.actor.name})`;
           if (this.actor) {
-            rollData.fumble = this.actor.fumbleVal(this.extraLuck);
-            rollData.crit = this.actor.critVal(this.extraLuck);
+            rollData.fumble = this.actor.fumbleVal(this.extraLuck) - item.data.critFailMod;
+            rollData.crit = this.actor.critVal(this.extraLuck) + item.data.critHitMod;
           }
 
           let targetMod;

@@ -370,6 +370,8 @@
       "range": "melee",
       "cost": "0",
       "firerate": "",
+      "critHitMod": 0,
+      "critFailMod": 0,
       "ammo": {
         "type": "",
         "loaded": "",
