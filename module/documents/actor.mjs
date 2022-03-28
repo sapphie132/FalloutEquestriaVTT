@@ -21,7 +21,7 @@ export class FalloutEquestriaActor extends Actor {
 
   /** @override */
   applyActiveEffects() {
-    this.effects.forEach(e => {e.determineSuppression(), console.log(e)})
+    this.effects.forEach(e => {e.determineSuppression()})
     return super.applyActiveEffects()
   }
 
@@ -156,6 +156,32 @@ export class FalloutEquestriaActor extends Actor {
 
     data.attributes.crit = this.critVal(0);
     data.attributes.fumble = this.fumbleVal(0);
+  }
+
+  async sleep(hoursSlept, hadMedicalAid) {
+    const hp = this.data.data.resources.hp;
+    const healPerHour = hadMedicalAid ? hp.regen * 2 : hp.regen;
+    const amountHealed = healPerHour * hoursSlept
+    hp.value += amountHealed;
+    if (hp.value > hp.max) { hp.value = hp.max};
+    const limbCount = Object.keys(hp.limbs).size;
+    for (let [limbKey, limb] of Object.entries(hp.limbs)) {
+      const cond = limb.condition;
+      const isCrippled = cond.value <= cond.max / 2;
+      cond.value += Math.floor(amountHealed / limbCount)
+      const actualMax = isCrippled ? Math.floor(cond.max / 2) : cond.max;
+      if (cond.value > actualMax) {
+        cond.value = actualMax;
+      }
+    }
+    // This method doesn't directly update the value, instead it lets passTime handle it
+    return this.passTime(hoursSlept)
+  }
+
+  async passTime(numHours) {
+    // TODO
+    const resources = this.data.data.resources;
+    await this.update({"data.resources": deepClone(resources)});
   }
 
   critVal(extraLuck) {
