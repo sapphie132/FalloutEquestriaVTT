@@ -1,0 +1,12 @@
+<form>
+    <div class="form-group">
+        <label>{{localize "FOE.HourAmount"}}</label>
+        <input type="number" name="hoursSlept" value="8"/>
+    </div>
+    {{#if activateMedicalAid}}
+    <div class="form-group">
+        <label>{{localize "FOE.GivenMedicalAid?"}}</label>
+        <input type="checkbox" name="hadMedicalAid" />
+    </div>
+    {{/if}}
+</form>

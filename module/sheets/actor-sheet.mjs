@@ -290,7 +290,8 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     // Everything below here is only needed if the sheet is editable
     if (!this.isEditable) return;
 
-    html.find('.clickable-action').click(this._onActionClick.bind(this));
+    html.find('.action').click(this._onActionClick.bind(this));
+    html.find('.time').click(this._onTimeActionClick.bind(this));
 
     // Add Inventory Item
     html.find('.item-create').click(this._onItemCreate.bind(this));
@@ -320,6 +321,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
 
     html.find('.reload-button').click(this._reload.bind(this));
 
+
     // Drag events for macros.
     if (this.actor.isOwner) {
       let handler = ev => this._onDragStart(ev);
@@ -331,6 +333,40 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     }
   }
 
+
+  async _onTimeActionClick(event) {
+    event.preventDefault();
+    const type = event.currentTarget.dataset.actionType
+    const SLEEP_TEMPLATE = "systems/foe/templates/time.html";
+    let timeFn;
+    let text;
+    let activateMedicalAid = false;
+    if (type === "sleep") {
+      timeFn = this.actor.sleep.bind(this.actor);
+      text = game.i18n.localize("FOE.Sleep");
+      activateMedicalAid = true
+    } else if (type === "timeskip") {
+      timeFn = this.actor.passTime.bind(this.actor);
+      text = game.i18n.localize("FOE.PassTime");
+    } else {
+      throw new Error("Invalid action type: " + type);
+    }
+    const content = await renderTemplate(SLEEP_TEMPLATE, {activateMedicalAid: activateMedicalAid})
+    const dialog = Dialog.prompt({
+      title: text,
+      content: content,
+      label: text,
+      callback: async function (html) {
+        const form = html[0].querySelector("form");
+        const hoursSlept = parseInt(form.hoursSlept.value);
+        const hadMedicalAid = form.hadMedicalAid?.checked;
+        await timeFn(hoursSlept, hadMedicalAid);
+      },
+      rejectClose: false
+    });
+    await dialog;
+  }
+
   async _onActionClick(event) {
     event.preventDefault();
     const button = event.currentTarget;
@@ -338,10 +374,10 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     const label = button.dataset.label;
     const ap = this.actor.data.data.resources.ap;
     const value = ap.value - cost;
-    const type = button.dataset.actionType;
+    const actionType = button.dataset.actionType;
     if (value >= 0) {
       let content = `${label} (${cost} AP)`
-      if (type == "movement") {
+      if (actionType === "movement") {
         content += ` (${button.dataset.yds + "yds"})`
       }
       const a = this.actor.update({ 'data.resources.ap.value': value });

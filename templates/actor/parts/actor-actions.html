@@ -12,8 +12,8 @@
             <tbody>
                 {{#each movementTypes as |type key|}}
                 <tr>
-                    <td class="clickable-action" data-yds="{{type.valYds}}" data-action-type="movement" data-label="{{type.name}}"
-                        data-cost="{{type.apCost}}">{{type.name}}</td>
+                    <td class="clickable action" data-yds="{{type.valYds}}" data-action-type="movement"
+                        data-label="{{type.name}}" data-cost="{{type.apCost}}">{{type.name}}</td>
                     <td class="align-center">{{type.valFt}}</td>
                     <td class="align-center">{{type.valYds}}</td>
                     <td class="align-right">{{type.apCost}}</td>
@@ -21,6 +21,10 @@
                 {{/each}}
             </tbody>
         </table>
+        <div>
+            <div class="clickable time" data-action-type="sleep">{{localize "FOE.Sleep"}}</div>
+            <div class="clickable time" data-action-type="timeskip">{{localize "FOE.PassTime"}}</div>
+        </div>
     </div>
     <div class="flexcol">
         {{> "systems/foe/templates/actor/parts/actor-equipped.html"}}
