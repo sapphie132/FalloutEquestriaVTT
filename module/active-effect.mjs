@@ -13,8 +13,6 @@ export default class ActiveEffectFoE extends ActiveEffect {
 
   /** @inheritdoc */
   apply(actor, change) {
-    console.log("asoteuhsantuhe")
-    console.log(this)
     if (this.isSuppressed) return null;
     return super.apply(actor, change);
   }

@@ -56,13 +56,15 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
     };
 
     if (item.type == 'weapon') {
-      for (let [itemId, thatItem] of this.actor.data.items.entries()) {
-        const tpe = thatItem.type;
-        if (tpe == 'ammo') {
-          const thatAmmoType = thatItem.data.data.type;
-          const thisAmmoType = item.data.data.ammo.type;
-          if (thisAmmoType == thatAmmoType) {
-            compatAmmo[itemId] = thatItem.name;
+      if (this.actor) {
+        for (let [itemId, thatItem] of this.actor.data.items.entries()) {
+          const tpe = thatItem.type;
+          if (tpe == 'ammo') {
+            const thatAmmoType = thatItem.data.data.type;
+            const thisAmmoType = item.data.data.ammo.type;
+            if (thisAmmoType == thatAmmoType) {
+              compatAmmo[itemId] = thatItem.name;
+            }
           }
         }
       }

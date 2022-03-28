@@ -154,11 +154,12 @@ export class FalloutEquestriaActor extends Actor {
       }
     })(rollData, data.movement)
 
-    data.attributes.crit = this.critVal(0, data);
-    data.attributes.fumble = this.fumbleVal(0, data);
+    data.attributes.crit = this.critVal(0);
+    data.attributes.fumble = this.fumbleVal(0);
   }
 
-  critVal(extraLuck, data) {
+  critVal(extraLuck) {
+    let data = this.data.data
     let effLuck = data.abilities.luck.value;
     if (extraLuck) {
       effLuck += extraLuck;
@@ -166,7 +167,8 @@ export class FalloutEquestriaActor extends Actor {
     return effLuck + data.attributes.critMod;
   }
 
-  fumbleVal(extraLuck, data) {
+  fumbleVal(extraLuck) {
+    let data = this.data.data
     let effLuck = data.abilities.luck.value;
     if (extraLuck) {
       effLuck += extraLuck;

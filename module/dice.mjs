@@ -30,7 +30,7 @@ async function skillRoll(skill, label, data, targetMod, chooseConsumeResource = 
     if (!data.fumble) data.fumble = 0;
     if (!data.crit) data.crit = 0;
     if (!targetMod) targetMod = "";
-    const r = new CONFIG.Dice.FoERoll("1d100", `@${skill}.total ${targetMod ? '+' + targetMod: ''}`, data, {
+    const r = new CONFIG.Dice.FoERoll("1d100", `@${skill} ${targetMod ? '+ ' + targetMod: ''}`, data, {
         label: label,
         fumble: 94+data.fumble,
         crit: 1+data.crit
