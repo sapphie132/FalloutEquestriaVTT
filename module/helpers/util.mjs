@@ -49,3 +49,7 @@ export function evaluateFormula(formula, rollData, fallbackFormula = null) {
         return result
     }
 }
+
+export function selectedOption(selector) {
+    return selector.options[selector.selectedIndex].value;
+}
