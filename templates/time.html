@@ -3,10 +3,25 @@
         <label>{{localize "FOE.HourAmount"}}</label>
         <input type="number" name="hoursSlept" value="8"/>
     </div>
-    {{#if activateMedicalAid}}
+    {{#if sleep}}
     <div class="form-group">
         <label>{{localize "FOE.GivenMedicalAid?"}}</label>
         <input type="checkbox" name="hadMedicalAid" />
     </div>
+    <div class="form-group">
+        <label>{{localize "FOE.SleepQuality"}}</label>
+        <select name="sleepQuality">
+            {{#each sleepQualityOptions as |sqo key|}}
+            <option value="{{key}}">{{localize sqo}}</option>
+            {{/each}}
+        </select>
+    {{else}}
+        <label>{{localize "FOE.ActivityLevel"}}</label>
+        <select name="activityLevel">
+            {{#each activityLevels as |level key|}}
+            <option value="{{key}}">{{localize level}}</option>
+            {{/each}}
+        </select>
     {{/if}}
+
 </form>

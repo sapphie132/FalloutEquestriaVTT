@@ -158,31 +158,53 @@ export class FalloutEquestriaActor extends Actor {
     data.attributes.fumble = this.fumbleVal(0);
   }
 
-  async sleep(hoursSlept, hadMedicalAid) {
+  async sleep(hoursSlept, hadMedicalAid, sleepQuality) {
     const hp = this.data.data.resources.hp;
     const healPerHour = hadMedicalAid ? hp.regen * 2 : hp.regen;
-    const amountHealed = healPerHour * hoursSlept
+    const amountHealed = healPerHour * hoursSlept;
+    // Clipping happens later
     hp.value += amountHealed;
     if (hp.value > hp.max) { hp.value = hp.max};
     const limbCount = Object.keys(hp.limbs).size;
-    for (let [limbKey, limb] of Object.entries(hp.limbs)) {
+
+    // Regenerate each limb, but do not cross the crippled threshold
+    for (let [_, limb] of Object.entries(hp.limbs)) {
       const cond = limb.condition;
       const isCrippled = cond.value <= cond.max / 2;
       cond.value += Math.floor(amountHealed / limbCount)
       const actualMax = isCrippled ? Math.floor(cond.max / 2) : cond.max;
-      if (cond.value > actualMax) {
-        cond.value = actualMax;
-      }
+      cond.value = Math.min(cond.value, actualMax);
+    }
+
+    const tp = this.data.data.resources.tp;
+    tp.value += FOE.trickPointRecovery[sleepQuality] * hoursSlept;
+
+    const stun = this.data.data.resources.stun;
+    if (sleepQuality === "good") {
+      stun.value = stun.max;
     }
     // This method doesn't directly update the value, instead it lets passTime handle it
-    return this.passTime(hoursSlept)
+    return this.passTime(hoursSlept, "sleep")
   }
 
-  async passTime(numHours) {
-    // TODO
+  async passTime(numHours, activityLevel) {
     const resources = this.data.data.resources;
+    // AP replenishes after a single turn in combat having it
+    // also replenish after a longer time is convenient
+    resources.ap.value = resources.ap.max;
+    resources.strain.value += FOE.strainRecovery[activityLevel] * numHours;
+
+    this.clipResources();
     await this.update({"data.resources": deepClone(resources)});
   }
+
+  clipResources() {
+    const resources = this.data.data.resources;
+    for (let [_, resource] of Object.entries(resources)) {
+      resource.value = Math.min(resource.max, resource.value);
+    }
+  }
+
 
   critVal(extraLuck) {
     let data = this.data.data

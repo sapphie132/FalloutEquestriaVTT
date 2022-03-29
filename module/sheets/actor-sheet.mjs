@@ -1,7 +1,7 @@
 import ActiveEffectFoE from "../active-effect.mjs"
 import { skillRoll, specialRoll } from "../dice.mjs"
 import { FOE } from "../helpers/config.mjs";
-import { fetchAndLocalize } from "../helpers/util.mjs";
+import { fetchAndLocalize, selectedOption } from "../helpers/util.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -337,21 +337,26 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
   async _onTimeActionClick(event) {
     event.preventDefault();
     const type = event.currentTarget.dataset.actionType
-    const SLEEP_TEMPLATE = "systems/foe/templates/time.html";
+    const TIME_TEMPLATE = "systems/foe/templates/time.html";
     let timeFn;
     let text;
-    let activateMedicalAid = false;
-    if (type === "sleep") {
-      timeFn = this.actor.sleep.bind(this.actor);
+    let doSleep = type === "sleep";
+    if (doSleep) {
+      // timeFn = this.actor.sleep.bind(this.actor);
       text = game.i18n.localize("FOE.Sleep");
-      activateMedicalAid = true
     } else if (type === "timeskip") {
-      timeFn = this.actor.passTime.bind(this.actor);
+      // timeFn = this.actor.passTime.bind(this.actor);
       text = game.i18n.localize("FOE.PassTime");
     } else {
       throw new Error("Invalid action type: " + type);
     }
-    const content = await renderTemplate(SLEEP_TEMPLATE, {activateMedicalAid: activateMedicalAid})
+    const content = await renderTemplate(TIME_TEMPLATE, {
+      sleep: doSleep,
+      activityLevels: FOE.activityLevels,
+      sleepQualityOptions: FOE.sleepTypes,
+    })
+
+    const actor = this.actor;
     const dialog = Dialog.prompt({
       title: text,
       content: content,
@@ -359,8 +364,15 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       callback: async function (html) {
         const form = html[0].querySelector("form");
         const hoursSlept = parseInt(form.hoursSlept.value);
-        const hadMedicalAid = form.hadMedicalAid?.checked;
-        await timeFn(hoursSlept, hadMedicalAid);
+        if (doSleep) {
+          const hadMedicalAid = form.hadMedicalAid.checked;
+          const sleepQuality = selectedOption(form.sleepQuality);
+          actor.sleep(hoursSlept, hadMedicalAid, sleepQuality);
+        } else {
+          const activityLevel = selectedOption(form.activityLevel);
+          actor.passTime(hoursSlept, activityLevel)
+        }
+        // await timeFn(hoursSlept, hadMedicalAid);
       },
       rejectClose: false
     });

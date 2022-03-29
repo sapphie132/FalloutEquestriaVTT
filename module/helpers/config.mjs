@@ -433,6 +433,27 @@ FOE.details = {
   karma: "FOE.Karma"
 }
 
+FOE.activityLevels = {
+  "normal": "FOE.ActivityNormal",
+  "light": "FOE.ActivityLight",
+  "rest": "FOE.ActivityRest",
+  "sleep": "FOE.ActivitySleep"
+}
+
+FOE.sleepTypes = { "light": "FOE.SleepLight", "good": "FOE.SleepGood" }
+
+FOE.strainRecovery = {
+  "normal": 5,
+  "light": 10,
+  "rest": 15,
+  "sleep": 20,
+}
+
+FOE.trickPointRecovery = {
+  "light": 1,
+  "good": 3,
+}
+
 // Note: Lower is excluded, upper is included
 FOE.conditionModifiers = {
   perfect: {
