@@ -29,13 +29,7 @@
   {{!-- Sheet Body --}}
   <section class="sheet-body">
 
-    {{!-- Description Tab --}}
-    <div class="tab" data-group="primary" data-tab="description">
-      {{!-- To render inline rolls in a TinyMCE editor, you need to pass the parent actor's (if any) roll data to the
-      rollData prop. --}}
-      {{editor content=data.description target="data.description" rollData=rollData button=true owner=owner
-      editable=editable}}
-    </div>
+
 
     {{!-- Attributes Tab --}}
     <div class="tab attributes" data-group="primary" data-tab="attributes">
@@ -60,8 +54,14 @@
         </div>
         <div class="resource">
           <label class="resource-label">{{localize "FOE.APCost"}}</label>
-          {{!--TODO: Make AP cost one or two integers--}}
-          <input type="text" name="data.cost" value="{{data.cost}}" data-dtype="String" />
+          <div>
+            <input class="inline" type="number" name="data.cost" value="{{data.cost}}" data-dtype="Number" />
+            {{#if (endswith data.firerate "action")}}
+            / <input class="inline" type="number" name="data.fireCost" value="{{data.fireCost}}" data-dtype="Number" />
+            + <input class="inline" type="number" name="data.reloadCost" value="{{data.reloadCost}}"
+              data-dtype="Number" />
+            {{/if}}
+          </div>
         </div>
         <div class="resource">
           <label class="resource-label">{{localize "FOE.CriticalHitMod"}}</label>
@@ -77,9 +77,10 @@
             <select name="data.firerate">
               {{selectOptions firerates selected=data.firerate localize=true}}
             </select>
-            {{log this}}
-            {{#if (eq data.firerate "fullauto")}}#<input type="number" data-dtype="Number" name="data.fullautorate"
-              value="{{data.fullautorate}}" style="max-width:20px; display:inline">{{/if}}
+            {{#if (eq data.firerate "fullauto")}}
+            #<input type="number" data-dtype="Number" name="data.fullautorate" value="{{data.fullautorate}}"
+              class="inline">
+            {{/if}}
           </div>
         </div>
         <div class="resource">
@@ -112,6 +113,13 @@
           </div>
         </div>
       </div>
+    </div>
+    {{!-- Description Tab --}}
+    <div class="tab" data-group="primary" data-tab="description">
+      {{!-- To render inline rolls in a TinyMCE editor, you need to pass the parent actor's (if any) roll data to the
+      rollData prop. --}}
+      {{editor content=data.description target="data.description" rollData=rollData button=true owner=owner
+      editable=editable}}
     </div>
   </section>
 </form>

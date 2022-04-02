@@ -369,8 +369,10 @@
       "critMult": 2,
       "rollSkill": "melee",
       "range": "melee",
-      "cost": "0",
-      "firerate": "",
+      "cost": 25,
+      "reloadCost": 15,
+      "fireCost": 10,
+      "firerate": "none",
       "critHitMod": 0,
       "critFailMod": 0,
       "ammo": {

@@ -10,6 +10,11 @@
   cursor: pointer;
 }
 
+input.inline {
+  max-width: 30px;
+  display: inline;
+}
+
 .clickable {
   font-weight: 700;
 }

@@ -75,6 +75,10 @@ Handlebars.registerHelper("eq", function (arg0, arg1) {
   return arg0 === arg1;
 })
 
+Handlebars.registerHelper("endswith", function (text, pattern) {
+  return text.endsWith(pattern);
+});
+
 Handlebars.registerHelper("round", function (num, places) {
   return num || num === 0 ? num.toFixed(places) : "";
 });

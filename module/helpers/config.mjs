@@ -291,6 +291,7 @@ FOE.firerates = {
   "boltaction": "FOE.FirerateBoltAction",
   "burst": "FOE.FirerateBurst",
   "leveraction": "FOE.FirerateLeverAction",
+  "pumpaction": "FOE.FireratePumpAction",
   "semiauto": "FOE.FirerateSemiAuto",
   "singleshot": "FOE.FirerateSingleShot",
 }
