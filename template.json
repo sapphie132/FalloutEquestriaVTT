@@ -103,8 +103,16 @@
           "xp": 0,
           "nextLevel": 0
         },
-        "fumbleMod": 0,
-        "critMod": 0,
+        "fumbleMod": {
+          "global": 0,
+          "skill": {},
+          "combat": 0
+        },
+        "critMod": {
+          "global": 0,
+          "skill": {},
+          "combat": 0
+        },
         "resistances": {
           "fire": {
             "value": 0

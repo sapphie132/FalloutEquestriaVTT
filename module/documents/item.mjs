@@ -125,10 +125,11 @@ export class FalloutEquestriaItem extends Item {
           }
           roll = new Roll(formula, rollData).roll({ async: false });
         } else if (damageOrAttack == "attack") {
-          label = `[${item.data.rollSkill}] ${item.name} (${this.actor.name})`;
+          let rollSkill = item.data.rollSkill
+          label = `[${rollSkill}] ${item.name} (${this.actor.name})`;
           if (this.actor) {
-            rollData.fumble = this.actor.fumbleVal(this.extraLuck) - item.data.critFailMod;
-            rollData.crit = this.actor.critVal(this.extraLuck) + item.data.critHitMod;
+            rollData.fumble = this.actor.fumbleVal(this.extraLuck, rollSkill, true) - item.data.critFailMod;
+            rollData.crit = this.actor.critVal(this.extraLuck, rollSkill, true) + item.data.critHitMod;
           }
 
           let targetMod;

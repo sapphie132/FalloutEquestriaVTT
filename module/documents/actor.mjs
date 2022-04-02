@@ -67,10 +67,6 @@ export class FalloutEquestriaActor extends Actor {
       ability.value = ability.rawValue + ability.bonus;
     }
 
-    const str = data.abilities.str.value;
-    const end = data.abilities.end.value;
-    const agi = data.abilities.agi.value;
-
     // Compute resource maximums
     (function (rollData, resources) {
       for (let [resourceKey, resource] of Object.entries(resources)) {
@@ -205,23 +201,38 @@ export class FalloutEquestriaActor extends Actor {
     }
   }
 
-
-  critVal(extraLuck) {
-    let data = this.data.data
-    let effLuck = data.abilities.luck.value;
-    if (extraLuck) {
-      effLuck += extraLuck;
+  critModifier(modifierObject, skill, combat) {
+    let mod = modifierObject.global;
+    if (skill) {
+      mod += modifierObject.skill[skill] ?? 0;
     }
-    return effLuck + data.attributes.critMod;
+    
+    if (combat) {
+      mod += modifierObject.combat;
+    }
+
+    return mod;
   }
 
-  fumbleVal(extraLuck) {
+
+  critVal(extraLuck, skill, combat) {
     let data = this.data.data
     let effLuck = data.abilities.luck.value;
     if (extraLuck) {
       effLuck += extraLuck;
     }
-    return Math.floor(effLuck / 2) + data.attributes.fumbleMod;
+
+    return effLuck + this.critModifier(data.critMod, skill, combat);
+  }
+
+  fumbleVal(extraLuck, skill, combat) {
+    let data = this.data.data
+    let effLuck = data.abilities.luck.value;
+    if (extraLuck) {
+      effLuck += extraLuck;
+    }
+
+    return Math.floor(effLuck / 2) - this.critModifier(data.fumbleMod, skill, combat);
   }
   /**
    * Prepare NPC type specific data.
