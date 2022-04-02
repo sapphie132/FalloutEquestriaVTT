@@ -77,6 +77,9 @@
             <select name="data.firerate">
               {{selectOptions firerates selected=data.firerate localize=true}}
             </select>
+            {{log this}}
+            {{#if (eq data.firerate "fullauto")}}#<input type="number" data-dtype="Number" name="data.fullautorate"
+              value="{{data.fullautorate}}" style="max-width:20px; display:inline">{{/if}}
           </div>
         </div>
         <div class="resource">

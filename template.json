@@ -360,6 +360,7 @@
         "physical",
         "equipment"
       ],
+      "fullautorate": 3,
       "damage": {
         "base": 0,
         "d10": 0
