@@ -20,6 +20,15 @@ FOE.weaponSlots = {
   2: "FOE.Tertiary"
 }
 
+FOE.weaponRanges = {
+  "short": "FOE.RangeShort",
+  "medium": "FOE.RangeMedium",
+  "long": "FOE.RangeLong",
+  "sniper": "FOE.RangeSniper",
+  "none": "FOE.N/A",
+  "pointBlank": "FOE.PointBlank",
+}
+
 FOE.abilityAbbreviations = {
   "str": "FOE.AbilityStrAbbr",
   "per": "FOE.AbilityPerAbbr",

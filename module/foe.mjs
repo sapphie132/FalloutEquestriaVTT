@@ -71,6 +71,10 @@ Handlebars.registerHelper('concat', function () {
   return outStr;
 });
 
+Handlebars.registerHelper("eq", function (arg0, arg1) {
+  return arg0 === arg1;
+})
+
 Handlebars.registerHelper("round", function (num, places) {
   return num || num === 0 ? num.toFixed(places) : "";
 });

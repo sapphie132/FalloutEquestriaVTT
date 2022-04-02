@@ -11,7 +11,7 @@
         <div class="resource">
           <label class="resource-label">{{localize "FOE.LoadedAmmunition"}}</label>
           <select class="resource-dropdown" name="data.ammo.loaded" value="{{data.ammo.loaded}}">
-          {{selectOptions compatAmmo selected=data.ammo.loaded}}
+            {{selectOptions compatAmmo selected=data.ammo.loaded}}
           </select>
         </div>
       </div>
@@ -50,7 +50,11 @@
         </div>
         <div class="resource">
           <label class="resource-label">{{localize "FOE.Range"}}</label>
-          <input type="text" name="data.range" value="{{data.range}}" data-dtype="String" />
+          <select name="data.range">
+            {{#each weaponRanges as |label key|}}
+            <option value="{{key}}" {{#if (eq ../data.range key)}}selected="selected"{{/if}}>{{localize label}}</option>
+            {{/each}}
+          </select>
         </div>
         <div class="resource">
           <label class="resource-label">{{localize "FOE.APCost"}}</label>
@@ -81,11 +85,12 @@
         </div>
         <div class="resource">
           <label class="resource-label">{{localize "FOE.NumberLoaded"}}</label>
-          <input type="number" name="data.ammo.capacity.value" value="{{data.ammo.capacity.value}}" data-dtype="Number"/>
+          <input type="number" name="data.ammo.capacity.value" value="{{data.ammo.capacity.value}}"
+            data-dtype="Number" />
         </div>
         <div class="resource">
           <label class="resource-label">{{localize "FOE.MagazineCap"}}</label>
-          <input type="number" name="data.ammo.capacity.max" value="{{data.ammo.capacity.max}}" data-dtype="Number"/>
+          <input type="number" name="data.ammo.capacity.max" value="{{data.ammo.capacity.max}}" data-dtype="Number" />
         </div>
         <div class="resource">
           <label class="resource-label">{{localize "FOE.ConditionModifierType"}}</label>
