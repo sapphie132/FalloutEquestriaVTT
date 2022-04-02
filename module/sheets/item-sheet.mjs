@@ -129,7 +129,7 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
       }
     } else {
       let idx = slots.indexOf(slotId);
-      if (idx > 0) {
+      if (idx >= 0) {
         slots.splice(idx, 1);
       }
     }
