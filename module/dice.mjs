@@ -26,14 +26,13 @@ async function specialRoll(ability, label, data = {}) {
  * @param chooseConsumeAmmoCallback What to do with the decision whether to consume ammo or not
  * @returns the roll
  */
-async function skillRoll(skill, label, data, targetMod, chooseConsumeResource = false, consumeResourceCallback) {
-    if (!data.fumble) data.fumble = 0;
-    if (!data.crit) data.crit = 0;
-    if (!targetMod) targetMod = "";
-    const r = new CONFIG.Dice.FoERoll("1d100", `@${skill} ${targetMod ? '+ ' + targetMod: ''}`, data, {
+async function skillRoll(skill, label, actor, targetMod, chooseConsumeResource = false, consumeResourceCallback) {
+    let fumble = actor.fumbleVal(0, skill, false)
+    let crit = actor.critVal(0, skill, false)
+    const r = new CONFIG.Dice.FoERoll("1d100", `@${skill} ${targetMod ? '+ ' + targetMod: ''}`, actor.getRollData(), {
         label: label,
-        fumble: 94+data.fumble,
-        crit: 1+data.crit
+        fumble: 94+fumble,
+        crit: 1+crit
     });
     const configured = await r.configureDialog({
         chooseDifficulty: true,

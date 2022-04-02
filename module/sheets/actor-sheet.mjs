@@ -563,11 +563,13 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
         }
         case 'skill': {
           if (!dataset.rollSkill) throw Error("No skill provided");
-          const r = await skillRoll(dataset.rollSkill, label, this.actor.getRollData());
+          const r = await skillRoll(dataset.rollSkill, label, this.actor);
 
           const speaker = { actor: this.actor };
-          const e = r.toMessage({ speaker }, { create: true })
-          return r;
+          if (r) {
+            const e = r.toMessage({ speaker }, { create: true })
+            return r;
+          }
         }
         case 'weapon': {
           const itemId = dataset.itemId;

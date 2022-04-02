@@ -127,16 +127,13 @@ export class FalloutEquestriaItem extends Item {
         } else if (damageOrAttack == "attack") {
           let rollSkill = item.data.rollSkill
           label = `[${rollSkill}] ${item.name} (${this.actor.name})`;
-          if (this.actor) {
-            rollData.fumble = this.actor.fumbleVal(this.extraLuck, rollSkill, true) - item.data.critFailMod;
-            rollData.crit = this.actor.critVal(this.extraLuck, rollSkill, true) + item.data.critHitMod;
-          }
+          let actor = this.actor;
 
           let targetMod;
           if (conditionModifierType == "hit") {
             targetMod = this.hitMod;
           }
-          roll = await skillRoll(item.data.rollSkill, label, rollData, targetMod, true, this.decrementBullets.bind(this));
+          roll = await skillRoll(item.data.rollSkill, label, actor, targetMod, true, this.decrementBullets.bind(this));
         } else {
           throw new Error(`Invalid roll mode: ${damageOrAttack}`);
         }

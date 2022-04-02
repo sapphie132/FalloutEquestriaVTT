@@ -127,7 +127,7 @@ export class FalloutEquestriaActor extends Actor {
         }
 
         if (miscItem.base || miscItem.base === 0) {
-          miscItem.value = miscItem.bonus + miscItem.base;
+          miscItem.value = (miscItem.bonus ?? 0) + miscItem.base;
         }
       }
     })(rollData, data.misc);
@@ -204,7 +204,7 @@ export class FalloutEquestriaActor extends Actor {
   critModifier(modifierObject, skill, combat) {
     let mod = modifierObject.global;
     if (skill) {
-      mod += modifierObject.skill[skill] ?? 0;
+      mod += modifierObject.skills[skill] ?? 0;
     }
     
     if (combat) {
