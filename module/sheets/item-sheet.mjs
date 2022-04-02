@@ -69,6 +69,7 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
         }
       }
       context.weaponRanges = FOE.weaponRanges;
+      context.firerates = FOE.firerates;
     }
 
     if (item.type == 'spell') {

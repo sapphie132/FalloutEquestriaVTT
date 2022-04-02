@@ -10,9 +10,11 @@
         </div>
         <div class="resource">
           <label class="resource-label">{{localize "FOE.LoadedAmmunition"}}</label>
-          <select class="resource-dropdown" name="data.ammo.loaded" value="{{data.ammo.loaded}}">
-            {{selectOptions compatAmmo selected=data.ammo.loaded}}
-          </select>
+          <div>
+            <select class="resource-dropdown" name="data.ammo.loaded" value="{{data.ammo.loaded}}">
+              {{selectOptions compatAmmo selected=data.ammo.loaded}}
+            </select>
+          </div>
         </div>
       </div>
     </div>
@@ -50,11 +52,11 @@
         </div>
         <div class="resource">
           <label class="resource-label">{{localize "FOE.Range"}}</label>
-          <select name="data.range">
-            {{#each weaponRanges as |label key|}}
-            <option value="{{key}}" {{#if (eq ../data.range key)}}selected="selected"{{/if}}>{{localize label}}</option>
-            {{/each}}
-          </select>
+          <div>
+            <select name="data.range">
+              {{selectOptions weaponRanges selected=data.range localize=true}}
+            </select>
+          </div>
         </div>
         <div class="resource">
           <label class="resource-label">{{localize "FOE.APCost"}}</label>
@@ -71,13 +73,19 @@
         </div>
         <div class="resource">
           <label class="resource-label">{{localize "FOE.RateOfFire"}}</label>
-          <input type="text" name="data.firerate" value="{{data.firerate}}" data-dtype="String" />
+          <div>
+            <select name="data.firerate">
+              {{selectOptions firerates selected=data.firerate localize=true}}
+            </select>
+          </div>
         </div>
         <div class="resource">
           <label class="resource-label">{{localize "FOE.WeaponSkill"}}</label>
-          <select class="resource-dropdown" value="{{data.rollSkill}}" name="data.rollSkill">
-            {{selectOptions combatSkills selected=data.rollSkill}}
-          </select>
+          <div>
+            <select class="resource-dropdown" value="{{data.rollSkill}}" name="data.rollSkill">
+              {{selectOptions combatSkills selected=data.rollSkill}}
+            </select>
+          </div>
         </div>
         <div class="resource">
           <label class="resource-label">{{localize "FOE.AmmunitionType"}}</label>
@@ -94,9 +102,11 @@
         </div>
         <div class="resource">
           <label class="resource-label">{{localize "FOE.ConditionModifierType"}}</label>
-          <select value="{{data.conditionMod}}" name="data.conditionMod">
-            {{selectOptions conditionModTypes selected=data.conditionMod}}
-          </select>
+          <div>
+            <select value="{{data.conditionMod}}" name="data.conditionMod">
+              {{selectOptions conditionModTypes selected=data.conditionMod}}
+            </select>
+          </div>
         </div>
       </div>
     </div>

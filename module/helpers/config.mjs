@@ -286,6 +286,15 @@ FOE.skillValueLabels = {
 
 FOE.combatSkills = ["unarmed", "melee", "throwing", "firearms", "mew", "explosives", "bSaddles"];
 
+FOE.firerates = {
+  "fullauto": "FOE.FirerateFullAuto",
+  "boltaction": "FOE.FirerateBoltAction",
+  "burst": "FOE.FirerateBurst",
+  "leveraction": "FOE.FirerateLeverAction",
+  "semiauto": "FOE.FirerateSemiAuto",
+  "singleshot": "FOE.FirerateSingleShot",
+}
+
 FOE.resources = {
   "hp": "FOE.ResourceHP",
   "strain": "FOE.ResourceStrain",
