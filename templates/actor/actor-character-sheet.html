@@ -68,14 +68,14 @@
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
     {{!-- Default tab is specified in actor-sheet.mjs --}}
-    <a class="item tab-link" data-tab="vital">Vital</a>
+    <a class="item tab-link" data-tab="vital">{{localize "FOE.Vital"}}</a>
     <a class="item tab-link" data-tab="actions">{{localize "FOE.Actions"}}</a>
     <a class="item tab-link" data-tab="perks-traits">{{localize "FOE.PerksTraits"}}</a>
     <a class="item tab-link" data-tab="skills-stats">{{localize "FOE.SkillsStats"}}</a>
-    <a class="item tab-link" data-tab="inventory">Inventory</a>
-    <a class="item tab-link" data-tab="magic">Magic</a>
+    <a class="item tab-link" data-tab="inventory">{{localize "FOE.Inventory"}}</a>
+    <a class="item tab-link" data-tab="magic">{{localize "FOE.Magic"}}</a>
     <a class="item tab-link" data-tab="effects">{{localize "FOE.Effects"}}</a>
-    <a class="item tab-link" data-tab="biography">Biography</a>
+    <a class="item tab-link" data-tab="biography">{{localize "FOE.Biography"}}</a>
   </nav>
 
   {{!-- Sheet Body --}}
@@ -107,7 +107,7 @@
       <div class="flexrow">
         {{! First Column}}
         <div class="vital-block quick-skills">
-          <h3>Quick Skills</h3>
+          <h3>{{localize "FOE.Quick Skills"}}</h3>
           {{> "systems/foe/templates/actor/parts/actor-quick-skills.html"}}
         </div>
 
@@ -116,13 +116,13 @@
 
           {{! Limbs}}
           <div class="vital-block limbs">
-            <h3>Limb condition</h3>
+            <h3>{{localize "FOE.Limb condition"}}</h3>
             {{> "systems/foe/templates/actor/parts/actor-limbs.html"}}
           </div>
 
           {{! Resistances}}
           <div class="vital-block resistances">
-            <h3>Resistances</h3>
+            <h3>{{localize "FOE.Resistances"}}</h3>
             <table class="resistances">
               <tr>
                 {{#each data.attributes.resistances as |resistance key|}}
@@ -140,7 +140,7 @@
 
           {{! Radiation}}
           <div class="vital-block radiation">
-            <h3>Radation</h3>
+            <h3>{{localize "FOE.Radiation"}}</h3>
             <table>
               <thead>
                 <tr>
