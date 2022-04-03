@@ -21,7 +21,7 @@ export class FalloutEquestriaActor extends Actor {
 
   /** @override */
   applyActiveEffects() {
-    this.effects.forEach(e => {e.determineSuppression()})
+    this.effects.forEach(e => { e.determineSuppression() })
     return super.applyActiveEffects()
   }
 
@@ -83,15 +83,27 @@ export class FalloutEquestriaActor extends Actor {
 
     (function (rollData, limbs) {
       for (let [limbKey, limb] of Object.entries(limbs)) {
-        const cond = limb.condition;
-        let formula = FOE.formulas.limbs[limbKey] ?? FOE.formulas.limbs.default;
-        cond.base = evaluateFormula(formula, rollData());
-        cond.bonus = cond.bonus ?? 0;
-        cond.max = cond.base + cond.bonus;
-        if (cond.value == null) {
-          cond.value = cond.max;
+        let sublimbs;
+        if (limb.condition) {
+          sublimbs = {}
+          sublimbs[limbKey] = limb
+        } else {
+          sublimbs = limb
         }
-        cond.percent = (cond.value / cond.max) * 100;
+
+        for (let [_, sublimb] of Object.entries(sublimbs)) {
+          if (typeof (sublimb) === "object") {
+            const cond = sublimb.condition;
+            let formula = FOE.formulas.limbs[limbKey] ?? FOE.formulas.limbs.default;
+            cond.base = evaluateFormula(formula, rollData());
+            cond.bonus = cond.bonus ?? 0;
+            cond.max = cond.base + cond.bonus;
+            if (cond.value == null) {
+              cond.value = cond.max;
+            }
+            cond.percent = (cond.value / cond.max) * 100;
+          }
+        }
       }
     })(rollData, resources.hp.limbs);
 
@@ -160,16 +172,41 @@ export class FalloutEquestriaActor extends Actor {
     const amountHealed = healPerHour * hoursSlept;
     // Clipping happens later
     hp.value += amountHealed;
-    if (hp.value > hp.max) { hp.value = hp.max};
-    const limbCount = Object.keys(hp.limbs).size;
+    if (hp.value > hp.max) { hp.value = hp.max };
+    let limbCount = 0;
+    for (let [_, limb] of Object.entries(hp.limbs)) {
+      if (!limb.disabled) {
+        if (limb.condition) {
+          limbCount += 1;
+        } else {
+          for (let [_, sublimb] of Object.entries(limb)) {
+            if (typeof (sublimb) === "object") {
+              limbCount += 1;
+            }
+          }
+        }
+      }
+    }
 
     // Regenerate each limb, but do not cross the crippled threshold
-    for (let [_, limb] of Object.entries(hp.limbs)) {
-      const cond = limb.condition;
-      const isCrippled = cond.value <= cond.max / 2;
-      cond.value += Math.floor(amountHealed / limbCount)
-      const actualMax = isCrippled ? Math.floor(cond.max / 2) : cond.max;
-      cond.value = Math.min(cond.value, actualMax);
+    for (let [k, superLimb] of Object.entries(hp.limbs)) {
+
+      let sublimbs;
+      if (superLimb.condition) {
+        sublimbs = {};
+        sublimbs[k] = superLimb;
+      } else {
+        sublimbs = superLimb;
+      }
+      for (let [_, limb] of Object.entries(sublimbs)) {
+        if (typeof (limb) === "object") {
+          const cond = limb.condition;
+          const isCrippled = cond.value <= cond.max / 2;
+          cond.value += Math.floor(amountHealed / limbCount)
+          const actualMax = isCrippled ? Math.floor(cond.max / 2) : cond.max;
+          cond.value = Math.min(cond.value, actualMax);
+        }
+      }
     }
 
     const tp = this.data.data.resources.tp;
@@ -191,7 +228,7 @@ export class FalloutEquestriaActor extends Actor {
     resources.strain.value += FOE.strainRecovery[activityLevel] * numHours;
 
     this.clipResources();
-    await this.update({"data.resources": deepClone(resources)});
+    await this.update({ "data.resources": deepClone(resources) });
   }
 
   clipResources() {
@@ -206,7 +243,7 @@ export class FalloutEquestriaActor extends Actor {
     if (skill) {
       mod += modifierObject.skills[skill] ?? 0;
     }
-    
+
     if (combat) {
       mod += modifierObject.combat;
     }

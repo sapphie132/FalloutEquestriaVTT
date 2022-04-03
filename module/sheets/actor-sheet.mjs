@@ -75,7 +75,6 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     fetchAndLocalize(context.data.abilities, CONFIG.FOE.abilities)
     fetchAndLocalize(context.data.resources, CONFIG.FOE.resources)
     fetchAndLocalize(context.data.skills, CONFIG.FOE.skills)
-    fetchAndLocalize(context.data.resources.hp.limbs, CONFIG.FOE.limbs)
     fetchAndLocalize(context.data.attributes.resistances, CONFIG.FOE.resistances)
     fetchAndLocalize(context.data.misc, CONFIG.FOE.misc)
 
@@ -173,6 +172,25 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       },
     }
 
+    for (let [l, limb] of Object.entries(context.data.options.limbs)) {
+      limb.label = FOE.optionalLimbs[l]
+      if (!limb.present) {
+        context.data.resources.hp.limbs[l].disabled = true;
+      }
+    }
+
+    for (let [l, limb] of Object.entries(context.data.resources.hp.limbs)) {
+      if (limb.condition) {
+        limb.label = FOE.limbs[l];
+      } else {
+        for (let [sl, sublimb] of Object.entries(limb)) {
+          if (typeof (sublimb) === "object") {
+            if (FOE.limbs[l]) sublimb.label = FOE.limbs[l][sl]
+          }
+        }
+      }
+    }
+
     const details = {};
     for (let [k, v] of Object.entries(context.data.details)) {
       details[k] = foundry.utils.deepClone(v);
@@ -180,7 +198,6 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
         details[k] = {}
       }
       details[k].label = FOE.details[k] ?? k;
-      details[k].isCutieMark = k == "cutieMark";
     }
 
     // Set up the slots dropdowns

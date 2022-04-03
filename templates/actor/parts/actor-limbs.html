@@ -1,5 +1,5 @@
 <table width="100%">
-    <col style="width:45%"/>
+    <col style="width:45%" />
     <thead>
         <tr>
             <th>Location</th>
@@ -10,8 +10,10 @@
     </thead>
     <tbody>
         {{#each limbs as |limb key|}}
+        {{#unless limb.disabled}}
+        {{#if limb.condition}}
         <tr class="align-center">
-            <td class="align-left">{{limb.label}}</td>
+            <td class="align-left">{{localize limb.label}}</td>
             <td>
                 <input type="number" name="data.resources.hp.limbs.{{key}}.condition.value"
                     value="{{limb.condition.value}}" data-dtype="Number">
@@ -24,6 +26,25 @@
                 <div> {{numberFormat limb.condition.percent decimals=0 sign=false}}% </div>
             </td>
         </tr>
+        {{else}}
+        {{#each limb as |sublimb sublimbKey|}}
+        <tr class="align-center">
+            <td class="align-left">{{localize sublimb.label}}</td>
+            <td>
+                <input type="number" name="data.resources.hp.limbs.{{key}}.{{sublimbKey}}.condition.value"
+                    value="{{sublimb.condition.value}}" data-dtype="Number">
+            </td>
+            <td>
+                <input type="number" name="data.resources.hp.limbs.{{key}}.{{sublimbKey}}.condition.max" value="{{sublimb.condition.max}}"
+                    data-dtype="Number" disabled>
+            </td>
+            <td>
+                <div> {{numberFormat sublimb.condition.percent decimals=0 sign=false}}% </div>
+            </td>
+        </tr>
+        {{/each}}
+        {{/if}}
+        {{/unless}}
         {{/each}}
     </tbody>
 </table>

@@ -27,34 +27,38 @@
                   "value": null
                 }
               },
-              "lForeleg": {
-                "condition": {
-                  "value": null
+              "legs": {
+                "leftFore": {
+                  "condition": {
+                    "value": null
+                  }
+                },
+                "leftHind": {
+                  "condition": {
+                    "value": null
+                  }
+                },
+                "rightHind": {
+                  "condition": {
+                    "value": null
+                  }
+                },
+                "rightFore": {
+                  "condition": {
+                    "value": null
+                  }
                 }
               },
-              "lHindleg": {
-                "condition": {
-                  "value": null
-                }
-              },
-              "lWing": {
-                "condition": {
-                  "value": null
-                }
-              },
-              "rForeleg": {
-                "condition": {
-                  "value": null
-                }
-              },
-              "rHindleg": {
-                "condition": {
-                  "value": null
-                }
-              },
-              "rWing": {
-                "condition": {
-                  "value": null
+              "wings": {
+                "left": {
+                  "condition": {
+                    "value": null
+                  }
+                },
+                "right": {
+                  "condition": {
+                    "value": null
+                  }
                 }
               }
             }
@@ -288,6 +292,16 @@
         "flight": {
           "value": {},
           "tagged": false
+        }
+      },
+      "options": {
+        "limbs": {
+          "horn": {
+            "present": true
+          },
+          "wings": {
+            "present": true
+          }
         }
       },
       "details": {

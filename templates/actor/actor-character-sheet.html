@@ -75,7 +75,7 @@
     <a class="item tab-link" data-tab="inventory">{{localize "FOE.Inventory"}}</a>
     <a class="item tab-link" data-tab="magic">{{localize "FOE.Magic"}}</a>
     <a class="item tab-link" data-tab="effects">{{localize "FOE.Effects"}}</a>
-    <a class="item tab-link" data-tab="biography">{{localize "FOE.Biography"}}</a>
+    <a class="item tab-link" data-tab="details">{{localize "FOE.Details"}}</a>
   </nav>
 
   {{!-- Sheet Body --}}
@@ -116,7 +116,7 @@
 
           {{! Limbs}}
           <div class="vital-block limbs">
-            <h3>{{localize "FOE.Limb condition"}}</h3>
+            <h3>{{localize "FOE.LimbConditions"}}</h3>
             {{> "systems/foe/templates/actor/parts/actor-limbs.html"}}
           </div>
 
@@ -283,19 +283,27 @@
     </div>
 
     {{!-- Biography Tab --}}
-    <div class="tab flexrow" data-group="primary" data-tab="biography">
+    <div class="tab flexrow" data-group="primary" data-tab="details">
       {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data
       to
       the rollData property. --}}
       <div class="characteristics flexcol">
         {{#each details as |detail key|}}
         <label>{{localize detail.label}}</label>
-        {{#if detail.isCutieMark}}
+        {{#if (eq key "cutieMark")}}
         <img class="profile-img" src="{{detail.img}}" data-edit="data.details.{{key}}.img" title="{{actor.name}}"
           height="100" width="100" />
         {{/if}}
         <input name="data.details.{{key}}.value" value="{{detail.value}}" />
         {{/each}}
+      </div>
+      <div class="options">
+        <div>
+          {{#each data.options.limbs as |limb key|}}
+          <label class="checkbox" for="checkbox_limb_{{key}}">{{localize limb.label}}</label>
+          <input type="checkbox" id="checkbox_limb_{{key}}" data-dtype="Boolean" name="data.options.limbs.{{key}}.present" {{checked limb.present}} />
+          {{/each}}
+        </div>
       </div>
       <div class="biography">
         {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner

@@ -320,16 +320,25 @@ FOE.ratesOfFire = {
   burst: "FOE.Burst",
 }
 
+FOE.optionalLimbs = {
+  horn: "FOE.LimbHorn",
+  wings: "FOE.LimbWings",
+}
+
 FOE.limbs = {
-  horn: "FOE.Horn",
-  lForeleg: "FOE.LeftForeleg",
-  rForeleg: "FOE.RightForeleg",
-  lHindleg: "FOE.LeftHindleg",
-  rHindleg: "FOE.RightHindleg",
-  rWing: "FOE.RightWing",
-  lWing: "FOE.LeftWing",
-  head: "FOE.Head",
-  torso: "FOE.Torso"
+  horn: "FOE.LimbHorn",
+  legs: {
+    leftFore: "FOE.LimbLeftForeleg",
+    rightFore: "FOE.LimbRightForeleg",
+    leftHind: "FOE.LimbLeftHindleg",
+    rightHind: "FOE.LimbRightHindleg",
+  },
+  wings: {
+    left: "FOE.LimbWingLeft",
+    right: "FOE.LimbWingRight",
+  },
+  head: "FOE.LimbHead",
+  torso: "FOE.LimbTorso"
 }
 
 FOE.resistances = {
