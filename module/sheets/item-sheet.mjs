@@ -1,5 +1,5 @@
 import { FOE } from "../helpers/config.mjs";
-import { fetchAndLocalize } from "../helpers/util.mjs"
+import { localizeAll, fetchAndLocalize } from "../helpers/util.mjs"
 import ActiveEffectFoE from "../active-effect.mjs";
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -70,6 +70,7 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
       }
       context.weaponRanges = FOE.weaponRanges;
       context.firerates = FOE.firerates;
+      context.weaponTypes = localizeAll(FOE.weaponTypes);
     }
 
     if (item.type == 'spell') {

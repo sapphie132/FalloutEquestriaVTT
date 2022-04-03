@@ -405,7 +405,8 @@
           "max": 0
         },
         "perShot": 1
-      }
+      },
+      "type": "none"
     },
     "ammo": {
       "templates": [

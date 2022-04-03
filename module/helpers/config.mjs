@@ -341,6 +341,13 @@ FOE.limbs = {
   torso: "FOE.LimbTorso"
 }
 
+FOE.weaponTypes = {
+  none: "FOE.N/A",
+  pistol: "FOE.WeaponTypePistol",
+  smg: "FOE.WeaponTypeSMG",
+  heavy: "FOE.WeaponTypeHeavy",
+}
+
 FOE.resistances = {
   fire: "FOE.Fire",
   cold: "FOE.Cold",

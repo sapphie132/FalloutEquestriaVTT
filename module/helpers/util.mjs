@@ -15,6 +15,14 @@ export function fetchAndLocalize(obj, table) {
     }
 }
 
+export function localizeAll(table) {
+    let res = deepClone(table);
+    for (let [k, v] of Object.entries(table)) {
+        res[k] = game.i18n.localize(v)
+    }
+    return res;
+}
+
 /**
  * Evaluates the provided formula. If that fails, evaluate the
  * fallback formula, and return a variable to indicate that it failed.
