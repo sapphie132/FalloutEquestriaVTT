@@ -26,7 +26,7 @@ FOE.weaponRanges = {
   "long": "FOE.RangeLong",
   "sniper": "FOE.RangeSniper",
   "none": "FOE.N/A",
-  "pointBlank": "FOE.PointBlank",
+  "pointBlank": "FOE.RangePointBlank",
 }
 
 FOE.abilityAbbreviations = {
@@ -217,11 +217,11 @@ FOE.skills = {
 }
 
 FOE.armorLimbs = {
-  horn: "FOE.Horn",
-  head: "FOE.Head",
-  wings: "FOE.Wings",
-  body: "FOE.Body",
-  legs: "FOE.Legs"
+  horn: "FOE.ArmorHorn",
+  head: "FOE.ArmorHead",
+  wings: "FOE.ArmorWings",
+  body: "FOE.ArmorBody",
+  legs: "FOE.ArmorLegs"
 }
 
 FOE.spellLevels = {

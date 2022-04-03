@@ -360,10 +360,10 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     let doSleep = type === "sleep";
     if (doSleep) {
       // timeFn = this.actor.sleep.bind(this.actor);
-      text = game.i18n.localize("FOE.Sleep");
+      text = game.i18n.localize("FOE.ActionSleep");
     } else if (type === "timeskip") {
       // timeFn = this.actor.passTime.bind(this.actor);
-      text = game.i18n.localize("FOE.PassTime");
+      text = game.i18n.localize("FOE.ActionPassTime");
     } else {
       throw new Error("Invalid action type: " + type);
     }

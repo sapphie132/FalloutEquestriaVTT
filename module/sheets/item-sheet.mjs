@@ -68,8 +68,8 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
           }
         }
       }
-      context.weaponRanges = FOE.weaponRanges;
-      context.firerates = FOE.firerates;
+      context.weaponRanges = localizeAll(FOE.weaponRanges);
+      context.firerates = localizeAll(FOE.firerates);
       context.weaponTypes = localizeAll(FOE.weaponTypes);
     }
 
