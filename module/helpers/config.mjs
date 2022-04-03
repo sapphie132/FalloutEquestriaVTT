@@ -334,8 +334,8 @@ FOE.limbs = {
     rightHind: "FOE.LimbRightHindleg",
   },
   wings: {
-    left: "FOE.LimbWingLeft",
-    right: "FOE.LimbWingRight",
+    left: "FOE.LimbLeftWing",
+    right: "FOE.LimbRightWing",
   },
   head: "FOE.LimbHead",
   torso: "FOE.LimbTorso"

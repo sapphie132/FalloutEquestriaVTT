@@ -174,9 +174,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
 
     for (let [l, limb] of Object.entries(context.data.options.limbs)) {
       limb.label = FOE.optionalLimbs[l]
-      if (!limb.present) {
-        context.data.resources.hp.limbs[l].disabled = true;
-      }
+      context.data.resources.hp.limbs[l].disabled = !limb.present;
     }
 
     for (let [l, limb] of Object.entries(context.data.resources.hp.limbs)) {

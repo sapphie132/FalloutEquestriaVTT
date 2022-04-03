@@ -28,6 +28,7 @@
         </tr>
         {{else}}
         {{#each limb as |sublimb sublimbKey|}}
+        {{#ifObject sublimb}}
         <tr class="align-center">
             <td class="align-left">{{localize sublimb.label}}</td>
             <td>
@@ -42,6 +43,7 @@
                 <div> {{numberFormat sublimb.condition.percent decimals=0 sign=false}}% </div>
             </td>
         </tr>
+        {{/ifObject}}
         {{/each}}
         {{/if}}
         {{/unless}}
