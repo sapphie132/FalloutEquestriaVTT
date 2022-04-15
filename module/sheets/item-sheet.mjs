@@ -94,6 +94,7 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
     context.compatAmmo = compatAmmo;
 
     context.effects = ActiveEffectFoE.prepareActiveEffectCategories(this.object.data.effects);
+    context.owned = !!this.actor;
     return context;
   }
 

@@ -304,6 +304,15 @@
           }
         }
       },
+      "spellCasting": {
+        "arcane": {
+          "basic": false,
+          "advanced": false,
+          "expert": false,
+          "gAndP": false
+        },
+        "arcaneLevel": 0
+      },
       "details": {
         "race": {
           "value": ""
@@ -460,26 +469,30 @@
         "basic": {
           "description": "",
           "enabled": true,
-          "learned": false
+          "learned": false,
+          "strainCost": 0
         },
         "advanced": {
           "description": "",
           "enabled": false,
-          "learned": false
+          "learned": false,
+          "strainCost": 0
         },
         "expert": {
           "description": "",
           "enabled": false,
-          "learned": false
+          "learned": false,
+          "strainCost": 0
+
         },
         "gAndP": {
           "description": "",
           "enabled": false,
-          "learned": false
+          "learned": false,
+          "strainCost": 0
         }
       },
-      "school": "general",
-      "strainCost": 0
+      "school": "general"
     },
     "perk": {
       "templates": [

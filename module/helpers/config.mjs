@@ -215,6 +215,26 @@ FOE.armorLimbs = {
   legs: "FOE.ArmorLegs"
 }
 
+FOE.resourcesBySpellType = {
+  spell: "strain",
+  trick: "tp"
+}
+
+FOE.arcaneLevelNumber = {
+  basic: 1,
+  advanced: 2,
+  expert: 3,
+  gAndP: 4
+}
+
+FOE.arcaneSpellApCost = {
+  base: 5,
+  unlearned: 10,
+  perLevel: 10
+}
+
+FOE.arcaneSpellUnlearnedSpellCost = 10;
+
 FOE.spellLevels = {
   basic: "FOE.MagicBasic",
   advanced: "FOE.MagicAdvanced",

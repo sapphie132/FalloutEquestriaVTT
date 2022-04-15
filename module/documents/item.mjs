@@ -22,16 +22,38 @@ export class FalloutEquestriaItem extends Item {
         this.data.conditionValues = foundry.utils.deepClone(v)
       }
     }
+
+    this.data.data.resource = FOE.resourcesBySpellType[this.type];
     if (this.type === 'spell') {
+      this.data.data.cost = this.data.data.strainCost;
       const levels = this.data.data.levels;
-      for (let [_, level] of Object.entries(levels)) {
+      const c = FOE.arcaneSpellApCost;
+      for (let [levelKey, level] of Object.entries(levels)) {
+        let levelApCost = c.base + c.perLevel * FOE.arcaneLevelNumber[levelKey]
         if (!level.enabled) {
           level.learned = false;
         }
+        let strainCost = level.rawStrainCost;
+        if (!level.learned) {
+          levelApCost += c.unlearned;
+          strainCost += FOE.arcaneSpellUnlearnedSpellCost;
+        }
+        level.strainCost = strainCost;
+        level.apCost = levelApCost;
       }
+
+      this.data.data.skill = "magic"
     }
 
   }
+
+  /*
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    if (this.type === 'spell') {
+      this.data.resource = 'strain'
+    }
+  }*/
 
   /**
    * Prepare a data object which is passed to any Roll formulas which are created related to this Item

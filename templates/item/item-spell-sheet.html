@@ -3,28 +3,33 @@
     <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
-    </div>
+    </div>      <div class="resource">
+        <label class="resource-label" for="data.school">{{localize "FOE.MagicArcaneSchool"}}</label>
+        <select class="resource-dropdown" name="data.school" value="{{data.school}}">
+          {{selectOptions schools selected=data.school}}
+        </select>
+      </div>
   </header>
-
-  {{!-- Sheet Tab Navigation --}}
-  <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="description">{{localize "FOE.Description"}}</a>
-    <a class="item" data-tab="attributes">{{localize "FOE.Attributes"}}</a>
-  </nav>
 
   {{!-- Sheet Body --}}
   <section class="sheet-body">
 
     {{!-- Description Tab --}}
-    <div class="tab" data-group="primary" data-tab="description">
+    <div>
       <label for="data.description">{{localize "FOE.Description"}}</label>
       <textarea name="data.description">{{data.description}}</textarea>
+
       <table>
+        <col style="width:15%"/>
+        <col style="width:12%"/>
+        <col style="width:12%"/>
+        <col style="width:12%"/>
         <thead>
           <tr>
             <th>{{localize "FOE.Level"}}</th>
             <th>{{localize "FOE.Enabled"}}</th>
             <th>{{localize "FOE.Learned"}}</th>
+            <th>{{localize "FOE.MagicStrainCost"}}</th>
             <th>{{localize "FOE.Description"}}</th>
           </tr>
         </thead>
@@ -39,7 +44,12 @@
               <input data-dtype="Bool" type="checkbox" name="data.levels.{{key}}.enabled" {{checked level.enabled}}>
             </td>
             <td>
-              <input data-dtype="Bool" type="checkbox" name="data.levels.{{key}}.learned" {{checked level.learned}} {{#unless level.enabled}}disabled{{/unless}}>
+              <input data-dtype="Bool" type="checkbox" name="data.levels.{{key}}.learned" {{checked level.learned}}
+                {{#ifAnd level.enabled ../owned}}{{else}}disabled{{/ifAnd}}>
+            </td>
+            <td>
+              <input data-dtype="Number" type="number" name="data.levels.{{key}}.rawStrainCost"
+                value="{{level.rawStrainCost}}" />
             </td>
             <td>
               <textarea name="data.levels.{{key}}.description">{{level.description}}</textarea>
@@ -48,23 +58,6 @@
           {{/each}}
         </tbody>
       </table>
-    </div>
-
-    {{!-- Attributes Tab --}}
-    <div class="tab attributes" data-group="primary" data-tab="attributes">
-      {{!-- As you add new fields, add them in here! --}}
-      <div class="grid grid-2col">
-        <div class="resource">
-          <label class="resource-label" for="data.strainCost">{{localize "FOE.MagicStrainCost"}}</label>
-          <input type="number" data-dtype="Number" name="data.strainCost" value="{{data.strainCost}}" />
-        </div>
-        <div class="resource">
-          <label class="resource-label" for="data.school">{{localize "FOE.MagicArcaneSchool"}}</label>
-          <select class="resource-dropdown" name="data.school" value="{{data.school}}">
-            {{selectOptions schools selected=data.school}}
-          </select>
-        </div>
-      </div>
     </div>
   </section>
 </form>

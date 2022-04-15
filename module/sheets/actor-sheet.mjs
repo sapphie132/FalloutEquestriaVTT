@@ -280,6 +280,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     context.maxCrit = context.data.attributes.crit;
     context.minFumble = 94 + context.data.attributes.fumble;
     context.magic = magic;
+    context.levelLabels = FOE.arcane
   }
 
   /* -------------------------------------------- */
@@ -300,7 +301,8 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     if (!this.isEditable) return;
 
     html.find('.action').click(this._onActionClick.bind(this));
-    html.find('.time').click(this._onTimeActionClick.bind(this));
+    html.find('.time-clickable').click(this._onTimeActionClick.bind(this));
+    html.find('.spell-clickable').click(this._onSpellClick.bind(this));
 
     // Add Inventory Item
     html.find('.item-create').click(this._onItemCreate.bind(this));
@@ -342,12 +344,60 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     }
   }
 
+  async _onSpellClick(event) {
+    event.preventDefault();
+    const actor = this.actor.data;
+    const dataset = event.currentTarget.dataset;
+    const spellId = dataset.spellId;
+    const spell = actor.items.get(spellId).data;
+    const levelKey = dataset.level;
+    const level = spell.data.levels[levelKey];
+    const apCost = level.apCost;
+    const strainCost = level.strainCost;
+    const levelName = game.i18n.localize(FOE.spellLevels[levelKey]);
+    let label = spell.name +" (" + levelName + ") (" + game.i18n.localize("FOE.SkillRollMagic") + ")"
+    if (!level.learned) {
+      label += " ("
+      label += game.i18n.localize("FOE.Unlearned")
+      label += ")"
+    }
+    const rollMode = game.settings.get('core', 'rollMode');
+    const speaker = ChatMessage.getSpeaker({ actor: this.actor });
+    let roll = await skillRoll(spell.data.skill, label, this.actor, 0, true, this.spellResourceConsumer(strainCost, apCost));
+    if (roll) {
+      roll.toMessage({
+        speaker: speaker,
+        rollMode: rollMode,
+        flavor: label,
+      })
+    }
+    // return roll;
+  }
+
+  spellResourceConsumer(strainAmount, apAmount) {
+    let resources = this.actor.data.data.resources;
+    let self = this.actor
+    async function decrementBullets(enabled) {
+      if (enabled) {
+        if (resources.ap.value >= apAmount && resources.strain.value >= strainAmount) {
+          resources.ap.value -= apAmount;
+          resources.strain.value -= strainAmount;
+          return self.update({ "data.resources": resources}).then(() => true);
+        } else {
+          return false;
+        }
+      } else {
+        return true
+      }
+    }
+
+    return decrementBullets
+  }
 
   async _onTimeActionClick(event) {
     event.preventDefault();
     const type = event.currentTarget.dataset.actionType
     const TIME_TEMPLATE = "systems/foe/templates/time.html";
-    let timeFn;
     let text;
     let doSleep = type === "sleep";
     if (doSleep) {

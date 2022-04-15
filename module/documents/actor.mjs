@@ -67,6 +67,14 @@ export class FalloutEquestriaActor extends Actor {
       ability.value = ability.rawValue + ability.bonus;
     }
 
+    // Determine maximum spellcasting level for arcane
+    (function (spellCasting) {
+      let arcane = spellCasting.arcane;
+      spellCasting.arcaneLevel = parseInt(spellCasting.arcaneLevel)
+      for (let [k, _] of Object.entries(arcane)) {
+        arcane[k] = FOE.arcaneLevelNumber[k] <= spellCasting.arcaneLevel;
+      }
+    })(data.spellCasting);
     // Compute resource maximums
     (function (rollData, resources) {
       for (let [resourceKey, resource] of Object.entries(resources)) {

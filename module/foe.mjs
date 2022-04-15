@@ -71,6 +71,14 @@ Handlebars.registerHelper('concat', function () {
   return outStr;
 });
 
+Handlebars.registerHelper("ifAnd", function (v1, v2, options) {
+  if (v1 && v2) {
+    return options.fn(this);
+  } else {
+    return options.inverse(this)
+  }
+})
+
 Handlebars.registerHelper("smartLookup", function (data, key, dict) {
   let lookup = data[key];
   let label = dict?.[lookup];

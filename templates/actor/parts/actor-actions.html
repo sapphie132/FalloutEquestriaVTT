@@ -25,11 +25,50 @@
         </div>
         <div>
             <h3>{{localize "FOE.TimeRelated"}}</h3>
-            <div class="clickable time" data-action-type="sleep">{{localize "FOE.ActionSleep"}}</div>
-            <div class="clickable time" data-action-type="timeskip">{{localize "FOE.ActionPassTime"}}</div>
+            <div class="clickable time-clickable" data-action-type="sleep">{{localize "FOE.ActionSleep"}}</div>
+            <div class="clickable time-clickable" data-action-type="timeskip">{{localize "FOE.ActionPassTime"}}</div>
         </div>
         <div>
-            <h3>{{localize "FOE.Spells"}}</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>{{localize "FOE.MagicSpellName"}}</th>
+                        <th>{{localize "FOE.MagicArcaneSpellLevel"}}</th>
+                        <th>{{localize "FOE.APCost"}}</th>
+                        <th>{{localize "FOE.Cost"}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#with magic.spell}}
+                    {{#each content as |spell idx|}}
+                    {{#each spell.data.levels as |level levelKey|}}
+                    {{#if level.enabled}}
+                    {{#if (lookup ../../../data.spellCasting.arcane levelKey)}}
+                    <tr>
+                        <td class="clickable spell-clickable" data-spell-id="{{spell._id}}" data-level="{{levelKey}}">
+                            {{spell.name}}
+                            {{#unless level.learned}}
+                            ({{localize "FOE.Unlearned"}})
+                            {{/unless}}
+                        </td>
+                        <td>
+                            {{localize (lookup ../../levelsDict levelKey)}}
+                        </td>
+                        <td>
+                            {{level.apCost}}
+                        </td>
+                        <td>
+                            {{level.strainCost}}
+                        </td>
+                    </tr>
+                    {{/if}}
+                    {{/if}}
+                    {{/each}}
+                    {{/each}}
+                    {{/with}}
+                </tbody>
+            </table>
+
         </div>
     </div>
     <div class="flexcol">
