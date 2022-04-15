@@ -174,6 +174,10 @@ export class FalloutEquestriaActor extends Actor {
     data.attributes.fumble = this.fumbleVal(0);
   }
 
+  async nextTurn() {
+    await this.passTime(0);
+  }
+
   async sleep(hoursSlept, hadMedicalAid, sleepQuality) {
     const hp = this.data.data.resources.hp;
     const healPerHour = hadMedicalAid ? hp.regen * 2 : hp.regen;
@@ -233,7 +237,7 @@ export class FalloutEquestriaActor extends Actor {
     // AP replenishes after a single turn in combat having it
     // also replenish after a longer time is convenient
     resources.ap.value = resources.ap.max;
-    resources.strain.value += FOE.strainRecovery[activityLevel] * numHours;
+    resources.strain.value += numHours * (FOE.strainRecovery[activityLevel] ?? 0);
 
     this.clipResources();
     await this.update({ "data.resources": deepClone(resources) });

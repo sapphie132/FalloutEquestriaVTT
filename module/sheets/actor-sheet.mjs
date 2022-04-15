@@ -399,6 +399,10 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     const type = event.currentTarget.dataset.actionType
     const TIME_TEMPLATE = "systems/foe/templates/time.html";
     let text;
+    if (type === "nextTurn") {
+      await this.actor.nextTurn()
+      return
+    }
     let doSleep = type === "sleep";
     if (doSleep) {
       // timeFn = this.actor.sleep.bind(this.actor);
