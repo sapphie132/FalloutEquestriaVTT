@@ -1,5 +1,5 @@
 import { FOE } from "../helpers/config.mjs";
-import { localizeAll, fetchAndLocalize } from "../helpers/util.mjs"
+import { localizeAll, fetchAndLocalize, fetchLabels } from "../helpers/util.mjs"
 import ActiveEffectFoE from "../active-effect.mjs";
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -73,15 +73,11 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
       context.weaponTypes = localizeAll(FOE.weaponTypes);
     }
 
-    if (item.type == 'spell') {
-      context.attributes = {};
-      const subtype = itemData.data.subtype;
-      for (let [k, v] of Object.entries(FOE.spellAttributes[subtype])) {
-        context.attributes[k] = v;
-      }
-
-      fetchAndLocalize(itemData.data.levels, FOE.spellLevels);
+    if (item.type === 'spell') {
+      fetchLabels(itemData.data.levels, FOE.spellLevels);
       context.levels = itemData.data.levels;
+      context.data = itemData.data;
+      context.schools = localizeAll(FOE.arcaneMagicSchools);
     }
 
     if (item.type == 'armor') {

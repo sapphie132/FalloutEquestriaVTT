@@ -8,8 +8,8 @@
 
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="description">Description</a>
-    <a class="item" data-tab="attributes">Attributes</a>
+    <a class="item" data-tab="description">{{localize "FOE.Description"}}</a>
+    <a class="item" data-tab="attributes">{{localize "FOE.Attributes"}}</a>
   </nav>
 
   {{!-- Sheet Body --}}
@@ -24,19 +24,22 @@
           <tr>
             <th>{{localize "FOE.Level"}}</th>
             <th>{{localize "FOE.Enabled"}}</th>
+            <th>{{localize "FOE.Learned"}}</th>
             <th>{{localize "FOE.Description"}}</th>
           </tr>
         </thead>
         <tbody>
-          {{#each levels as |level key|}}
+          {{#each data.levels as |level key|}}
           <tr>
             <td>
-              <label>{{level.label}}</label>
+              <label>{{localize level.label}}</label>
             </td>
 
             <td>
-              <input data-dtype="Bool" type="checkbox" name="data.levels.{{key}}.enabled" {{#if
-                level.enabled}}checked{{/if}}>
+              <input data-dtype="Bool" type="checkbox" name="data.levels.{{key}}.enabled" {{checked level.enabled}}>
+            </td>
+            <td>
+              <input data-dtype="Bool" type="checkbox" name="data.levels.{{key}}.learned" {{checked level.learned}} {{#unless level.enabled}}disabled{{/unless}}>
             </td>
             <td>
               <textarea name="data.levels.{{key}}.description">{{level.description}}</textarea>
@@ -51,13 +54,16 @@
     <div class="tab attributes" data-group="primary" data-tab="attributes">
       {{!-- As you add new fields, add them in here! --}}
       <div class="grid grid-2col">
-        {{#each attributes as |attribute attributeKey|}}
         <div class="resource">
-          <label class="resource-label" for="data.{{attributeKey}}">{{localize attribute.label}}</label>
-          <input type="{{attribute.inputType}}" data-dtype="{{attribute.type}}" name="data.{{attributeKey}}"
-            value="{{lookup ../data attributeKey}}" />
+          <label class="resource-label" for="data.strainCost">{{localize "FOE.MagicStrainCost"}}</label>
+          <input type="number" data-dtype="Number" name="data.strainCost" value="{{data.strainCost}}" />
         </div>
-        {{/each}}
+        <div class="resource">
+          <label class="resource-label" for="data.school">{{localize "FOE.MagicArcaneSchool"}}</label>
+          <select class="resource-dropdown" name="data.school" value="{{data.school}}">
+            {{selectOptions schools selected=data.school}}
+          </select>
+        </div>
       </div>
     </div>
   </section>

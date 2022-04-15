@@ -22,6 +22,14 @@ export class FalloutEquestriaItem extends Item {
         this.data.conditionValues = foundry.utils.deepClone(v)
       }
     }
+    if (this.type === 'spell') {
+      const levels = this.data.data.levels;
+      for (let [_, level] of Object.entries(levels)) {
+        if (!level.enabled) {
+          level.learned = false;
+        }
+      }
+    }
 
   }
 

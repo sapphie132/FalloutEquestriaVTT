@@ -1,29 +1,35 @@
 <div class="flexrow">
-    <div class="movement vital-block">
-        <table>
-            <thead>
-                <tr>
-                    <th>{{localize "FOE.MovementAction"}}</th>
-                    <th>{{localize "FOE.FeetShort"}}</th>
-                    <th>{{localize "FOE.YardsShort"}}</th>
-                    <th>{{localize "FOE.Cost"}}</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each movementTypes as |type key|}}
-                <tr>
-                    <td class="clickable action" data-yds="{{type.valYds}}" data-action-type="movement"
-                        data-label="{{type.name}}" data-cost="{{type.apCost}}">{{type.name}}</td>
-                    <td class="align-center">{{type.valFt}}</td>
-                    <td class="align-center">{{type.valYds}}</td>
-                    <td class="align-right">{{type.apCost}}</td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
+    <div class="movement">
+        <div class="movement vital-block">
+            <table>
+                <thead>
+                    <tr>
+                        <th>{{localize "FOE.MovementAction"}}</th>
+                        <th>{{localize "FOE.FeetShort"}}</th>
+                        <th>{{localize "FOE.YardsShort"}}</th>
+                        <th>{{localize "FOE.Cost"}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each movementTypes as |type key|}}
+                    <tr>
+                        <td class="clickable action" data-yds="{{type.valYds}}" data-action-type="movement"
+                            data-label="{{type.name}}" data-cost="{{type.apCost}}">{{type.name}}</td>
+                        <td class="align-center">{{type.valFt}}</td>
+                        <td class="align-center">{{type.valYds}}</td>
+                        <td class="align-right">{{type.apCost}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
         <div>
+            <h3>{{localize "FOE.TimeRelated"}}</h3>
             <div class="clickable time" data-action-type="sleep">{{localize "FOE.ActionSleep"}}</div>
             <div class="clickable time" data-action-type="timeskip">{{localize "FOE.ActionPassTime"}}</div>
+        </div>
+        <div>
+            <h3>{{localize "FOE.Spells"}}</h3>
         </div>
     </div>
     <div class="flexcol">

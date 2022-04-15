@@ -359,6 +359,7 @@
       "misc",
       "perk",
       "spell",
+      "trick",
       "ammo"
     ],
     "templates": {
@@ -448,36 +449,37 @@
         "stackable"
       ]
     },
+    "trick": {
+      "templates": ["base"]
+    },
     "spell": {
       "templates": [
         "base"
       ],
-      "subtype": "arcaneMagic",
-      "level": "Basic",
       "levels": {
         "basic": {
           "description": "",
-          "enabled": true
+          "enabled": true,
+          "learned": false
         },
         "advanced": {
           "description": "",
-          "enabled": false
+          "enabled": false,
+          "learned": false
         },
         "expert": {
           "description": "",
-          "enabled": false
+          "enabled": false,
+          "learned": false
         },
         "gAndP": {
           "description": "",
-          "enabled": false
+          "enabled": false,
+          "learned": false
         }
       },
-      "effect": "",
-      "tpCost": 0,
-      "extraTpCost": "",
-      "school": "Illusion",
-      "strainCost": 0,
-      "duration": ""
+      "school": "general",
+      "strainCost": 0
     },
     "perk": {
       "templates": [

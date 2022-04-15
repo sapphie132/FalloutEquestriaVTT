@@ -15,6 +15,13 @@ export function fetchAndLocalize(obj, table) {
     }
 }
 
+export function fetchLabels(obj, table) {
+    for (let [k, v] of Object.entries(obj)) {
+        let lookup = table[k] ?? k;
+        v.label = lookup;
+    }
+}
+
 export function localizeAll(table) {
     let res = deepClone(table);
     for (let [k, v] of Object.entries(table)) {

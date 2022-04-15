@@ -132,23 +132,21 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     };
 
     const magic = {
-      arcaneMagic: {
-        content: {},
-        attributes: {},
+      spell: {
+        content: [],
+        label: "FOE.MagicSpellArcane",
+        levelsDict: FOE.spellLevels,
       },
-      flightMagic: {
-        content: {},
-        attributes: {},
+      trick: {
+        content: [],
+        label: "FOE.MagicSpellFlight"
       },
     }
 
-    for (let [magicKey, attributes] of Object.entries(FOE.spellAttributes)) {
-      for (let [k, v] of Object.entries(attributes)) {
-        magic[magicKey].attributes[k] = { label: game.i18n.localize(v.label) };
-      }
+    for (let [k, spellCat] of Object.entries(magic)) {
+      spellCat.attributes = deepClone(FOE.spellAttributes[k])
     }
 
-    fetchAndLocalize(magic, FOE.magicTypes);
     const equippable = {
       weapon: {},
       armor: {},
@@ -222,7 +220,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       i.img = i.img || DEFAULT_TOKEN;
-      // Append to gear.
+      // Append to gear if it is something that belongs in the inventory.
       if (inventory[i.type]) {
         // Add it to the proper inventory
         inventory[i.type].content.push(i);
@@ -265,12 +263,8 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
         }
       } else if (i.type == 'perk') {
         perks[i.data.subtype].content[i._id] = i;
-      } else if (i.type == 'spell') {
-        fetchAndLocalize(i.data.levels, FOE.spellLevels);
-        // Add the spell to the correct category
-        if (i.data.subtype) {
-          magic[i.data.subtype].content[i._id] = i;
-        }
+      } else if (magic[i.type]) { // Append to magic if it belongs there
+        magic[i.type].content.push(i);
       } else {
         console.log(`Unknown item type: ${i.type}`);
       }

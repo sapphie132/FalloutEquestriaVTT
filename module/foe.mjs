@@ -71,6 +71,16 @@ Handlebars.registerHelper('concat', function () {
   return outStr;
 });
 
+Handlebars.registerHelper("smartLookup", function (data, key, dict) {
+  let lookup = data[key];
+  let label = dict?.[lookup];
+  if (label) {
+    return game.i18n.localize(label);
+  } else {
+    return lookup
+  }
+});
+
 Handlebars.registerHelper("eq", function (arg0, arg1) {
   return arg0 === arg1;
 })
@@ -121,20 +131,6 @@ Hooks.once("ready", async function () {
 
   FOE.localizedConditionModTypes = localizeObject(FOE.conditionModTypes);
   FOE.localizedRatesOfFire = localizeObject(FOE.ratesOfFire);
-  // Process spell attributes
-  for (let [k, v] of Object.entries(FOE.spellAttributes)) {
-    // Set the input types based on the attribute type
-
-    FOE.spellAttributes[k] = mergeObject(FOE.commonSpellAttributes, v, { inplace: false });
-    let v1 = FOE.spellAttributes[k];
-    for (let [k2, v2] of Object.entries(v1)) {
-      if (v2.type == "Number") {
-        v2.inputType = "number";
-      } else {
-        v2.inputType = "text";
-      }
-    }
-  }
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => createItemMacro(data, slot));

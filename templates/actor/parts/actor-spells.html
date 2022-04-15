@@ -1,42 +1,50 @@
 <ol class="items-list">
   {{#each magic as |spells spellCategory|}}
   <li class="item flexrow items-header">
-    <div class="item-name">{{spells.label}}s</div>
+    <div class="item-name">{{localize (concat spells.label "Plural")}}</div>
+    {{#if (eq spellCategory "spell")}}
+    <div class="item-spell-level">{{localize "FOE.MagicArcaneSpellLevelsLearned"}}</div>
+    {{/if}}
     {{#each spells.attributes as |attribute attributeKey|}}
-    <div class="item-{{attributeKey}}">{{attribute.label}}</div>
+    <div class="item-{{attributeKey}}">{{localize attribute.label}}</div>
     {{/each}}
     <div class="item-controls">
-      <a class="item-control item-create" title="Create item" data-type="spell" data-subtype="{{spellCategory}}"
-        data-spell-level="{{spellLevel}}"><i class="fas fa-plus"></i> Add {{spells.label}}</a>
+      <a class="item-control item-create" title="Create item" data-type="{{spellCategory}}"
+        data-spell-level="{{spellLevel}}"><i class="fas fa-plus"></i> {{localize (concat spells.label "Add")}}</a>
     </div>
   </li>
-  {{#each spells.content as |item id|}}
-  <li class="item flexrow" data-item-id="{{item._id}}">
+  {{!-- Iterate over the spells in the category--}}
+  {{#each spells.content as |spell id|}}
+  <li class="item flexrow" data-item-id="{{spell._id}}">
     <div class="item-name flexrow">
       <div class="item-image">
-        <a class="rollable" data-roll-type="item"><img src="{{item.img}}" title="{{item.name}}" width="24"
+        <a class="rollable" data-roll-type="item"><img src="{{spell.img}}" title="{{spell.name}}" width="24"
             height="24" /></a>
       </div>
-      <h4>{{item.name}}</h4>
+      <h4>{{spell.name}}</h4>
     </div>
+    <ul>
+      {{#if (eq spellCategory "spell")}}
+      {{#each spell.data.levels as |level levelKey|}}
+      {{#if level.learned}}
+      <li class="flexrow">
+        <div>{{localize (lookup spells.levelsDict levelKey)}}</div>
+      </li>
+      {{/if}}
+      {{/each}}
+      {{/if}}
+    </ul>
     {{#each spells.attributes as |attribute attributeKey|}}
-    <div class="align-center item-{{attributeKey}}">{{lookup item.data attributeKey}}</div>
+    <div class="align-center item-{{attributeKey}}">
+      {{smartLookup spell.data attributeKey attribute.dict}}
+    </div>
     {{/each}}
     <div class="item-controls">
       <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
       <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
     </div>
   </li>
-  <li>
-    {{#each item.data.levels as |level levelKey|}}
-    {{#if level.enabled}}
-    <div class="flexrow">
-      <div>{{level.label}}</div>
-      <div>{{level.description}}</div>
-    </div>
-    {{/if}}
-    {{/each}}
-  </li>
+
   {{/each}}
   {{/each}}
 </ol>

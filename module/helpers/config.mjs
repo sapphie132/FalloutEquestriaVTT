@@ -227,41 +227,37 @@ FOE.magicTypes = {
   flightMagic: "FOE.Trick",
 }
 
+FOE.arcaneMagicSchools = {
+  "general": "FOE.MagicArcaneSchoolGeneral",
+  "offence": "FOE.MagicArcaneSchoolOffence",
+  "defence": "FOE.MagicArcaneSchoolDefence",
+  "imbuing": "FOE.MagicArcaneSchoolImbuing",
+  "manipulation": "FOE.MagicArcaneSchoolManipulation",
+  "medical": "FOE.MagicArcaneSchoolMedical",
+  "illusion": "FOE.MagicArcaneSchoolIllusion",
+  "perception": "FOE.MagicArcaneSchoolPerception",
+  "battle": "FOE.MagicArcaneSchoolBattle",
+}
+
 FOE.spellAttributes = {
-  arcaneMagic: {
+  spell: {
     school: {
-      label: "FOE.School",
-      type: "String",
+      label: "FOE.MagicArcaneSchool",
+      dict: FOE.arcaneMagicSchools,
     },
     strainCost: {
-      label: "FOE.StrainCost",
-      type: "Number",
-    },
-    duration: {
-      label: "FOE.Duration",
-      type: "String",
+      label: "FOE.MagicStrainCost",
     },
   },
-  flightMagic: {
+  trick: {
     tpCost: {
-      label: "FOE.TPCost",
-      type: "Number",
+      label: "FOE.MagicTPCost",
     },
     extraTpCost: {
-      label: "FOE.AdditionalTPCost",
-      type: "String",
+      label: "FOE.MagicAdditionalTPCost",
     }
   }
 }
-
-
-FOE.commonSpellAttributes = {
-  level: {
-    label: "FOE.Level",
-    type: "String",
-  },
-}
-
 
 FOE.skillValueLabels = {
   base: "FOE.Base",
