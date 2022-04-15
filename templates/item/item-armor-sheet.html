@@ -50,7 +50,7 @@
           <div class="resource align-center">
             <label class="resource-label">{{slot.label}}</label>
             <div>
-              <input class="slot" type="checkbox" data-slot="{{slotId}}" {{#if slot.checked}}checked{{/if}} />
+              <input class="slot" type="checkbox" data-slot="{{slotId}}" {{checked slot.checked}}/>
             </div>
           </div>
           {{/each}}

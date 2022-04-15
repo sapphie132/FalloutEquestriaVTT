@@ -20,12 +20,12 @@
       </td>
       <td class="align-center">
         <input class="skills" title="{{localize " FOE.Tagged?"}}" type="checkbox" data-dtype="Boolean"
-          name="data.skills.{{skillKey}}.tagged" {{#if skill.tagged}}checked{{/if}} />
+          name="data.skills.{{skillKey}}.tagged" {{checked skill.tagged}}/>
       </td>
       {{#each ../subValues as |subVal valKey|}}
       <td class="align-center">
         <input class="skills" title="{{localize subVal.label}}" type="number" data-dtype="Number"
-          value="{{lookup skill.value valKey}}" {{#if subVal.readOnly}} disabled {{/if}}
+          value="{{lookup skill.value valKey}}" {{disabled subVal.readOnly}}
           name="data.skills.{{skillKey}}.value.{{valKey}}" />
       </td>
       {{/each}}
