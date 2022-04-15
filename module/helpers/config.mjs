@@ -105,16 +105,7 @@ FOE.skillsSubValues = {
   },
   ranks: {
     label: "FOE.Ranks",
-  },
-  perks: {
-    label: "FOE.Perks",
-  },
-  traits: {
-    label: "FOE.Traits",
-  },
-  books: {
-    label: "FOE.Books"
-  },
+  }
 }
 
 FOE.skills = {
