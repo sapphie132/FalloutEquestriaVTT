@@ -116,17 +116,20 @@
           "global": 0,
           "skills": {},
           "combat": 0
+        }
+      },
+      "resistances": {
+        "fire": {
+          "formula": "0"
         },
-        "resistances": {
-          "fire": {
-            "value": 0
-          },
-          "cold": {
-            "value": 0
-          },
-          "lightning": {
-            "value": 0
-          }
+        "cold": {
+          "formula": "0"
+        },
+        "lightning": {
+          "formula": "0"
+        },
+        "poison": {
+          "formula": "@end * 2"
         }
       },
       "movement": {
@@ -459,7 +462,9 @@
       ]
     },
     "trick": {
-      "templates": ["base"]
+      "templates": [
+        "base"
+      ]
     },
     "spell": {
       "templates": [
@@ -483,7 +488,6 @@
           "enabled": false,
           "learned": false,
           "strainCost": 0
-
         },
         "gAndP": {
           "description": "",

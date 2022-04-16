@@ -1,5 +1,5 @@
 import ActiveEffectFoE from "../active-effect.mjs"
-import { skillRoll, specialRoll } from "../dice.mjs"
+import { FoERoll, skillRoll, specialRoll } from "../dice.mjs"
 import { FOE } from "../helpers/config.mjs";
 import { fetchAndLocalize, selectedOption } from "../helpers/util.mjs";
 
@@ -75,7 +75,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     fetchAndLocalize(context.data.abilities, CONFIG.FOE.abilities)
     fetchAndLocalize(context.data.resources, CONFIG.FOE.resources)
     fetchAndLocalize(context.data.skills, CONFIG.FOE.skills)
-    fetchAndLocalize(context.data.attributes.resistances, CONFIG.FOE.resistances)
+    fetchAndLocalize(context.data.resistances, CONFIG.FOE.resistances)
     fetchAndLocalize(context.data.misc, CONFIG.FOE.misc)
 
 
@@ -355,7 +355,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     const apCost = level.apCost;
     const strainCost = level.strainCost;
     const levelName = game.i18n.localize(FOE.spellLevels[levelKey]);
-    let label = spell.name +" (" + levelName + ") (" + game.i18n.localize("FOE.SkillRollMagic") + ")"
+    let label = spell.name + " (" + levelName + ") (" + game.i18n.localize("FOE.SkillRollMagic") + ")"
     if (!level.learned) {
       label += " ("
       label += game.i18n.localize("FOE.Unlearned")
@@ -382,7 +382,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
         if (resources.ap.value >= apAmount && resources.strain.value >= strainAmount) {
           resources.ap.value -= apAmount;
           resources.strain.value -= strainAmount;
-          return self.update({ "data.resources": resources}).then(() => true);
+          return self.update({ "data.resources": resources }).then(() => true);
         } else {
           return false;
         }
@@ -646,16 +646,30 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       }
     }
 
+    const speaker = ChatMessage.getSpeaker({ actor: this.actor })
+    const rollMode = game.settings.get('core', 'rollMode');
+    let roll = null;
+    let label = null;
+
     // Handle rolls that supply the formula directly.
     if (dataset.roll) {
-      let label = dataset.label ? `${dataset.label} check` : '';
-      let roll = new Roll(dataset.roll, this.actor.getRollData()).roll();
+      label = dataset.label ? `${dataset.label} check` : '';
+      roll = new Roll(dataset.roll, this.actor.getRollData()).roll();
+    }
+
+    // Handle rolls that supply the target
+    if (dataset.rollTarget) {
+      label = dataset.label;
+      roll = new FoERoll("1d100", dataset.rollTarget, this.actor.getRollData());
+    }
+
+    if (roll) {
       roll.toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        speaker: speaker,
         flavor: label,
-        rollMode: game.settings.get('core', 'rollMode'),
-      });
-      return roll;
+        rollMode: rollMode,
+      })
+      return roll
     }
   }
 }

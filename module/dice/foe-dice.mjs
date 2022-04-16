@@ -5,7 +5,7 @@ Code originally from the dnd 5e module (https://gitlab.com/foundrynet/dnd5e/-/bl
 Adapted by Sapphie
 */
 export default class FoERoll {
-    constructor(mainFormula, targetFormula, data, options) {
+    constructor(mainFormula, targetFormula, data, options = {}) {
         this.mainRoll = new Roll(mainFormula, data);
         if (!(this.mainRoll.terms[0] instanceof Die))
             throw new Error(`Invalid roll formula provided: ${mainFormula}`)

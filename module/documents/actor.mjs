@@ -168,7 +168,18 @@ export class FalloutEquestriaActor extends Actor {
           mvtItem.valFt = mvtItem.value * 3;
         }
       }
-    })(rollData, data.movement)
+    })(rollData, data.movement);
+
+    (function (rollData, resistances) {
+      for (let [_, resistance] of Object.entries(resistances)) {
+        let formula = resistance.formula;
+        if (formula) {
+          let bonus = evaluateFormula(resistance.bonus ?? "0", rollData())
+          let base = evaluateFormula(formula, rollData())
+          resistance.value = bonus + base
+        }
+      }
+    })(rollData, data.resistances);
 
     data.attributes.crit = this.critVal(0);
     data.attributes.fumble = this.fumbleVal(0);

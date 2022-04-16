@@ -14,7 +14,7 @@
             <label for="data.resources.hp.regen" class="resource-label">{{localize "FOE.Regen"}}</label>
             <div class="resource-content flexrow flex-center flex-between">
               <input type="number" name="data.resources.hp.regen" value="{{data.resources.hp.regen}}"
-                data-dtype="Number" disabled/>
+                data-dtype="Number" disabled />
             </div>
           </div>
           {{!-- Level --}}
@@ -125,14 +125,15 @@
             <h3>{{localize "FOE.Resistances"}}</h3>
             <table class="resistances">
               <tr>
-                {{#each data.attributes.resistances as |resistance key|}}
-                <td>{{resistance.label}}</td>
+                {{#each data.resistances as |resistance key|}}
+                <th><span class="rollable" data-roll-target="{{resistance.value}}"
+                    data-roll-label="{{resistance.label}}">{{resistance.label}}</span></th>
                 {{/each}}
               </tr>
               <tr>
-                {{#each data.attributes.resistances as |resistance key|}}
+                {{#each data.resistances as |resistance key|}}
                 <td><input class="resistances" type="number" data-dtype="Number"
-                    name="data.attributes.resistances.{{key}}.value" value="{{resistance.value}}" /> </td>
+                    name="data.attributes.resistances.{{key}}.value" value="{{resistance.value}}" disabled /> </td>
                 {{/each}}
               </tr>
             </table>
@@ -153,8 +154,7 @@
                 <tr>
                   <td><input type="number" data-dtype="Number" name="data.rads.value" value="{{data.rads.value}}" />
                   </td>
-                  <td><input type="number" data-dtype="Number" name="data.rads.resistance"
-                      value="{{data.rads.resistance}}" /></td>
+                  <td>{{data.resistances.poison.value}}</td>
                   <td><input type="text" data-dtype="String" name="data.rads.sickness" value="{{data.rads.sickness}}" />
                   </td>
                 </tr>
@@ -162,26 +162,6 @@
             </table>
           </div>
           {{! Poison}}
-          <div class="vital-block radiation">
-            <h3>{{localize "FOE.Poison"}}</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th>{{localize "FOE.Resistance"}}</th>
-                  <th>{{localize "FOE.Effect"}}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><input type="number" data-dtype="Number" name="data.poison.resistance"
-                      value="{{data.poison.resistance}}" />
-                  </td>
-                  <td><input type="text" data-dtype="String" name="data.poison.effect" value="{{data.poison.effect}}" />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
           <div class="filler" style="height: 100%;">
           </div>
         </div>
@@ -301,7 +281,8 @@
         <div>
           {{#each data.options.limbs as |limb key|}}
           <label class="checkbox" for="checkbox_limb_{{key}}">{{localize limb.label}}</label>
-          <input type="checkbox" id="checkbox_limb_{{key}}" data-dtype="Boolean" name="data.options.limbs.{{key}}.present" {{checked limb.present}} />
+          <input type="checkbox" id="checkbox_limb_{{key}}" data-dtype="Boolean"
+            name="data.options.limbs.{{key}}.present" {{checked limb.present}} />
           {{/each}}
         </div>
       </div>

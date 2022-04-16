@@ -64,4 +64,13 @@ The keys for each skill can be found below.
 * Arcane Magic: `magic`
 * Flight Magic: `flight`
 
-#### 
+#### Resistances
+For resistances, it is possible to override the formula. For instance,
+`data.resistances.poison.formula` exposes the formula directly. However,
+`data.resistances.poison.bonus` exposes a bonus.
+The keys are:
+* Fire: `fire`
+* Cold: `cold`
+* Lightning: `lightning`
+* Poison: `poison`
+Very straightforward.

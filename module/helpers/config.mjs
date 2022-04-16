@@ -358,7 +358,8 @@ FOE.weaponTypes = {
 FOE.resistances = {
   fire: "FOE.Fire",
   cold: "FOE.Cold",
-  lightning: "FOE.Lightning"
+  lightning: "FOE.Lightning",
+  poison: "FOE.Poison",
 }
 
 FOE.movementTypes = {
