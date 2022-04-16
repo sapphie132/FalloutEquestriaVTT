@@ -332,6 +332,10 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
 
     html.find('.reload-button').click(this._reload.bind(this));
 
+    // Input focus and update
+    const inputs = html.find("input");
+    inputs.focus(ev => ev.currentTarget.select());
+    inputs.addBack().find('[data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
 
     // Drag events for macros.
     if (this.actor.isOwner) {
@@ -593,6 +597,21 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     return this.actor.update(newData);
   }
 
+  /**
+ * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs
+ * @param {Event} event  Triggering event.
+ * @private
+ */
+  _onChangeInputDelta(event) {
+    const input = event.target;
+    const value = input.value;
+    if (["+", "-"].includes(value[0])) {
+      let delta = parseFloat(value);
+      input.value = getProperty(this.actor.data, input.name) + delta;
+    } else if (value[0] === "=") {
+      input.value = value.slice(1);
+    }
+  }
 
 
   /**
