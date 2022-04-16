@@ -144,6 +144,7 @@
           <div class="vital-block radiation">
             <h3>{{localize "FOE.Radiation"}}</h3>
             <table>
+              <col style="min-width:45px"/>
               <thead>
                 <tr>
                   <th>{{localize "FOE.Rads"}}</th>
@@ -158,7 +159,7 @@
                   <td><input type="number" data-dtype="Number" name="data.rads.resistance.value"
                       value="{{data.rads.resistance.value}}" disabled />
                   </td>
-                  <td><input type="text" data-dtype="String" name="data.rads.sickness" value="{{data.rads.sickness}}" />
+                  <td>{{localize data.rads.sickness}}
                   </td>
                 </tr>
               </tbody>

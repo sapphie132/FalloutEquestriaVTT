@@ -59,14 +59,33 @@ export class FalloutEquestriaActor extends Actor {
     const data = actorData.data;
     let rollData = this.getRollData.bind(this);
 
-    const resources = data.resources;
-    const abilities = data.abilities;
+    // Compute special scores
+    (function (abilities) {
+      for (let [_, ability] of Object.entries(abilities)) {
+        ability.bonus = Number(ability.bonus ?? 0);
+        ability.value = ability.rawValue + ability.bonus;
+      }
+    })(data.abilities);
 
-    for (let [_, ability] of Object.entries(abilities)) {
-      ability.bonus = Number(ability.bonus ?? 0);
-      ability.value = ability.rawValue + ability.bonus;
-    }
+    // Compute radiation poisoning
+    (function (abilities, rads) {
+      let radValue = rads.value;
+      let prevMax = 0;
+      let maxLevel = null;
+      for (let [levelKey, level] of Object.entries(FOE.radPoison)) {
+        if (level.lower <= radValue) {
+          for (let [abilityKey, amount] of Object.entries(level.effect)) {
+            abilities[abilityKey].value += amount;
+          }
 
+          if (level.lower >= prevMax) {
+            prevMax = level.lower;
+            maxLevel = levelKey;
+          }
+        }
+      }
+      rads.poisonLevel = maxLevel;
+    })(data.abilities, data.rads);
     // Determine maximum spellcasting level for arcane
     (function (spellCasting) {
       let arcane = spellCasting.arcane;
@@ -89,6 +108,7 @@ export class FalloutEquestriaActor extends Actor {
       }
     })(rollData, data.resources);
 
+    // Compute hp maximums for limbs
     (function (rollData, limbs) {
       for (let [limbKey, limb] of Object.entries(limbs)) {
         let sublimbs;
@@ -113,7 +133,7 @@ export class FalloutEquestriaActor extends Actor {
           }
         }
       }
-    })(rollData, resources.hp.limbs);
+    })(rollData, data.resources.hp.limbs);
 
     // Compute subvalues and totals for each skill
     (function (rollData, skills) {
@@ -170,6 +190,7 @@ export class FalloutEquestriaActor extends Actor {
       }
     })(rollData, data.movement);
 
+    // Prepare elemental and poison resistance
     (function (rollData, resistances) {
       for (let [_, resistance] of Object.entries(resistances)) {
         let formula = resistance.formula;
@@ -181,6 +202,7 @@ export class FalloutEquestriaActor extends Actor {
       }
     })(rollData, data.resistances);
 
+    // Prepare rad resistance
     (function (rollData, rads) {
       let res = rads.resistance;
       let bonus = evaluateFormula(res.bonus ?? "0", rollData())

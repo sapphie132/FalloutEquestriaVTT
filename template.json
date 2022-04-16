@@ -121,7 +121,8 @@
       "rads": {
         "resistance": {
           "formula": "@end * 2"
-        }
+        },
+        "value": 0
       },
       "resistances": {
         "fire": {

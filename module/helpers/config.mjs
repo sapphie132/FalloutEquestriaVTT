@@ -362,6 +362,53 @@ FOE.resistances = {
   poison: "FOE.Poison",
 }
 
+FOE.radPoison = {
+  none: {
+    lower: 0,
+    effect: {}
+  },
+  minor: {
+    lower: 200,
+    effect: {
+      "end": -1,
+    }
+  },
+  advanced: {
+    lower: 400,
+    effect: {
+      "end": -1,
+      "agi": -1,
+    }
+  },
+  critical: {
+    lower: 600,
+    effect: {
+      "end": -1,
+      "agi": -1,
+      "str": -1,
+    }
+  },
+  deadly: {
+    lower: 800,
+    effect: {
+      "str": -1,
+    }
+  },
+  fatal: {
+    lower: 1000,
+    effect: {}
+  }
+}
+
+FOE.radPoisonLabels = {
+  none: "FOE.RadPoisonNone",
+  minor: "FOE.RadPoisonMinor",
+  advanced: "FOE.RadPoisonAdvanced",
+  critical: "FOE.RadPoisonCritical",
+  deadly: "FOE.RadPoisonDeadly",
+  fatal: "FOE.RadPoisonFatal",
+}
+
 FOE.movementTypes = {
   regular: {
     name: "FOE.Regular",
