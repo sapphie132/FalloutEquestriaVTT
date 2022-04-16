@@ -606,7 +606,13 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     const input = event.target;
     const value = input.value;
     if (["+", "-"].includes(value[0])) {
+      let isRads = input.name === "data.rads.value"
       let delta = parseFloat(value);
+      if (isRads) {
+        let scale = (100 - (this.actor.data.data.rads.resistance.value ?? 0)) / 100
+        delta *= scale;
+        delta = Math.floor(delta)
+      }
       input.value = getProperty(this.actor.data, input.name) + delta;
     } else if (value[0] === "=") {
       input.value = value.slice(1);

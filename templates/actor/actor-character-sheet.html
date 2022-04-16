@@ -53,7 +53,8 @@
         <div class="resource flex-group-center">
           <label for="data.resources.{{key}}.value" class="resource-label">{{resource.label}}</label>
           <div class="resource-content flexrow flex-center flex-between">
-            <input type="text" name="data.resources.{{key}}.value" value="{{resource.value}}" placeholder="0" data-dtype="Number" />
+            <input type="text" name="data.resources.{{key}}.value" value="{{resource.value}}" placeholder="0"
+              data-dtype="Number" />
             <div class="resource-sep">/</div>
             <input disabled type="number" name="data.resources.{{key}}.max" value="{{resource.max}}"
               data-dtype="Number" />
@@ -152,9 +153,11 @@
               </thead>
               <tbody>
                 <tr>
-                  <td><input type="number" data-dtype="Number" name="data.rads.value" value="{{data.rads.value}}" />
+                  <td><input type="text" data-dtype="Number" name="data.rads.value" value="{{data.rads.value}}" />
                   </td>
-                  <td>{{data.resistances.poison.value}}</td>
+                  <td><input type="number" data-dtype="Number" name="data.rads.resistance.value"
+                      value="{{data.rads.resistance.value}}" disabled />
+                  </td>
                   <td><input type="text" data-dtype="String" name="data.rads.sickness" value="{{data.rads.sickness}}" />
                   </td>
                 </tr>

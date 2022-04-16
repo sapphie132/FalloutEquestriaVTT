@@ -181,6 +181,13 @@ export class FalloutEquestriaActor extends Actor {
       }
     })(rollData, data.resistances);
 
+    (function (rollData, rads) {
+      let res = rads.resistance;
+      let bonus = evaluateFormula(res.bonus ?? "0", rollData())
+      let base = evaluateFormula(res.formula, rollData())
+      res.value = base + bonus;
+    })(rollData, data.rads);
+
     data.attributes.crit = this.critVal(0);
     data.attributes.fumble = this.fumbleVal(0);
   }

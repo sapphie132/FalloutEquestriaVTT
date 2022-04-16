@@ -74,3 +74,12 @@ The keys are:
 * Lightning: `lightning`
 * Poison: `poison`
 Very straightforward.
+
+The exception to this is radiation. For that, resistance is handled using
+`data.rads.resistance.bonus` and `data.rads.resistance.formula`. That is
+because the game handles radiation differently than the rest of resistances,
+as it actually reduces it by a percentage, rather than being a black and white
+resistance check.
+
+It is worth noting that when using delta input (i.e., typing "+5" in the input),
+radiation resistance is automatically applied. Magic!

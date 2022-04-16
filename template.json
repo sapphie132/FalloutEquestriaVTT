@@ -118,6 +118,11 @@
           "combat": 0
         }
       },
+      "rads": {
+        "resistance": {
+          "formula": "@end * 2"
+        }
+      },
       "resistances": {
         "fire": {
           "formula": "0"
