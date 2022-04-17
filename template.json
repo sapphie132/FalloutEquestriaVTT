@@ -116,6 +116,11 @@
           "global": 0,
           "skills": {},
           "combat": 0
+        }, 
+        "skillPoints": {
+          "perLevel": {
+            "bonus": 0
+          }
         }
       },
       "rads": {

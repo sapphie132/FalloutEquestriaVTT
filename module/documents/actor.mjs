@@ -210,6 +210,29 @@ export class FalloutEquestriaActor extends Actor {
       res.value = base + bonus;
     })(rollData, data.rads);
 
+    (function (int, effects, attributes) {
+      const relevantSkillKey = "data.abilities.int.bonus";
+      let bonusInt = 0;
+      for (let effect of effects.values()) {
+        if (!effect.isTemporary && !effect.isSuppressed) {
+          effect = effect.data;
+          if (!effect.disabled) {
+            for (let change of effect.changes) {
+              if (change.key === relevantSkillKey) {
+                if (change.mode === 2) {
+                  bonusInt += Number(change.value);
+                }
+              }
+            }
+          }
+        }
+      }
+
+      const skillPoints = attributes.skillPoints;
+      skillPoints.perLevel.value = evaluateFormula(FOE.skillPointsPerLevel, {'int': int + bonusInt}) + skillPoints.perLevel.bonus;
+      skillPoints.value = skillPoints.perLevel.value * attributes.level.value;
+    })(data.abilities.int.rawValue, this.effects, data.attributes);
+
     data.attributes.crit = this.critVal(0);
     data.attributes.fumble = this.fumbleVal(0);
   }

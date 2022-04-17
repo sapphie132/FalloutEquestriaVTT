@@ -83,3 +83,12 @@ resistance check.
 
 It is worth noting that when using delta input (i.e., typing "+5" in the input),
 radiation resistance is automatically applied. Magic!
+
+#### Notes
+##### Temporary vs Permanent effects
+It is very important, when creating effects on items or on characters
+directly, to differentiate between temporary and permanent effects. At the
+time of writing this, only skill points per level treat the two differently.
+
+Armour, guns, etc need to be put down as temporary, while only certain perks
+can be put down as permanent.

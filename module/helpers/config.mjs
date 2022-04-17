@@ -303,6 +303,9 @@ FOE.firerates = {
   "singleshot": "FOE.FirerateSingleShot",
 }
 
+FOE.skillPointsPerLevel = "@int + 10";
+FOE.maxStatTotal = 40;
+
 FOE.resources = {
   "hp": "FOE.ResourceHP",
   "strain": "FOE.ResourceStrain",

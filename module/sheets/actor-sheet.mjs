@@ -85,6 +85,17 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       movementTypes[k].valFt = v.valFt;
     }
 
+    context.data.skillTotal = 0;
+    for (let [_, skill] of Object.entries(context.data.skills)) {
+      context.data.skillTotal += skill.value.ranks + skill.value.tag;
+    }
+
+    context.data.statTotal = 0;
+    context.data.maxStat = FOE.maxStatTotal;
+    for (let [_, stat] of Object.entries(context.data.abilities)) {
+      context.data.statTotal += stat.value;
+    }
+
     context.movementTypes = movementTypes;
 
     context.limbs = context.data.resources.hp.limbs;
