@@ -1,5 +1,5 @@
 {{#each equippable.weapon as |slot idx|}}
-<div class="vital-block">
+<div class="weapon-slot">
     <div class="flexlarge flexrow resource-label" data-item-id="{{slot.item}}">
         <div>
             {{localize slot.label}}
@@ -36,7 +36,7 @@
         <div class="item-damage">{{damageString slot.equippedItem}}</div>
         <div class="item-range">{{slot.equippedItem.data.range}}</div>
         <div class="item-cost">{{slot.equippedItem.data.cost}}</div>
-        <div class="item-firerate">{{slot.equippedItem.data.firerate}}</div>
+        <div class="item-firerate">{{localize (lookup ../firerates slot.equippedItem.data.firerate)}}</div>
         <input type="number" data-dtype="Number" class="item-condition" data-item-id="{{slot.equippedItem._id}}"
             value="{{slot.equippedItem.data.condition}}" />
     </div>

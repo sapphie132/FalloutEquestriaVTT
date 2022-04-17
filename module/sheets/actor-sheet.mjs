@@ -285,6 +285,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
     context.data.rads.sickness = FOE.radPoisonLabels[context.data.rads.poisonLevel]
 
     // Assign and return
+    context.firerates = FOE.firerates;
     context.inventory = inventory;
     context.equippable = equippable;
     context.perks = perks;
