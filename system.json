@@ -2,7 +2,7 @@
   "name": "foe",
   "title": "Fallout Equestria",
   "description": "The Fallout Equestria system for FoundryVTT!",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "minimumCoreVersion": "0.8.5",
   "compatibleCoreVersion": "9",
   "author": "Sapphie",
@@ -23,6 +23,6 @@
   "secondaryTokenAttribute": "ap",
   "url": "https://github.com/sapphie132/FalloutEquestriaVTT",
   "manifest": "https://raw.githubusercontent.com/sapphie132/FalloutEquestriaVTT/master/system.json",
-  "download": "https://github.com/sapphie132/FalloutEquestriaVTT/archive/refs/tags/1.0.2.zip",
+  "download": "https://github.com/sapphie132/FalloutEquestriaVTT/archive/refs/tags/1.0.3.zip",
   "license": "LICENSE.txt"
 }
