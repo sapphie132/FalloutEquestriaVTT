@@ -207,13 +207,24 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
       }
     }
 
-    for (let [k, v] of Object.entries(equipped.armor)) {
-      equippable.armor[k] = {
+    const optionalLimbs = context.data.options.limbs;
+    for (let [armourKey, v] of Object.entries(equipped.armor)) {
+      let enabled = true;
+      for (let [limbKey, limb] of Object.entries(optionalLimbs)) {
+        if (!limb.present) {
+          let idx = armourKey.search(limbKey);
+          if (idx >= 0) {
+            enabled = false
+          }
+        }
+      }
+      equippable.armor[armourKey] = {
         options: {
           "none": "None"
         },
-        label: game.i18n.localize(FOE.armorLimbs[k] ?? k),
+        label: game.i18n.localize(FOE.armorLimbs[armourKey] ?? armourKey),
         item: v,
+        enabled: enabled,
       }
     }
 

@@ -185,6 +185,7 @@
               </thead>
               <tbody>
                 {{#each equippable.armor as |slot key|}}
+                {{#if slot.enabled}}
                 <tr>
                   <td>{{slot.label}}</td>
                   <td>
@@ -201,6 +202,7 @@
                     {{/if}}
                   </td>
                 </tr>
+                {{/if}}
                 {{/each}}
               </tbody>
             </table>
