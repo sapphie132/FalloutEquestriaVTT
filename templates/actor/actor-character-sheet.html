@@ -93,7 +93,7 @@
         <tr>
           {{#each data.abilities as |ability key|}}
           <td class="ability">
-            <h4 class="ability-name box-title rollable" data-roll-type="special" data-roll-stat="{{key}}">
+            <h4 class="ability-name box-title rollable" data-roll-type="special" data-label="{{key}}" data-roll-stat="{{key}}">
               {{ability.label}}</h4>
             <div class="ability-total">
               {{ability.value}}

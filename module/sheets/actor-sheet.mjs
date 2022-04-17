@@ -633,7 +633,7 @@ export class FalloutEquestriaActorSheet extends ActorSheet {
 
     // Handle item rolls.
     if (dataset.rollType) {
-      const label = dataset.label ? `${dataset.label} check` : '';
+      const label = dataset.label ? game.i18n.localize("FOE.CheckLabel" + dataset.label.capitalize()) : "";
       switch (dataset.rollType) {
         case 'item':
           // TODO: make weapon rolls smarter (post rollable links in chat)

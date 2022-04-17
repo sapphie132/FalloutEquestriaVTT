@@ -110,99 +110,99 @@ FOE.skillsSubValues = {
 
 FOE.skills = {
   unarmed: {
-    label: "FOE.Unarmed",
+    label: "FOE.SkillUnarmed",
     formula: "@end + @agi + @luck / 2"
   },
   throwing: {
-    label: "FOE.Throwing",
+    label: "FOE.SkillThrowing",
     formula: "@str + @agi + @luck / 2"
   },
   melee: {
-    label: "FOE.Melee",
+    label: "FOE.SkillMelee",
     formula: "@str + @agi + @luck / 2"
   },
   firearms: {
-    label: "FOE.Firearms",
+    label: "FOE.SkillFirearms",
     formula: "@per + @agi + @luck / 2"
   },
   mew: {
-    label: "FOE.MEW",
+    label: "FOE.SkillMEW",
     formula: "@per * 2 + @luck / 2"
   },
   explosives: {
-    label: "FOE.Explosives",
+    label: "FOE.SkillExplosives",
     formula: "@per * 2 + @luck / 2"
   },
   bSaddles: {
-    label: "FOE.BattleSaddles",
+    label: "FOE.SkillBattleSaddles",
     formula: "@per + @end * 2 + @str + @luck / 2 - 10"
   },
   survival: {
-    label: "FOE.AlchemySurvivalTraps",
+    label: "FOE.SkillAlchemySurvivalTraps",
     formula: "@end + @per + @luck / 2"
   },
   barter: {
-    label: "FOE.Barter",
+    label: "FOE.SkillBarter",
     formula: "@cha * 2 + @luck / 2"
   },
   intimidation: {
-    label: "FOE.BluffIntimidation",
+    label: "FOE.SkillBluffIntimidation",
     formula: "@cha * 2 + @luck / 2"
   },
   persuasion: {
-    label: "FOE.NegotiationSeduction",
+    label: "FOE.SkillNegotiationSeduction",
     formula: "@cha * 2 + @luck / 2"
   },
   sneak: {
-    label: "FOE.Sneak",
+    label: "FOE.SkillSneak",
     formula: "@agi * 2 + @luck / 2"
   },
   lockpick: {
-    label: "FOE.Lockpick",
+    label: "FOE.SkillLockpick",
     formula: "@per * 2 + @luck / 2"
   },
   sleightHoof: {
-    label: "FOE.SleightOfHoof",
+    label: "FOE.SkillSleightOfHoof",
     formula: "@cha + @agi + @luck / 2"
   },
   tech: {
-    label: "FOE.HackingMatrixTech",
+    label: "FOE.SkillHackingMatrixTech",
     formula: "@int * 2 + @luck / 2"
   },
   chem: {
-    label: "FOE.Chemistry",
+    label: "FOE.SkillChemistry",
     formula: "@int * 2 + @luck / 2"
   },
   history: {
-    label: "FOE.AcademicsLore",
+    label: "FOE.SkillAcademicsLore",
     formula: "@int * 2 + @luck / 2"
   },
   repair: {
-    label: "FOE.RepairMechanics",
+    label: "FOE.SkillRepairMechanics",
     formula: "@int * 2 + @luck / 2"
   },
   gambling: {
-    label: "FOE.Gambling",
+    label: "FOE.SkillGambling",
     formula: "@luck * 2 + 3"
   },
   athletics: {
-    label: "FOE.Athletics",
+    label: "FOE.SkillAthletics",
     formula: "@str + @agi + @end + @luck / 2 - 5"
   },
   profession: {
-    label: "FOE.Profession",
+    label: "FOE.SkillProfession",
     formula: "@cha * 2 + @luck / 2"
   },
   shamanism: {
-    label: "FOE.Shamanism",
+    label: "FOE.SkillShamanism",
     formula: "@cha * 2 + @luck / 2"
   },
   magic: {
-    label: "FOE.Magic",
+    label: "FOE.SkillMagic",
     formula: "@per + @int + @luck / 2"
   },
   flight: {
-    label: "FOE.FlightMagic",
+    label: "FOE.SkillFlightMagic",
     formula: "@end + @agi + @cha + @luck / 2"
   }
 }
