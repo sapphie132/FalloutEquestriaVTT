@@ -116,7 +116,7 @@
           "global": 0,
           "skills": {},
           "combat": 0
-        }, 
+        },
         "skillPoints": {
           "perLevel": {
             "bonus": 0
@@ -481,6 +481,11 @@
       "description": "",
       "extraCost": ""
     },
+    "trait": {
+      "templates": [
+        "base"
+      ]
+    },
     "spell": {
       "templates": [
         "base"
@@ -517,7 +522,15 @@
       "templates": [
         "base"
       ],
-      "subtype": "perk"
+      "rank": 1,
+      "maxRanks": 1,
+      "requirements": {
+        "level": 2,
+        "racial": null,
+        "traits": [],
+        "perks": [],
+        "other": ""
+      }
     }
   }
 }

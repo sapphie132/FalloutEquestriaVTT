@@ -320,7 +320,11 @@ input.inline {
 
 .foe .sheet-body,
 .foe .sheet-body .tab,
-.foe .sheet-body .tab .editor {
+.foe {
+  height: 60%;
+}
+
+.item-description {
   height: 100%;
 }
 
