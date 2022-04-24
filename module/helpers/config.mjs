@@ -54,7 +54,7 @@ FOE.formulas = {
     base: "55 + @agi * 3"
   },
   tp: {
-    base: "(@cha + @agi) / 2 + @lvl - 1"
+    base: "ceil((@cha + @agi) / 2) + @lvl - 1"
   }
 }
 

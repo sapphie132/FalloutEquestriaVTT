@@ -1,0 +1,24 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <div class="header-fields">
+      <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+    </div>
+    <div class="resource">
+      <label for="data.cost">{{localize "FOE.MagicTPCost"}}</label>
+      <input type="number" data-dtype="Number" name="data.cost" value="{{data.cost}}" />
+      <label for="data.extraCost">{{localize "FOE.MagicAdditionalTPCost"}}</label>
+      <input type="text" data-dtype="String" name="data.extraCost" value="{{data.extraCost}}" />
+    </div>
+  </header>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+
+    {{!-- Description Tab --}}
+    <div>
+      <label for="data.description">{{localize "FOE.Description"}}</label>
+      <textarea name="data.description">{{data.description}}</textarea>
+    </div>
+  </section>
+</form>

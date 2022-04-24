@@ -69,6 +69,33 @@
                     {{/with}}
                 </tbody>
             </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>{{localize "FOE.MagicTrickName"}}</th>
+                        <th>{{localize "FOE.MagicTPCost"}}</th>
+                        <th>{{localize "FOE.MagicAdditionalTPCostShort"}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#with magic.trick}}
+                    {{#each content as |trick idx|}}
+                    <tr>
+                        <td>
+                            {{trick.name}}
+                        </td>
+                        <td>
+                            {{trick.data.cost}}
+                        </td>
+                        <td>
+                            {{trick.data.extraCost}}
+                        </td>
+                    </tr>
+                    {{/each}}
+                    {{/with}}
+                </tbody>
+            </table>
+
 
         </div>
     </div>
