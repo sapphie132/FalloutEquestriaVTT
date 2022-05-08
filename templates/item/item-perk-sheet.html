@@ -35,8 +35,8 @@
       {{> "systems/foe/templates/actor/parts/actor-effects.html"}}
     </div>
     <div class="tab" data-group="primary" data-tab="requirements">
-      <div class="grid-2col">
-        {{#with data.requirements}}
+      {{#with requirements}}
+      <div class="grid-3col">
         <div>
           <label for="data.requirements.level">{{localize "FOE.PerkReqLevel"}}</label>
           <input type="number" data-dtype="Number" name="data.requirements.level" value="level" />
@@ -49,16 +49,31 @@
           <label for="data.requirements.other">{{localize "FOE.PerkReqOther"}}</label>
           <input type="text" data-dtype="String" name="data.requirements.other" value="{{other}}" />
         </div>
+      </div>
+      <div class="grid-2col">
         <div>
-          <label for="data.requirements.traits">{{localize "FOE.PerkReqTraits"}}</label>
-          <input type="text" data-dtype="String" name="data.requirements.traits" value="{{traits}}" />
+          <table>
+            <div>{{localize "FOE.PerkReqTraits"}} <a class="add-req" data-type="trait">+</a></div>
+            {{#each traits as |req key|}}
+            <tr>
+              <td>
+                <select name="data.requirements.traits.{{key}}">
+                  {{selectOptions req.options selected=req.id}}
+                </select>
+              </td>
+              <td>
+                <a data-idx="{{key}}" data-type="trait" class="del-req" title="{{localize "FOE.DeleteReq"}}"><i class="fas fa-trash"></i></a>
+              </td>
+            </tr>
+            {{/each}}
+          </table>
         </div>
         <div>
           <label for="data.requirements.perks">{{localize "FOE.PerkReqPerks"}}</label>
           <input type="text" data-dtype="String" name="data.requirements.perks" value="{{perks}}" />
         </div>
-        {{/with}}
       </div>
+      {{/with}}
     </div>
   </section>
 </form>

@@ -91,6 +91,41 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
       context.possibleSlots = possibleSlots;
     }
 
+    let notSelectedLabel = game.i18n.localize("FOE.NothingSelected")
+    let possibleTraitPerkReqs = { 'traits': {}, 'perks': {} };
+    if (item.type === 'perk') {
+      for (let itm of game.items.values()) {
+        let item = itm.data
+        let cat = item.type + "s"
+        let container = possibleTraitPerkReqs[cat]
+        if (container && !item.isEmbedded && item._id !== itemData._id) {
+          container[item._id] = item.name
+        }
+      }
+
+      const requirements = { 'traits': [], 'perks': [] }
+      for (let [key, reqs] of Object.entries(requirements)) {
+        for (let [_, req] of Object.entries(item.data.data.requirements[key])) {
+          let reqObj = {}
+          let exists = !!possibleTraitPerkReqs[key][req]
+          if (exists) {
+            reqObj.id = req
+          } else {
+            reqObj.id = this.noRequirementId;
+          }
+          reqObj.options = deepClone(possibleTraitPerkReqs[key]);
+          reqObj.options[this.noRequirementId] = notSelectedLabel;
+
+          if (exists) {
+            delete possibleTraitPerkReqs[key][req]
+          }
+          reqs.push(reqObj)
+        }
+      }
+      context.requirements = requirements;
+    }
+
+
     context.compatAmmo = compatAmmo;
 
     context.effects = ActiveEffectFoE.prepareActiveEffectCategories(this.object.data.effects);
@@ -98,6 +133,7 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
     return context;
   }
 
+  noRequirementId = null;
   /* -------------------------------------------- */
 
   /** @override */
@@ -115,7 +151,39 @@ export class FalloutEquestriaItemSheet extends ItemSheet {
       ActiveEffectFoE.onManageActiveEffect(ev, this.item);
     });
 
+    html.find(".add-req").click(this._onAddReq.bind(this))
+    html.find(".del-req").click(this._onDelReq.bind(this))
+
     // Roll handlers, click handlers, etc. would go here.
+  }
+
+  async _onDelReq(ev) {
+    ev.preventDefault();
+    const idx = ev.currentTarget.dataset.idx;
+    const type = ev.currentTarget.dataset.type;
+    const key = type + 's'
+    const list = this.item.data.data.requirements[key];
+    console.log(list)
+    console.log(idx)
+    delete list[idx]
+    console.log(list)
+    await this.updateReqList(list, key);
+  }
+
+  async _onAddReq(ev) {
+    ev.preventDefault();
+    const type = ev.currentTarget.dataset.type;
+    const key = type + 's'
+    const list = this.item.data.data.requirements[key];
+    list.push(this.noRequirementId)
+    await this.updateReqList(list, key);
+  }
+
+  async updateReqList(list, key) {
+    const dataKey = 'data.requirements.' + key;
+    const newData = {}
+    newData[dataKey] = list
+    await this.item.update(newData, {'recursive': false})
   }
 
   _onSlotSelect(ev) {
